@@ -1,7 +1,7 @@
 import { fn } from '@storybook/test';
 import type { Meta, StoryObj } from '@storybook/vue3';
 
-import MyHeader from './Header.vue';
+import { Header as MyHeader } from '@/components';
 
 const meta = {
   /* 👇 The title prop is optional.
