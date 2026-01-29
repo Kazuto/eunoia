@@ -14,12 +14,14 @@ import { computed } from "vue";
 import { tv } from "tailwind-variants";
 
 const buttonStyles = tv({
-  base: "inline-block cursor-pointer border-0 rounded-full font-bold leading-none font-sans",
+  base: "inline-block cursor-pointer border-0 rounded-xl font-bold leading-none font-sans",
   variants: {
     intent: {
       primary: "bg-primary text-white",
       secondary:
         "bg-transparent text-gray-800 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.15)]",
+      ghost:
+        "bg-transparent text-gray-800 hover:bg-gray-100 active:bg-gray-200",
     },
     size: {
       small: "px-4 py-2.5 text-xs",
@@ -35,31 +37,24 @@ const buttonStyles = tv({
 
 const props = withDefaults(
   defineProps<{
-    /**
-     * The label of the button
-     */
     label: string;
-    /**
-     * primary or secondary button
-     */
     primary?: boolean;
-    /**
-     * size of the button
-     */
+    ghost?: boolean;
     size?: "small" | "medium" | "large";
-    /**
-     * background color of the button
-     */
     backgroundColor?: string;
   }>(),
-  { primary: false },
+  { primary: false, ghost: false },
 );
 
 const emit = defineEmits<{
   (e: "click", id: number): void;
 }>();
 
-const intent = computed(() => (props.primary ? "primary" : "secondary"));
+const intent = computed(() => {
+  if (props.ghost) return "ghost";
+  if (props.primary) return "primary";
+  return "secondary";
+});
 
 const style = computed(() => ({
   backgroundColor: props.backgroundColor,
