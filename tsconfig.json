@@ -10,19 +10,10 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "@/components": [
-        "stories/components/index.ts"
-      ],
-      "@/components/*": [
-        "stories/components/*"
-      ]
+      "@/components": ["stories/components/index.ts"],
+      "@/components/*": ["stories/components/*"]
     }
   },
-  "include": [
-    "stories/**/*",
-    "vite.config.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["env.d.ts", "stories/**/*", "vite.config.ts"],
+  "exclude": ["node_modules"]
 }

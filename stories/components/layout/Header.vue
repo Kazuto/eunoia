@@ -1,7 +1,7 @@
 <template>
   <header>
     <div
-      class="flex justify-between items-center border-b border-black/10 px-5 py-4 font-sans"
+      class="flex items-center justify-between border-b border-black/10 px-5 py-4 font-sans"
     >
       <div class="flex items-center">
         <svg
@@ -27,13 +27,13 @@
           </g>
         </svg>
         <h1
-          class="inline-block align-top my-1.5 ml-2.5 font-bold text-xl leading-none"
+          class="my-1.5 ml-2.5 inline-block align-top text-xl leading-none font-bold"
         >
           Acme
         </h1>
       </div>
       <div class="flex items-center gap-2.5">
-        <span class="text-gray-800 text-sm" v-if="user"
+        <span class="text-sm text-gray-800" v-if="user"
           >Welcome, <b>{{ user.name }}</b
           >!</span
         >

@@ -14,7 +14,7 @@ import { computed } from "vue";
 import { tv } from "tailwind-variants";
 
 const buttonStyles = tv({
-  base: "inline-block cursor-pointer border-0 rounded-xl font-bold leading-none font-sans",
+  base: "inline-block cursor-pointer rounded-xl border-0 font-sans leading-none font-bold",
   variants: {
     intent: {
       primary: "bg-primary text-white",
@@ -43,7 +43,7 @@ const props = withDefaults(
     size?: "small" | "medium" | "large";
     backgroundColor?: string;
   }>(),
-  { primary: false, ghost: false },
+  { primary: false, ghost: false }
 );
 
 const emit = defineEmits<{
