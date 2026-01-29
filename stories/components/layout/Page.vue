@@ -47,23 +47,20 @@
           target="_blank"
           rel="noopener noreferrer"
           class="text-inherit"
-          >Storybook tutorials</a
-        >
+        >Storybook tutorials</a>
         . Read more in the
         <a
           href="https://storybook.js.org/docs"
           target="_blank"
           rel="noopener noreferrer"
           class="text-inherit"
-          >docs</a
-        >
+        >docs</a>
         .
       </p>
       <div class="my-10 text-[13px] leading-5">
         <span
           class="mr-2.5 inline-block rounded-full bg-green-100 px-3 py-1 align-top text-[11px] leading-3 font-bold text-green-700"
-          >Tip</span
-        >
+        >Tip</span>
         Adjust the width of the canvas with the
         <svg
           width="10"
@@ -72,10 +69,13 @@
           xmlns="http://www.w3.org/2000/svg"
           class="mt-0.5 mr-1 inline-block h-3 w-3 align-top"
         >
-          <g fill="none" fill-rule="evenodd">
+          <g
+            fill="none"
+            fill-rule="evenodd"
+          >
             <path
-              d="M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z"
               id="a"
+              d="M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z"
               fill="#1ea7fd"
             />
           </g>

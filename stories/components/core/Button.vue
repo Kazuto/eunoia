@@ -2,8 +2,8 @@
   <button
     type="button"
     :class="buttonStyles({ intent, size })"
-    @click="onClick"
     :style="style"
+    @click="onClick"
   >
     {{ label }}
   </button>
