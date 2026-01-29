@@ -1,0 +1,35 @@
+# Display Components
+
+## Purpose
+
+Components that present data, information, or content to users without primary input functionality. These components organize and structure information for consumption rather than collection.
+
+## Belongs Here
+
+- Data tables and grids
+- Card components for displaying grouped information
+- List displays and item collections
+- Description/definition lists
+- Accordion and collapsible content displays
+- Components that structure and present read-only or primarily read-focused content
+
+## Examples of What Fits
+
+- DataTable, DataTableMinimal
+- Card variants (BlankCard, ImageCard, SectionedCard, ChangeLogCard)
+- Details (accordion/collapsible content)
+- Description (definition lists, key-value pairs)
+- Content viewers that don't allow editing
+
+## Does NOT Belong Here
+
+- Form inputs → `forms/`
+- Interactive filters → `navigation/`
+- Buttons and actions → `core/` or contextual directory
+- Modals and overlays → `feedback/`
+- Page structure → `layout/`
+
+## Decision Rule
+
+**If its primary purpose is presenting/displaying information → display**  
+**If its primary purpose is collecting input or navigation → NOT display**

@@ -1,0 +1,35 @@
+# Effects Components
+
+## Purpose
+
+Decorative, animated, or visual enhancement components that add polish, delight, or atmospheric effects to the interface. These components are primarily aesthetic and don't convey critical information.
+
+## Belongs Here
+
+- Background animations and effects
+- Decorative transitions and animations
+- Icon animations without semantic meaning
+- Particle effects and visual flourishes
+- Ambient visual enhancements
+- Easter eggs and delightful micro-interactions
+
+## Examples of What Fits
+
+- MovingBackground (animated background effects)
+- FlipIcon (icon flip animations for delight)
+- Parallax effects
+- Confetti or celebration animations
+- Decorative illustrations that animate
+- Visual effects that enhance but aren't essential
+
+## Does NOT Belong Here
+
+- Loading indicators → `core/Loader`, `core/Spinner`
+- Transition wrappers for functional components → Include in those components
+- Meaningful animations (feedback, state changes) → Appropriate functional directory
+- Icons without animation → `core/Icon`
+
+## Decision Rule
+
+**If it's purely decorative or enhances delight → effects**  
+**If it communicates state or provides functional feedback → NOT effects**

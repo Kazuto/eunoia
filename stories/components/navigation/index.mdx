@@ -1,0 +1,38 @@
+# Navigation Components
+
+## Purpose
+
+Components that help users navigate through content, filter data, switch views, or move between different sections of the application. These facilitate wayfinding and content discovery.
+
+## Belongs Here
+
+- Pagination controls
+- Search components (not form inputs, but search UI patterns)
+- Filter controls (single and multi-select filters)
+- View switchers and attribute toggles
+- Breadcrumbs and step indicators
+- Tab navigation components
+- Status indicators used for navigation states
+
+## Examples of What Fits
+
+- Pagination
+- Search (search bar UI pattern)
+- FilterSelect, FilterSingleSelect, BadgeFilter
+- AttributeSwitch (view mode toggles)
+- CircleIndicator (if used for navigation/step states)
+- Any component that helps users move through or filter content
+
+## Does NOT Belong Here
+
+- Form search inputs → `forms/TextInput` or `forms/SearchableSelect`
+- Main site navigation → `layout/Header`, `layout/MenuDropdown`
+- Action buttons → `core/Button`
+- Links without navigation context → `core/Link`
+- Modal/drawer navigation → `feedback/`
+
+## Decision Rule
+
+**If it helps users navigate, filter, or discover content → navigation**  
+**If it's structural site navigation → layout**  
+**If it's a form control → forms**

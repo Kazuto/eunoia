@@ -1,0 +1,35 @@
+# Core Components
+
+## Purpose
+
+Foundation-level components that wrap or extend native HTML elements with minimal composition. These are the building blocks for all other components in the system.
+
+## Belongs Here
+
+- Styled wrappers around single HTML elements
+- Components that don't import other custom components
+- Visual primitives that can't be broken down further
+- Components used across multiple other categories
+
+## Examples of What Fits
+
+- Buttons (standard, link, outline variants)
+- Icons and icon wrappers
+- Images with basic loading states
+- Badges and labels
+- Links and anchor elements
+- Loading indicators (spinners, loaders, skeletons)
+- Status indicators
+- Keyboard key representations
+
+## Does NOT Belong Here
+
+- Components that compose multiple core components
+- Components with complex internal state management
+- Domain-specific components (forms, navigation, etc.)
+- Components that import from other component directories
+
+## Decision Rule
+
+**If it imports another custom component from this library → NOT core**  
+**If it's essentially a styled native element with minimal logic → core**

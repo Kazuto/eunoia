@@ -1,0 +1,34 @@
+# Typography Components
+
+## Purpose
+
+Components specifically for text rendering, formatting, and typographic presentation. These extend or wrap text elements with consistent styling, hierarchy, and semantic meaning.
+
+## Belongs Here
+
+- Heading components with predefined hierarchy
+- Text components with specific semantic or visual purposes
+- Caption and hint text components
+- Specialized text formatting wrappers
+- Components that primarily control text appearance
+
+## Examples of What Fits
+
+- Headline (headings with consistent styling)
+- Hint (help text, captions, supplementary information)
+- Pull quotes or callout text
+- Code/pre-formatted text wrappers (if styled)
+- Text components with specific typographic treatments
+
+## Does NOT Belong Here
+
+- Form labels → `forms/Label`
+- Error messages → `forms/ErrorMessage`
+- Buttons with text → `core/Button`
+- Generic text that doesn't need component wrapping → Use HTML elements
+- Rich text editors → `forms/`
+
+## Decision Rule
+
+**If it's primarily about text appearance and typography → typography**  
+**If it has functional purpose beyond text styling → NOT typography**

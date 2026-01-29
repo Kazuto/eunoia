@@ -1,0 +1,36 @@
+# Layout Components
+
+## Purpose
+
+Components that define page structure, application shell, and major structural divisions of the interface. These create the scaffolding and framework within which other components exist.
+
+## Belongs Here
+
+- Page wrapper components
+- Site-wide structure components
+- Header and footer components
+- Main navigation shells (nav bars, sidebars)
+- Grid systems and major structural containers
+- Template components that define page layouts
+
+## Examples of What Fits
+
+- Page, Site
+- Header, SiteHeader
+- IndexComponent (list/index page layouts)
+- MenuDropdown (main navigation menus)
+- Structural wrappers that define page regions
+- Components that establish the application frame
+
+## Does NOT Belong Here
+
+- Content cards → `display/`
+- Form containers → `forms/FormContainer`
+- Modals and overlays → `feedback/`
+- Content-level containers → Use semantic HTML or display components
+- Buttons and controls → `core/` or contextual directory
+
+## Decision Rule
+
+**If it defines page structure or application shell → layout**  
+**If it's content within the structure → NOT layout**
