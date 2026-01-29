@@ -1,11 +1,12 @@
-import type { Preview } from '@storybook/vue3'
+import type { Preview } from "@storybook/vue3";
+import "../stories/styles.css";
 
 const preview: Preview = {
   parameters: {
     controls: {
       matchers: {
-       color: /(background|color)$/i,
-       date: /Date$/i,
+        color: /(background|color)$/i,
+        date: /Date$/i,
       },
     },
   },

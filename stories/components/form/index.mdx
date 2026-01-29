@@ -1,0 +1,37 @@
+# Forms Components
+
+## Purpose
+
+All components related to user input, data entry, and form construction. This includes individual input controls, form structure elements, validation feedback, and form submission actions.
+
+## Belongs Here
+
+- Text input components (single-line, multi-line, masked)
+- Selection controls (checkboxes, radios, dropdowns, selects)
+- Specialized inputs (color pickers, file uploads, sliders)
+- Form structure components (containers, groups, field wrappers)
+- Form-specific labels and error messages
+- Action buttons that trigger form submission or manipulation
+
+## Examples of What Fits
+
+- TextInput, TextBox, TextArea
+- Checkbox, Radio, RadioGroup, Switch
+- SearchableSelect, TreeSelect, ListBox
+- RangeSlider, ColorPicker, Dropzone, FileViewer
+- GenericInput, IconField, InputGroup, ListInput
+- Label, ErrorMessage, FormContainer
+- SplitButton (for form actions like "Save" with dropdown options)
+
+## Does NOT Belong Here
+
+- Generic buttons without form context → `core/`
+- Navigation search bars → `navigation/`
+- Modal dialogs → `feedback/`
+- Data display tables → `display/`
+- Page layout components → `layout/`
+
+## Decision Rule
+
+**If it's used to collect, edit, or validate user input → forms**  
+**If it's a generic element without form-specific behavior → NOT forms**

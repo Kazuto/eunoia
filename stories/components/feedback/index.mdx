@@ -1,0 +1,36 @@
+# Feedback Components
+
+## Purpose
+
+Components that provide user feedback, confirmations, overlays, and temporary messages. These components communicate system status, display contextual information, or require user acknowledgment before proceeding.
+
+## Belongs Here
+
+- Alert and notification components
+- Toast/snackbar messages
+- Banner messages (informational, warning, error)
+- Modal dialogs and confirmation dialogs
+- Drawers and side panels
+- Tooltips and popovers
+- Dropdown overlays for messages or actions
+
+## Examples of What Fits
+
+- Alert, Toast, Banner
+- Dialog, ConfirmDialog, Drawer
+- Tooltip, Dropdown (for message/action overlays)
+- Any component that temporarily overlays content
+- Components that require user acknowledgment or action
+
+## Does NOT Belong Here
+
+- Form validation messages → `forms/ErrorMessage`
+- Navigation dropdowns → `layout/MenuDropdown` or `navigation/`
+- Select/dropdown inputs → `forms/`
+- Loading states → `core/Loader`, `core/Skeleton`
+- Status badges → `core/Badge`
+
+## Decision Rule
+
+**If it overlays content or provides temporary feedback → feedback**  
+**If it's part of permanent page structure → NOT feedback**
