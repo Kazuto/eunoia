@@ -1,3 +1,3 @@
-export { default as Button } from "./core/Button.vue";
-export { default as Header } from "./layout/Header.vue";
-export { default as Page } from "./layout/Page.vue";
+export * from "@/components/core";
+export { default as Header } from "@/components/layout/Header.vue";
+export { default as Page } from "@/components/layout/Page.vue";
