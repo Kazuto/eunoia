@@ -21,7 +21,7 @@ defineOptions({
 const attrs = useAttrs();
 
 const buttonStyles = tv({
-  base: "inline-block cursor-pointer rounded-xl border-0 font-sans leading-none font-bold",
+  base: "inline-block cursor-pointer rounded-lg border-0 font-sans leading-none font-bold",
   variants: {
     size: {
       small: "px-4 py-2.5 text-xs",
