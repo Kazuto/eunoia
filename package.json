@@ -40,6 +40,7 @@
   },
   "dependencies": {
     "tailwind-merge": "^3.4.0",
-    "tailwind-variants": "^3.2.2"
+    "tailwind-variants": "^3.2.2",
+    "vue-icons-plus": "^0.1.9"
   }
 }
