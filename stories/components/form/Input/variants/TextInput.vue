@@ -23,7 +23,7 @@ defineOptions({
 
 const props = withDefaults(
   defineProps<{
-    size?: "small" | "medium" | "large";
+    dense?: boolean;
     invalid?: boolean;
     disabled?: boolean;
   }>(),

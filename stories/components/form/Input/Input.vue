@@ -1,20 +1,23 @@
 <template>
   <div class="flex flex-col gap-1">
-    <Label :size><slot /></Label>
+    <Label :dense :for="inputId"><slot /></Label>
     <component
       :is="variantComponent"
       v-model="model"
       v-bind="$attrs"
-      :size
+      :id="inputId"
+      :dense
       :invalid
       :disabled
+      :aria-label="ariaLabel"
+      :aria-labelledby="ariaLabelledby"
     />
   </div>
 </template>
 
 <script setup lang="ts">
 import Label from "./primitives/Label.vue";
-import { useAttrs, computed } from "vue";
+import { useAttrs, useId, computed } from "vue";
 import PasswordInput from "./variants/PasswordInput.vue";
 import NumberInput from "./variants/NumberInput.vue";
 import TextInput from "./variants/TextInput.vue";
@@ -24,12 +27,15 @@ defineOptions({
 });
 
 const attrs = useAttrs();
+const inputId = useId();
 const model = defineModel<string | number>();
 
 defineProps<{
-  size?: "small" | "medium" | "large";
+  dense?: boolean;
   invalid?: boolean;
   disabled?: boolean;
+  ariaLabel?: string;
+  ariaLabelledby?: string;
 }>();
 
 const variantComponent = computed(() => {

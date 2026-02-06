@@ -18,11 +18,12 @@
       @keydown.enter="toggleVisibility"
       @keydown.space="toggleVisibility"
       role="button"
-      tabindex="0"
+      :aria-label="isVisible ? 'Hide password' : 'Show password'"
+      :aria-pressed="isVisible"
       :disabled
       :invalid
     >
-      <component :is="icon" />
+      <component :is="icon" class="h-4 w-4" aria-hidden="true" />
     </InputGroupAddon>
   </InputGroup>
 </template>
@@ -36,7 +37,7 @@ import InputGroupAddon from "../primitives/InputGroupAddon.vue";
 
 const props = withDefaults(
   defineProps<{
-    size?: "small" | "medium" | "large";
+    dense?: boolean;
     invalid?: boolean;
     disabled?: boolean;
   }>(),

@@ -9,7 +9,7 @@ const meta = {
   tags: ["autodocs"],
   argTypes: {
     type: { control: "select", options: ["text", "password", "number"] },
-    size: { control: "select", options: ["small", "medium", "large"] },
+    dense: { control: "boolean" },
     disabled: { control: "boolean" },
     invalid: { control: "boolean" },
     default: {
@@ -28,7 +28,7 @@ const meta = {
     onBlur: fn(),
     onChange: fn(),
     'onUpdate:modelValue': fn(),
-    size: "medium",
+    dense: false,
   },
   render: (args: any) => ({
     setup() {
@@ -48,15 +48,9 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Small: Story = {
+export const Dense: Story = {
   args: {
-    size: "small",
-  },
-};
-
-export const Large: Story = {
-  args: {
-    size: "large",
+    dense: true,
   },
 };
 

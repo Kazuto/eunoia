@@ -9,6 +9,7 @@
         class: $attrs.class,
       })
     "
+    :tabindex="$attrs.role === 'button' ? 0 : undefined"
     v-bind="$attrs"
   >
     <slot />

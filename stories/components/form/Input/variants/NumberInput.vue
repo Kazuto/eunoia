@@ -7,10 +7,14 @@
     <Input
       v-model="model"
       v-bind="{ ...$attrs, ...props }"
+      role="spinbutton"
       type="number"
       :min
       :max
       :step
+      :aria-valuenow="model"
+      :aria-valuemin="min"
+      :aria-valuemax="max"
     />
 
     <InputGroupAddon
@@ -19,12 +23,13 @@
       @keydown.enter="decrement"
       @keydown.space.prevent="decrement"
       role="button"
-      tabindex="0"
+      aria-label="Decrease value"
+      tabindex="-1"
       class="rounded-none"
       :disabled
       :invalid
     >
-      <PiMinus />
+      <PiMinus class="h-4 w-4" aria-hidden="true" />
     </InputGroupAddon>
     <InputGroupAddon
       position="right"
@@ -32,11 +37,12 @@
       @keydown.enter="increment"
       @keydown.space.prevent="increment"
       role="button"
-      tabindex="0"
+      aria-label="Increase value"
+      tabindex="-1"
       :disabled
       :invalid
     >
-      <PiPlus />
+      <PiPlus class="h-4 w-4" aria-hidden="true" />
     </InputGroupAddon>
   </InputGroup>
 </template>
@@ -53,7 +59,7 @@ defineOptions({
 
 const props = withDefaults(
   defineProps<{
-    size?: "small" | "medium" | "large";
+    dense?: boolean;
     invalid?: boolean;
     disabled?: boolean;
     min?: number;

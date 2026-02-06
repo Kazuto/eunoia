@@ -1,5 +1,5 @@
 <template>
-  <label :class="labelStyles({ size })">
+  <label :class="labelStyles({ dense })" v-bind="$attrs">
     <slot />
   </label>
 </template>
@@ -7,24 +7,20 @@
 <script setup lang="ts">
 import { tv } from "tailwind-variants";
 
-withDefaults(
-  defineProps<{
-    size?: "small" | "medium" | "large";
-  }>(),
-  {}
-);
+defineProps<{
+  dense?: boolean;
+}>();
 
 const labelStyles = tv({
-  base: "block text-sm font-medium text-gray-700 uppercase tracking-widest",
+  base: "block font-medium tracking-widest text-gray-700 uppercase",
   variants: {
-    size: {
-      small: "text-xs",
-      medium: "text-sm",
-      large: "text-base",
+    dense: {
+      false: "text-sm",
+      true: "text-xs",
     },
   },
   defaultVariants: {
-    size: "medium",
+    dense: false,
   },
 });
 </script>
