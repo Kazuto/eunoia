@@ -1,5 +1,5 @@
 <template>
-  <component :is="variantComponent" :size="size">
+  <component :is="variantComponent" :dense="dense">
     <slot />
   </component>
 </template>
@@ -14,7 +14,7 @@ const props = withDefaults(
   defineProps<{
     primary?: boolean;
     ghost?: boolean;
-    size?: "small" | "medium" | "large";
+    dense?: boolean;
   }>(),
   { primary: false, ghost: false }
 );

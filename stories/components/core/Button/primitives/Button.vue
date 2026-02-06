@@ -1,6 +1,6 @@
 <template>
   <button
-    :class="buttonStyles({ size, class: attrs.class as string })"
+    :class="buttonStyles({ dense, class: attrs.class as string })"
     :style="style"
     @click="emit('click', $event)"
     @focus="emit('focus', $event)"
@@ -23,20 +23,19 @@ const attrs = useAttrs();
 const buttonStyles = tv({
   base: "inline-block cursor-pointer rounded-lg border-0 font-sans leading-none font-bold",
   variants: {
-    size: {
-      small: "px-4 py-2.5 text-xs",
-      medium: "px-5 py-2.5 text-sm",
-      large: "px-6 py-3 text-base",
+    dense: {
+      false: "px-5 py-2.5 text-sm",
+      true: "px-4 py-2.5 text-xs",
     },
   },
   defaultVariants: {
-    size: "medium",
+    dense: false,
   },
 });
 
 const props = withDefaults(
   defineProps<{
-    size?: "small" | "medium" | "large";
+    dense?: boolean;
   }>(),
   {}
 );

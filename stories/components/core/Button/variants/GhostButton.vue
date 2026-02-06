@@ -1,6 +1,6 @@
 <template>
   <Button
-    :size="size"
+    :dense="dense"
     class="bg-transparent text-gray-800 hover:bg-gray-100 active:bg-gray-200"
   >
     <slot />
@@ -11,6 +11,6 @@
 import Button from "../primitives/Button.vue";
 
 defineProps<{
-  size?: "small" | "medium" | "large";
+  dense?: boolean;
 }>();
 </script>

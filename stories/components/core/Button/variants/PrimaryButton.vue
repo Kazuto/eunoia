@@ -1,6 +1,6 @@
 <template>
   <Button
-    :size="size"
+    :dense="dense"
     :background-color="backgroundColor"
     class="bg-primary text-white"
   >
@@ -12,6 +12,6 @@
 import Button from "../primitives/Button.vue";
 
 defineProps<{
-  size?: "small" | "medium" | "large";
+  dense?: boolean;
 }>();
 </script>

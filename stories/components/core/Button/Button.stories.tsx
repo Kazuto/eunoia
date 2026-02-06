@@ -7,7 +7,7 @@ const meta = {
   component: Button,
   tags: ["autodocs"],
   argTypes: {
-    size: { control: "select", options: ["small", "medium", "large"] },
+    dense: { control: "boolean" },
     default: {
       control: "text",
       description: "Default slot content",
@@ -59,15 +59,9 @@ export const Ghost: Story = {
   },
 };
 
-export const Small: Story = {
+export const Dense: Story = {
   args: {
-    size: "small",
-  },
-};
-
-export const Large: Story = {
-  args: {
-    size: "large",
+    dense: true,
   },
 };
 
