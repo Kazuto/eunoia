@@ -6,7 +6,7 @@
 
     <Input
       v-model="model"
-      v-bind="{ ...$attrs, ...props }"
+      v-bind="{ ...$attrs, ...forwardedProps }"
       :type="inputType"
       :disabled
       :invalid
@@ -18,7 +18,7 @@
       @keydown.enter="toggleVisibility"
       @keydown.space="toggleVisibility"
       role="button"
-      :aria-label="isVisible ? 'Hide password' : 'Show password'"
+      :aria-label="isVisible ? t('hide-password') : t('show-password')"
       :aria-pressed="isVisible"
       :disabled
       :invalid
@@ -29,20 +29,29 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, ref, toRef } from "vue";
 import { PiEye, PiEyeClosed } from "vue-icons-plus/pi";
 import Input from "../primitives/Input.vue";
 import InputGroup from "../primitives/InputGroup.vue";
 import InputGroupAddon from "../primitives/InputGroupAddon.vue";
+import { type LocaleMessages, useLocale } from "@/composables/useLocale";
 
 const props = withDefaults(
   defineProps<{
     dense?: boolean;
     invalid?: boolean;
     disabled?: boolean;
+    locale?: LocaleMessages;
   }>(),
   {}
 );
+
+const t = useLocale("input.password", toRef(() => props.locale));
+
+const forwardedProps = computed(() => {
+  const { locale, ...rest } = props;
+  return rest;
+});
 
 defineOptions({
   inheritAttrs: false,

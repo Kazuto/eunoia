@@ -11,6 +11,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@/components": resolve(__dirname, "stories/components"),
+      "@/composables": resolve(__dirname, "stories/composables"),
     },
   },
 });

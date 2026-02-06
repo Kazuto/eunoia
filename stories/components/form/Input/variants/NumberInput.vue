@@ -6,7 +6,7 @@
 
     <Input
       v-model="model"
-      v-bind="{ ...$attrs, ...props }"
+      v-bind="{ ...$attrs, ...forwardedProps }"
       role="spinbutton"
       type="number"
       :min
@@ -23,7 +23,7 @@
       @keydown.enter="decrement"
       @keydown.space.prevent="decrement"
       role="button"
-      aria-label="Decrease value"
+      :aria-label="t('decrease-value')"
       tabindex="-1"
       class="rounded-none"
       :disabled
@@ -37,7 +37,7 @@
       @keydown.enter="increment"
       @keydown.space.prevent="increment"
       role="button"
-      aria-label="Increase value"
+      :aria-label="t('increase-value')"
       tabindex="-1"
       :disabled
       :invalid
@@ -48,10 +48,12 @@
 </template>
 
 <script setup lang="ts">
+import { computed, toRef } from "vue";
 import { PiPlus, PiMinus } from "vue-icons-plus/pi";
 import Input from "../primitives/Input.vue";
 import InputGroup from "../primitives/InputGroup.vue";
 import InputGroupAddon from "../primitives/InputGroupAddon.vue";
+import { type LocaleMessages, useLocale } from "@/composables/useLocale";
 
 defineOptions({
   inheritAttrs: false,
@@ -65,11 +67,19 @@ const props = withDefaults(
     min?: number;
     max?: number;
     step?: number;
+    locale?: LocaleMessages;
   }>(),
   {
     step: 1,
   }
 );
+
+const t = useLocale("input.number", toRef(() => props.locale));
+
+const forwardedProps = computed(() => {
+  const { locale, ...rest } = props;
+  return rest;
+});
 
 const model = defineModel<number>();
 

@@ -1,0 +1,165 @@
+# useLocale
+
+A lightweight i18n composable for translatable ARIA strings. It uses flat dot-notation keys with a JSON-based default locale, Vue's `provide`/`inject` for global overrides, and per-instance props for component-level overrides.
+
+## Resolution Priority
+
+```
+Per-instance prop  >  LocaleProvider  >  Default locale (en.json)  >  Full key as fallback
+```
+
+## Default Locale
+
+English defaults live in `stories/locales/en.json`:
+
+To add a new language, create a file like `stories/locales/nl.json` with the same keys.
+All files in the `locales/` directory are auto-discovered at build time via `import.meta.glob`.
+
+## Key Format
+
+Keys follow the pattern `{category}.{component}.{label}`:
+
+| Key | Default |
+|---|---|
+| `input.number.increase-value` | Increase value |
+| `input.number.decrease-value` | Decrease value |
+| `input.password.show-password` | Show password |
+| `input.password.hide-password` | Hide password |
+
+## API
+
+### `useLocale(prefix, overrides?)`
+
+Returns a function `t(key)` that resolves a translated string.
+
+```ts
+// Inside a component's setup
+const t = useLocale("input.number", toRef(() => props.locale));
+
+// In the template
+t("increase-value") // => "Increase value"
+````
+
+| Parameter | Type | Description |
+|---|---|---|
+| `prefix` | `string` | Dot-notation prefix, e.g. `"input.number"` |
+| `overrides` | `Ref<LocaleMessages \| undefined>` | Optional per-instance overrides using short keys |
+
+### `setDefaultLocale(locale)`
+
+Switches the base default locale at runtime. The locale must exist as a JSON file in `stories/locales/`.
+
+```ts
+import { setDefaultLocale } from "@/composables/useLocale";
+
+// Switch base defaults to Dutch (loads stories/locales/nl.json)
+setDefaultLocale("nl");
+```
+
+### `LocaleProvider`
+
+A renderless component that provides translations to all descendants via `provide`/`inject`.
+Uses fully qualified keys.
+
+```ts
+<LocaleProvider :locale="{
+  'input.password.show-password': 'Toon wachtwoord',
+  'input.password.hide-password': 'Verberg wachtwoord',
+}">
+  <App />
+</LocaleProvider>
+```
+
+## Usage
+
+### No provider — English defaults work out of the box
+
+```html
+<!-- aria-label="Increase value", aria-label="Show password" -->
+<Input type="number">Amount</Input>
+<Input type="password">Password</Input>
+```
+
+### Global override via LocaleProvider
+
+```html
+<LocaleProvider :locale="{
+  'input.number.increase-value': 'Verhoog waarde',
+  'input.number.decrease-value': 'Verlaag waarde',
+  'input.password.show-password': 'Toon wachtwoord',
+  'input.password.hide-password': 'Verberg wachtwoord',
+}">
+  <App />
+</LocaleProvider>
+```
+
+### Per-instance override (highest priority)
+
+Instance props use **short keys** — the prefix is handled internally by the component.
+
+```html
+<!-- Overrides only this input, regardless of any provider -->
+<Input type="number" :locale="{
+  'increase-value': 'Verhoog',
+  'decrease-value': 'Verlaag',
+}">
+  Amount
+</Input>
+```
+
+### Partial override — only what you need
+
+Unprovided keys fall back to the next level in the resolution chain.
+
+```html
+<!-- Only increase-value is Dutch, decrease-value stays English -->
+<LocaleProvider :locale="{
+  'input.number.increase-value': 'Meer',
+}">
+  <Input type="number">Menge</Input>
+</LocaleProvider>
+```
+
+### Switching the base locale at runtime
+
+```ts
+import { setDefaultLocale } from "@/composables/useLocale";
+
+// Assuming stories/locales/nl.json exists
+setDefaultLocale("nl");
+
+// To reset back to English
+setDefaultLocale("en");
+```
+
+## Adding a New Component
+
+To add translatable strings for a new component:
+
+1. Add keys to `stories/locales/en.json` (and any other locale files):
+
+```json
+{
+  "input.search.clear-value": "Clear search",
+  "input.search.placeholder": "Search..."
+}
+```
+
+2. Use the composable in your component:
+
+```html
+<script setup lang="ts">
+import { toRef } from "vue";
+import { type LocaleMessages, useLocale } from "@/composables/useLocale";
+
+const props = defineProps<{
+  locale?: LocaleMessages;
+}>();
+
+const t = useLocale("input.search", toRef(() => props.locale));
+</script>
+
+<template>
+  <button :aria-label="t('clear-value')">X</button>
+</template>
+```

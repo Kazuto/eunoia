@@ -11,7 +11,8 @@
     "baseUrl": ".",
     "paths": {
       "@/components": ["stories/components/index.ts"],
-      "@/components/*": ["stories/components/*"]
+      "@/components/*": ["stories/components/*"],
+      "@/composables/*": ["stories/composables/*"]
     }
   },
   "include": ["env.d.ts", "stories/**/*", "vite.config.ts"],
