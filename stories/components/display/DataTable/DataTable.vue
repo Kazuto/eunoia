@@ -59,16 +59,6 @@ function handleSort(key: string) {
   }
 }
 
-function getCellValue(
-  item: Record<string, unknown>,
-  header: DataTableColumn
-): unknown {
-  if (header.value) {
-    return header.value(item);
-  }
-  return item[header.key];
-}
-
 const sortedItems = computed(() => {
   if (!sortKey.value || !sortDirection.value) return props.items;
 
@@ -78,8 +68,10 @@ const sortedItems = computed(() => {
   const dir = sortDirection.value === "asc" ? 1 : -1;
 
   return [...props.items].sort((a, b) => {
-    const valA = getCellValue(a, header);
-    const valB = getCellValue(b, header);
+    const rawA = a[header.key];
+    const rawB = b[header.key];
+    const valA = rawA != null ? rawA : header.value?.(a);
+    const valB = rawB != null ? rawB : header.value?.(b);
 
     if (valA == null && valB == null) return 0;
     if (valA == null) return dir;
