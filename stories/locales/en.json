@@ -4,5 +4,6 @@
   "input.password.show-password": "Show password",
   "input.password.hide-password": "Hide password",
   "select.placeholder": "Select an option",
-  "select.no-results": "No options"
+  "select.no-results": "No options",
+  "alert.dismiss": "Dismiss"
 }
