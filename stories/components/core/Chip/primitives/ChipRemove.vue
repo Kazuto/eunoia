@@ -35,7 +35,7 @@ const removeStyles = tv({
       danger: "bg-red-800/15 text-red-800 hover:bg-red-800/25",
     },
     dense: {
-      false: "h-4 w-4 text-[10px]",
+      false: "h-4 w-4 p-0.5 text-[10px]",
       true: "h-3.5 w-3.5 text-[8px]",
     },
   },
@@ -53,7 +53,7 @@ withDefaults(
   }>(),
   {
     ariaLabel: "Remove",
-  },
+  }
 );
 
 const emit = defineEmits<{
