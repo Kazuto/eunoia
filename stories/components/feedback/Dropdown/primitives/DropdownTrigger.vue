@@ -13,7 +13,10 @@
   >
     <slot />
     <PiCaretDown
-      :class="['ml-2 h-4 w-4 shrink-0 transition-transform', isOpen && 'rotate-180']"
+      :class="[
+        'ml-2 h-4 w-4 shrink-0 transition-transform',
+        isOpen && 'rotate-180',
+      ]"
       aria-hidden="true"
     />
   </button>

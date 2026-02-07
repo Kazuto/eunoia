@@ -33,9 +33,20 @@ export const EnglishDefaults: Story = {
       const pass = ref<string>();
 
       return () => (
-        <div style={{ display: "flex", flexDirection: "column", gap: "16px", maxWidth: "320px" }}>
-          <Input type="number" v-model={num.value}>Amount</Input>
-          <Input type="password" v-model={pass.value}>Password</Input>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "16px",
+            maxWidth: "320px",
+          }}
+        >
+          <Input type="number" v-model={num.value}>
+            Amount
+          </Input>
+          <Input type="password" v-model={pass.value}>
+            Password
+          </Input>
         </div>
       );
     },
@@ -61,9 +72,20 @@ export const GlobalProvider: Story = {
 
       return () => (
         <LocaleProvider locale={dutchLocale}>
-          <div style={{ display: "flex", flexDirection: "column", gap: "16px", maxWidth: "320px" }}>
-            <Input type="number" v-model={num.value}>Hoeveelheid</Input>
-            <Input type="password" v-model={pass.value}>Wachtwoord</Input>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "16px",
+              maxWidth: "320px",
+            }}
+          >
+            <Input type="number" v-model={num.value}>
+              Hoeveelheid
+            </Input>
+            <Input type="password" v-model={pass.value}>
+              Wachtwoord
+            </Input>
           </div>
         </LocaleProvider>
       );
@@ -88,7 +110,9 @@ export const PartialOverride: Story = {
       return () => (
         <LocaleProvider locale={partial}>
           <div style={{ maxWidth: "320px" }}>
-            <Input type="number" v-model={num.value}>Menge</Input>
+            <Input type="number" v-model={num.value}>
+              Menge
+            </Input>
           </div>
         </LocaleProvider>
       );
@@ -122,9 +146,22 @@ export const PerInstanceOverride: Story = {
 
       return () => (
         <LocaleProvider locale={dutchLocale}>
-          <div style={{ display: "flex", flexDirection: "column", gap: "16px", maxWidth: "320px" }}>
-            <Input type="number" v-model={num.value}>Hoeveelheid (Dutch via provider)</Input>
-            <Input type="password" v-model={pass.value} locale={japanesePassword}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "16px",
+              maxWidth: "320px",
+            }}
+          >
+            <Input type="number" v-model={num.value}>
+              Hoeveelheid (Dutch via provider)
+            </Input>
+            <Input
+              type="password"
+              v-model={pass.value}
+              locale={japanesePassword}
+            >
               パスワード (Japanese via instance prop)
             </Input>
           </div>

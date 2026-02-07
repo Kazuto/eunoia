@@ -28,7 +28,7 @@ withDefaults(
   defineProps<{
     dense?: boolean;
   }>(),
-  {},
+  {}
 );
 
 const model = defineModel<boolean>({ default: false });

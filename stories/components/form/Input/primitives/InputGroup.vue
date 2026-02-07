@@ -1,8 +1,5 @@
 <template>
-  <div
-    :class="variants({ disabled, invalid })"
-    role="group"
-  >
+  <div :class="variants({ disabled, invalid })" role="group">
     <slot />
   </div>
 </template>

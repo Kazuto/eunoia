@@ -1,14 +1,6 @@
 <template>
-  <InputGroup
-    :invalid
-    :disabled
-  >
-    <InputGroupAddon
-      v-if="$slots.prepend"
-      position="left"
-      :disabled
-      :invalid
-    >
+  <InputGroup :invalid :disabled>
+    <InputGroupAddon v-if="$slots.prepend" position="left" :disabled :invalid>
       <slot name="prepend" />
     </InputGroupAddon>
 
@@ -37,10 +29,7 @@
       @keydown.enter="decrement"
       @keydown.space.prevent="decrement"
     >
-      <PiMinus
-        class="h-4 w-4"
-        aria-hidden="true"
-      />
+      <PiMinus class="h-4 w-4" aria-hidden="true" />
     </InputGroupAddon>
     <InputGroupAddon
       position="right"
@@ -53,10 +42,7 @@
       @keydown.enter="increment"
       @keydown.space.prevent="increment"
     >
-      <PiPlus
-        class="h-4 w-4"
-        aria-hidden="true"
-      />
+      <PiPlus class="h-4 w-4" aria-hidden="true" />
     </InputGroupAddon>
   </InputGroup>
 </template>
@@ -91,7 +77,10 @@ const props = withDefaults(
   }
 );
 
-const t = useLocale("input.number", toRef(() => props.locale));
+const t = useLocale(
+  "input.number",
+  toRef(() => props.locale)
+);
 
 const forwardedProps = computed(() => {
   const { locale: _locale, ...rest } = props;

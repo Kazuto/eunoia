@@ -1,12 +1,6 @@
 <template>
-  <div
-    ref="containerRef"
-    class="relative flex flex-col gap-1"
-  >
-    <Label
-      :id="labelId"
-      :dense
-    >
+  <div ref="containerRef" class="relative flex flex-col gap-1">
+    <Label :id="labelId" :dense>
       <slot />
     </Label>
     <SelectTrigger
@@ -28,12 +22,7 @@
       @keydown="handleTriggerKeydown"
       @remove-chip="removeValue"
     />
-    <SelectDropdown
-      v-if="isOpen"
-      :id="listboxId"
-      :multiple
-      :dense
-    >
+    <SelectDropdown v-if="isOpen" :id="listboxId" :multiple :dense>
       <li
         v-if="options.length === 0"
         role="option"
@@ -87,12 +76,15 @@ const props = withDefaults(
     ariaLabel: undefined,
     ariaLabelledby: undefined,
     locale: undefined,
-  },
+  }
 );
 
 const model = defineModel<string | number | Array<string | number>>();
 
-const t = useLocale("select", toRef(() => props.locale));
+const t = useLocale(
+  "select",
+  toRef(() => props.locale)
+);
 
 const labelId = useId();
 const triggerId = useId();
@@ -173,7 +165,7 @@ function handleTriggerKeydown(event: KeyboardEvent) {
       } else {
         activeIndex.value = Math.min(
           activeIndex.value + 1,
-          props.options.length - 1,
+          props.options.length - 1
         );
       }
       break;
@@ -250,9 +242,7 @@ watch(isOpen, (open) => {
 
 watch(activeIndex, (index) => {
   if (index >= 0 && isOpen.value) {
-    const optionEl = document.getElementById(
-      `${listboxId}-option-${index}`,
-    );
+    const optionEl = document.getElementById(`${listboxId}-option-${index}`);
     optionEl?.scrollIntoView({ block: "nearest" });
   }
 });

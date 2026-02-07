@@ -47,6 +47,6 @@ withDefaults(
   }>(),
   {
     variant: "primary",
-  },
+  }
 );
 </script>

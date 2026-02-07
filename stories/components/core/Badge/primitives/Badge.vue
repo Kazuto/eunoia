@@ -19,7 +19,7 @@ defineOptions({
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const badgeStyles = tv({
-  base: "inline-flex items-center font-sans font-bold leading-none",
+  base: "inline-flex items-center font-sans leading-none font-bold",
   variants: {
     variant: {
       primary: "bg-primary text-white",
@@ -52,6 +52,6 @@ withDefaults(
   }>(),
   {
     variant: "primary",
-  },
+  }
 );
 </script>

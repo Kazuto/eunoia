@@ -1,10 +1,5 @@
 <template>
-  <Alert
-    v-if="isVisible"
-    v-bind="$attrs"
-    :variant
-    :dense
-  >
+  <Alert v-if="isVisible" v-bind="$attrs" :variant :dense>
     <span class="flex-1">
       <slot />
     </span>
@@ -16,11 +11,7 @@
       @dismiss="dismiss"
     />
     <template #timeout>
-      <TimeoutBar
-        v-if="!persistent"
-        :variant
-        :duration
-      />
+      <TimeoutBar v-if="!persistent" :variant :duration />
     </template>
   </Alert>
 </template>

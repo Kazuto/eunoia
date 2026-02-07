@@ -31,7 +31,9 @@ const meta = {
       return () => (
         <Button {...args}>
           {{
-            default: () => { return args.default; },
+            default: () => {
+              return args.default;
+            },
           }}
         </Button>
       );
@@ -71,4 +73,3 @@ export const Dense: Story = {
     dense: true,
   },
 };
-

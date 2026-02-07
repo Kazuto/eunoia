@@ -10,5 +10,8 @@ const props = defineProps<{
   locale?: LocaleMessages;
 }>();
 
-provide(LOCALE_KEY, toRef(() => props.locale ?? {}));
+provide(
+  LOCALE_KEY,
+  toRef(() => props.locale ?? {})
+);
 </script>

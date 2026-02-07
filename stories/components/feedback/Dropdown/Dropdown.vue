@@ -1,8 +1,5 @@
 <template>
-  <div
-    ref="containerRef"
-    class="relative inline-block"
-  >
+  <div ref="containerRef" class="relative inline-block">
     <DropdownTrigger
       v-bind="$attrs"
       :dense
@@ -67,14 +64,17 @@ const props = withDefaults(
   }>(),
   {
     locale: undefined,
-  },
+  }
 );
 
 const emit = defineEmits<{
   (e: "select", value: string): void;
 }>();
 
-const t = useLocale("dropdown", toRef(() => props.locale));
+const t = useLocale(
+  "dropdown",
+  toRef(() => props.locale)
+);
 
 const menuId = useId();
 
@@ -86,7 +86,7 @@ const enabledIndices = computed(() =>
   props.items.reduce<number[]>((acc, item, index) => {
     if (!item.disabled) acc.push(index);
     return acc;
-  }, []),
+  }, [])
 );
 
 const activeDescendantId = computed(() => {

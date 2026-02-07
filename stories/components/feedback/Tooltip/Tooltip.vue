@@ -41,7 +41,7 @@ withDefaults(
   {
     content: undefined,
     placement: undefined,
-  },
+  }
 );
 
 const id = useId().replace(/[^a-zA-Z0-9]/g, "-");

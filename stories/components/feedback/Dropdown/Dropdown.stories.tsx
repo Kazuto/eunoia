@@ -77,8 +77,16 @@ export const WithDisabledItems: Story = {
 export const DangerItems: Story = {
   args: {
     items: [
-      { label: "Remove from list", value: "remove", variant: "danger" as const },
-      { label: "Delete permanently", value: "delete", variant: "danger" as const },
+      {
+        label: "Remove from list",
+        value: "remove",
+        variant: "danger" as const,
+      },
+      {
+        label: "Delete permanently",
+        value: "delete",
+        variant: "danger" as const,
+      },
     ],
     trigger: "Danger actions",
   },

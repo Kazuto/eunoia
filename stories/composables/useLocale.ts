@@ -14,7 +14,7 @@ const locales = Object.fromEntries(
   Object.entries(localeFiles).map(([path, messages]) => [
     path.match(/\/([^/]+)\.json$/)?.[1] ?? path,
     messages,
-  ]),
+  ])
 );
 
 const defaultMessages = ref<LocaleMessages>(locales["en"] ?? {});
@@ -25,7 +25,7 @@ export function setDefaultLocale(locale: string) {
 
 export function useLocale(
   prefix: string,
-  overrides?: Ref<LocaleMessages | undefined>,
+  overrides?: Ref<LocaleMessages | undefined>
 ) {
   const provided = inject(LOCALE_KEY, ref<LocaleMessages>({}));
 

@@ -46,6 +46,6 @@ withDefaults(
   }>(),
   {
     variant: "info",
-  },
+  }
 );
 </script>

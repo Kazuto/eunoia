@@ -2,7 +2,15 @@
   <div
     :id
     v-bind="forwardedAttrs"
-    :class="triggerStyles({ dense, invalid, disabled, open: isOpen, class: classAttr })"
+    :class="
+      triggerStyles({
+        dense,
+        invalid,
+        disabled,
+        open: isOpen,
+        class: classAttr,
+      })
+    "
     role="combobox"
     :aria-expanded="isOpen"
     aria-haspopup="listbox"
@@ -37,14 +45,14 @@
     >
       {{ selectedLabels[0] }}
     </span>
-    <span
-      v-else
-      class="flex-1 truncate text-gray-400"
-    >
+    <span v-else class="flex-1 truncate text-gray-400">
       {{ placeholder }}
     </span>
     <PiCaretDown
-      :class="['ml-2 h-4 w-4 shrink-0 transition-transform', isOpen && 'rotate-180']"
+      :class="[
+        'ml-2 h-4 w-4 shrink-0 transition-transform',
+        isOpen && 'rotate-180',
+      ]"
       aria-hidden="true"
     />
   </div>

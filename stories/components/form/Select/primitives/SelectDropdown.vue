@@ -21,7 +21,7 @@ defineOptions({
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const dropdownStyles = tv({
-  base: "absolute left-0 right-0 top-full z-50 mt-1 max-h-60 overflow-auto rounded-md border border-gray-300 bg-white shadow-lg",
+  base: "absolute top-full right-0 left-0 z-50 mt-1 max-h-60 overflow-auto rounded-md border border-gray-300 bg-white shadow-lg",
   variants: {
     dense: {
       false: "py-1",

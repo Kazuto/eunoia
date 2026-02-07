@@ -54,6 +54,6 @@ const positionStyle = computed(
       position: "fixed",
       "position-anchor": props.anchorName,
       "position-area": props.placement ?? "top",
-    }) as Record<string, string>,
+    }) as Record<string, string>
 );
 </script>

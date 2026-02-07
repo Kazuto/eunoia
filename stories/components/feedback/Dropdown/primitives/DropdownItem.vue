@@ -2,7 +2,15 @@
   <li
     :id
     v-bind="forwardedAttrs"
-    :class="itemStyles({ dense, active: isActive, variant, disabled, class: classAttr })"
+    :class="
+      itemStyles({
+        dense,
+        active: isActive,
+        variant,
+        disabled,
+        class: classAttr,
+      })
+    "
     role="menuitem"
     :aria-disabled="disabled || undefined"
     @click="!disabled && emit('select', value)"

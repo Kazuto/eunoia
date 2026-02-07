@@ -38,10 +38,13 @@ const props = withDefaults(
   {
     variant: "primary",
     locale: undefined,
-  },
+  }
 );
 
-const t = useLocale("chip", toRef(() => props.locale));
+const t = useLocale(
+  "chip",
+  toRef(() => props.locale)
+);
 
 const emit = defineEmits<{
   (e: "click", event: MouseEvent): void;

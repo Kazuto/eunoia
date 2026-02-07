@@ -19,12 +19,12 @@ All files in the `locales/` directory are auto-discovered at build time via `imp
 
 Keys follow the pattern `{category}.{component}.{label}`:
 
-| Key | Default |
-|---|---|
-| `input.number.increase-value` | Increase value |
-| `input.number.decrease-value` | Decrease value |
-| `input.password.show-password` | Show password |
-| `input.password.hide-password` | Hide password |
+| Key                            | Default        |
+| ------------------------------ | -------------- |
+| `input.number.increase-value`  | Increase value |
+| `input.number.decrease-value`  | Decrease value |
+| `input.password.show-password` | Show password  |
+| `input.password.hide-password` | Hide password  |
 
 ## API
 
@@ -34,15 +34,18 @@ Returns a function `t(key)` that resolves a translated string.
 
 ```ts
 // Inside a component's setup
-const t = useLocale("input.number", toRef(() => props.locale));
+const t = useLocale(
+  "input.number",
+  toRef(() => props.locale)
+);
 
 // In the template
-t("increase-value") // => "Increase value"
-````
+t("increase-value"); // => "Increase value"
+```
 
-| Parameter | Type | Description |
-|---|---|---|
-| `prefix` | `string` | Dot-notation prefix, e.g. `"input.number"` |
+| Parameter   | Type                               | Description                                      |
+| ----------- | ---------------------------------- | ------------------------------------------------ |
+| `prefix`    | `string`                           | Dot-notation prefix, e.g. `"input.number"`       |
 | `overrides` | `Ref<LocaleMessages \| undefined>` | Optional per-instance overrides using short keys |
 
 ### `setDefaultLocale(locale)`
@@ -83,12 +86,14 @@ Uses fully qualified keys.
 ### Global override via LocaleProvider
 
 ```html
-<LocaleProvider :locale="{
+<LocaleProvider
+  :locale="{
   'input.number.increase-value': 'Verhoog waarde',
   'input.number.decrease-value': 'Verlaag waarde',
   'input.password.show-password': 'Toon wachtwoord',
   'input.password.hide-password': 'Verberg wachtwoord',
-}">
+}"
+>
   <App />
 </LocaleProvider>
 ```
@@ -149,14 +154,17 @@ To add translatable strings for a new component:
 
 ```html
 <script setup lang="ts">
-import { toRef } from "vue";
-import { type LocaleMessages, useLocale } from "@/composables/useLocale";
+  import { toRef } from "vue";
+  import { type LocaleMessages, useLocale } from "@/composables/useLocale";
 
-const props = defineProps<{
-  locale?: LocaleMessages;
-}>();
+  const props = defineProps<{
+    locale?: LocaleMessages;
+  }>();
 
-const t = useLocale("input.search", toRef(() => props.locale));
+  const t = useLocale(
+    "input.search",
+    toRef(() => props.locale)
+  );
 </script>
 
 <template>

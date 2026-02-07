@@ -6,10 +6,7 @@
         :key="toast.id"
         :style="getStackStyle(index)"
       >
-        <Toast
-          :variant="toast.variant"
-          :dense
-        >
+        <Toast :variant="toast.variant" :dense>
           <span class="flex-1">
             {{ toast.message }}
           </span>
@@ -67,10 +64,13 @@ const props = withDefaults(
     position: "bottom-right",
     limit: 3,
     locale: undefined,
-  },
+  }
 );
 
-const t = useLocale("toast", toRef(() => props.locale));
+const t = useLocale(
+  "toast",
+  toRef(() => props.locale)
+);
 
 const isBottom = computed(() => props.position.startsWith("bottom"));
 
@@ -78,12 +78,12 @@ const containerStyles = tv({
   base: "fixed z-50 flex gap-2",
   variants: {
     position: {
-      "top-left": "left-4 top-4 flex-col",
-      "top-center": "left-1/2 top-4 -translate-x-1/2 flex-col",
-      "top-right": "right-4 top-4 flex-col",
+      "top-left": "top-4 left-4 flex-col",
+      "top-center": "top-4 left-1/2 -translate-x-1/2 flex-col",
+      "top-right": "top-4 right-4 flex-col",
       "bottom-left": "bottom-4 left-4 flex-col-reverse",
       "bottom-center": "bottom-4 left-1/2 -translate-x-1/2 flex-col-reverse",
-      "bottom-right": "bottom-4 right-4 flex-col-reverse",
+      "bottom-right": "right-4 bottom-4 flex-col-reverse",
     },
   },
   defaultVariants: {
@@ -98,7 +98,7 @@ let nextId = 1;
 const orderedToasts = computed(() => [...toasts.value]);
 
 const collapsedCount = computed(() =>
-  Math.max(0, toasts.value.length - props.limit),
+  Math.max(0, toasts.value.length - props.limit)
 );
 
 function getStackStyle(index: number): Record<string, string> {

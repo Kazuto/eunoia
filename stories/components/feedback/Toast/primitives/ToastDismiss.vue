@@ -27,7 +27,8 @@ const dismissStyles = tv({
     variant: {
       info: "text-blue-800 hover:bg-blue-100 focus-visible:ring-blue-400",
       success: "text-green-800 hover:bg-green-100 focus-visible:ring-green-400",
-      warning: "text-yellow-800 hover:bg-yellow-100 focus-visible:ring-yellow-400",
+      warning:
+        "text-yellow-800 hover:bg-yellow-100 focus-visible:ring-yellow-400",
       danger: "text-red-800 hover:bg-red-100 focus-visible:ring-red-400",
     },
     dense: {

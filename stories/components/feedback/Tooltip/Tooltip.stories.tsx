@@ -21,7 +21,13 @@ const meta = {
   render: (args: any) => ({
     setup() {
       return () => (
-        <div style={{ padding: "100px", display: "flex", justifyContent: "center" }}>
+        <div
+          style={{
+            padding: "100px",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
           <Tooltip {...args}>
             {{
               default: () => (
@@ -79,6 +85,7 @@ export const Dense: Story = {
 
 export const LongContent: Story = {
   args: {
-    content: "This is a longer tooltip message that provides more detailed information.",
+    content:
+      "This is a longer tooltip message that provides more detailed information.",
   },
 };

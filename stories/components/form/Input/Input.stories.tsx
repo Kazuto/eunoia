@@ -27,7 +27,7 @@ const meta = {
     onFocus: fn(),
     onBlur: fn(),
     onChange: fn(),
-    'onUpdate:modelValue': fn(),
+    "onUpdate:modelValue": fn(),
     dense: false,
   },
   render: (args: any) => ({
@@ -37,7 +37,9 @@ const meta = {
       return () => (
         <Input {...args} v-model={value.value}>
           {{
-            default: () => { return args.default; },
+            default: () => {
+              return args.default;
+            },
           }}
         </Input>
       );

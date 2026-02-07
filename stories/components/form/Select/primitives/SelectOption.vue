@@ -2,7 +2,14 @@
   <li
     :id
     v-bind="forwardedAttrs"
-    :class="optionStyles({ dense, selected: isSelected, active: isActive, class: classAttr })"
+    :class="
+      optionStyles({
+        dense,
+        selected: isSelected,
+        active: isActive,
+        class: classAttr,
+      })
+    "
     role="option"
     :aria-selected="isSelected"
     @click="emit('select', option)"
@@ -10,11 +17,7 @@
     @mousedown.prevent
   >
     <span class="flex-1">{{ option.label }}</span>
-    <PiCheck
-      v-if="isSelected"
-      class="h-4 w-4 shrink-0"
-      aria-hidden="true"
-    />
+    <PiCheck v-if="isSelected" class="h-4 w-4 shrink-0" aria-hidden="true" />
   </li>
 </template>
 

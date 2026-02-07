@@ -22,7 +22,7 @@ defineOptions({
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const chipStyles = tv({
-  base: "inline-flex cursor-pointer items-center rounded-full border-0 font-sans font-bold leading-none outline-none focus-visible:ring-2 focus-visible:ring-offset-1",
+  base: "inline-flex cursor-pointer items-center rounded-full border-0 font-sans leading-none font-bold outline-none focus-visible:ring-2 focus-visible:ring-offset-1",
   variants: {
     variant: {
       primary: "bg-primary text-white focus-visible:ring-primary",
@@ -49,7 +49,7 @@ withDefaults(
   }>(),
   {
     variant: "primary",
-  },
+  }
 );
 
 const emit = defineEmits<{

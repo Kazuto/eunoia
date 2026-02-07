@@ -29,8 +29,8 @@ const toastStyles = tv({
       danger: "border-red-200 text-red-800",
     },
     dense: {
-      false: "min-w-72 max-w-sm px-4 py-3 text-sm",
-      true: "min-w-64 max-w-xs px-3 py-2 text-xs",
+      false: "max-w-sm min-w-72 px-4 py-3 text-sm",
+      true: "max-w-xs min-w-64 px-3 py-2 text-xs",
     },
   },
   defaultVariants: {
@@ -46,6 +46,6 @@ withDefaults(
   }>(),
   {
     variant: "info",
-  },
+  }
 );
 </script>

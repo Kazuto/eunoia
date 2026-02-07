@@ -39,6 +39,6 @@ withDefaults(
   {
     variant: "info",
     duration: undefined,
-  },
+  }
 );
 </script>
