@@ -1,9 +1,6 @@
 <template>
   <div class="flex flex-col gap-1">
-    <Label
-      :dense
-      :for="inputId"
-    ><slot /></Label>
+    <Label v-if="!isCheckbox" :dense :for="inputId"><slot /></Label>
     <component
       :is="variantComponent"
       v-bind="$attrs"
@@ -12,9 +9,14 @@
       :dense
       :invalid
       :disabled
+      :indeterminate
       :aria-label="ariaLabel"
       :aria-labelledby="ariaLabelledby"
-    />
+    >
+      <template #default v-if="isCheckbox">
+        <slot />
+      </template>
+    </component>
   </div>
 </template>
 
@@ -25,6 +27,7 @@ import { useSanitizedId } from "@/composables/useSanitizedId";
 import PasswordInput from "./variants/PasswordInput.vue";
 import NumberInput from "./variants/NumberInput.vue";
 import TextInput from "./variants/TextInput.vue";
+import CheckboxInput from "./variants/CheckboxInput.vue";
 
 defineOptions({
   inheritAttrs: false,
@@ -38,14 +41,20 @@ defineProps<{
   dense?: boolean;
   invalid?: boolean;
   disabled?: boolean;
+  indeterminate?: boolean;
   ariaLabel?: string;
   ariaLabelledby?: string;
 }>();
 
-const variantComponent = computed(() => {
-  if (attrs.type === "password") return PasswordInput;
-  if (attrs.type === "number") return NumberInput;
+const variantMap = new Map<string, Component>([
+  ["password", PasswordInput],
+  ["number", NumberInput],
+  ["checkbox", CheckboxInput],
+]);
 
-  return TextInput;
+const isCheckbox = computed(() => attrs.type === "checkbox");
+
+const variantComponent = computed(() => {
+  return variantMap.get(attrs.type) ?? TextInput;
 });
 </script>

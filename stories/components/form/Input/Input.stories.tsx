@@ -8,7 +8,7 @@ const meta = {
   component: Input,
   tags: ["autodocs"],
   argTypes: {
-    type: { control: "select", options: ["text", "password", "number"] },
+    type: { control: "select", options: ["text", "password", "number", "checkbox"] },
     dense: { control: "boolean" },
     disabled: { control: "boolean" },
     invalid: { control: "boolean" },
@@ -84,4 +84,45 @@ export const Number: Story = {
   args: {
     type: "number",
   },
+};
+
+export const Checkbox: Story = {
+  args: {
+    type: "checkbox",
+    default: "Accept terms",
+  },
+  render: (args: any) => ({
+    setup() {
+      const checked = ref<boolean>(false);
+
+      return () => (
+        <Input {...args} v-model={checked.value}>
+          {{
+            default: () => args.default,
+          }}
+        </Input>
+      );
+    },
+  }),
+};
+
+export const CheckboxIndeterminate: Story = {
+  args: {
+    type: "checkbox",
+    indeterminate: true,
+    default: "Select all",
+  },
+  render: (args: any) => ({
+    setup() {
+      const checked = ref<boolean>(false);
+
+      return () => (
+        <Input {...args} v-model={checked.value}>
+          {{
+            default: () => args.default,
+          }}
+        </Input>
+      );
+    },
+  }),
 };
