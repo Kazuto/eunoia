@@ -1,5 +1,8 @@
 <template>
-  <div ref="containerRef" class="relative inline-block">
+  <div
+    ref="containerRef"
+    class="relative inline-block"
+  >
     <DropdownTrigger
       v-bind="$attrs"
       :dense
@@ -38,8 +41,9 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onBeforeUnmount, ref, toRef, useId, watch } from "vue";
+import { computed, onBeforeUnmount, ref, toRef, watch } from "vue";
 import { type LocaleMessages, useLocale } from "@/composables/useLocale";
+import { useSanitizedId } from "@/composables/useSanitizedId";
 import DropdownTrigger from "./primitives/DropdownTrigger.vue";
 import DropdownMenu from "./primitives/DropdownMenu.vue";
 import DropdownItem from "./primitives/DropdownItem.vue";
@@ -76,7 +80,7 @@ const t = useLocale(
   toRef(() => props.locale)
 );
 
-const menuId = `dropdown-menu-${useId().replace(/[^a-zA-Z0-9]/g, "-")}`;
+const menuId = useSanitizedId("dropdown-menu");
 
 const isOpen = ref(false);
 const activeIndex = ref(-1);

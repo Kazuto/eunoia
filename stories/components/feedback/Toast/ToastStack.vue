@@ -6,7 +6,10 @@
         :key="toast.id"
         :style="getStackStyle(index)"
       >
-        <Toast :variant="toast.variant" :dense>
+        <Toast
+          :variant="toast.variant"
+          :dense
+        >
           <span class="flex-1">
             {{ toast.message }}
           </span>

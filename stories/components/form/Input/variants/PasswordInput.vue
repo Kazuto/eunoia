@@ -1,6 +1,14 @@
 <template>
-  <InputGroup :invalid :disabled>
-    <InputGroupAddon v-if="$slots.prepend" position="left" :disabled :invalid>
+  <InputGroup
+    :invalid
+    :disabled
+  >
+    <InputGroupAddon
+      v-if="$slots.prepend"
+      position="left"
+      :disabled
+      :invalid
+    >
       <slot name="prepend" />
     </InputGroupAddon>
 
@@ -23,7 +31,11 @@
       @keydown.enter="toggleVisibility"
       @keydown.space="toggleVisibility"
     >
-      <component :is="icon" class="h-4 w-4" aria-hidden="true" />
+      <component
+        :is="icon"
+        class="h-4 w-4"
+        aria-hidden="true"
+      />
     </InputGroupAddon>
   </InputGroup>
 </template>

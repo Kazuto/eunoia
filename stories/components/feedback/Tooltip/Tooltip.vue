@@ -25,7 +25,8 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, useId } from "vue";
+import { ref } from "vue";
+import { useSanitizedId } from "@/composables/useSanitizedId";
 import TooltipContent from "./primitives/TooltipContent.vue";
 
 defineOptions({
@@ -44,9 +45,9 @@ withDefaults(
   }
 );
 
-const id = useId().replace(/[^a-zA-Z0-9]/g, "-");
-const anchorName = `--tooltip-${id}`;
-const tooltipId = `tooltip-${id}`;
+const id = useSanitizedId("tooltip");
+const anchorName = `--${id}`;
+const tooltipId = id;
 const anchorStyle = { "anchor-name": anchorName } as Record<string, string>;
 const isVisible = ref(false);
 

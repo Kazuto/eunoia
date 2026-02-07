@@ -1,12 +1,28 @@
 <template>
-  <InputGroup :invalid :disabled>
-    <InputGroupAddon v-if="$slots.prepend" position="left" :disabled :invalid>
+  <InputGroup
+    :invalid
+    :disabled
+  >
+    <InputGroupAddon
+      v-if="$slots.prepend"
+      position="left"
+      :disabled
+      :invalid
+    >
       <slot name="prepend" />
     </InputGroupAddon>
 
-    <Input v-model="model" v-bind="{ ...$attrs, ...props }" />
+    <Input
+      v-model="model"
+      v-bind="{ ...$attrs, ...props }"
+    />
 
-    <InputGroupAddon v-if="$slots.append" position="right" :disabled :invalid>
+    <InputGroupAddon
+      v-if="$slots.append"
+      position="right"
+      :disabled
+      :invalid
+    >
       <slot name="append" />
     </InputGroupAddon>
   </InputGroup>

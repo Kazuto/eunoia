@@ -1,7 +1,14 @@
 <template>
   <Teleport to="body">
-    <div v-if="isVisible" :class="positionStyles({ position })">
-      <Toast v-bind="$attrs" :variant :dense>
+    <div
+      v-if="isVisible"
+      :class="positionStyles({ position })"
+    >
+      <Toast
+        v-bind="$attrs"
+        :variant
+        :dense
+      >
         <span class="flex-1">
           <slot />
         </span>
@@ -13,7 +20,11 @@
           @dismiss="dismiss"
         />
         <template #timeout>
-          <TimeoutBar v-if="!persistent" :variant :duration />
+          <TimeoutBar
+            v-if="!persistent"
+            :variant
+            :duration
+          />
         </template>
       </Toast>
     </div>

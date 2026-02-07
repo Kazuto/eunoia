@@ -17,7 +17,11 @@
     @mousedown.prevent
   >
     <span class="flex-1">{{ option.label }}</span>
-    <PiCheck v-if="isSelected" class="h-4 w-4 shrink-0" aria-hidden="true" />
+    <PiCheck
+      v-if="isSelected"
+      class="h-4 w-4 shrink-0"
+      aria-hidden="true"
+    />
   </li>
 </template>
 

@@ -1,6 +1,12 @@
 <template>
-  <div ref="containerRef" class="relative flex flex-col gap-1">
-    <Label :id="labelId" :dense>
+  <div
+    ref="containerRef"
+    class="relative flex flex-col gap-1"
+  >
+    <Label
+      :id="labelId"
+      :dense
+    >
       <slot />
     </Label>
     <SelectTrigger
@@ -22,7 +28,12 @@
       @keydown="handleTriggerKeydown"
       @remove-chip="removeValue"
     />
-    <SelectDropdown v-if="isOpen" :id="listboxId" :multiple :dense>
+    <SelectDropdown
+      v-if="isOpen"
+      :id="listboxId"
+      :multiple
+      :dense
+    >
       <li
         v-if="options.length === 0"
         role="option"
@@ -48,8 +59,9 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onBeforeUnmount, ref, toRef, useId, watch } from "vue";
+import { computed, onBeforeUnmount, ref, toRef, watch } from "vue";
 import { type LocaleMessages, useLocale } from "@/composables/useLocale";
+import { useSanitizedId } from "@/composables/useSanitizedId";
 import Label from "../Input/primitives/Label.vue";
 import SelectTrigger from "./primitives/SelectTrigger.vue";
 import SelectDropdown from "./primitives/SelectDropdown.vue";
@@ -86,9 +98,9 @@ const t = useLocale(
   toRef(() => props.locale)
 );
 
-const labelId = useId();
-const triggerId = useId();
-const listboxId = useId();
+const labelId = useSanitizedId("select-label");
+const triggerId = useSanitizedId("select-trigger");
+const listboxId = useSanitizedId("select-listbox");
 
 const isOpen = ref(false);
 const activeIndex = ref(-1);

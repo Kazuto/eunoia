@@ -17,7 +17,8 @@
 </template>
 
 <script lang="ts" setup>
-import { nextTick, ref, useId, watch } from "vue";
+import { nextTick, ref, watch } from "vue";
+import { useSanitizedId } from "@/composables/useSanitizedId";
 import DetailsPrimitive from "./primitives/Details.vue";
 
 defineOptions({
@@ -33,7 +34,7 @@ withDefaults(
 
 const model = defineModel<boolean>({ default: false });
 
-const contentId = `details-content-${useId().replace(/[^a-zA-Z0-9]/g, "-")}`;
+const contentId = useSanitizedId("details-content");
 const nativeOpen = ref(model.value);
 const expanded = ref(model.value);
 

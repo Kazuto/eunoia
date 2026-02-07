@@ -45,7 +45,10 @@
     >
       {{ selectedLabels[0] }}
     </span>
-    <span v-else class="flex-1 truncate text-gray-400">
+    <span
+      v-else
+      class="flex-1 truncate text-gray-400"
+    >
       {{ placeholder }}
     </span>
     <PiCaretDown

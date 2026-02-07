@@ -1,5 +1,8 @@
 <template>
-  <component :is="variantComponent" :dense="dense">
+  <component
+    :is="variantComponent"
+    :dense="dense"
+  >
     <slot />
   </component>
 </template>

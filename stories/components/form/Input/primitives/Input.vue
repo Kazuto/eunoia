@@ -4,7 +4,7 @@
     v-model="model"
     :class="inputStyles({ dense, invalid })"
     :aria-invalid="invalid || undefined"
-  />
+  >
 </template>
 
 <script setup lang="ts">

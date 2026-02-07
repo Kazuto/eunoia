@@ -1,6 +1,9 @@
 <template>
   <div class="flex flex-col gap-1">
-    <Label :dense :for="inputId"><slot /></Label>
+    <Label
+      :dense
+      :for="inputId"
+    ><slot /></Label>
     <component
       :is="variantComponent"
       v-bind="$attrs"
@@ -17,7 +20,8 @@
 
 <script setup lang="ts">
 import Label from "./primitives/Label.vue";
-import { useAttrs, useId, computed } from "vue";
+import { useAttrs, computed } from "vue";
+import { useSanitizedId } from "@/composables/useSanitizedId";
 import PasswordInput from "./variants/PasswordInput.vue";
 import NumberInput from "./variants/NumberInput.vue";
 import TextInput from "./variants/TextInput.vue";
@@ -27,7 +31,7 @@ defineOptions({
 });
 
 const attrs = useAttrs();
-const inputId = useId();
+const inputId = useSanitizedId("input");
 const model = defineModel<string | number>();
 
 defineProps<{
