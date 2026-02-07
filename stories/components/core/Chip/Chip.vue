@@ -12,7 +12,7 @@
       v-if="removable"
       :variant
       :dense
-      :ariaLabel="t('remove')"
+      :aria-label="t('remove')"
       @remove="emit('remove', $event)"
     />
   </Chip>
@@ -35,7 +35,10 @@ const props = withDefaults(
     removable?: boolean;
     locale?: LocaleMessages;
   }>(),
-  {},
+  {
+    variant: "primary",
+    locale: undefined,
+  },
 );
 
 const t = useLocale("chip", toRef(() => props.locale));

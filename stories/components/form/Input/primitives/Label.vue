@@ -1,5 +1,8 @@
 <template>
-  <label :class="labelStyles({ dense })" v-bind="$attrs">
+  <label
+    :class="labelStyles({ dense })"
+    v-bind="$attrs"
+  >
     <slot />
   </label>
 </template>

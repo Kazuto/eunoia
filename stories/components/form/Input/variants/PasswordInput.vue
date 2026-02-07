@@ -1,6 +1,14 @@
 <template>
-  <InputGroup :invalid :disabled>
-    <InputGroupAddon v-if="$slots.prepend" position="left" :disabled :invalid>
+  <InputGroup
+    :invalid
+    :disabled
+  >
+    <InputGroupAddon
+      v-if="$slots.prepend"
+      position="left"
+      :disabled
+      :invalid
+    >
       <slot name="prepend" />
     </InputGroupAddon>
 
@@ -14,16 +22,20 @@
 
     <InputGroupAddon
       position="right"
-      @click="toggleVisibility"
-      @keydown.enter="toggleVisibility"
-      @keydown.space="toggleVisibility"
       role="button"
       :aria-label="isVisible ? t('hide-password') : t('show-password')"
       :aria-pressed="isVisible"
       :disabled
       :invalid
+      @click="toggleVisibility"
+      @keydown.enter="toggleVisibility"
+      @keydown.space="toggleVisibility"
     >
-      <component :is="icon" class="h-4 w-4" aria-hidden="true" />
+      <component
+        :is="icon"
+        class="h-4 w-4"
+        aria-hidden="true"
+      />
     </InputGroupAddon>
   </InputGroup>
 </template>
@@ -43,13 +55,15 @@ const props = withDefaults(
     disabled?: boolean;
     locale?: LocaleMessages;
   }>(),
-  {}
+  {
+    locale: undefined,
+  },
 );
 
 const t = useLocale("input.password", toRef(() => props.locale));
 
 const forwardedProps = computed(() => {
-  const { locale, ...rest } = props;
+  const { locale: _locale, ...rest } = props;
   return rest;
 });
 

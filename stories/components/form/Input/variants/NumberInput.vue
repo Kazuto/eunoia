@@ -1,6 +1,14 @@
 <template>
-  <InputGroup :invalid :disabled>
-    <InputGroupAddon v-if="$slots.prepend" position="left" :disabled :invalid>
+  <InputGroup
+    :invalid
+    :disabled
+  >
+    <InputGroupAddon
+      v-if="$slots.prepend"
+      position="left"
+      :disabled
+      :invalid
+    >
       <slot name="prepend" />
     </InputGroupAddon>
 
@@ -19,30 +27,36 @@
 
     <InputGroupAddon
       position="right"
-      @click="decrement"
-      @keydown.enter="decrement"
-      @keydown.space.prevent="decrement"
       role="button"
       :aria-label="t('decrease-value')"
       tabindex="-1"
       class="rounded-none"
       :disabled
       :invalid
+      @click="decrement"
+      @keydown.enter="decrement"
+      @keydown.space.prevent="decrement"
     >
-      <PiMinus class="h-4 w-4" aria-hidden="true" />
+      <PiMinus
+        class="h-4 w-4"
+        aria-hidden="true"
+      />
     </InputGroupAddon>
     <InputGroupAddon
       position="right"
-      @click="increment"
-      @keydown.enter="increment"
-      @keydown.space.prevent="increment"
       role="button"
       :aria-label="t('increase-value')"
       tabindex="-1"
       :disabled
       :invalid
+      @click="increment"
+      @keydown.enter="increment"
+      @keydown.space.prevent="increment"
     >
-      <PiPlus class="h-4 w-4" aria-hidden="true" />
+      <PiPlus
+        class="h-4 w-4"
+        aria-hidden="true"
+      />
     </InputGroupAddon>
   </InputGroup>
 </template>
@@ -70,14 +84,17 @@ const props = withDefaults(
     locale?: LocaleMessages;
   }>(),
   {
+    min: undefined,
+    max: undefined,
     step: 1,
+    locale: undefined,
   }
 );
 
 const t = useLocale("input.number", toRef(() => props.locale));
 
 const forwardedProps = computed(() => {
-  const { locale, ...rest } = props;
+  const { locale: _locale, ...rest } = props;
   return rest;
 });
 

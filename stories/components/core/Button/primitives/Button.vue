@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, useAttrs } from "vue";
+import { useAttrs } from "vue";
 import { tv } from "tailwind-variants";
 
 defineOptions({
@@ -33,7 +33,7 @@ const buttonStyles = tv({
   },
 });
 
-const props = withDefaults(
+withDefaults(
   defineProps<{
     dense?: boolean;
   }>(),

@@ -1,16 +1,21 @@
 <template>
-  <div ref="containerRef" class="relative inline-block">
+  <div
+    ref="containerRef"
+    class="relative inline-block"
+  >
     <DropdownTrigger
       v-bind="$attrs"
       :dense
       :disabled
       :is-open="isOpen"
       :menu-id="menuId"
-      :ariaLabel="t('toggle')"
+      :aria-label="t('toggle')"
       @toggle="toggleMenu"
       @keydown="handleTriggerKeydown"
     >
-      <slot name="trigger">{{ t("toggle") }}</slot>
+      <slot name="trigger">
+        {{ t("toggle") }}
+      </slot>
     </DropdownTrigger>
     <DropdownMenu
       v-if="isOpen"
@@ -20,8 +25,8 @@
     >
       <DropdownItem
         v-for="(item, index) in items"
-        :key="item.value"
         :id="`${menuId}-item-${index}`"
+        :key="item.value"
         :label="item.label"
         :value="item.value"
         :variant="item.variant"
@@ -60,7 +65,9 @@ const props = withDefaults(
     disabled?: boolean;
     locale?: LocaleMessages;
   }>(),
-  {},
+  {
+    locale: undefined,
+  },
 );
 
 const emit = defineEmits<{

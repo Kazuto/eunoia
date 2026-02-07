@@ -47,7 +47,9 @@ withDefaults(
     variant?: "primary" | "secondary" | "success" | "warning" | "danger";
     dense?: boolean;
   }>(),
-  {},
+  {
+    variant: "primary",
+  },
 );
 
 const emit = defineEmits<{

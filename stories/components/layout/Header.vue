@@ -42,20 +42,20 @@
         >Welcome, <b>{{ user.name }}</b>!</span>
         <my-button
           v-if="user"
-          size="small"
+          dense
           label="Log out"
           @click="$emit('logout')"
         />
         <my-button
           v-if="!user"
-          size="small"
+          dense
           label="Log in"
           @click="$emit('login')"
         />
         <my-button
           v-if="!user"
           primary
-          size="small"
+          dense
           label="Sign up"
           @click="$emit('createAccount')"
         />

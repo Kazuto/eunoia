@@ -17,7 +17,9 @@
       :placement
       :dense
     >
-      <slot name="content">{{ content }}</slot>
+      <slot name="content">
+        {{ content }}
+      </slot>
     </TooltipContent>
   </div>
 </template>
@@ -36,7 +38,10 @@ withDefaults(
     placement?: "top" | "bottom" | "left" | "right";
     dense?: boolean;
   }>(),
-  {},
+  {
+    content: undefined,
+    placement: undefined,
+  },
 );
 
 const id = useId().replace(/[^a-zA-Z0-9]/g, "-");

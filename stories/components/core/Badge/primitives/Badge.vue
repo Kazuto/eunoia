@@ -1,5 +1,9 @@
 <template>
-  <span role="status" v-bind="forwardedAttrs" :class="badgeStyles({ variant, dense, pill, class: classAttr })">
+  <span
+    role="status"
+    v-bind="forwardedAttrs"
+    :class="badgeStyles({ variant, dense, pill, class: classAttr })"
+  >
     <slot />
   </span>
 </template>
@@ -46,6 +50,8 @@ withDefaults(
     dense?: boolean;
     pill?: boolean;
   }>(),
-  {},
+  {
+    variant: "primary",
+  },
 );
 </script>

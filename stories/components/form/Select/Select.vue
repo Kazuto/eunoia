@@ -1,6 +1,12 @@
 <template>
-  <div ref="containerRef" class="relative flex flex-col gap-1">
-    <Label :id="labelId" :dense>
+  <div
+    ref="containerRef"
+    class="relative flex flex-col gap-1"
+  >
+    <Label
+      :id="labelId"
+      :dense
+    >
       <slot />
     </Label>
     <SelectTrigger
@@ -39,8 +45,8 @@
       <SelectOption
         v-for="(option, index) in options"
         v-else
-        :key="option.value"
         :id="`${listboxId}-option-${index}`"
+        :key="option.value"
         :option="option"
         :is-selected="selectedValues.includes(option.value)"
         :is-active="activeIndex === index"
@@ -76,7 +82,12 @@ const props = withDefaults(
     ariaLabelledby?: string;
     locale?: LocaleMessages;
   }>(),
-  {},
+  {
+    placeholder: undefined,
+    ariaLabel: undefined,
+    ariaLabelledby: undefined,
+    locale: undefined,
+  },
 );
 
 const model = defineModel<string | number | Array<string | number>>();

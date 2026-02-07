@@ -1,10 +1,10 @@
 <template>
   <input
     v-bind="$attrs"
+    v-model="model"
     :class="inputStyles({ dense, invalid })"
     :aria-invalid="invalid || undefined"
-    v-model="model"
-  />
+  >
 </template>
 
 <script setup lang="ts">

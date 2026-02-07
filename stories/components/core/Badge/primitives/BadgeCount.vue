@@ -45,6 +45,8 @@ withDefaults(
     dense?: boolean;
     count: number;
   }>(),
-  {},
+  {
+    variant: "primary",
+  },
 );
 </script>

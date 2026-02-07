@@ -15,7 +15,10 @@
     @click="!disabled && emit('toggle')"
     @keydown="!disabled && emit('keydown', $event)"
   >
-    <div v-if="multiple && selectedValues.length > 0" class="flex flex-1 flex-wrap gap-1">
+    <div
+      v-if="multiple && selectedValues.length > 0"
+      class="flex flex-1 flex-wrap gap-1"
+    >
       <Chip
         v-for="(label, i) in selectedLabels"
         :key="selectedValues[i]"
@@ -28,10 +31,16 @@
         {{ label }}
       </Chip>
     </div>
-    <span v-else-if="!multiple && selectedLabels.length > 0" class="flex-1 truncate">
+    <span
+      v-else-if="!multiple && selectedLabels.length > 0"
+      class="flex-1 truncate"
+    >
       {{ selectedLabels[0] }}
     </span>
-    <span v-else class="flex-1 truncate text-gray-400">
+    <span
+      v-else
+      class="flex-1 truncate text-gray-400"
+    >
       {{ placeholder }}
     </span>
     <PiCaretDown

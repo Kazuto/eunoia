@@ -1,7 +1,17 @@
 <template>
-  <Badge v-bind="$attrs" :variant :dense :pill>
+  <Badge
+    v-bind="$attrs"
+    :variant
+    :dense
+    :pill
+  >
     <slot />
-    <BadgeCount v-if="count != null" :variant :dense :count>
+    <BadgeCount
+      v-if="count != null"
+      :variant
+      :dense
+      :count
+    >
       {{ displayCount }}
     </BadgeCount>
   </Badge>
@@ -25,6 +35,8 @@ const props = withDefaults(
     maxCount?: number;
   }>(),
   {
+    variant: "primary",
+    count: undefined,
     maxCount: 99,
   }
 );

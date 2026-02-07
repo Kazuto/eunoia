@@ -36,6 +36,9 @@ withDefaults(
     variant?: "info" | "success" | "warning" | "danger";
     duration?: number;
   }>(),
-  {},
+  {
+    variant: "info",
+    duration: undefined,
+  },
 );
 </script>

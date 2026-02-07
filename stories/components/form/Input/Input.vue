@@ -1,11 +1,14 @@
 <template>
   <div class="flex flex-col gap-1">
-    <Label :dense :for="inputId"><slot /></Label>
+    <Label
+      :dense
+      :for="inputId"
+    ><slot /></Label>
     <component
       :is="variantComponent"
-      v-model="model"
       v-bind="$attrs"
       :id="inputId"
+      v-model="model"
       :dense
       :invalid
       :disabled

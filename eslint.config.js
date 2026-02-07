@@ -18,6 +18,19 @@ export default defineConfig([
         parser: tseslint.parser,
       },
     },
+    rules: {
+      "vue/multi-word-component-names": "off",
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        { argsIgnorePattern: "^_", destructuredArrayIgnorePattern: "^_", varsIgnorePattern: "^_" },
+      ],
+    },
+  },
+  {
+    files: ["**/*.stories.tsx"],
+    rules: {
+      "@typescript-eslint/no-explicit-any": "off",
+    },
   },
   {
     languageOptions: {

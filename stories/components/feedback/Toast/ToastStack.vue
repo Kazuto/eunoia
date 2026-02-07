@@ -6,7 +6,10 @@
         :key="toast.id"
         :style="getStackStyle(index)"
       >
-        <Toast :variant="toast.variant" :dense>
+        <Toast
+          :variant="toast.variant"
+          :dense
+        >
           <span class="flex-1">
             {{ toast.message }}
           </span>
@@ -14,11 +17,15 @@
             v-if="toast.dismissible"
             :variant="toast.variant"
             :dense
-            :ariaLabel="t('dismiss')"
+            :aria-label="t('dismiss')"
             @dismiss="dismiss(toast.id)"
           />
           <template #timeout>
-            <TimeoutBar v-if="!toast.persistent" :variant="toast.variant" :duration="toast.duration" />
+            <TimeoutBar
+              v-if="!toast.persistent"
+              :variant="toast.variant"
+              :duration="toast.duration"
+            />
           </template>
         </Toast>
       </div>
@@ -59,6 +66,7 @@ const props = withDefaults(
   {
     position: "bottom-right",
     limit: 3,
+    locale: undefined,
   },
 );
 

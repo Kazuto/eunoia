@@ -44,6 +44,8 @@ withDefaults(
     variant?: "info" | "success" | "warning" | "danger";
     dense?: boolean;
   }>(),
-  {},
+  {
+    variant: "info",
+  },
 );
 </script>
