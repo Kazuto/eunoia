@@ -5,5 +5,6 @@
   "input.password.hide-password": "Hide password",
   "select.placeholder": "Select an option",
   "select.no-results": "No options",
+  "chip.remove": "Remove",
   "alert.dismiss": "Dismiss"
 }

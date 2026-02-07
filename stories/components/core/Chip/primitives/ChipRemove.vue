@@ -45,16 +45,11 @@ const removeStyles = tv({
   },
 });
 
-withDefaults(
-  defineProps<{
-    variant?: "primary" | "secondary" | "success" | "warning" | "danger";
-    dense?: boolean;
-    ariaLabel?: string;
-  }>(),
-  {
-    ariaLabel: "Remove",
-  }
-);
+defineProps<{
+  variant?: "primary" | "secondary" | "success" | "warning" | "danger";
+  dense?: boolean;
+  ariaLabel: string;
+}>();
 
 const emit = defineEmits<{
   (e: "remove", event: MouseEvent | KeyboardEvent): void;

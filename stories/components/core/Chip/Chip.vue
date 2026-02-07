@@ -12,12 +12,15 @@
       v-if="removable"
       :variant
       :dense
+      :ariaLabel="t('remove')"
       @remove="emit('remove', $event)"
     />
   </Chip>
 </template>
 
 <script lang="ts" setup>
+import { toRef } from "vue";
+import { type LocaleMessages, useLocale } from "@/composables/useLocale";
 import Chip from "./primitives/Chip.vue";
 import ChipRemove from "./primitives/ChipRemove.vue";
 
@@ -25,14 +28,17 @@ defineOptions({
   inheritAttrs: false,
 });
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     variant?: "primary" | "secondary" | "success" | "warning" | "danger";
     dense?: boolean;
     removable?: boolean;
+    locale?: LocaleMessages;
   }>(),
   {},
 );
+
+const t = useLocale("chip", toRef(() => props.locale));
 
 const emit = defineEmits<{
   (e: "click", event: MouseEvent): void;
