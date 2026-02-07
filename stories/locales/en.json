@@ -2,5 +2,7 @@
   "input.number.increase-value": "Increase value",
   "input.number.decrease-value": "Decrease value",
   "input.password.show-password": "Show password",
-  "input.password.hide-password": "Hide password"
+  "input.password.hide-password": "Hide password",
+  "select.placeholder": "Select an option",
+  "select.no-results": "No options"
 }
