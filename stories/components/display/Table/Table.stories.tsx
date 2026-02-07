@@ -2,13 +2,13 @@ import type { Meta, StoryObj } from "@storybook/vue3-vite";
 
 import Table from "./Table.vue";
 
-const columns = [
-  { name: "Name", key: "name" },
-  { name: "Role", key: "role" },
-  { name: "Email", key: "email" },
+const headers = [
+  { title: "Name", key: "name" },
+  { title: "Role", key: "role" },
+  { title: "Email", key: "email" },
 ];
 
-const rows = [
+const items = [
   { name: "Alice Johnson", role: "Engineer", email: "alice@example.com" },
   { name: "Bob Smith", role: "Designer", email: "bob@example.com" },
   { name: "Carol White", role: "Manager", email: "carol@example.com" },
@@ -18,13 +18,13 @@ const meta = {
   component: Table,
   tags: ["autodocs"],
   argTypes: {
-    columns: { control: "object" },
-    rows: { control: "object" },
+    headers: { control: "object" },
+    items: { control: "object" },
     dense: { control: "boolean" },
   },
   args: {
-    columns,
-    rows,
+    headers,
+    items,
     dense: false,
   },
 } satisfies Meta<typeof Table>;
@@ -42,12 +42,12 @@ export const Dense: Story = {
 
 export const Numbers: Story = {
   args: {
-    columns: [
-      { name: "Product", key: "product" },
-      { name: "Quantity", key: "qty" },
-      { name: "Price", key: "price" },
+    headers: [
+      { title: "Product", key: "product" },
+      { title: "Quantity", key: "qty" },
+      { title: "Price", key: "price" },
     ],
-    rows: [
+    items: [
       { product: "Widget A", qty: 150, price: 9.99 },
       { product: "Widget B", qty: 42, price: 24.5 },
       { product: "Widget C", qty: 300, price: 4.75 },
@@ -57,6 +57,6 @@ export const Numbers: Story = {
 
 export const Empty: Story = {
   args: {
-    rows: [],
+    items: [],
   },
 };

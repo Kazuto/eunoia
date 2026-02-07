@@ -3,8 +3,8 @@
     v-bind="$attrs"
     :dense
   >
-    <TableHead :columns :dense />
-    <TableBody :columns :rows :dense />
+    <TableHead :headers :dense />
+    <TableBody :headers :items :dense />
   </TablePrimitive>
 </template>
 
@@ -17,15 +17,15 @@ defineOptions({
   inheritAttrs: false,
 });
 
-export interface TableColumn {
-  name: string;
+export interface TableHeader {
+  title: string;
   key: string;
 }
 
 withDefaults(
   defineProps<{
-    columns: TableColumn[];
-    rows: Record<string, unknown>[];
+    headers: TableHeader[];
+    items: Record<string, unknown>[];
     dense?: boolean;
   }>(),
   {},

@@ -8,9 +8,15 @@
       <td
         v-for="header in headers"
         :key="header.key"
-        :class="cellStyles({ dense })"
+        :class="cellStyles({ dense, align: header.align })"
       >
-        {{ item[header.key] }}
+        {{ header.value ? header.value(item) : item[header.key] }}
+      </td>
+      <td
+        v-if="hasActions"
+        :class="cellStyles({ dense, align: 'end' })"
+      >
+        <slot name="actions" :item="item" />
       </td>
     </tr>
   </tbody>
@@ -37,15 +43,29 @@ const cellStyles = tv({
       false: "px-4 py-3",
       true: "px-3 py-2",
     },
+    align: {
+      start: "text-left",
+      end: "text-right",
+    },
   },
   defaultVariants: {
     dense: false,
+    align: "start",
   },
 });
 
+export interface DataTableColumn {
+  title: string;
+  key: string;
+  sortable?: boolean;
+  align?: "start" | "end";
+  value?: (item: Record<string, unknown>) => unknown;
+}
+
 defineProps<{
-  headers: { name: string; key: string }[];
+  headers: DataTableColumn[];
   items: Record<string, unknown>[];
+  hasActions?: boolean;
   dense?: boolean;
 }>();
 </script>

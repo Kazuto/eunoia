@@ -2,11 +2,11 @@
   <thead v-bind="forwardedAttrs" :class="classAttr">
     <tr :class="rowStyles({ dense })">
       <th
-        v-for="column in columns"
-        :key="column.key"
+        v-for="header in headers"
+        :key="header.key"
         :class="cellStyles({ dense })"
       >
-        {{ column.name }}
+        {{ header.title }}
       </th>
     </tr>
   </thead>
@@ -40,7 +40,7 @@ const cellStyles = tv({
 });
 
 defineProps<{
-  columns: { name: string; key: string }[];
+  headers: { title: string; key: string }[];
   dense?: boolean;
 }>();
 </script>
