@@ -31,7 +31,7 @@ defineOptions({
 });
 
 const attrs = useAttrs();
-const inputId = useSanitizedId("input");
+const inputId = useSanitizedId("input", { useAttrId: true });
 const model = defineModel<string | number>();
 
 defineProps<{
