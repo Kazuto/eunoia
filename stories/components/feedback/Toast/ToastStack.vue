@@ -17,6 +17,9 @@
             :ariaLabel="t('dismiss')"
             @dismiss="dismiss(toast.id)"
           />
+          <template #timeout>
+            <TimeoutBar v-if="!toast.persistent" :variant="toast.variant" :duration="toast.duration" />
+          </template>
         </Toast>
       </div>
     </div>
@@ -29,6 +32,7 @@ import { tv } from "tailwind-variants";
 import { type LocaleMessages, useLocale } from "@/composables/useLocale";
 import Toast from "./primitives/Toast.vue";
 import ToastDismiss from "./primitives/ToastDismiss.vue";
+import TimeoutBar from "@/components/feedback/primitives/TimeoutBar.vue";
 
 interface ToastItem {
   id: number;

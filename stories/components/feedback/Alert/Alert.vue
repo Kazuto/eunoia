@@ -1,10 +1,5 @@
 <template>
-  <Alert
-    v-if="isVisible"
-    v-bind="$attrs"
-    :variant
-    :dense
-  >
+  <Alert v-if="isVisible" v-bind="$attrs" :variant :dense>
     <span class="flex-1">
       <slot />
     </span>
@@ -15,6 +10,9 @@
       :ariaLabel="t('dismiss')"
       @dismiss="dismiss"
     />
+    <template #timeout>
+      <TimeoutBar v-if="!persistent" :variant :duration />
+    </template>
   </Alert>
 </template>
 
@@ -23,6 +21,7 @@ import { ref, onMounted, onBeforeUnmount, watch, toRef } from "vue";
 import { type LocaleMessages, useLocale } from "@/composables/useLocale";
 import Alert from "./primitives/Alert.vue";
 import AlertDismiss from "./primitives/AlertDismiss.vue";
+import TimeoutBar from "@/components/feedback/primitives/TimeoutBar.vue";
 
 defineOptions({
   inheritAttrs: false,
@@ -39,10 +38,13 @@ const props = withDefaults(
   }>(),
   {
     duration: 5000,
-  },
+  }
 );
 
-const t = useLocale("alert", toRef(() => props.locale));
+const t = useLocale(
+  "alert",
+  toRef(() => props.locale)
+);
 
 const emit = defineEmits<{
   (e: "dismiss"): void;
@@ -78,7 +80,7 @@ watch(
     } else {
       startTimer();
     }
-  },
+  }
 );
 
 onMounted(() => {

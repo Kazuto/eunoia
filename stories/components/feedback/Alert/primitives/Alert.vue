@@ -5,6 +5,7 @@
     :class="alertStyles({ variant, dense, class: classAttr })"
   >
     <slot />
+    <slot name="timeout" />
   </div>
 </template>
 
@@ -19,7 +20,7 @@ defineOptions({
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const alertStyles = tv({
-  base: "flex items-start gap-3 rounded-md border font-sans",
+  base: "relative flex items-start gap-3 overflow-hidden rounded-md border font-sans",
   variants: {
     variant: {
       info: "border-blue-200 bg-blue-50 text-blue-800",
