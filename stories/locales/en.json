@@ -7,5 +7,6 @@
   "select.no-results": "No options",
   "chip.remove": "Remove",
   "alert.dismiss": "Dismiss",
-  "toast.dismiss": "Dismiss"
+  "toast.dismiss": "Dismiss",
+  "dropdown.toggle": "Toggle menu"
 }
