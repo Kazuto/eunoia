@@ -20,6 +20,7 @@ const meta = {
   args: {
     primary: false,
     ghost: false,
+    destructive: false,
     default: "Button",
     onClick: fn(),
     onFocus: fn(),
@@ -56,6 +57,12 @@ export const Secondary: Story = {
 export const Ghost: Story = {
   args: {
     ghost: true,
+  },
+};
+
+export const Destructive: Story = {
+  args: {
+    destructive: true,
   },
 };
 
