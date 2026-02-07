@@ -1,6 +1,8 @@
 <template>
   <button
-    :class="chipStyles({ variant, dense, class: attrs.class as string })"
+    type="button"
+    v-bind="forwardedAttrs"
+    :class="chipStyles({ variant, dense, class: classAttr })"
     @click="emit('click', $event)"
     @focus="emit('focus', $event)"
     @blur="emit('blur', $event)"
@@ -10,14 +12,14 @@
 </template>
 
 <script lang="ts" setup>
-import { useAttrs } from "vue";
 import { tv } from "tailwind-variants";
+import { useForwardedAttrs } from "@/composables/useForwardedAttrs";
 
 defineOptions({
   inheritAttrs: false,
 });
 
-const attrs = useAttrs();
+const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const chipStyles = tv({
   base: "inline-flex cursor-pointer items-center rounded-full border-0 font-sans font-bold leading-none outline-none focus-visible:ring-2 focus-visible:ring-offset-1",

@@ -1,6 +1,7 @@
 <template>
   <span
-    :class="removeStyles({ variant, dense, class: attrs.class as string })"
+    v-bind="forwardedAttrs"
+    :class="removeStyles({ variant, dense, class: classAttr })"
     role="button"
     tabindex="-1"
     :aria-label="ariaLabel"
@@ -13,15 +14,15 @@
 </template>
 
 <script lang="ts" setup>
-import { useAttrs } from "vue";
 import { tv } from "tailwind-variants";
 import { PiX } from "vue-icons-plus/pi";
+import { useForwardedAttrs } from "@/composables/useForwardedAttrs";
 
 defineOptions({
   inheritAttrs: false,
 });
 
-const attrs = useAttrs();
+const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const removeStyles = tv({
   base: "ml-1.5 inline-flex items-center justify-center rounded-full",

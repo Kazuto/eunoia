@@ -1,5 +1,6 @@
 <template>
   <Chip
+    v-bind="$attrs"
     :variant
     :dense
     @click="emit('click', $event)"
@@ -19,6 +20,10 @@
 <script lang="ts" setup>
 import Chip from "./primitives/Chip.vue";
 import ChipRemove from "./primitives/ChipRemove.vue";
+
+defineOptions({
+  inheritAttrs: false,
+});
 
 withDefaults(
   defineProps<{

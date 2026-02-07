@@ -1,5 +1,5 @@
 <template>
-  <Badge :variant :dense :pill>
+  <Badge v-bind="$attrs" :variant :dense :pill>
     <slot />
     <BadgeCount v-if="count != null" :variant :dense :count>
       {{ displayCount }}
@@ -11,6 +11,10 @@
 import { computed } from "vue";
 import Badge from "./primitives/Badge.vue";
 import BadgeCount from "./primitives/BadgeCount.vue";
+
+defineOptions({
+  inheritAttrs: false,
+});
 
 const props = withDefaults(
   defineProps<{

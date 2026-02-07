@@ -1,21 +1,22 @@
 <template>
   <span
-    :class="countStyles({ variant, dense, class: attrs.class as string })"
-    :aria-label="`${count}`"
+    v-bind="forwardedAttrs"
+    :class="countStyles({ variant, dense, class: classAttr })"
+    :aria-label="String(count)"
   >
     <slot />
   </span>
 </template>
 
 <script lang="ts" setup>
-import { useAttrs } from "vue";
 import { tv } from "tailwind-variants";
+import { useForwardedAttrs } from "@/composables/useForwardedAttrs";
 
 defineOptions({
   inheritAttrs: false,
 });
 
-const attrs = useAttrs();
+const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const countStyles = tv({
   base: "ml-1.5 inline-flex items-center justify-center rounded-full font-bold",

@@ -1,18 +1,18 @@
 <template>
-  <span :class="badgeStyles({ variant, dense, pill, class: attrs.class as string })">
+  <span role="status" v-bind="forwardedAttrs" :class="badgeStyles({ variant, dense, pill, class: classAttr })">
     <slot />
   </span>
 </template>
 
 <script lang="ts" setup>
-import { useAttrs } from "vue";
 import { tv } from "tailwind-variants";
+import { useForwardedAttrs } from "@/composables/useForwardedAttrs";
 
 defineOptions({
   inheritAttrs: false,
 });
 
-const attrs = useAttrs();
+const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const badgeStyles = tv({
   base: "inline-flex items-center font-sans font-bold leading-none",
