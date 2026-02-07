@@ -45,10 +45,7 @@
     >
       {{ selectedLabels[0] }}
     </span>
-    <span
-      v-else
-      class="flex-1 truncate text-gray-400"
-    >
+    <span v-else class="flex-1 truncate text-gray-400">
       {{ placeholder }}
     </span>
     <PiCaretDown
@@ -77,7 +74,7 @@ const triggerStyles = tv({
   base: "inline-flex w-full cursor-pointer items-center rounded-md border border-gray-300 font-sans outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2",
   variants: {
     dense: {
-      false: "min-h-[42px] px-3 py-2 text-sm",
+      false: "min-h-[42px] px-3 py-1.5 text-sm",
       true: "min-h-[38px] px-2.5 py-1.5 text-xs",
     },
     invalid: {

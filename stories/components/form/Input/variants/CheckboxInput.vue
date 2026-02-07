@@ -60,8 +60,8 @@ const boxStyles = tv({
   base: "inline-flex shrink-0 items-center justify-center rounded border border-gray-300 bg-white transition-colors",
   variants: {
     dense: {
-      false: "h-5 w-5",
-      true: "h-4 w-4",
+      false: "h-7 w-7",
+      true: "h-5 w-5",
     },
     checked: {
       true: "border-primary bg-primary",
@@ -86,8 +86,8 @@ const iconStyles = tv({
   base: "text-white",
   variants: {
     dense: {
-      false: "h-3.5 w-3.5",
-      true: "h-3 w-3",
+      false: "h-4.5 w-4.5",
+      true: "h-3.5 w-3.5",
     },
   },
   defaultVariants: {
