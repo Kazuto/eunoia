@@ -76,7 +76,7 @@ const t = useLocale(
   toRef(() => props.locale)
 );
 
-const menuId = useId();
+const menuId = `dropdown-menu-${useId().replace(/[^a-zA-Z0-9]/g, "-")}`;
 
 const isOpen = ref(false);
 const activeIndex = ref(-1);
