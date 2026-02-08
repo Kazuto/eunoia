@@ -10,13 +10,15 @@
         :key="header.key"
         :class="cellStyles({ dense, align: header.align })"
       >
-        {{ header.value ? header.value(item) : item[header.key] }}
+        <Skeleton v-if="loading" />
+        <template v-else>{{ header.value ? header.value(item) : item[header.key] }}</template>
       </td>
       <td
         v-if="hasActions"
         :class="cellStyles({ dense, align: 'end' })"
       >
-        <slot name="actions" :item="item" />
+        <Skeleton v-if="loading" width="80px" />
+        <slot v-else name="actions" :item="item" />
       </td>
     </tr>
   </tbody>
@@ -25,6 +27,7 @@
 <script lang="ts" setup>
 import { tv } from "tailwind-variants";
 import { useForwardedAttrs } from "@/composables/useForwardedAttrs";
+import Skeleton from "@/components/core/Skeleton/Skeleton.vue";
 
 defineOptions({
   inheritAttrs: false,
@@ -66,6 +69,7 @@ defineProps<{
   headers: DataTableColumn[];
   items: Record<string, unknown>[];
   hasActions?: boolean;
+  loading?: boolean;
   dense?: boolean;
 }>();
 </script>

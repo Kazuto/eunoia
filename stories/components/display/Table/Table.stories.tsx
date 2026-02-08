@@ -21,11 +21,14 @@ const meta = {
     headers: { control: "object" },
     items: { control: "object" },
     dense: { control: "boolean" },
+    loading: { control: "boolean" },
+    loadingRows: { control: "number" },
   },
   args: {
     headers,
     items,
     dense: false,
+    loading: false,
   },
 } satisfies Meta<typeof Table>;
 
@@ -58,5 +61,18 @@ export const Numbers: Story = {
 export const Empty: Story = {
   args: {
     items: [],
+  },
+};
+
+export const Loading: Story = {
+  args: {
+    loading: true,
+  },
+};
+
+export const LoadingCustomRows: Story = {
+  args: {
+    loading: true,
+    loadingRows: 5,
   },
 };

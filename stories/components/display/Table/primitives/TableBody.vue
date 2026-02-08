@@ -10,7 +10,8 @@
         :key="header.key"
         :class="cellStyles({ dense })"
       >
-        {{ item[header.key] }}
+        <Skeleton v-if="loading" />
+        <template v-else>{{ item[header.key] }}</template>
       </td>
     </tr>
   </tbody>
@@ -19,6 +20,7 @@
 <script lang="ts" setup>
 import { tv } from "tailwind-variants";
 import { useForwardedAttrs } from "@/composables/useForwardedAttrs";
+import Skeleton from "@/components/core/Skeleton/Skeleton.vue";
 
 defineOptions({
   inheritAttrs: false,
@@ -44,8 +46,9 @@ const cellStyles = tv({
 });
 
 defineProps<{
-  headers: { name: string; key: string }[];
+  headers: { title: string; key: string }[];
   items: Record<string, unknown>[];
+  loading?: boolean;
   dense?: boolean;
 }>();
 </script>

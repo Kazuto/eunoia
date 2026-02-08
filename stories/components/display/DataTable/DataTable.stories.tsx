@@ -23,6 +23,8 @@ const meta = {
     headers: { control: "object" },
     items: { control: "object" },
     dense: { control: "boolean" },
+    loading: { control: "boolean" },
+    loadingRows: { control: "number" },
     actions: { table: { category: "slots" } },
   },
   args: {
@@ -39,6 +41,7 @@ const meta = {
     ],
     items,
     dense: false,
+    loading: false,
   },
 } satisfies Meta<typeof DataTable>;
 
@@ -86,6 +89,12 @@ export const Aligned: Story = {
       { title: "Salary", key: "salary", sortable: true, align: "end" as const },
       { title: "Hours", key: "hours", sortable: true, align: "end" as const },
     ],
+  },
+};
+
+export const Loading: Story = {
+  args: {
+    loading: true,
   },
 };
 

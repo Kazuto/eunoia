@@ -8,7 +8,7 @@
       :sort-direction="sortDirection"
       @sort="handleSort"
     />
-    <DataTableBody :headers :items="sortedItems" :has-actions :dense>
+    <DataTableBody :headers :items="displayItems" :has-actions :loading :dense>
       <template v-if="hasActions" #actions="{ item }">
         <slot name="actions" :item="item" />
       </template>
@@ -34,9 +34,13 @@ const props = withDefaults(
   defineProps<{
     headers: DataTableColumn[];
     items: Record<string, unknown>[];
+    loading?: boolean;
+    loadingRows?: number;
     dense?: boolean;
   }>(),
-  {}
+  {
+    loadingRows: 3,
+  },
 );
 
 const slots = useSlots();
@@ -84,4 +88,12 @@ const sortedItems = computed(() => {
     return String(valA).localeCompare(String(valB)) * dir;
   });
 });
+
+const placeholderItems = computed(() =>
+  Array.from({ length: props.loadingRows }, () => ({})),
+);
+
+const displayItems = computed(() =>
+  props.loading ? placeholderItems.value : sortedItems.value,
+);
 </script>
