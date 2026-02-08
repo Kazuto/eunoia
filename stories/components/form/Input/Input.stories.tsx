@@ -74,6 +74,27 @@ export const Text: Story = {
   },
 };
 
+export const TextMaxLength: Story = {
+  args: {
+    type: "text",
+    default: "Bio",
+    maxlength: 255,
+    helper: "Tell us about yourself",
+  },
+};
+
+export const TextErrors: Story = {
+  args: {
+    type: "text",
+    default: "Email",
+    invalid: true,
+    errors: [
+      "Please enter a valid email address",
+      "Email is already taken",
+    ],
+  },
+};
+
 export const Password: Story = {
   args: {
     type: "password",

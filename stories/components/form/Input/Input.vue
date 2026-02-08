@@ -17,11 +17,20 @@
         <slot name="description" />
       </template>
     </component>
+    <InputHintRow v-if="helper || maxlength" :dense>
+      <InputHelper v-if="helper">{{ helper }}</InputHelper>
+      <InputCounter v-if="maxlength" :current="modelLength" :max="maxlength" />
+    </InputHintRow>
+    <InputError v-if="errors?.length" :errors="errors" :dense />
   </div>
 </template>
 
 <script setup lang="ts">
 import Label from "./primitives/Label.vue";
+import InputHintRow from "./primitives/InputHintRow.vue";
+import InputHelper from "./primitives/InputHelper.vue";
+import InputCounter from "./primitives/InputCounter.vue";
+import InputError from "./primitives/InputError.vue";
 import { useAttrs, computed } from "vue";
 import { useSanitizedId } from "@/composables/useSanitizedId";
 import PasswordInput from "./variants/PasswordInput.vue";
@@ -43,9 +52,21 @@ defineProps<{
   invalid?: boolean;
   disabled?: boolean;
   indeterminate?: boolean;
+  helper?: string;
+  errors?: string[];
   ariaLabel?: string;
   ariaLabelledby?: string;
 }>();
+
+const maxlength = computed(() => {
+  const val = attrs.maxlength;
+  return val != null ? Number(val) : undefined;
+});
+
+const modelLength = computed(() => {
+  if (typeof model.value === "string") return model.value.length;
+  return 0;
+});
 
 const variantMap = new Map<string, Component>([
   ["password", PasswordInput],
