@@ -17,8 +17,8 @@
         <slot name="description" />
       </template>
     </component>
-    <InputHintRow v-if="helper || maxlength" :dense>
-      <InputHelper v-if="helper">{{ helper }}</InputHelper>
+    <InputHintRow v-if="hasHelper || maxlength" :dense>
+      <InputHelper v-if="hasHelper">{{ helper }}</InputHelper>
       <InputCounter v-if="maxlength" :current="modelLength" :max="maxlength" />
     </InputHintRow>
     <InputError v-if="errors?.length" :errors="errors" :dense />
@@ -47,7 +47,7 @@ const attrs = useAttrs();
 const inputId = useSanitizedId("input", { useAttrId: true });
 const model = defineModel<string | number>();
 
-defineProps<{
+const props = defineProps<{
   dense?: boolean;
   invalid?: boolean;
   disabled?: boolean;
@@ -57,6 +57,8 @@ defineProps<{
   ariaLabel?: string;
   ariaLabelledby?: string;
 }>();
+
+const hasHelper = computed(() => props.helper && !props.errors?.length);
 
 const maxlength = computed(() => {
   const val = attrs.maxlength;
