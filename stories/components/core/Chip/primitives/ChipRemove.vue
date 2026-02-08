@@ -9,13 +9,13 @@
     @keydown.enter.stop="emit('remove', $event)"
     @keydown.space.stop="emit('remove', $event)"
   >
-    <PiX aria-hidden="true" />
+    <Icon name="x" size="xs" />
   </span>
 </template>
 
 <script lang="ts" setup>
 import { tv } from "tailwind-variants";
-import { PiX } from "vue-icons-plus/pi";
+import Icon from "@/components/core/Icon/Icon.vue";
 import { useForwardedAttrs } from "@/composables/useForwardedAttrs";
 
 defineOptions({

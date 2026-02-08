@@ -15,17 +15,20 @@
             class="inline-flex flex-col"
             aria-hidden="true"
           >
-            <PiCaretUp
+            <Icon
+              name="caret-up"
+              size="xs"
               :class="[
-                'h-3 w-3 -mb-1',
+                '-mb-1',
                 sortKey === header.key && sortDirection === 'asc'
                   ? 'text-gray-900'
                   : 'text-gray-300',
               ]"
             />
-            <PiCaretDown
+            <Icon
+              name="caret-down"
+              size="xs"
               :class="[
-                'h-3 w-3',
                 sortKey === header.key && sortDirection === 'desc'
                   ? 'text-gray-900'
                   : 'text-gray-300',
@@ -44,7 +47,7 @@
 
 <script lang="ts" setup>
 import { tv } from "tailwind-variants";
-import { PiCaretUp, PiCaretDown } from "vue-icons-plus/pi";
+import Icon from "@/components/core/Icon/Icon.vue";
 import { useForwardedAttrs } from "@/composables/useForwardedAttrs";
 
 defineOptions({

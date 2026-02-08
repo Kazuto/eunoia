@@ -31,18 +31,14 @@
       @keydown.enter="toggleVisibility"
       @keydown.space="toggleVisibility"
     >
-      <component
-        :is="icon"
-        class="h-4 w-4"
-        aria-hidden="true"
-      />
+      <Icon :name="isVisible ? 'eye' : 'eye-closed'" size="sm" />
     </InputGroupAddon>
   </InputGroup>
 </template>
 
 <script setup lang="ts">
 import { computed, ref, toRef } from "vue";
-import { PiEye, PiEyeClosed } from "vue-icons-plus/pi";
+import Icon from "@/components/core/Icon/Icon.vue";
 import Input from "../primitives/Input.vue";
 import InputGroup from "../primitives/InputGroup.vue";
 import InputGroupAddon from "../primitives/InputGroupAddon.vue";
@@ -79,8 +75,6 @@ const model = defineModel<string>();
 const isVisible = ref(false);
 
 const inputType = computed(() => (isVisible.value ? "text" : "password"));
-
-const icon = computed(() => (isVisible.value ? PiEye : PiEyeClosed));
 
 function toggleVisibility() {
   if (props.disabled) return;

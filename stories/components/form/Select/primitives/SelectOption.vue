@@ -17,17 +17,18 @@
     @mousedown.prevent
   >
     <span class="flex-1">{{ option.label }}</span>
-    <PiCheck
+    <Icon
       v-if="isSelected"
-      class="h-4 w-4 shrink-0"
-      aria-hidden="true"
+      name="check"
+      size="sm"
+      class="shrink-0"
     />
   </li>
 </template>
 
 <script lang="ts" setup>
 import { tv } from "tailwind-variants";
-import { PiCheck } from "vue-icons-plus/pi";
+import Icon from "@/components/core/Icon/Icon.vue";
 import { useForwardedAttrs } from "@/composables/useForwardedAttrs";
 
 defineOptions({

@@ -9,8 +9,8 @@
       class="sr-only"
     />
     <span :class="boxStyles({ dense, invalid, checked: model, indeterminate })">
-      <PiCheck v-if="model && !indeterminate" :class="iconStyles({ dense })" />
-      <PiMinus v-else-if="indeterminate" :class="iconStyles({ dense })" />
+      <Icon v-if="model && !indeterminate" name="check" :class="iconStyles({ dense })" />
+      <Icon v-else-if="indeterminate" name="minus" :class="iconStyles({ dense })" />
     </span>
     <slot />
   </Label>
@@ -19,7 +19,7 @@
 <script setup lang="ts">
 import { ref, toRef, watchEffect } from "vue";
 import { tv } from "tailwind-variants";
-import { PiCheck, PiMinus } from "vue-icons-plus/pi";
+import Icon from "@/components/core/Icon/Icon.vue";
 import Label from "../primitives/Label.vue";
 
 defineOptions({

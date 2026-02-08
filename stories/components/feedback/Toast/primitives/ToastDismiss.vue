@@ -6,13 +6,13 @@
     :aria-label="ariaLabel"
     @click="emit('dismiss', $event)"
   >
-    <PiX aria-hidden="true" />
+    <Icon name="x" size="xs" />
   </button>
 </template>
 
 <script lang="ts" setup>
 import { tv } from "tailwind-variants";
-import { PiX } from "vue-icons-plus/pi";
+import Icon from "@/components/core/Icon/Icon.vue";
 import { useForwardedAttrs } from "@/composables/useForwardedAttrs";
 
 defineOptions({

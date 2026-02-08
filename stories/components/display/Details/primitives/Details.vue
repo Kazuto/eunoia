@@ -13,12 +13,13 @@
       <span class="flex-1">
         <slot name="summary" />
       </span>
-      <PiCaretRight
+      <Icon
+        name="caret-right"
+        size="sm"
         :class="[
-          'h-4 w-4 shrink-0 transition-transform duration-200',
+          'shrink-0 transition-transform duration-200',
           expanded && 'rotate-90',
         ]"
-        aria-hidden="true"
       />
     </summary>
     <div
@@ -39,7 +40,7 @@
 
 <script lang="ts" setup>
 import { tv } from "tailwind-variants";
-import { PiCaretRight } from "vue-icons-plus/pi";
+import Icon from "@/components/core/Icon/Icon.vue";
 import { useForwardedAttrs } from "@/composables/useForwardedAttrs";
 
 defineOptions({

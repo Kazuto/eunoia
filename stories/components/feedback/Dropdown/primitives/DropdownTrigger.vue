@@ -12,19 +12,20 @@
     @keydown="emit('keydown', $event)"
   >
     <slot />
-    <PiCaretDown
+    <Icon
+      name="caret-down"
+      size="sm"
       :class="[
-        'ml-2 h-4 w-4 shrink-0 transition-transform',
+        'ml-2 shrink-0 transition-transform',
         isOpen && 'rotate-180',
       ]"
-      aria-hidden="true"
     />
   </button>
 </template>
 
 <script lang="ts" setup>
 import { tv } from "tailwind-variants";
-import { PiCaretDown } from "vue-icons-plus/pi";
+import Icon from "@/components/core/Icon/Icon.vue";
 import { useForwardedAttrs } from "@/composables/useForwardedAttrs";
 
 defineOptions({

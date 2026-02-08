@@ -80,17 +80,17 @@
             <div class="inline-flex items-center gap-1">
               <Tooltip content="View" placement="top">
                 <Button ghost dense @click="onView(item)"
-                  ><PiEye class="h-4 w-4"
+                  ><Icon name="eye" size="sm"
                 /></Button>
               </Tooltip>
               <Tooltip content="Edit" placement="top">
                 <Button ghost dense @click="onEdit(item)"
-                  ><PiPencilSimple class="h-4 w-4"
+                  ><Icon name="pencil-simple" size="sm"
                 /></Button>
               </Tooltip>
               <Tooltip content="Delete" placement="top">
                 <Button ghost dense destructive @click="onDelete(item)"
-                  ><PiTrash class="h-4 w-4"
+                  ><Icon name="trash" size="sm"
                 /></Button>
               </Tooltip>
             </div>
@@ -110,8 +110,8 @@ import Badge from "@/components/core/Badge/Badge.vue";
 import Alert from "@/components/feedback/Alert/Alert.vue";
 import Card from "@/components/display/Card/Card.vue";
 import DataTable from "@/components/display/DataTable/DataTable.vue";
+import Icon from "@/components/core/Icon/Icon.vue";
 import Tooltip from "@/components/feedback/Tooltip/Tooltip.vue";
-import { PiEye, PiPencilSimple, PiTrash } from "vue-icons-plus/pi";
 
 const name = ref("");
 const email = ref("");

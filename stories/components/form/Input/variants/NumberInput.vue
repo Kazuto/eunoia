@@ -37,10 +37,7 @@
       @keydown.enter="decrement"
       @keydown.space.prevent="decrement"
     >
-      <PiMinus
-        class="h-4 w-4"
-        aria-hidden="true"
-      />
+      <Icon name="minus" size="sm" />
     </InputGroupAddon>
     <InputGroupAddon
       position="right"
@@ -53,17 +50,14 @@
       @keydown.enter="increment"
       @keydown.space.prevent="increment"
     >
-      <PiPlus
-        class="h-4 w-4"
-        aria-hidden="true"
-      />
+      <Icon name="plus" size="sm" />
     </InputGroupAddon>
   </InputGroup>
 </template>
 
 <script setup lang="ts">
 import { computed, toRef } from "vue";
-import { PiPlus, PiMinus } from "vue-icons-plus/pi";
+import Icon from "@/components/core/Icon/Icon.vue";
 import Input from "../primitives/Input.vue";
 import InputGroup from "../primitives/InputGroup.vue";
 import InputGroupAddon from "../primitives/InputGroupAddon.vue";

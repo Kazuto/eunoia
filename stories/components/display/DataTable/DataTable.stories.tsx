@@ -3,8 +3,8 @@ import type { Meta, StoryObj } from "@storybook/vue3-vite";
 
 import DataTable from "./DataTable.vue";
 import Button from "@/components/core/Button/Button.vue";
+import Icon from "@/components/core/Icon/Icon.vue";
 import Tooltip from "@/components/feedback/Tooltip/Tooltip.vue";
-import { PiEye, PiPencilSimple, PiTrash } from "vue-icons-plus/pi";
 
 const items = [
   { name: "Alice Johnson", role: "Engineer", salary: 95000, hours: 160 },
@@ -106,20 +106,20 @@ export const Actions: Story = {
     ],
   },
   render: (args) => ({
-    components: { DataTable, Button, Tooltip, PiEye, PiPencilSimple, PiTrash },
+    components: { DataTable, Button, Icon, Tooltip },
     setup: () => ({ args, onView, onEdit, onDelete }),
     template: `
       <DataTable v-bind="args">
         <template #actions="{ item }">
           <div class="inline-flex items-center gap-1">
             <Tooltip content="View" placement="top">
-              <Button ghost dense @click="onView(item)"><PiEye class="h-4 w-4" /></Button>
+              <Button ghost dense @click="onView(item)"><Icon name="eye" size="sm" /></Button>
             </Tooltip>
             <Tooltip content="Edit" placement="top">
-              <Button ghost dense @click="onEdit(item)"><PiPencilSimple class="h-4 w-4" /></Button>
+              <Button ghost dense @click="onEdit(item)"><Icon name="pencil-simple" size="sm" /></Button>
             </Tooltip>
             <Tooltip content="Delete" placement="top">
-              <Button dense destructive @click="onDelete(item)"><PiTrash class="h-4 w-4" /></Button>
+              <Button dense destructive @click="onDelete(item)"><Icon name="trash" size="sm" /></Button>
             </Tooltip>
           </div>
         </template>
