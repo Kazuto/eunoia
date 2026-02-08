@@ -63,7 +63,7 @@
           <Button primary>Submit</Button>
           <Button>Cancel</Button>
           <Button ghost>Reset</Button>
-          <Button destructive dense>Delete Draft</Button>
+          <Button destructive>Delete Draft</Button>
         </template>
       </Card>
 
@@ -119,6 +119,7 @@
           <Button primary dense>Submit</Button>
           <Button dense>Cancel</Button>
           <Button ghost dense>Reset</Button>
+          <Button destructive dense>Delete Draft</Button>
         </template>
       </Card>
 
