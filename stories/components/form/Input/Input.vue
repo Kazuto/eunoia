@@ -28,6 +28,7 @@ import PasswordInput from "./variants/PasswordInput.vue";
 import NumberInput from "./variants/NumberInput.vue";
 import TextInput from "./variants/TextInput.vue";
 import CheckboxInput from "./variants/CheckboxInput.vue";
+import RadioInput from "./variants/RadioInput.vue";
 
 defineOptions({
   inheritAttrs: false,
@@ -50,6 +51,7 @@ const variantMap = new Map<string, Component>([
   ["password", PasswordInput],
   ["number", NumberInput],
   ["checkbox", CheckboxInput],
+  ["radio", RadioInput],
 ]);
 
 const isCheckbox = computed(() => attrs.type === "checkbox");

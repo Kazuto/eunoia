@@ -8,7 +8,7 @@ const meta = {
   component: Input,
   tags: ["autodocs"],
   argTypes: {
-    type: { control: "select", options: ["text", "password", "number", "checkbox"] },
+    type: { control: "select", options: ["text", "password", "number", "checkbox", "radio"] },
     dense: { control: "boolean" },
     disabled: { control: "boolean" },
     invalid: { control: "boolean" },
@@ -97,6 +97,31 @@ export const Checkbox: Story = {
 
       return () => (
         <Input {...args} v-model={checked.value}>
+          {{
+            default: () => args.default,
+          }}
+        </Input>
+      );
+    },
+  }),
+};
+
+export const Radio: Story = {
+  args: {
+    type: "radio",
+    default: "Preferred Role",
+    options: [
+      { label: "Engineer", value: "engineer" },
+      { label: "Designer", value: "designer" },
+      { label: "Manager", value: "manager" },
+    ],
+  },
+  render: (args: any) => ({
+    setup() {
+      const selected = ref<string>();
+
+      return () => (
+        <Input {...args} v-model={selected.value}>
           {{
             default: () => args.default,
           }}
