@@ -23,13 +23,39 @@
       <Card title="Add Employee">
         <div class="flex flex-col gap-4">
           <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <Input v-model="name" type="text">Full Name</Input>
-            <Input v-model="email" type="text">Email</Input>
-            <Input v-model="website" type="websitet">Website</Input>
+            <Input
+              v-model="name"
+              type="text"
+              :maxlength="100"
+              helper="Legal full name"
+              :errors="nameErrors"
+              :invalid="nameErrors.length > 0"
+            >
+              Full Name
+            </Input>
+            <Input
+              v-model="email"
+              type="text"
+              helper="We'll never share your email"
+              :errors="emailErrors"
+              :invalid="emailErrors.length > 0"
+            >
+              Email
+            </Input>
+            <Input v-model="website" type="text" helper="https://...">
+              Website
+            </Input>
           </div>
           <Select v-model="role" :options="roleOptions" multiple>Role</Select>
+          <Input v-model="department" type="radio" :options="departmentOptions">
+            Department
+          </Input>
           <Input v-model="newsletter" type="checkbox">
-            Subscribe to newsletter
+            Newsletter
+            <template #description>
+              Subscribe to our
+              <a href="#" class="text-primary underline">monthly newsletter</a>
+            </template>
           </Input>
         </div>
 
@@ -49,14 +75,45 @@
         </template>
         <div class="flex flex-col gap-4">
           <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <Input v-model="name" type="text" dense>Full Name</Input>
-            <Input v-model="email" type="text" dense>Email</Input>
-            <Input v-model="website" type="text" dense>Website</Input>
+            <Input
+              v-model="name"
+              type="text"
+              dense
+              :maxlength="100"
+              helper="Legal full name"
+              >Full Name</Input
+            >
+            <Input
+              v-model="email"
+              type="text"
+              dense
+              helper="We'll never share your email"
+              :errors="emailErrors"
+              :invalid="emailErrors.length > 0"
+              >Email</Input
+            >
+            <Input v-model="website" type="text" dense helper="https://..."
+              >Website</Input
+            >
           </div>
           <Select v-model="role" :options="roleOptions" dense multiple>
             Role
           </Select>
-          <Input v-model="newsletter" type="checkbox" dense>Newsletter</Input>
+          <Input
+            v-model="department"
+            type="radio"
+            :options="departmentOptions"
+            dense
+          >
+            Department
+          </Input>
+          <Input v-model="newsletter" type="checkbox" dense>
+            Newsletter
+            <template #description>
+              Subscribe to our
+              <a href="#" class="text-primary underline">monthly newsletter</a>
+            </template>
+          </Input>
         </div>
         <template #footer>
           <Button primary dense>Submit</Button>
@@ -114,10 +171,14 @@ import Icon from "@/components/core/Icon/Icon.vue";
 import Tooltip from "@/components/feedback/Tooltip/Tooltip.vue";
 
 const name = ref("");
-const email = ref("");
+const email = ref("invalid-email");
 const website = ref("");
 const role = ref<string>("");
+const department = ref<string>();
 const newsletter = ref(false);
+
+const nameErrors = ref<string[]>([]);
+const emailErrors = ref(["Please enter a valid email address"]);
 
 const emit = defineEmits<{
   (e: "view", item: Record<string, unknown>): void;
@@ -128,6 +189,12 @@ const emit = defineEmits<{
 const onView = (item: Record<string, unknown>) => emit("view", item);
 const onEdit = (item: Record<string, unknown>) => emit("edit", item);
 const onDelete = (item: Record<string, unknown>) => emit("delete", item);
+
+const departmentOptions = [
+  { label: "Engineering", value: "engineering" },
+  { label: "Product", value: "product" },
+  { label: "Design", value: "design" },
+];
 
 const roleOptions = [
   { label: "Engineer", value: "engineer" },
