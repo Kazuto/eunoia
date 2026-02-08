@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col gap-1">
-    <Label v-if="!isCheckbox" :dense :for="inputId"><slot /></Label>
+    <Label :dense :for="inputId"><slot /></Label>
     <component
       :is="variantComponent"
       v-bind="$attrs"
@@ -13,8 +13,8 @@
       :aria-label="ariaLabel"
       :aria-labelledby="ariaLabelledby"
     >
-      <template #default v-if="isCheckbox">
-        <slot />
+      <template v-if="$slots.description" #description>
+        <slot name="description" />
       </template>
     </component>
   </div>
@@ -53,8 +53,6 @@ const variantMap = new Map<string, Component>([
   ["checkbox", CheckboxInput],
   ["radio", RadioInput],
 ]);
-
-const isCheckbox = computed(() => attrs.type === "checkbox");
 
 const variantComponent = computed(() => {
   return variantMap.get(attrs.type) ?? TextInput;

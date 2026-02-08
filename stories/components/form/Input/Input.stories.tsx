@@ -89,7 +89,7 @@ export const Number: Story = {
 export const Checkbox: Story = {
   args: {
     type: "checkbox",
-    default: "Accept terms",
+    default: "Terms",
   },
   render: (args: any) => ({
     setup() {
@@ -99,6 +99,14 @@ export const Checkbox: Story = {
         <Input {...args} v-model={checked.value}>
           {{
             default: () => args.default,
+            description: () => (
+              <span>
+                I accept the{" "}
+                <a href="#" class="text-primary underline">
+                  terms and conditions
+                </a>
+              </span>
+            ),
           }}
         </Input>
       );

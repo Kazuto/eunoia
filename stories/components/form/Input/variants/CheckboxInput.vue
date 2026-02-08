@@ -1,5 +1,5 @@
 <template>
-  <Label :class="wrapperStyles({ disabled })" :dense>
+  <label :class="wrapperStyles({ disabled })">
     <input
       ref="inputRef"
       v-bind="$attrs"
@@ -12,15 +12,14 @@
       <Icon v-if="model && !indeterminate" name="check" :class="iconStyles({ dense })" />
       <Icon v-else-if="indeterminate" name="minus" :class="iconStyles({ dense })" />
     </span>
-    <slot />
-  </Label>
+    <span v-if="$slots.description" :class="descriptionStyles({ dense })"><slot name="description" /></span>
+  </label>
 </template>
 
 <script setup lang="ts">
 import { ref, toRef, watchEffect } from "vue";
 import { tv } from "tailwind-variants";
 import Icon from "@/components/core/Icon/Icon.vue";
-import Label from "../primitives/Label.vue";
 
 defineOptions({
   inheritAttrs: false,
@@ -77,6 +76,19 @@ const boxStyles = tv({
     { checked: true, invalid: true, class: "border-red-500 bg-red-500" },
     { indeterminate: true, invalid: true, class: "border-red-500 bg-red-500" },
   ],
+  defaultVariants: {
+    dense: false,
+  },
+});
+
+const descriptionStyles = tv({
+  base: "text-gray-700",
+  variants: {
+    dense: {
+      false: "text-sm",
+      true: "text-xs",
+    },
+  },
   defaultVariants: {
     dense: false,
   },
