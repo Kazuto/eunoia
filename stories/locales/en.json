@@ -11,5 +11,6 @@
   "dialog.close": "Close",
   "dialog.confirm": "Confirm",
   "dialog.cancel": "Cancel",
+  "dialog.confirm-phrase-prompt": "Type \"{phrase}\" to confirm",
   "dropdown.toggle": "Toggle menu"
 }
