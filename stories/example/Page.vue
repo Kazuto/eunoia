@@ -54,7 +54,7 @@
             Newsletter
             <template #description>
               Subscribe to our
-              <a href="#" class="text-primary underline">monthly newsletter</a>
+              <Link href="https://example.com/newsletter">monthly newsletter</Link>
             </template>
           </Input>
         </div>
@@ -111,7 +111,7 @@
             Newsletter
             <template #description>
               Subscribe to our
-              <a href="#" class="text-primary underline">monthly newsletter</a>
+              <Link href="https://example.com/newsletter">monthly newsletter</Link>
             </template>
           </Input>
         </div>
@@ -169,6 +169,7 @@ import Alert from "@/components/feedback/Alert/Alert.vue";
 import Card from "@/components/display/Card/Card.vue";
 import DataTable from "@/components/display/DataTable/DataTable.vue";
 import Icon from "@/components/core/Icon/Icon.vue";
+import Link from "@/components/core/Link/Link.vue";
 import Tooltip from "@/components/feedback/Tooltip/Tooltip.vue";
 
 const name = ref("");
