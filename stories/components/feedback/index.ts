@@ -1,4 +1,5 @@
 export { default as Alert } from "./Alert/Alert.vue";
+export { default as Dialog } from "./Dialog/Dialog.vue";
 export { default as Dropdown } from "./Dropdown/Dropdown.vue";
 export { default as Toast } from "./Toast/Toast.vue";
 export { default as ToastStack } from "./Toast/ToastStack.vue";

@@ -8,5 +8,8 @@
   "chip.remove": "Remove",
   "alert.dismiss": "Dismiss",
   "toast.dismiss": "Dismiss",
+  "dialog.close": "Close",
+  "dialog.confirm": "Confirm",
+  "dialog.cancel": "Cancel",
   "dropdown.toggle": "Toggle menu"
 }
