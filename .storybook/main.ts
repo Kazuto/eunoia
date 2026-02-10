@@ -14,5 +14,10 @@ const config: StorybookConfig = {
     name: "@storybook/vue3-vite",
     options: {},
   },
+  viteFinal(config) {
+    config.build ??= {};
+    config.build.chunkSizeWarningLimit = 6000;
+    return config;
+  },
 };
 export default config;
