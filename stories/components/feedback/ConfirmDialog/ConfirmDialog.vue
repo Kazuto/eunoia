@@ -16,9 +16,8 @@
         :aria-label="t('close')"
         class="aspect-square"
         @click="cancel"
-      >
-        <Icon name="x" />
-      </Button>
+        icon="x"
+      />
     </DialogHeader>
     <DialogBody :dense>
       <slot />
@@ -37,12 +36,7 @@
       <Button :dense @click="cancel">
         {{ t("cancel") }}
       </Button>
-      <Button
-        destructive
-        :dense
-        :disabled="!isConfirmEnabled"
-        @click="confirm"
-      >
+      <Button destructive :dense :disabled="!isConfirmEnabled" @click="confirm">
         {{ t("confirm") }}
       </Button>
     </DialogFooter>
@@ -53,7 +47,6 @@
 import { ref, computed, watch, toRef } from "vue";
 import { useSanitizedId } from "@/composables/useSanitizedId";
 import { type LocaleMessages, useLocale } from "@/composables/useLocale";
-import Icon from "@/components/core/Icon/Icon.vue";
 import Button from "@/components/core/Button/Button.vue";
 import Input from "@/components/form/Input/Input.vue";
 import DialogPanel from "../Dialog/primitives/DialogPanel.vue";

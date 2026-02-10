@@ -16,9 +16,8 @@
         :aria-label="t('close')"
         class="aspect-square"
         @click="close"
-      >
-        <Icon name="x" size="sm" />
-      </Button>
+        icon="x"
+      />
     </DialogHeader>
     <DialogBody :dense>
       <slot />
@@ -34,7 +33,6 @@ import { toRef } from "vue";
 import { useSanitizedId } from "@/composables/useSanitizedId";
 import { type LocaleMessages, useLocale } from "@/composables/useLocale";
 import Button from "@/components/core/Button/Button.vue";
-import Icon from "@/components/core/Icon/Icon.vue";
 import DialogPanel from "./primitives/DialogPanel.vue";
 import DialogHeader from "./primitives/DialogHeader.vue";
 import DialogTitle from "./primitives/DialogTitle.vue";
