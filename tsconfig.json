@@ -12,6 +12,7 @@
     "paths": {
       "@/components": ["stories/components/index.ts"],
       "@/components/*": ["stories/components/*"],
+      "@/composables": ["stories/composables/index.ts"],
       "@/composables/*": ["stories/composables/*"]
     }
   },
