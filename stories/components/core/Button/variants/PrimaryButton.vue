@@ -1,6 +1,7 @@
 <template>
   <Button
     :dense="dense"
+    :icon="icon"
     :background-color="backgroundColor"
     class="bg-primary text-white"
   >
@@ -11,7 +12,13 @@
 <script lang="ts" setup>
 import Button from "../primitives/Button.vue";
 
-defineProps<{
-  dense?: boolean;
-}>();
+withDefaults(
+  defineProps<{
+    dense?: boolean;
+    icon?: string;
+  }>(),
+  {
+    icon: undefined,
+  }
+);
 </script>

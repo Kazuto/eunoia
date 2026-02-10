@@ -1,18 +1,21 @@
 <template>
   <button
-    :class="buttonStyles({ dense, class: attrs.class as string })"
+    :class="buttonStyles({ dense, icon: hasIcon, iconOnly: isIconOnly, class: attrs.class as string })"
     :style="style"
     @click="emit('click', $event)"
     @focus="emit('focus', $event)"
     @blur="emit('blur', $event)"
   >
+    <Icon v-if="icon" :name="icon" :size="dense ? 'sm' : 'md'" />
     <slot />
   </button>
 </template>
 
 <script lang="ts" setup>
-import { useAttrs } from "vue";
+import { computed, useAttrs } from "vue";
 import { tv } from "tailwind-variants";
+import Icon from "@/components/core/Icon/Icon.vue";
+import { useSlotContent } from "@/composables/useSlotContent";
 
 defineOptions({
   inheritAttrs: false,
@@ -20,25 +23,45 @@ defineOptions({
 
 const attrs = useAttrs();
 
+const props = withDefaults(
+  defineProps<{
+    dense?: boolean;
+    icon?: string;
+  }>(),
+  {
+    icon: undefined,
+  }
+);
+
+const { hasSlotContent } = useSlotContent();
+const hasDefaultSlot = hasSlotContent("default");
+const hasIcon = computed(() => !!props.icon);
+const isIconOnly = computed(() => hasIcon.value && !hasDefaultSlot.value);
+
 const buttonStyles = tv({
-  base: "inline-block cursor-pointer rounded-lg border-0 font-sans leading-none font-bold",
+  base: "inline-flex cursor-pointer items-center gap-1.5 rounded-lg border-0 font-sans leading-none font-bold",
   variants: {
     dense: {
       false: "px-5 py-2.5 text-sm",
       true: "px-4 py-2.5 text-xs",
     },
+    icon: {
+      true: "",
+    },
+    iconOnly: {
+      true: "aspect-square justify-center",
+    },
   },
+  compoundVariants: [
+    { dense: false, icon: true, class: "px-3 py-2.5" },
+    { dense: true, icon: true, class: "px-2.5 py-2" },
+  ],
   defaultVariants: {
     dense: false,
+    icon: false,
+    iconOnly: false,
   },
 });
-
-withDefaults(
-  defineProps<{
-    dense?: boolean;
-  }>(),
-  {}
-);
 
 const emit = defineEmits<{
   (e: "click", event: MouseEvent): void;

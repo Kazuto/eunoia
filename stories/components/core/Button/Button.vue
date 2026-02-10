@@ -2,6 +2,7 @@
   <component
     :is="variantComponent"
     :dense="dense"
+    :icon="icon"
   >
     <slot />
   </component>
@@ -20,8 +21,9 @@ const props = withDefaults(
     ghost?: boolean;
     destructive?: boolean;
     dense?: boolean;
+    icon?: string;
   }>(),
-  { primary: false, ghost: false, destructive: false }
+  { primary: false, ghost: false, destructive: false, icon: undefined }
 );
 
 const variantComponent = computed(() => {

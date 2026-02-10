@@ -8,6 +8,7 @@ const meta = {
   tags: ["autodocs"],
   argTypes: {
     dense: { control: "boolean" },
+    icon: { control: "text" },
     default: {
       control: "text",
       description: "Default slot content",
@@ -71,5 +72,30 @@ export const Destructive: Story = {
 export const Dense: Story = {
   args: {
     dense: true,
+  },
+};
+
+export const WithIcon: Story = {
+  args: {
+    primary: true,
+    icon: "plus",
+    default: "Add Item",
+  },
+};
+
+export const WithIconDense: Story = {
+  args: {
+    primary: true,
+    dense: true,
+    icon: "plus",
+    default: "Add Item",
+  },
+};
+
+export const IconOnly: Story = {
+  args: {
+    ghost: true,
+    icon: "x",
+    default: "",
   },
 };
