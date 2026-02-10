@@ -19,15 +19,19 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, "stories/index.ts"),
       formats: ["es"],
-      fileName: "eunoia",
     },
     rollupOptions: {
       external: [
-        "vue",
-        "tailwind-variants",
-        "tailwind-merge",
-        "vue-icons-plus",
+        /^vue/,
+        /^tailwind-variants/,
+        /^tailwind-merge/,
+        /^vue-icons-plus/,
       ],
+      output: {
+        preserveModules: true,
+        preserveModulesRoot: "stories",
+        entryFileNames: "[name].js",
+      },
     },
   },
 });
