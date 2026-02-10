@@ -1,2 +1,4 @@
-export * from "@/components";
-export * from "@/composables";
+import "./styles.css";
+
+export * from "./components";
+export * from "./composables";

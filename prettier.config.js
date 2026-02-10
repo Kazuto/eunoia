@@ -5,6 +5,6 @@ export default {
   tabWidth: 2,
   trailingComma: "es5",
   tailwindFunctions: ["tv"],
-  tailwindStylesheet: "./stories/styles.css",
+  tailwindStylesheet: "./stories/storybook.css",
   plugins: ["prettier-plugin-tailwindcss"],
 };

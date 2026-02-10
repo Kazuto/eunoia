@@ -14,4 +14,20 @@ export default defineConfig({
       "@/composables": resolve(__dirname, "stories/composables"),
     },
   },
+  build: {
+    minify: "esbuild",
+    lib: {
+      entry: resolve(__dirname, "stories/index.ts"),
+      formats: ["es"],
+      fileName: "eunoia",
+    },
+    rollupOptions: {
+      external: [
+        "vue",
+        "tailwind-variants",
+        "tailwind-merge",
+        "vue-icons-plus",
+      ],
+    },
+  },
 });

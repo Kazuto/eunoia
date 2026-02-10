@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "noEmitOnError": false,
+    "outDir": "dist",
+    "rootDir": "stories"
+  },
+  "include": ["stories/**/*"],
+  "exclude": [
+    "stories/**/*.stories.tsx",
+    "stories/**/*.test.ts",
+    "stories/**/*.spec.ts",
+    "stories/example/**/*",
+    ".storybook"
+  ]
+}
