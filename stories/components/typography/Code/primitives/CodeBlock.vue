@@ -9,15 +9,17 @@
       @click="copy"
     />
     <span v-if="filename" :class="filenameStyles()">{{ filename }}</span>
+    <span v-if="language" ref="slotRef" hidden><slot /></span>
     <pre
       :class="preStyles({ hasFilename: !!filename })"
-    ><code :class="codeStyles()"><slot /></code></pre>
+    ><code v-if="language" :class="codeStyles()" v-html="highlightedHtml" /><code v-else :class="codeStyles()"><slot /></code></pre>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { computed, onMounted, onUpdated, ref } from "vue";
 import { tv } from "tailwind-variants";
+import hljs from "highlight.js/lib/core";
 import Button from "@/components/core/Button/Button.vue";
 import { useForwardedAttrs } from "@/composables/useForwardedAttrs";
 
@@ -27,14 +29,36 @@ defineOptions({
 
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
-defineProps<{
+const props = defineProps<{
   ariaLabel: string;
   filename?: string;
+  language?: string;
 }>();
 
 const emit = defineEmits<{
   (e: "copy", text: string): void;
 }>();
+
+const slotRef = ref<HTMLElement | null>(null);
+const rawCode = ref("");
+
+function extractCode() {
+  if (slotRef.value) {
+    rawCode.value = slotRef.value.textContent ?? "";
+  }
+}
+
+onMounted(extractCode);
+onUpdated(extractCode);
+
+const highlightedHtml = computed(() => {
+  if (!props.language || !rawCode.value) return "";
+  try {
+    return hljs.highlight(rawCode.value, { language: props.language }).value;
+  } catch {
+    return rawCode.value;
+  }
+});
 
 const copied = ref(false);
 let timeout: ReturnType<typeof setTimeout> | undefined;
@@ -85,6 +109,6 @@ const preStyles = tv({
 });
 
 const codeStyles = tv({
-  base: "font-mono text-sm text-gray-800",
+  base: "font-mono text-sm",
 });
 </script>

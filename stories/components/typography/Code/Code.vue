@@ -3,6 +3,7 @@
     v-if="block"
     v-bind="$attrs"
     :filename
+    :language
     :ariaLabel="t('copy')"
     @copy="(text) => emit('copy', text)"
   >
@@ -27,6 +28,7 @@ const props = withDefaults(
   defineProps<{
     block?: boolean;
     filename?: string;
+    language?: string;
     locale?: LocaleMessages;
   }>(),
   {

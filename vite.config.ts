@@ -26,6 +26,7 @@ export default defineConfig({
         /^tailwind-variants/,
         /^tailwind-merge/,
         /^vue-icons-plus/,
+        /^highlight\.js/,
       ],
       output: {
         preserveModules: true,

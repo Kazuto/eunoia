@@ -8,6 +8,7 @@ const meta = {
   tags: ["autodocs"],
   argTypes: {
     block: { control: "boolean" },
+    language: { control: "text" },
     filename: { control: "text" },
     default: {
       control: "text",
@@ -59,10 +60,29 @@ export const Block: Story = {
   },
 };
 
-export const BlockMultiline: Story = {
+export const Highlighted: Story = {
   args: {
     block: true,
-    default: `import { ref } from "vue";\n\nconst count = ref(0);\n\nfunction increment() {\n  count.value++;\n}\n\nfunction decrement() {\n  count.value--;\n}`,
+    language: "typescript",
+    default: `function greet(name: string): string {\n  return \`Hello, \${name}!\`;\n}\n\nconsole.log(greet("World"));`,
+  },
+};
+
+export const HighlightedWithFilename: Story = {
+  args: {
+    block: true,
+    language: "typescript",
+    filename: "src/composables/useCounter.ts",
+    default: `import { ref } from "vue";\n\nexport function useCounter(initial = 0) {\n  const count = ref(initial);\n  const increment = () => count.value++;\n  const decrement = () => count.value--;\n  return { count, increment, decrement };\n}`,
+  },
+};
+
+export const HighlightedCSS: Story = {
+  args: {
+    block: true,
+    language: "css",
+    filename: "styles.css",
+    default: `.container {\n  display: flex;\n  align-items: center;\n  gap: 1rem;\n  padding: 2rem;\n  background-color: #f9fafb;\n  border-radius: 0.5rem;\n}`,
   },
 };
 
