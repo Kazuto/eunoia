@@ -29,6 +29,8 @@
     "eslint-plugin-storybook": "^10.2.1",
     "eslint-plugin-vue": "^10.7.0",
     "globals": "^17.2.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
     "playwright": "^1.58.0",
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
@@ -56,6 +58,16 @@
     "format:check": "prettier --check .",
     "lint": "eslint . --cache --cache-strategy content --fix",
     "lint:check": "eslint . --cache --cache-strategy content",
-    "code:fix": "bun lint && bun format"
+    "code:format": "bun lint && bun format",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,vue}": [
+      "eslint --cache --cache-strategy content --fix",
+      "prettier --write"
+    ],
+    "*.{js,json,css,md,mdx}": [
+      "prettier --write"
+    ]
   }
 }
