@@ -1,5 +1,8 @@
 <template>
-  <span v-bind="forwardedAttrs" :class="helperStyles({ class: classAttr })">
+  <span
+    v-bind="forwardedAttrs"
+    :class="helperStyles({ class: classAttr })"
+  >
     <slot />
   </span>
 </template>

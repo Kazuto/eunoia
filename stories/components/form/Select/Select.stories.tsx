@@ -47,7 +47,10 @@ const meta = {
     setup() {
       const value = ref();
       return () => (
-        <Select {...args} v-model={value.value}>
+        <Select
+          {...args}
+          v-model={value.value}
+        >
           {{
             default: () => {
               return args.default;
@@ -91,7 +94,10 @@ export const MultiSelect: Story = {
     setup() {
       const value = ref<Array<string | number>>([]);
       return () => (
-        <Select {...args} v-model={value.value}>
+        <Select
+          {...args}
+          v-model={value.value}
+        >
           {{
             default: () => {
               return "Fruits";
@@ -113,7 +119,10 @@ export const MultiSelectDense: Story = {
     setup() {
       const value = ref<Array<string | number>>([]);
       return () => (
-        <Select {...args} v-model={value.value}>
+        <Select
+          {...args}
+          v-model={value.value}
+        >
           {{
             default: () => {
               return "Fruits";
@@ -130,7 +139,10 @@ export const PreselectedSingle: Story = {
     setup() {
       const value = ref<string>("cherry");
       return () => (
-        <Select {...args} v-model={value.value}>
+        <Select
+          {...args}
+          v-model={value.value}
+        >
           {{
             default: () => {
               return "Fruit";
@@ -150,7 +162,10 @@ export const PreselectedMulti: Story = {
     setup() {
       const value = ref(["apple", "cherry"]);
       return () => (
-        <Select {...args} v-model={value.value}>
+        <Select
+          {...args}
+          v-model={value.value}
+        >
           {{
             default: () => {
               return "Fruits";

@@ -8,20 +8,28 @@
     @close="cancel"
   >
     <DialogHeader :dense>
-      <DialogTitle :id="titleId" :dense>{{ title }}</DialogTitle>
+      <DialogTitle
+        :id="titleId"
+        :dense
+      >
+        {{ title }}
+      </DialogTitle>
       <Button
         v-if="!persistent"
         ghost
         dense
         :aria-label="t('close')"
         class="aspect-square"
-        @click="cancel"
         icon="x"
+        @click="cancel"
       />
     </DialogHeader>
     <DialogBody :dense>
       <slot />
-      <div v-if="confirmPhrase" class="mt-4">
+      <div
+        v-if="confirmPhrase"
+        class="mt-4"
+      >
         <Input
           v-model="frictionValue"
           type="text"
@@ -33,10 +41,18 @@
       </div>
     </DialogBody>
     <DialogFooter :dense>
-      <Button :dense @click="cancel">
+      <Button
+        :dense
+        @click="cancel"
+      >
         {{ t("cancel") }}
       </Button>
-      <Button destructive :dense :disabled="!isConfirmEnabled" @click="confirm">
+      <Button
+        destructive
+        :dense
+        :disabled="!isConfirmEnabled"
+        @click="confirm"
+      >
         {{ t("confirm") }}
       </Button>
     </DialogFooter>

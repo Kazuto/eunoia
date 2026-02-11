@@ -1,10 +1,15 @@
 <template>
-  <thead v-bind="forwardedAttrs" :class="classAttr">
+  <thead
+    v-bind="forwardedAttrs"
+    :class="classAttr"
+  >
     <tr :class="rowStyles()">
       <th
         v-for="header in headers"
         :key="header.key"
-        :class="cellStyles({ dense, sortable: header.sortable, align: header.align })"
+        :class="
+          cellStyles({ dense, sortable: header.sortable, align: header.align })
+        "
         :aria-sort="getAriaSort(header.key)"
         @click="header.sortable && emit('sort', header.key)"
       >
@@ -82,7 +87,12 @@ const cellStyles = tv({
 });
 
 const props = defineProps<{
-  headers: { title: string; key: string; sortable?: boolean; align?: "start" | "end" }[];
+  headers: {
+    title: string;
+    key: string;
+    sortable?: boolean;
+    align?: "start" | "end";
+  }[];
   dense?: boolean;
   hasActions?: boolean;
   sortKey?: string | null;

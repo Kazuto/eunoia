@@ -1,5 +1,8 @@
 <template>
-  <TablePrimitive v-bind="$attrs" :dense>
+  <TablePrimitive
+    v-bind="$attrs"
+    :dense
+  >
     <DataTableHead
       :headers
       :dense
@@ -8,9 +11,21 @@
       :sort-direction="sortDirection"
       @sort="handleSort"
     />
-    <DataTableBody :headers :items="displayItems" :has-actions :loading :dense>
-      <template v-if="hasActions" #actions="{ item }">
-        <slot name="actions" :item="item" />
+    <DataTableBody
+      :headers
+      :items="displayItems"
+      :has-actions
+      :loading
+      :dense
+    >
+      <template
+        v-if="hasActions"
+        #actions="{ item }"
+      >
+        <slot
+          name="actions"
+          :item="item"
+        />
       </template>
     </DataTableBody>
   </TablePrimitive>
@@ -40,7 +55,7 @@ const props = withDefaults(
   }>(),
   {
     loadingRows: 3,
-  },
+  }
 );
 
 const slots = useSlots();
@@ -90,10 +105,10 @@ const sortedItems = computed(() => {
 });
 
 const placeholderItems = computed(() =>
-  Array.from({ length: props.loadingRows }, () => ({})),
+  Array.from({ length: props.loadingRows }, () => ({}))
 );
 
 const displayItems = computed(() =>
-  props.loading ? placeholderItems.value : sortedItems.value,
+  props.loading ? placeholderItems.value : sortedItems.value
 );
 </script>

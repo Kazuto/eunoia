@@ -34,6 +34,6 @@ withDefaults(
   defineProps<{
     dense?: boolean;
   }>(),
-  {},
+  {}
 );
 </script>

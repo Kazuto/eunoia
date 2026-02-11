@@ -24,6 +24,8 @@ withDefaults(
   }>(),
   {
     variant: "text",
-  },
+    width: undefined,
+    height: undefined,
+  }
 );
 </script>

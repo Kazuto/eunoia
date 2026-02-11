@@ -15,10 +15,7 @@
     <Icon
       name="caret-down"
       size="sm"
-      :class="[
-        'ml-2 shrink-0 transition-transform',
-        isOpen && 'rotate-180',
-      ]"
+      :class="['ml-2 shrink-0 transition-transform', isOpen && 'rotate-180']"
     />
   </button>
 </template>

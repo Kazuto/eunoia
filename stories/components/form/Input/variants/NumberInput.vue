@@ -37,7 +37,10 @@
       @keydown.enter="decrement"
       @keydown.space.prevent="decrement"
     >
-      <Icon name="minus" size="sm" />
+      <Icon
+        name="minus"
+        size="sm"
+      />
     </InputGroupAddon>
     <InputGroupAddon
       position="right"
@@ -50,7 +53,10 @@
       @keydown.enter="increment"
       @keydown.space.prevent="increment"
     >
-      <Icon name="plus" size="sm" />
+      <Icon
+        name="plus"
+        size="sm"
+      />
     </InputGroupAddon>
   </InputGroup>
 </template>

@@ -4,12 +4,15 @@
     v-bind="$attrs"
     :filename
     :language
-    :ariaLabel="t('copy')"
+    :aria-label="t('copy')"
     @copy="(text) => emit('copy', text)"
   >
     <slot />
   </CodeBlock>
-  <CodeInline v-else v-bind="$attrs">
+  <CodeInline
+    v-else
+    v-bind="$attrs"
+  >
     <slot />
   </CodeInline>
 </template>
@@ -32,6 +35,8 @@ const props = withDefaults(
     locale?: LocaleMessages;
   }>(),
   {
+    filename: undefined,
+    language: undefined,
     locale: undefined,
   }
 );
@@ -40,5 +45,8 @@ const emit = defineEmits<{
   (e: "copy", text: string): void;
 }>();
 
-const t = useLocale("code", toRef(() => props.locale));
+const t = useLocale(
+  "code",
+  toRef(() => props.locale)
+);
 </script>

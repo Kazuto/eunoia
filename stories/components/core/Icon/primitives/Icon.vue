@@ -51,7 +51,8 @@ const props = defineProps<{
 
 const resolvedIcon = computed(() => {
   const pascalName = toPascalCase(props.name);
-  const suffix = !props.type || props.type === "regular" ? "" : toPascalCase(props.type);
+  const suffix =
+    !props.type || props.type === "regular" ? "" : toPascalCase(props.type);
   const key = `Pi${pascalName}${suffix}`;
   return (icons as Record<string, unknown>)[key];
 });

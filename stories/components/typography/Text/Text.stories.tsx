@@ -23,15 +23,12 @@ const meta = {
   args: {
     size: "base",
     muted: false,
-    default: "The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs.",
+    default:
+      "The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs.",
   },
   render: (args: any) => ({
     setup() {
-      return () => (
-        <Text {...args}>
-          {args.default}
-        </Text>
-      );
+      return () => <Text {...args}>{args.default}</Text>;
     },
   }),
 } satisfies Meta<typeof Text>;

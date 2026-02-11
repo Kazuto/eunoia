@@ -39,7 +39,9 @@
         <span
           v-if="user"
           class="text-sm text-gray-800"
-        >Welcome, <b>{{ user.name }}</b>!</span>
+          >Welcome, <b>{{ user.name }}</b
+          >!</span
+        >
         <my-button
           v-if="user"
           dense

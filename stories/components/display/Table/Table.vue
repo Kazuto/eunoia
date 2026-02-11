@@ -3,8 +3,16 @@
     v-bind="$attrs"
     :dense
   >
-    <TableHead :headers :dense />
-    <TableBody :headers :items="displayItems" :loading :dense />
+    <TableHead
+      :headers
+      :dense
+    />
+    <TableBody
+      :headers
+      :items="displayItems"
+      :loading
+      :dense
+    />
   </TablePrimitive>
 </template>
 
@@ -33,14 +41,14 @@ const props = withDefaults(
   }>(),
   {
     loadingRows: 3,
-  },
+  }
 );
 
 const placeholderItems = computed(() =>
-  Array.from({ length: props.loadingRows }, () => ({})),
+  Array.from({ length: props.loadingRows }, () => ({}))
 );
 
 const displayItems = computed(() =>
-  props.loading ? placeholderItems.value : props.items,
+  props.loading ? placeholderItems.value : props.items
 );
 </script>

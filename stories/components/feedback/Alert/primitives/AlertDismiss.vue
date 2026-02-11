@@ -6,7 +6,10 @@
     :aria-label="ariaLabel"
     @click="emit('dismiss', $event)"
   >
-    <Icon name="x" size="xs" />
+    <Icon
+      name="x"
+      size="xs"
+    />
   </button>
 </template>
 

@@ -26,11 +26,7 @@ const meta = {
   },
   render: (args: any) => ({
     setup() {
-      return () => (
-        <Code {...args}>
-          {args.default}
-        </Code>
-      );
+      return () => <Code {...args}>{args.default}</Code>;
     },
   }),
 } satisfies Meta<typeof Code>;

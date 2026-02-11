@@ -27,8 +27,11 @@ const props = withDefaults(
   }
 );
 
-const t = useLocale("button-group", toRef(() => ({
-  label: props.ariaLabel,
-  ...props.locale,
-})));
+const t = useLocale(
+  "button-group",
+  toRef(() => ({
+    label: props.ariaLabel,
+    ...props.locale,
+  }))
+);
 </script>

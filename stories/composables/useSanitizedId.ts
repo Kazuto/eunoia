@@ -2,7 +2,7 @@ import { useAttrs, useId } from "vue";
 
 export function useSanitizedId(
   prefix: string,
-  { useAttrId = false }: { useAttrId?: boolean } = {},
+  { useAttrId = false }: { useAttrId?: boolean } = {}
 ): string {
   if (useAttrId) {
     const attrs = useAttrs();

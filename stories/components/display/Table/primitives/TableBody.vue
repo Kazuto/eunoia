@@ -1,5 +1,8 @@
 <template>
-  <tbody v-bind="forwardedAttrs" :class="classAttr">
+  <tbody
+    v-bind="forwardedAttrs"
+    :class="classAttr"
+  >
     <tr
       v-for="(item, itemIndex) in items"
       :key="itemIndex"
@@ -11,7 +14,9 @@
         :class="cellStyles({ dense })"
       >
         <Skeleton v-if="loading" />
-        <template v-else>{{ item[header.key] }}</template>
+        <template v-else>
+          {{ item[header.key] }}
+        </template>
       </td>
     </tr>
   </tbody>

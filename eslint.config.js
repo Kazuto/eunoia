@@ -20,6 +20,10 @@ export default defineConfig([
     },
     rules: {
       "vue/multi-word-component-names": "off",
+      "vue/html-closing-bracket-newline": "off",
+      "vue/html-indent": "off",
+      "vue/html-self-closing": "off",
+      "vue/singleline-html-element-content-newline": "off",
       "@typescript-eslint/no-unused-vars": [
         "error",
         {

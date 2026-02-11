@@ -1,5 +1,10 @@
 <template>
-  <IconPrimitive v-bind="$attrs" :name :type :size />
+  <IconPrimitive
+    v-bind="$attrs"
+    :name
+    :type
+    :size
+  />
 </template>
 
 <script lang="ts" setup>

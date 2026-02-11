@@ -1,5 +1,8 @@
 <template>
-  <h3 v-bind="forwardedAttrs" :class="titleStyles({ dense, class: classAttr })">
+  <h3
+    v-bind="forwardedAttrs"
+    :class="titleStyles({ dense, class: classAttr })"
+  >
     <slot />
   </h3>
 </template>

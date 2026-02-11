@@ -1,5 +1,8 @@
 <template>
-  <span v-bind="forwardedAttrs" :class="counterStyles({ class: classAttr })">
+  <span
+    v-bind="forwardedAttrs"
+    :class="counterStyles({ class: classAttr })"
+  >
     {{ current }}/{{ max }}
   </span>
 </template>

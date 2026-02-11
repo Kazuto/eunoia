@@ -1,7 +1,7 @@
 <template>
   <label
     :class="labelStyles({ dense, class: classAttr })"
-    v-bind="$forwardedAttrs"
+    v-bind="forwardedAttrs"
   >
     <slot />
   </label>

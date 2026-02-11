@@ -63,7 +63,10 @@ const meta = {
           >
             Add Toast
           </button>
-          <ToastStack ref={stack} {...args} />
+          <ToastStack
+            ref={stack}
+            {...args}
+          />
         </div>
       );
     },
@@ -124,7 +127,10 @@ export const AutoHide: Story = {
           >
             Add Auto-Hide Toast
           </button>
-          <ToastStack ref={stack} {...args} />
+          <ToastStack
+            ref={stack}
+            {...args}
+          />
         </div>
       );
     },

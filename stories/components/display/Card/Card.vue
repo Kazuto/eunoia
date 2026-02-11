@@ -1,13 +1,27 @@
 <template>
-  <CardPrimitive v-bind="$attrs" :dense>
-    <CardHeader v-if="$slots.header || title" :dense>
-      <CardTitle v-if="title" :dense>{{ title }}</CardTitle>
+  <CardPrimitive
+    v-bind="$attrs"
+    :dense
+  >
+    <CardHeader
+      v-if="$slots.header || title"
+      :dense
+    >
+      <CardTitle
+        v-if="title"
+        :dense
+      >
+        {{ title }}
+      </CardTitle>
       <slot name="header" />
     </CardHeader>
     <CardBody :dense>
       <slot />
     </CardBody>
-    <CardFooter v-if="$slots.footer" :dense>
+    <CardFooter
+      v-if="$slots.footer"
+      :dense
+    >
       <slot name="footer" />
     </CardFooter>
   </CardPrimitive>
@@ -31,6 +45,6 @@ withDefaults(
   }>(),
   {
     title: undefined,
-  },
+  }
 );
 </script>

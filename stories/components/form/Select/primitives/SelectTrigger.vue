@@ -45,16 +45,16 @@
     >
       {{ selectedLabels[0] }}
     </span>
-    <span v-else class="flex-1 truncate text-gray-400">
+    <span
+      v-else
+      class="flex-1 truncate text-gray-400"
+    >
       {{ placeholder }}
     </span>
     <Icon
       name="caret-down"
       size="sm"
-      :class="[
-        'ml-2 shrink-0 transition-transform',
-        isOpen && 'rotate-180',
-      ]"
+      :class="['ml-2 shrink-0 transition-transform', isOpen && 'rotate-180']"
     />
   </div>
 </template>

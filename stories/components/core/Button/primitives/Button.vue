@@ -1,12 +1,23 @@
 <template>
   <button
-    :class="buttonStyles({ dense, icon: hasIcon, iconOnly: isIconOnly, class: attrs.class as string })"
+    :class="
+      buttonStyles({
+        dense,
+        icon: hasIcon,
+        iconOnly: isIconOnly,
+        class: attrs.class as string,
+      })
+    "
     :style="style"
     @click="emit('click', $event)"
     @focus="emit('focus', $event)"
     @blur="emit('blur', $event)"
   >
-    <Icon v-if="icon" :name="icon" :size="dense ? 'sm' : 'md'" />
+    <Icon
+      v-if="icon"
+      :name="icon"
+      :size="dense ? 'sm' : 'md'"
+    />
     <slot />
   </button>
 </template>

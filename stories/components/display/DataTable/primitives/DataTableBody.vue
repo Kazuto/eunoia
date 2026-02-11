@@ -1,5 +1,8 @@
 <template>
-  <tbody v-bind="forwardedAttrs" :class="classAttr">
+  <tbody
+    v-bind="forwardedAttrs"
+    :class="classAttr"
+  >
     <tr
       v-for="(item, itemIndex) in items"
       :key="itemIndex"
@@ -11,14 +14,23 @@
         :class="cellStyles({ dense, align: header.align })"
       >
         <Skeleton v-if="loading" />
-        <template v-else>{{ header.value ? header.value(item) : item[header.key] }}</template>
+        <template v-else>
+          {{ header.value ? header.value(item) : item[header.key] }}
+        </template>
       </td>
       <td
         v-if="hasActions"
         :class="cellStyles({ dense, align: 'end' })"
       >
-        <Skeleton v-if="loading" width="80px" />
-        <slot v-else name="actions" :item="item" />
+        <Skeleton
+          v-if="loading"
+          width="80px"
+        />
+        <slot
+          v-else
+          name="actions"
+          :item="item"
+        />
       </td>
     </tr>
   </tbody>

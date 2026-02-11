@@ -9,10 +9,22 @@
       class="sr-only"
     />
     <span :class="boxStyles({ dense, invalid, checked: model, indeterminate })">
-      <Icon v-if="model && !indeterminate" name="check" :class="iconStyles({ dense })" />
-      <Icon v-else-if="indeterminate" name="minus" :class="iconStyles({ dense })" />
+      <Icon
+        v-if="model && !indeterminate"
+        name="check"
+        :class="iconStyles({ dense })"
+      />
+      <Icon
+        v-else-if="indeterminate"
+        name="minus"
+        :class="iconStyles({ dense })"
+      />
     </span>
-    <span v-if="$slots.description" :class="descriptionStyles({ dense })"><slot name="description" /></span>
+    <span
+      v-if="$slots.description"
+      :class="descriptionStyles({ dense })"
+      ><slot name="description"
+    /></span>
   </label>
 </template>
 

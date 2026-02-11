@@ -9,7 +9,10 @@
     @keydown.enter.stop="emit('remove', $event)"
     @keydown.space.stop="emit('remove', $event)"
   >
-    <Icon name="x" size="xs" />
+    <Icon
+      name="x"
+      size="xs"
+    />
   </span>
 </template>
 

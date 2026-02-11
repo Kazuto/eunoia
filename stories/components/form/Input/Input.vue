@@ -1,6 +1,10 @@
 <template>
-  <div class="gap-1 flex flex-col">
-    <Label :dense :for="inputId"><slot /></Label>
+  <div class="flex flex-col gap-1">
+    <Label
+      :dense
+      :for="inputId"
+      ><slot
+    /></Label>
     <component
       :is="variantComponent"
       v-bind="$attrs"
@@ -13,15 +17,31 @@
       :aria-label="ariaLabel"
       :aria-labelledby="ariaLabelledby"
     >
-      <template v-if="$slots.description" #description>
+      <template
+        v-if="$slots.description"
+        #description
+      >
         <slot name="description" />
       </template>
     </component>
-    <InputHintRow v-if="hasHelper || maxlength" :dense>
-      <InputHelper v-if="hasHelper">{{ helper }}</InputHelper>
-      <InputCounter v-if="maxlength" :current="modelLength" :max="maxlength" />
+    <InputHintRow
+      v-if="hasHelper || maxlength"
+      :dense
+    >
+      <InputHelper v-if="hasHelper">
+        {{ helper }}
+      </InputHelper>
+      <InputCounter
+        v-if="maxlength"
+        :current="modelLength"
+        :max="maxlength"
+      />
     </InputHintRow>
-    <InputError v-if="errors?.length" :errors="errors" :dense />
+    <InputError
+      v-if="errors?.length"
+      :errors="errors"
+      :dense
+    />
   </div>
 </template>
 
@@ -31,7 +51,7 @@ import InputHintRow from "./primitives/InputHintRow.vue";
 import InputHelper from "./primitives/InputHelper.vue";
 import InputCounter from "./primitives/InputCounter.vue";
 import InputError from "./primitives/InputError.vue";
-import { useAttrs, computed } from "vue";
+import { useAttrs, computed, type Component } from "vue";
 import { useSanitizedId } from "@/composables/useSanitizedId";
 import PasswordInput from "./variants/PasswordInput.vue";
 import NumberInput from "./variants/NumberInput.vue";

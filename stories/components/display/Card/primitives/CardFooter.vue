@@ -1,5 +1,8 @@
 <template>
-  <div v-bind="forwardedAttrs" :class="footerStyles({ dense, class: classAttr })">
+  <div
+    v-bind="forwardedAttrs"
+    :class="footerStyles({ dense, class: classAttr })"
+  >
     <slot />
   </div>
 </template>

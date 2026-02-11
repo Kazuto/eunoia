@@ -63,7 +63,7 @@ export const Dense: Story = {
 };
 
 export const InParagraph: Story = {
-  render: (args: any) => ({
+  render: (_args: any) => ({
     setup() {
       return () => (
         <p class="text-sm text-gray-700">

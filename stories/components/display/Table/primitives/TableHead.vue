@@ -1,5 +1,8 @@
 <template>
-  <thead v-bind="forwardedAttrs" :class="classAttr">
+  <thead
+    v-bind="forwardedAttrs"
+    :class="classAttr"
+  >
     <tr :class="rowStyles({ dense })">
       <th
         v-for="header in headers"

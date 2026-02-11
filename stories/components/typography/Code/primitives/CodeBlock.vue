@@ -1,5 +1,8 @@
 <template>
-  <div v-bind="forwardedAttrs" :class="wrapperStyles({ class: classAttr })">
+  <div
+    v-bind="forwardedAttrs"
+    :class="wrapperStyles({ class: classAttr })"
+  >
     <Button
       ghost
       dense
@@ -8,11 +11,26 @@
       :aria-label="ariaLabel"
       @click="copy"
     />
-    <span v-if="filename" :class="filenameStyles()">{{ filename }}</span>
-    <span v-if="language" ref="slotRef" hidden><slot /></span>
+    <span
+      v-if="filename"
+      :class="filenameStyles()"
+      >{{ filename }}</span
+    >
+    <span
+      v-if="language"
+      ref="slotRef"
+      hidden
+      ><slot
+    /></span>
     <pre
+      v-if="language"
       :class="preStyles({ hasFilename: !!filename })"
-    ><code v-if="language" :class="codeStyles()" v-html="highlightedHtml" /><code v-else :class="codeStyles()"><slot /></code></pre>
+    ><!-- eslint-disable-next-line vue/no-v-html, vue/max-attributes-per-line -->
+<code :class="codeStyles()" v-html="highlightedHtml" /></pre>
+    <pre
+      v-else
+      :class="preStyles({ hasFilename: !!filename })"
+    ><code :class="codeStyles()"><slot /></code></pre>
   </div>
 </template>
 
@@ -87,7 +105,7 @@ const wrapperStyles = tv({
 });
 
 const copyButtonStyles = tv({
-  base: "top-2 right-2 absolute opacity-0 transition-opacity group-hover:opacity-100 focus:opacity-100",
+  base: "absolute top-2 right-2 opacity-0 transition-opacity group-hover:opacity-100 focus:opacity-100",
   variants: {
     copied: {
       true: "text-green-600 opacity-100",
@@ -96,14 +114,14 @@ const copyButtonStyles = tv({
 });
 
 const filenameStyles = tv({
-  base: "rounded-t-lg bg-gray-100 px-4 pt-3 pb-0 font-mono text-xs text-gray-500 block",
+  base: "block rounded-t-lg bg-gray-100 px-4 pt-3 pb-0 font-mono text-xs text-gray-500",
 });
 
 const preStyles = tv({
-  base: "rounded-lg bg-gray-100 p-4 overflow-x-auto",
+  base: "overflow-x-auto rounded-lg bg-gray-100 p-4",
   variants: {
     hasFilename: {
-      true: "pt-2 rounded-t-none",
+      true: "rounded-t-none pt-2",
     },
   },
 });

@@ -24,7 +24,8 @@ const meta = {
   },
   args: {
     title: "Card Title",
-    default: "This is the card body content. It can contain any text or components.",
+    default:
+      "This is the card body content. It can contain any text or components.",
     dense: false,
   },
   render: (args: any) => ({

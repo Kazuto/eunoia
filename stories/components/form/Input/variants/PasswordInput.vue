@@ -31,7 +31,10 @@
       @keydown.enter="toggleVisibility"
       @keydown.space="toggleVisibility"
     >
-      <Icon :name="isVisible ? 'eye' : 'eye-closed'" size="sm" />
+      <Icon
+        :name="isVisible ? 'eye' : 'eye-closed'"
+        size="sm"
+      />
     </InputGroupAddon>
   </InputGroup>
 </template>

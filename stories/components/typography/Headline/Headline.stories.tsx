@@ -25,11 +25,7 @@ const meta = {
   },
   render: (args: any) => ({
     setup() {
-      return () => (
-        <Headline {...args}>
-          {args.default}
-        </Headline>
-      );
+      return () => <Headline {...args}>{args.default}</Headline>;
     },
   }),
 } satisfies Meta<typeof Headline>;

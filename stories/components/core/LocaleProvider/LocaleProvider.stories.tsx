@@ -41,10 +41,16 @@ export const EnglishDefaults: Story = {
             maxWidth: "320px",
           }}
         >
-          <Input type="number" v-model={num.value}>
+          <Input
+            type="number"
+            v-model={num.value}
+          >
             Amount
           </Input>
-          <Input type="password" v-model={pass.value}>
+          <Input
+            type="password"
+            v-model={pass.value}
+          >
             Password
           </Input>
         </div>
@@ -80,10 +86,16 @@ export const GlobalProvider: Story = {
               maxWidth: "320px",
             }}
           >
-            <Input type="number" v-model={num.value}>
+            <Input
+              type="number"
+              v-model={num.value}
+            >
               Hoeveelheid
             </Input>
-            <Input type="password" v-model={pass.value}>
+            <Input
+              type="password"
+              v-model={pass.value}
+            >
               Wachtwoord
             </Input>
           </div>
@@ -110,7 +122,10 @@ export const PartialOverride: Story = {
       return () => (
         <LocaleProvider locale={partial}>
           <div style={{ maxWidth: "320px" }}>
-            <Input type="number" v-model={num.value}>
+            <Input
+              type="number"
+              v-model={num.value}
+            >
               Menge
             </Input>
           </div>
@@ -154,7 +169,10 @@ export const PerInstanceOverride: Story = {
               maxWidth: "320px",
             }}
           >
-            <Input type="number" v-model={num.value}>
+            <Input
+              type="number"
+              v-model={num.value}
+            >
               Hoeveelheid (Dutch via provider)
             </Input>
             <Input

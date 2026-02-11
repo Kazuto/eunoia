@@ -10,7 +10,9 @@
       "import": "./dist/index.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "devDependencies": {
     "@chromatic-com/storybook": "^5.0.0",
     "@eslint/js": "^9.39.2",
@@ -52,7 +54,8 @@
     "build-storybook": "storybook build",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint": "eslint . --cache --cache-strategy content --fix",
+    "lint:check": "eslint . --cache --cache-strategy content",
+    "code:fix": "bun lint && bun format"
   }
 }

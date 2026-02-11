@@ -4,8 +4,17 @@
     :class="errorStyles({ dense, class: classAttr })"
     role="alert"
   >
-    <p v-for="(message, i) in errors" :key="i" :class="['flex items-center gap-1', i > 0 && 'pl-4']">
-      <Icon v-if="i === 0" name="warning" size="xs" class="shrink-0" />
+    <p
+      v-for="(message, i) in errors"
+      :key="i"
+      :class="['flex items-center gap-1', i > 0 && 'pl-4']"
+    >
+      <Icon
+        v-if="i === 0"
+        name="warning"
+        size="xs"
+        class="shrink-0"
+      />
       {{ message }}
     </p>
   </div>

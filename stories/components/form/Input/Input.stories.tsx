@@ -8,7 +8,10 @@ const meta = {
   component: Input,
   tags: ["autodocs"],
   argTypes: {
-    type: { control: "select", options: ["text", "password", "number", "checkbox", "radio"] },
+    type: {
+      control: "select",
+      options: ["text", "password", "number", "checkbox", "radio"],
+    },
     dense: { control: "boolean" },
     disabled: { control: "boolean" },
     invalid: { control: "boolean" },
@@ -35,7 +38,10 @@ const meta = {
       const value = ref<string | number>();
 
       return () => (
-        <Input {...args} v-model={value.value}>
+        <Input
+          {...args}
+          v-model={value.value}
+        >
           {{
             default: () => {
               return args.default;
@@ -88,10 +94,7 @@ export const TextErrors: Story = {
     type: "text",
     default: "Email",
     invalid: true,
-    errors: [
-      "Please enter a valid email address",
-      "Email is already taken",
-    ],
+    errors: ["Please enter a valid email address", "Email is already taken"],
   },
 };
 
@@ -117,13 +120,19 @@ export const Checkbox: Story = {
       const checked = ref<boolean>(false);
 
       return () => (
-        <Input {...args} v-model={checked.value}>
+        <Input
+          {...args}
+          v-model={checked.value}
+        >
           {{
             default: () => args.default,
             description: () => (
               <span>
                 I accept the{" "}
-                <a href="#" class="text-primary underline">
+                <a
+                  href="#"
+                  class="text-primary underline"
+                >
                   terms and conditions
                 </a>
               </span>
@@ -146,19 +155,34 @@ export const Radio: Story = {
 
       return () => (
         <div class="flex flex-col gap-1">
-          <Input {...args} v-model={selected.value} name="role" value="engineer">
+          <Input
+            {...args}
+            v-model={selected.value}
+            name="role"
+            value="engineer"
+          >
             {{
               default: () => args.default,
               description: () => "Engineer",
             }}
           </Input>
-          <Input {...args} v-model={selected.value} name="role" value="designer">
+          <Input
+            {...args}
+            v-model={selected.value}
+            name="role"
+            value="designer"
+          >
             {{
               default: () => null,
               description: () => "Designer",
             }}
           </Input>
-          <Input {...args} v-model={selected.value} name="role" value="manager">
+          <Input
+            {...args}
+            v-model={selected.value}
+            name="role"
+            value="manager"
+          >
             {{
               default: () => null,
               description: () => "Manager",
@@ -181,7 +205,10 @@ export const CheckboxIndeterminate: Story = {
       const checked = ref<boolean>(false);
 
       return () => (
-        <Input {...args} v-model={checked.value}>
+        <Input
+          {...args}
+          v-model={checked.value}
+        >
           {{
             default: () => args.default,
           }}

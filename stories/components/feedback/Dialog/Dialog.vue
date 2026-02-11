@@ -8,21 +8,29 @@
     @close="close"
   >
     <DialogHeader :dense>
-      <DialogTitle :id="titleId" :dense>{{ title }}</DialogTitle>
+      <DialogTitle
+        :id="titleId"
+        :dense
+      >
+        {{ title }}
+      </DialogTitle>
       <Button
         v-if="!persistent"
         ghost
         dense
         :aria-label="t('close')"
         class="aspect-square"
-        @click="close"
         icon="x"
+        @click="close"
       />
     </DialogHeader>
     <DialogBody :dense>
       <slot />
     </DialogBody>
-    <DialogFooter v-if="$slots.footer" :dense>
+    <DialogFooter
+      v-if="$slots.footer"
+      :dense
+    >
       <slot name="footer" />
     </DialogFooter>
   </DialogPanel>

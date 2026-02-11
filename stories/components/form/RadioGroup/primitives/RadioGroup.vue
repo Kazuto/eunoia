@@ -10,7 +10,7 @@
       :style="indicatorStyle"
     />
     <label
-      v-for="(option, i) in options"
+      v-for="option in options"
       :key="option.value"
       :class="
         optionStyles({ dense, selected: model === option.value, disabled })

@@ -5,16 +5,35 @@
       <div class="mx-auto flex max-w-6xl items-center justify-between">
         <h1 class="text-xl font-bold text-gray-900">Dashboard</h1>
         <div class="flex items-center gap-3">
-          <Badge variant="success" pill>5 online</Badge>
-          <Button dense ghost>Settings</Button>
-          <Button dense primary>New Employee</Button>
+          <Badge
+            variant="success"
+            pill
+          >
+            5 online
+          </Badge>
+          <Button
+            dense
+            ghost
+          >
+            Settings
+          </Button>
+          <Button
+            dense
+            primary
+          >
+            New Employee
+          </Button>
         </div>
       </div>
     </header>
 
     <main class="mx-auto flex max-w-6xl flex-col gap-8 px-8 py-8">
       <!-- Alert -->
-      <Alert variant="info" persistent dismissible>
+      <Alert
+        variant="info"
+        persistent
+        dismissible
+      >
         Welcome to the dashboard. This is a reference page showcasing Eunoia
         components.
       </Alert>
@@ -42,28 +61,47 @@
             >
               Email
             </Input>
-            <Input v-model="website" type="text" helper="https://...">
+            <Input
+              v-model="website"
+              type="text"
+              helper="https://..."
+            >
               Website
             </Input>
           </div>
-          <Select v-model="role" :options="roleOptions" multiple>Role</Select>
-          <Input v-model="department" type="radio" :options="departmentOptions">
+          <Select
+            v-model="role"
+            :options="roleOptions"
+            multiple
+          >
+            Role
+          </Select>
+          <Input
+            v-model="department"
+            type="radio"
+            :options="departmentOptions"
+          >
             Department
           </Input>
-          <Input v-model="newsletter" type="checkbox">
+          <Input
+            v-model="newsletter"
+            type="checkbox"
+          >
             Newsletter
             <template #description>
               Subscribe to our
-              <Link href="https://example.com/newsletter">monthly newsletter</Link>
+              <Link href="https://example.com/newsletter">
+                monthly newsletter
+              </Link>
             </template>
           </Input>
         </div>
 
         <template #footer>
-          <Button primary>Submit</Button>
+          <Button primary> Submit </Button>
           <Button>Cancel</Button>
-          <Button ghost>Reset</Button>
-          <Button destructive>Delete Draft</Button>
+          <Button ghost> Reset </Button>
+          <Button destructive> Delete Draft </Button>
         </template>
       </Card>
 
@@ -71,7 +109,12 @@
       <Card dense>
         <template #header>
           <h3 class="text-base font-semibold text-gray-900">Dense Variant</h3>
-          <Badge variant="secondary" dense>Compact</Badge>
+          <Badge
+            variant="secondary"
+            dense
+          >
+            Compact
+          </Badge>
         </template>
         <div class="flex flex-col gap-4">
           <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -81,8 +124,9 @@
               dense
               :maxlength="100"
               helper="Legal full name"
-              >Full Name</Input
             >
+              Full Name
+            </Input>
             <Input
               v-model="email"
               type="text"
@@ -90,13 +134,24 @@
               helper="We'll never share your email"
               :errors="emailErrors"
               :invalid="emailErrors.length > 0"
-              >Email</Input
             >
-            <Input v-model="website" type="text" dense helper="https://..."
-              >Website</Input
+              Email
+            </Input>
+            <Input
+              v-model="website"
+              type="text"
+              dense
+              helper="https://..."
             >
+              Website
+            </Input>
           </div>
-          <Select v-model="role" :options="roleOptions" dense multiple>
+          <Select
+            v-model="role"
+            :options="roleOptions"
+            dense
+            multiple
+          >
             Role
           </Select>
           <Input
@@ -107,19 +162,40 @@
           >
             Department
           </Input>
-          <Input v-model="newsletter" type="checkbox" dense>
+          <Input
+            v-model="newsletter"
+            type="checkbox"
+            dense
+          >
             Newsletter
             <template #description>
               Subscribe to our
-              <Link href="https://example.com/newsletter">monthly newsletter</Link>
+              <Link href="https://example.com/newsletter">
+                monthly newsletter
+              </Link>
             </template>
           </Input>
         </div>
         <template #footer>
-          <Button primary dense>Submit</Button>
-          <Button dense>Cancel</Button>
-          <Button ghost dense>Reset</Button>
-          <Button destructive dense>Delete Draft</Button>
+          <Button
+            primary
+            dense
+          >
+            Submit
+          </Button>
+          <Button dense> Cancel </Button>
+          <Button
+            ghost
+            dense
+          >
+            Reset
+          </Button>
+          <Button
+            destructive
+            dense
+          >
+            Delete Draft
+          </Button>
         </template>
       </Card>
 
@@ -128,28 +204,77 @@
         <template #header>
           <h3 class="text-lg font-semibold text-gray-900">Employees</h3>
           <div class="flex items-center gap-2">
-            <Badge variant="primary" :count="5">Total</Badge>
-            <Badge variant="success" :count="4">Active</Badge>
-            <Badge variant="warning" :count="1">On Leave</Badge>
+            <Badge
+              variant="primary"
+              :count="5"
+            >
+              Total
+            </Badge>
+            <Badge
+              variant="success"
+              :count="4"
+            >
+              Active
+            </Badge>
+            <Badge
+              variant="warning"
+              :count="1"
+            >
+              On Leave
+            </Badge>
           </div>
         </template>
-        <DataTable :headers="headers" :items="items">
+        <DataTable
+          :headers="headers"
+          :items="items"
+        >
           <template #actions="{ item }">
             <div class="inline-flex items-center gap-1">
-              <Tooltip content="View" placement="top">
-                <Button ghost dense @click="onView(item)"
-                  ><Icon name="eye" size="sm"
-                /></Button>
+              <Tooltip
+                content="View"
+                placement="top"
+              >
+                <Button
+                  ghost
+                  dense
+                  @click="onView(item)"
+                >
+                  <Icon
+                    name="eye"
+                    size="sm"
+                  />
+                </Button>
               </Tooltip>
-              <Tooltip content="Edit" placement="top">
-                <Button ghost dense @click="onEdit(item)"
-                  ><Icon name="pencil-simple" size="sm"
-                /></Button>
+              <Tooltip
+                content="Edit"
+                placement="top"
+              >
+                <Button
+                  ghost
+                  dense
+                  @click="onEdit(item)"
+                >
+                  <Icon
+                    name="pencil-simple"
+                    size="sm"
+                  />
+                </Button>
               </Tooltip>
-              <Tooltip content="Delete" placement="top">
-                <Button ghost dense destructive @click="onDelete(item)"
-                  ><Icon name="trash" size="sm"
-                /></Button>
+              <Tooltip
+                content="Delete"
+                placement="top"
+              >
+                <Button
+                  ghost
+                  dense
+                  destructive
+                  @click="onDelete(item)"
+                >
+                  <Icon
+                    name="trash"
+                    size="sm"
+                  />
+                </Button>
               </Tooltip>
             </div>
           </template>

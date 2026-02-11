@@ -28,7 +28,10 @@ const meta = {
       const selected = ref<string>("monthly");
 
       return () => (
-        <RadioGroup {...args} v-model={selected.value} />
+        <RadioGroup
+          {...args}
+          v-model={selected.value}
+        />
       );
     },
   }),
@@ -52,7 +55,10 @@ export const ThreeOptions: Story = {
       const selected = ref<string>("week");
 
       return () => (
-        <RadioGroup {...args} v-model={selected.value} />
+        <RadioGroup
+          {...args}
+          v-model={selected.value}
+        />
       );
     },
   }),

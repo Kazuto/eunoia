@@ -75,7 +75,11 @@ const meta = {
             Show Toast
           </button>
           {show.value && (
-            <Toast {...args} key={key.value} onDismiss={onDismiss}>
+            <Toast
+              {...args}
+              key={key.value}
+              onDismiss={onDismiss}
+            >
               {{
                 default: () => {
                   return args.default;

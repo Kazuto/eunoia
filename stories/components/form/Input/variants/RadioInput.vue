@@ -11,7 +11,11 @@
     <span :class="radioStyles({ dense, invalid, checked: model === value })">
       <span :class="dotStyles({ dense, visible: model === value })" />
     </span>
-    <span v-if="$slots.description" :class="descriptionStyles({ dense })"><slot name="description" /></span>
+    <span
+      v-if="$slots.description"
+      :class="descriptionStyles({ dense })"
+      ><slot name="description"
+    /></span>
   </label>
 </template>
 
@@ -41,7 +45,7 @@ const wrapperStyles = tv({
 });
 
 const radioStyles = tv({
-  base: "border-gray-300 bg-white inline-flex shrink-0 items-center justify-center rounded-full border transition-colors",
+  base: "inline-flex shrink-0 items-center justify-center rounded-full border border-gray-300 bg-white transition-colors",
   variants: {
     dense: {
       false: "h-7 w-7",
@@ -63,7 +67,7 @@ const radioStyles = tv({
 });
 
 const dotStyles = tv({
-  base: "bg-white rounded-full transition-opacity",
+  base: "rounded-full bg-white transition-opacity",
   variants: {
     dense: {
       false: "h-2.5 w-2.5",

@@ -47,20 +47,23 @@
           target="_blank"
           rel="noopener noreferrer"
           class="text-inherit"
-        >Storybook tutorials</a>
+          >Storybook tutorials</a
+        >
         . Read more in the
         <a
           href="https://storybook.js.org/docs"
           target="_blank"
           rel="noopener noreferrer"
           class="text-inherit"
-        >docs</a>
+          >docs</a
+        >
         .
       </p>
       <div class="my-10 text-[13px] leading-5">
         <span
           class="mr-2.5 inline-block rounded-full bg-green-100 px-3 py-1 align-top text-[11px] leading-3 font-bold text-green-700"
-        >Tip</span>
+          >Tip</span
+        >
         Adjust the width of the canvas with the
         <svg
           width="10"
