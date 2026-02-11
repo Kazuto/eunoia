@@ -13,5 +13,6 @@
   "dialog.cancel": "Cancel",
   "dialog.confirm-phrase-prompt": "Type \"{phrase}\" to confirm",
   "dropdown.toggle": "Toggle menu",
-  "button-group.label": "Button group"
+  "button-group.label": "Button group",
+  "code.copy": "Copy to clipboard"
 }
