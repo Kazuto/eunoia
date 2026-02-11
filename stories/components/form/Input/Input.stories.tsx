@@ -139,22 +139,32 @@ export const Radio: Story = {
   args: {
     type: "radio",
     default: "Preferred Role",
-    options: [
-      { label: "Engineer", value: "engineer" },
-      { label: "Designer", value: "designer" },
-      { label: "Manager", value: "manager" },
-    ],
   },
   render: (args: any) => ({
     setup() {
       const selected = ref<string>();
 
       return () => (
-        <Input {...args} v-model={selected.value}>
-          {{
-            default: () => args.default,
-          }}
-        </Input>
+        <div class="flex flex-col gap-1">
+          <Input {...args} v-model={selected.value} name="role" value="engineer">
+            {{
+              default: () => args.default,
+              description: () => "Engineer",
+            }}
+          </Input>
+          <Input {...args} v-model={selected.value} name="role" value="designer">
+            {{
+              default: () => null,
+              description: () => "Designer",
+            }}
+          </Input>
+          <Input {...args} v-model={selected.value} name="role" value="manager">
+            {{
+              default: () => null,
+              description: () => "Manager",
+            }}
+          </Input>
+        </div>
       );
     },
   }),

@@ -1,39 +1,22 @@
 <template>
-  <div v-bind="$attrs" role="radiogroup" class="flex flex-col gap-2">
-    <label
-      v-for="option in options"
-      :key="option.value"
-      :class="wrapperStyles({ disabled })"
-    >
-      <input
-        v-model="model"
-        type="radio"
-        :name="radioName"
-        :value="option.value"
-        :disabled
-        class="sr-only"
-      />
-      <span
-        :class="
-          radioStyles({
-            dense,
-            invalid,
-            checked: model === option.value,
-          })
-        "
-      >
-        <span
-          :class="dotStyles({ dense, visible: model === option.value })"
-        />
-      </span>
-      <span :class="labelStyles({ dense })">{{ option.label }}</span>
-    </label>
-  </div>
+  <label :class="wrapperStyles({ disabled })">
+    <input
+      v-bind="$attrs"
+      v-model="model"
+      type="radio"
+      :value="value"
+      :disabled
+      class="sr-only"
+    />
+    <span :class="radioStyles({ dense, invalid, checked: model === value })">
+      <span :class="dotStyles({ dense, visible: model === value })" />
+    </span>
+    <span v-if="$slots.description" :class="descriptionStyles({ dense })"><slot name="description" /></span>
+  </label>
 </template>
 
 <script setup lang="ts">
 import { tv } from "tailwind-variants";
-import { useSanitizedId } from "@/composables/useSanitizedId";
 
 defineOptions({
   inheritAttrs: false,
@@ -41,17 +24,12 @@ defineOptions({
 
 const model = defineModel<string | number>();
 
-const radioName = useSanitizedId("radio");
-
-withDefaults(
-  defineProps<{
-    options: { label: string; value: string | number }[];
-    dense?: boolean;
-    invalid?: boolean;
-    disabled?: boolean;
-  }>(),
-  {}
-);
+defineProps<{
+  value: string | number;
+  dense?: boolean;
+  invalid?: boolean;
+  disabled?: boolean;
+}>();
 
 const wrapperStyles = tv({
   base: "inline-flex w-fit cursor-pointer items-center gap-2",
@@ -63,7 +41,7 @@ const wrapperStyles = tv({
 });
 
 const radioStyles = tv({
-  base: "inline-flex shrink-0 items-center justify-center rounded-full border border-gray-300 bg-white transition-colors",
+  base: "border-gray-300 bg-white inline-flex shrink-0 items-center justify-center rounded-full border transition-colors",
   variants: {
     dense: {
       false: "h-7 w-7",
@@ -85,7 +63,7 @@ const radioStyles = tv({
 });
 
 const dotStyles = tv({
-  base: "rounded-full bg-white transition-opacity",
+  base: "bg-white rounded-full transition-opacity",
   variants: {
     dense: {
       false: "h-2.5 w-2.5",
@@ -102,7 +80,7 @@ const dotStyles = tv({
   },
 });
 
-const labelStyles = tv({
+const descriptionStyles = tv({
   base: "text-gray-700",
   variants: {
     dense: {

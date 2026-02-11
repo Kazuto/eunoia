@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col gap-1">
+  <div class="gap-1 flex flex-col">
     <Label :dense :for="inputId"><slot /></Label>
     <component
       :is="variantComponent"
