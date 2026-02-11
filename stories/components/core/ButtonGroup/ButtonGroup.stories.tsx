@@ -99,9 +99,9 @@ export const WithIcons: Story = {
     setup() {
       return () => (
         <ButtonGroup {...args}>
-          <Button icon="bold" />
-          <Button icon="italic" />
-          <Button icon="underline" />
+          <Button icon="text-b" />
+          <Button icon="text-italic" />
+          <Button icon="text-underline" />
         </ButtonGroup>
       );
     },
