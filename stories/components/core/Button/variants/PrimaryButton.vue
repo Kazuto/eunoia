@@ -3,7 +3,7 @@
     :dense="dense"
     :icon="icon"
     :background-color="backgroundColor"
-    class="bg-primary text-white"
+    class="bg-primary text-white hover:bg-primary/85"
   >
     <slot />
   </Button>
