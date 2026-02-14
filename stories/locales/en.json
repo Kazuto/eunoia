@@ -14,5 +14,8 @@
   "dialog.confirm-phrase-prompt": "Type \"{phrase}\" to confirm",
   "dropdown.toggle": "Toggle menu",
   "button-group.label": "Button group",
-  "code.copy": "Copy to clipboard"
+  "code.copy": "Copy to clipboard",
+  "theme-toggle.system": "Change to system preference",
+  "theme-toggle.light": "Change to light mode",
+  "theme-toggle.dark": "Change to dark mode"
 }
