@@ -66,7 +66,7 @@ const indicatorStyle = computed(() => {
 });
 
 const groupStyles = tv({
-  base: "relative inline-flex w-full rounded-lg bg-gray-100 p-1",
+  base: "relative inline-flex w-full rounded-lg bg-neutral-100 p-1",
   variants: {
     dense: {
       false: "",
@@ -86,20 +86,20 @@ const indicatorStyles = tv({
       true: "",
     },
     focused: {
-      true: "ring-2 ring-gray-300 ring-offset-2",
+      true: "ring-2 ring-neutral-300 ring-offset-2",
     },
   },
 });
 
 const optionStyles = tv({
-  base: "relative z-10 flex-1 cursor-pointer text-center font-sans font-medium text-gray-500 transition-colors duration-200 select-none",
+  base: "relative z-10 flex-1 cursor-pointer text-center font-sans font-medium text-neutral-500 transition-colors duration-200 select-none",
   variants: {
     dense: {
       false: "px-4 py-2 text-sm",
       true: "px-3 py-1.5 text-xs",
     },
     selected: {
-      true: "text-gray-900",
+      true: "text-neutral-900",
     },
     disabled: {
       true: "cursor-not-allowed",

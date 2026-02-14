@@ -28,11 +28,11 @@ const padding = computed(() => {
 });
 
 const itemStyles = tv({
-  base: "block cursor-pointer rounded-lg px-4 py-2 text-sm text-gray-700 no-underline focus:bg-gray-100 focus:text-gray-900 focus:ring-2 focus:ring-gray-200 focus:ring-offset-2 focus:ring-offset-gray-100 focus:outline-none",
+  base: "block cursor-pointer rounded-lg px-4 py-2 text-sm text-neutral-700 no-underline focus:bg-neutral-100 focus:text-neutral-900 focus:ring-2 focus:ring-neutral-200 focus:ring-offset-2 focus:ring-offset-neutral-100 focus:outline-none",
   variants: {
     active: {
-      true: "bg-gray-100 text-gray-900",
-      false: "hover:bg-gray-50 hover:text-gray-900",
+      true: "bg-neutral-100 text-neutral-900",
+      false: "hover:bg-neutral-50 hover:text-neutral-900",
     },
   },
 });

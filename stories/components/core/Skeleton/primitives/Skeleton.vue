@@ -19,7 +19,7 @@ defineOptions({
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const skeletonStyles = tv({
-  base: "animate-pulse bg-gray-200",
+  base: "animate-pulse bg-neutral-200",
   variants: {
     variant: {
       text: "rounded",

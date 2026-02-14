@@ -22,7 +22,7 @@ defineProps<{
 }>();
 
 const hintRowStyles = tv({
-  base: "flex justify-between text-gray-400",
+  base: "flex justify-between text-neutral-400",
   variants: {
     dense: {
       false: "text-xs",

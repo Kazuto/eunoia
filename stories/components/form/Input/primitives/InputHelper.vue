@@ -18,6 +18,6 @@ defineOptions({
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const helperStyles = tv({
-  base: "text-gray-400",
+  base: "text-neutral-400",
 });
 </script>

@@ -65,7 +65,7 @@ function onBackdropClick(e: MouseEvent) {
 
 const panelStyles = tv({
   base: [
-    "m-auto w-full flex-col rounded-lg border border-gray-200 bg-white shadow-lg",
+    "m-auto w-full flex-col rounded-lg border border-neutral-200 bg-white shadow-lg",
     "backdrop:bg-black/50",
     "open:flex",
   ],

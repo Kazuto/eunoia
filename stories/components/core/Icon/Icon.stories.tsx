@@ -35,23 +35,23 @@ export const Sizes: Story = {
       <div class="flex items-end gap-4">
         <div class="flex flex-col items-center gap-1">
           <Icon name="house" size="xs" />
-          <span class="text-xs text-gray-500">xs</span>
+          <span class="text-xs text-neutral-500">xs</span>
         </div>
         <div class="flex flex-col items-center gap-1">
           <Icon name="house" size="sm" />
-          <span class="text-xs text-gray-500">sm</span>
+          <span class="text-xs text-neutral-500">sm</span>
         </div>
         <div class="flex flex-col items-center gap-1">
           <Icon name="house" size="md" />
-          <span class="text-xs text-gray-500">md</span>
+          <span class="text-xs text-neutral-500">md</span>
         </div>
         <div class="flex flex-col items-center gap-1">
           <Icon name="house" size="lg" />
-          <span class="text-xs text-gray-500">lg</span>
+          <span class="text-xs text-neutral-500">lg</span>
         </div>
         <div class="flex flex-col items-center gap-1">
           <Icon name="house" size="xl" />
-          <span class="text-xs text-gray-500">xl</span>
+          <span class="text-xs text-neutral-500">xl</span>
         </div>
       </div>
     `,
@@ -65,27 +65,27 @@ export const Types: Story = {
       <div class="flex items-end gap-4">
         <div class="flex flex-col items-center gap-1">
           <Icon name="house" type="thin" size="lg" />
-          <span class="text-xs text-gray-500">thin</span>
+          <span class="text-xs text-neutral-500">thin</span>
         </div>
         <div class="flex flex-col items-center gap-1">
           <Icon name="house" type="light" size="lg" />
-          <span class="text-xs text-gray-500">light</span>
+          <span class="text-xs text-neutral-500">light</span>
         </div>
         <div class="flex flex-col items-center gap-1">
           <Icon name="house" type="regular" size="lg" />
-          <span class="text-xs text-gray-500">regular</span>
+          <span class="text-xs text-neutral-500">regular</span>
         </div>
         <div class="flex flex-col items-center gap-1">
           <Icon name="house" type="bold" size="lg" />
-          <span class="text-xs text-gray-500">bold</span>
+          <span class="text-xs text-neutral-500">bold</span>
         </div>
         <div class="flex flex-col items-center gap-1">
           <Icon name="house" type="fill" size="lg" />
-          <span class="text-xs text-gray-500">fill</span>
+          <span class="text-xs text-neutral-500">fill</span>
         </div>
         <div class="flex flex-col items-center gap-1">
           <Icon name="house" type="duotone" size="lg" />
-          <span class="text-xs text-gray-500">duotone</span>
+          <span class="text-xs text-neutral-500">duotone</span>
         </div>
       </div>
     `,
@@ -119,10 +119,10 @@ export const Gallery: Story = {
         <div
           v-for="name in names"
           :key="name"
-          class="flex flex-col items-center gap-2 rounded-lg border border-gray-200 p-4"
+          class="flex flex-col items-center gap-2 rounded-lg border border-neutral-200 p-4"
         >
           <Icon :name="name" size="lg" />
-          <span class="text-xs text-gray-500">{{ name }}</span>
+          <span class="text-xs text-neutral-500">{{ name }}</span>
         </div>
       </div>
     `,

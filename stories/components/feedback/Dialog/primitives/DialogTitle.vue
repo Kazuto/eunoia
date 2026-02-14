@@ -24,7 +24,7 @@ defineProps<{
 }>();
 
 const titleStyles = tv({
-  base: "font-semibold text-gray-900",
+  base: "font-semibold text-neutral-900",
   variants: {
     dense: {
       false: "text-lg",

@@ -67,7 +67,7 @@ export const CardSkeleton: Story = {
   render: () => ({
     components: { Skeleton },
     template: `
-      <div class="flex gap-4 rounded-lg border border-gray-200 p-4" style="width: 360px">
+      <div class="flex gap-4 rounded-lg border border-neutral-200 p-4" style="width: 360px">
         <Skeleton variant="circular" :width="48" :height="48" />
         <div class="flex flex-1 flex-col gap-2">
           <Skeleton height="16px" width="60%" />

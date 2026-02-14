@@ -47,7 +47,7 @@
     </span>
     <span
       v-else
-      class="flex-1 truncate text-gray-400"
+      class="flex-1 truncate text-neutral-400"
     >
       {{ placeholder }}
     </span>
@@ -71,7 +71,7 @@ defineOptions({
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const triggerStyles = tv({
-  base: "inline-flex w-full cursor-pointer items-center rounded-md border border-gray-300 font-sans outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2",
+  base: "inline-flex w-full cursor-pointer items-center rounded-md border border-neutral-300 font-sans outline-none focus:ring-2 focus:ring-neutral-300 focus:ring-offset-2",
   variants: {
     dense: {
       false: "min-h-[42px] px-3 py-1.5 text-sm",
@@ -84,7 +84,7 @@ const triggerStyles = tv({
       true: "pointer-events-none cursor-not-allowed opacity-50",
     },
     open: {
-      true: "ring-2 ring-gray-300 ring-offset-2",
+      true: "ring-2 ring-neutral-300 ring-offset-2",
     },
   },
   defaultVariants: {

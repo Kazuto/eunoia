@@ -23,7 +23,7 @@ const countStyles = tv({
   variants: {
     variant: {
       primary: "bg-white text-primary",
-      secondary: "bg-gray-800 text-white",
+      secondary: "bg-neutral-800 text-white",
       success: "bg-green-800 text-white",
       warning: "bg-yellow-800 text-white",
       danger: "bg-red-800 text-white",

@@ -1,6 +1,6 @@
 <template>
   <article>
-    <my-header
+    <Header
       :user="user"
       @login="onLogin"
       @logout="onLogout"
@@ -8,7 +8,7 @@
     />
 
     <section
-      class="mx-auto max-w-xl px-5 py-12 font-sans text-sm leading-6 text-gray-800"
+      class="mx-auto max-w-xl px-5 py-12 font-sans text-sm leading-6 text-neutral-800"
     >
       <h2 class="mb-1 inline-block align-top text-3xl leading-none font-bold">
         Pages in Storybook
@@ -90,7 +90,7 @@
 </template>
 
 <script lang="ts" setup>
-import MyHeader from "./Header.vue";
+import Header from "./Header.vue";
 import { ref } from "vue";
 
 const user = ref<{ name: string } | null>(null);

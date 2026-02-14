@@ -18,7 +18,7 @@ defineProps<{
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const labelStyles = tv({
-  base: "block tracking-wide text-gray-700",
+  base: "block tracking-wide text-neutral-700",
   variants: {
     dense: {
       false: "text-sm",

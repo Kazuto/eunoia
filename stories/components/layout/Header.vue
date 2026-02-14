@@ -38,36 +38,42 @@
       <div class="flex items-center gap-2.5">
         <span
           v-if="user"
-          class="text-sm text-gray-800"
-          >Welcome, <b>{{ user.name }}</b
-          >!</span
+          class="text-sm text-neutral-800"
         >
-        <my-button
+          Welcome, <b>{{ user.name }}</b>
+        </span>
+        <Button
           v-if="user"
           dense
           label="Log out"
           @click="$emit('logout')"
-        />
-        <my-button
+        >
+          Log out
+        </Button>
+        <Button
           v-if="!user"
           dense
           label="Log in"
           @click="$emit('login')"
-        />
-        <my-button
+        >
+          Log in
+        </Button>
+        <Button
           v-if="!user"
           primary
           dense
           label="Sign up"
           @click="$emit('createAccount')"
-        />
+        >
+          Sign up
+        </Button>
       </div>
     </div>
   </header>
 </template>
 
 <script lang="ts" setup>
-import { Button as MyButton } from "@/components";
+import { Button } from "@/components";
 
 defineProps<{ user: { name: string } | null }>();
 

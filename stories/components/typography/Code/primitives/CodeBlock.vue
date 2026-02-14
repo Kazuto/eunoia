@@ -114,11 +114,11 @@ const copyButtonStyles = tv({
 });
 
 const filenameStyles = tv({
-  base: "block rounded-t-lg bg-gray-100 px-4 pt-3 pb-0 font-mono text-xs text-gray-500",
+  base: "block rounded-t-lg bg-neutral-100 px-4 pt-3 pb-0 font-mono text-xs text-neutral-500",
 });
 
 const preStyles = tv({
-  base: "overflow-x-auto rounded-lg bg-gray-100 p-4",
+  base: "overflow-x-auto rounded-lg bg-neutral-100 p-4",
   variants: {
     hasFilename: {
       true: "rounded-t-none pt-2",

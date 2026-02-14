@@ -39,7 +39,7 @@ const itemStyles = tv({
       true: "px-2.5 py-2 text-xs",
     },
     active: {
-      true: "bg-gray-100",
+      true: "bg-neutral-100",
     },
     variant: {
       default: "",

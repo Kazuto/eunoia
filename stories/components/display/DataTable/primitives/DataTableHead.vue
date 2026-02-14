@@ -26,8 +26,8 @@
               :class="[
                 '-mb-1',
                 sortKey === header.key && sortDirection === 'asc'
-                  ? 'text-gray-900'
-                  : 'text-gray-300',
+                  ? 'text-neutral-900'
+                  : 'text-neutral-300',
               ]"
             />
             <Icon
@@ -35,8 +35,8 @@
               size="xs"
               :class="[
                 sortKey === header.key && sortDirection === 'desc'
-                  ? 'text-gray-900'
-                  : 'text-gray-300',
+                  ? 'text-neutral-900'
+                  : 'text-neutral-300',
               ]"
             />
           </span>
@@ -62,11 +62,11 @@ defineOptions({
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const rowStyles = tv({
-  base: "border-b border-gray-300",
+  base: "border-b border-neutral-300",
 });
 
 const cellStyles = tv({
-  base: "font-semibold text-gray-700",
+  base: "font-semibold text-neutral-700",
   variants: {
     dense: {
       false: "px-4 py-3",

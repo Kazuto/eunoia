@@ -50,7 +50,7 @@ defineOptions({
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const detailsStyles = tv({
-  base: "rounded-md border border-gray-300 font-sans",
+  base: "rounded-md border border-neutral-300 font-sans",
   variants: {
     dense: {
       false: "text-sm",
@@ -76,7 +76,7 @@ const summaryStyles = tv({
 });
 
 const contentStyles = tv({
-  base: "border-t border-gray-200",
+  base: "border-t border-neutral-200",
   variants: {
     dense: {
       false: "px-4 py-3",

@@ -23,6 +23,6 @@ defineProps<{
 }>();
 
 const counterStyles = tv({
-  base: "ml-auto text-gray-400",
+  base: "ml-auto text-neutral-400",
 });
 </script>

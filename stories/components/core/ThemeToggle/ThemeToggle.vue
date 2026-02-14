@@ -47,7 +47,7 @@ const icon = computed(() => {
 });
 
 const cycleStyles = tv({
-  base: "inline-flex aspect-square items-center justify-center transition-colors duration-200 hover:bg-gray-100 focus:outline-none active:bg-gray-200",
+  base: "inline-flex aspect-square items-center justify-center transition-colors duration-200 hover:bg-neutral-100 focus:outline-none active:bg-neutral-200",
   variants: {
     dense: {
       false: "rounded-lg p-2.5 text-sm",

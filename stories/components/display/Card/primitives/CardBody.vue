@@ -18,7 +18,7 @@ defineOptions({
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const bodyStyles = tv({
-  base: "text-gray-600",
+  base: "text-neutral-600 dark:text-neutral-400",
   variants: {
     dense: {
       false: "text-sm",

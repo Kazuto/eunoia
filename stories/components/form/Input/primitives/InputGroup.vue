@@ -19,7 +19,7 @@ withDefaults(
 );
 
 const variants = tv({
-  base: "inline-flex rounded-md border border-gray-300 focus:ring-2 focus:ring-gray-300 has-[input:focus]:ring-2 has-[input:focus]:ring-gray-300 has-[input:focus]:ring-offset-2",
+  base: "inline-flex rounded-md border border-neutral-300 focus:ring-2 focus:ring-neutral-300 has-[input:focus]:ring-2 has-[input:focus]:ring-neutral-300 has-[input:focus]:ring-offset-2",
   variants: {
     disabled: {
       true: "cursor-not-allowed opacity-50",

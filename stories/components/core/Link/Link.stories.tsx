@@ -66,7 +66,7 @@ export const InParagraph: Story = {
   render: (_args: any) => ({
     setup() {
       return () => (
-        <p class="text-sm text-gray-700">
+        <p class="text-sm text-neutral-700">
           Please read our{" "}
           <Link href="https://example.com/terms">terms and conditions</Link>{" "}
           before proceeding.

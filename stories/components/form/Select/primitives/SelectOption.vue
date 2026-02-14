@@ -48,7 +48,7 @@ const optionStyles = tv({
       true: "font-semibold",
     },
     active: {
-      true: "bg-gray-100",
+      true: "bg-neutral-100",
     },
   },
   defaultVariants: {

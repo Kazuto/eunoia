@@ -22,7 +22,7 @@ defineProps<{
 }>();
 
 const bodyStyles = tv({
-  base: "flex-1 text-gray-600",
+  base: "flex-1 text-neutral-600",
   variants: {
     dense: {
       false: "px-6 py-4 text-sm",

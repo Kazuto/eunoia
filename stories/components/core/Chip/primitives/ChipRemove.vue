@@ -32,7 +32,7 @@ const removeStyles = tv({
   variants: {
     variant: {
       primary: "bg-white/25 text-white hover:bg-white/40",
-      secondary: "bg-gray-800/15 text-gray-800 hover:bg-gray-800/25",
+      secondary: "bg-neutral-800/15 text-neutral-800 hover:bg-neutral-800/25",
       success: "bg-green-800/15 text-green-800 hover:bg-green-800/25",
       warning: "bg-yellow-800/15 text-yellow-800 hover:bg-yellow-800/25",
       danger: "bg-red-800/15 text-red-800 hover:bg-red-800/25",

@@ -34,11 +34,11 @@ defineOptions({
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const rowStyles = tv({
-  base: "border-b border-gray-200 last:border-b-0",
+  base: "border-b border-neutral-200 last:border-b-0",
 });
 
 const cellStyles = tv({
-  base: "text-gray-900",
+  base: "text-neutral-900",
   variants: {
     dense: {
       false: "px-4 py-3",

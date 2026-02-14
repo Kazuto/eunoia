@@ -22,7 +22,7 @@ defineProps<{
 }>();
 
 const headerStyles = tv({
-  base: "flex items-center justify-between border-b border-gray-200",
+  base: "flex items-center justify-between border-b border-neutral-200",
   variants: {
     dense: {
       false: "px-6 py-4",

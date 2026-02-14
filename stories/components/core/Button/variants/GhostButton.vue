@@ -2,7 +2,7 @@
   <Button
     :dense="dense"
     :icon="icon"
-    class="bg-transparent text-gray-800 hover:bg-gray-100 active:bg-gray-200"
+    class="bg-transparent text-neutral-800 hover:bg-neutral-100 active:bg-neutral-200 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:active:bg-neutral-600"
   >
     <slot />
   </Button>

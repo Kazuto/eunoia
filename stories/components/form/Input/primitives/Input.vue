@@ -22,7 +22,7 @@ defineProps<{
 }>();
 
 const inputStyles = tv({
-  base: "inline-block w-full [appearance:textfield] rounded-md outline-none hover:bg-gray-50 focus:bg-gray-50 active:bg-gray-100 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none",
+  base: "inline-block w-full [appearance:textfield] rounded-md outline-none hover:bg-neutral-50 focus:bg-neutral-50 active:bg-neutral-100 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none",
   variants: {
     dense: {
       false: "px-3.5 py-2.5 text-sm",

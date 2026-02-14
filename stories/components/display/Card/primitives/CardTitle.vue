@@ -18,7 +18,7 @@ defineOptions({
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const titleStyles = tv({
-  base: "font-semibold text-gray-900",
+  base: "font-semibold text-neutral-900 dark:text-neutral-100",
   variants: {
     dense: {
       false: "text-lg",

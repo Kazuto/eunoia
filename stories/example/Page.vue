@@ -1,9 +1,9 @@
 <template>
-  <div class="min-h-screen bg-gray-50 font-sans">
+  <div class="min-h-screen bg-neutral-50 font-sans">
     <!-- Header -->
-    <header class="border-b border-gray-200 bg-white px-8 py-4">
+    <header class="border-b border-neutral-200 bg-white px-8 py-4">
       <div class="mx-auto flex max-w-6xl items-center justify-between">
-        <h1 class="text-xl font-bold text-gray-900">Dashboard</h1>
+        <h1 class="text-xl font-bold text-neutral-900">Dashboard</h1>
         <div class="flex items-center gap-3">
           <Badge
             variant="success"
@@ -113,7 +113,9 @@
       <!-- Dense Form -->
       <Card dense>
         <template #header>
-          <h3 class="text-base font-semibold text-gray-900">Dense Variant</h3>
+          <h3 class="text-base font-semibold text-neutral-900">
+            Dense Variant
+          </h3>
           <Badge
             variant="secondary"
             dense
@@ -213,7 +215,7 @@
       <!-- Data Table -->
       <Card>
         <template #header>
-          <h3 class="text-lg font-semibold text-gray-900">Employees</h3>
+          <h3 class="text-lg font-semibold text-neutral-900">Employees</h3>
           <div class="flex items-center gap-2">
             <Badge
               variant="primary"

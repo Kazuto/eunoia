@@ -26,7 +26,8 @@ const chipStyles = tv({
   variants: {
     variant: {
       primary: "bg-primary text-white focus-visible:ring-primary",
-      secondary: "bg-gray-100 text-gray-800 focus-visible:ring-gray-400",
+      secondary:
+        "bg-neutral-100 text-neutral-800 focus-visible:ring-neutral-400",
       success: "bg-green-100 text-green-800 focus-visible:ring-green-400",
       warning: "bg-yellow-100 text-yellow-800 focus-visible:ring-yellow-400",
       danger: "bg-red-100 text-red-800 focus-visible:ring-red-400",

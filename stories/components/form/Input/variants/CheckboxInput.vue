@@ -68,7 +68,7 @@ const wrapperStyles = tv({
 });
 
 const boxStyles = tv({
-  base: "inline-flex shrink-0 items-center justify-center rounded border border-gray-300 bg-white transition-colors",
+  base: "inline-flex shrink-0 items-center justify-center rounded border border-neutral-300 bg-white transition-colors",
   variants: {
     dense: {
       false: "h-7 w-7",
@@ -94,7 +94,7 @@ const boxStyles = tv({
 });
 
 const descriptionStyles = tv({
-  base: "text-gray-700",
+  base: "text-neutral-700",
   variants: {
     dense: {
       false: "text-sm",

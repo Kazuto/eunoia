@@ -38,7 +38,7 @@
         v-if="options.length === 0"
         role="option"
         :aria-selected="false"
-        class="px-3 py-2.5 text-sm text-gray-400"
+        class="px-3 py-2.5 text-sm text-neutral-400"
       >
         {{ t("no-results") }}
       </li>
