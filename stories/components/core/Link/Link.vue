@@ -1,6 +1,7 @@
 <template>
   <LinkPrimitive
     v-bind="linkAttrs"
+    :class="classAttr"
     :tag="linkTag"
     :external="isExternal"
     :dense
@@ -12,6 +13,7 @@
 <script setup lang="ts">
 import { computed, getCurrentInstance } from "vue";
 import LinkPrimitive from "./primitives/Link.vue";
+import { useForwardedAttrs } from "@/composables/useForwardedAttrs";
 
 defineOptions({
   inheritAttrs: false,
@@ -27,6 +29,8 @@ const props = withDefaults(
     external: undefined,
   }
 );
+
+const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const isExternal = computed(() => {
   if (props.external !== undefined) return props.external;
@@ -46,7 +50,7 @@ const linkTag = computed(() => {
 });
 
 const linkAttrs = computed(() => {
-  const attrs: Record<string, unknown> = {};
+  const attrs: Record<string, unknown> = forwardedAttrs.value ?? {};
 
   if (linkTag.value === "NuxtLink") {
     attrs.to = props.href;
