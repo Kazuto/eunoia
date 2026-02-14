@@ -3,6 +3,7 @@
     <Link
       :href="href"
       :class="itemStyles()"
+      tabindex="0"
       :style="{ paddingLeft: padding }"
     >
       <MenuLabel :icon>
@@ -22,19 +23,17 @@ import type { MenuItem } from "../types";
 const props = defineProps<MenuItem>();
 
 const padding = computed(() => {
-  if (props.level <= 1) return "0.75rem";
+  if (props.level <= 1) return;
 
   return `${props.level * 0.75}rem`;
 });
 
 const itemStyles = tv({
-  base: "block cursor-pointer rounded-lg px-4 py-2 text-sm text-neutral-700 no-underline focus:bg-neutral-100 focus:text-neutral-900 focus:ring-2 focus:ring-neutral-200 focus:ring-offset-2 focus:ring-offset-neutral-100 focus:outline-none",
-  variants: {
-    active: {
-      true: "bg-neutral-100 text-neutral-900",
-      false: "hover:bg-neutral-50 hover:text-neutral-900",
-    },
-  },
+  base: [
+    "flex cursor-pointer items-center rounded-lg px-3 py-2 text-sm no-underline transition-all duration-200 focus:ring-2 focus:ring-offset-2 focus:outline-none",
+    "text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900 focus:bg-neutral-100 focus:text-neutral-900 focus:ring-neutral-100 focus:ring-offset-white hover:focus:bg-neutral-200 hover:focus:ring-neutral-200",
+    "dark:text-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-neutral-200 dark:focus:bg-neutral-700 dark:focus:text-neutral-200 dark:focus:ring-neutral-700 dark:focus:ring-offset-neutral-800 dark:hover:focus:bg-neutral-600 dark:hover:focus:ring-neutral-600",
+  ],
 });
 </script>
 

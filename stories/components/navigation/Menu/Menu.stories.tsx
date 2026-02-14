@@ -16,7 +16,7 @@ export const Default: Story = {
       items={[
         { label: "Home", href: "/", icon: "house-simple" },
         { label: "About", href: "/about", icon: "user" },
-        { label: "Team", href: "/team", icon: "users" },
+        { label: "Team", href: "/team" },
         { label: "History", href: "/history", icon: "clock" },
       ]}
     />

@@ -1,6 +1,6 @@
 <template>
   <li>
-    <ul>
+    <ul class="flex flex-col gap-1">
       <li
         :class="sectionStyles()"
         :style="{ paddingLeft: padding }"
@@ -58,7 +58,7 @@ import { ref, computed } from "vue";
 const props = defineProps<MenuItem>();
 
 const padding = computed(() => {
-  if (props.level <= 1) return "0.75rem";
+  if (props.level <= 1) return;
 
   return `${props.level * 0.75}rem`;
 });
@@ -66,15 +66,19 @@ const padding = computed(() => {
 const open = ref(true);
 
 const sectionStyles = tv({
-  base: "flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-sm text-neutral-700 no-underline hover:bg-neutral-100 hover:text-neutral-900 focus:bg-neutral-100 focus:text-neutral-900 focus:ring-2 focus:ring-neutral-200 focus:ring-offset-2 focus:ring-offset-neutral-100 focus:outline-none",
+  base: [
+    "flex cursor-pointer items-center justify-between gap-2 rounded-lg px-3 py-2 text-sm no-underline transition-all duration-200 focus:ring-2 focus:ring-offset-2 focus:outline-none",
+    "text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900 focus:bg-neutral-100 focus:text-neutral-900 focus:ring-neutral-100 focus:ring-offset-white hover:focus:bg-neutral-200 hover:focus:ring-neutral-200",
+    "dark:text-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-neutral-200 dark:focus:bg-neutral-700 dark:focus:text-neutral-200 dark:focus:ring-neutral-700 dark:focus:ring-offset-neutral-800 dark:hover:focus:bg-neutral-600 dark:hover:focus:ring-neutral-600",
+  ],
 });
 
 const itemStyles = tv({
-  base: "grid overflow-hidden p-1 transition-all duration-300",
+  base: "flex flex-col gap-2 transition-all duration-300",
   variants: {
     open: {
       true: "max-h-[1000px]",
-      false: "max-h-0",
+      false: "max-h-0 overflow-hidden",
     },
   },
 });

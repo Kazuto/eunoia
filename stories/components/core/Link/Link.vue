@@ -1,6 +1,6 @@
 <template>
   <LinkPrimitive
-    v-bind="linkAttrs"
+    v-bind="{ ...forwardedAttrs, ...linkAttrs }"
     :class="classAttr"
     :tag="linkTag"
     :external="isExternal"
