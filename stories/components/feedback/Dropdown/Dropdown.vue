@@ -42,8 +42,7 @@
 
 <script lang="ts" setup>
 import { computed, onBeforeUnmount, ref, toRef, watch } from "vue";
-import { type LocaleMessages, useLocale } from "@/composables/useLocale";
-import { useSanitizedId } from "@/composables/useSanitizedId";
+import { useSanitizedId, useLocale, type LocaleMessages } from "@/composables";
 import DropdownTrigger from "./primitives/DropdownTrigger.vue";
 import DropdownMenu from "./primitives/DropdownMenu.vue";
 import DropdownItem from "./primitives/DropdownItem.vue";

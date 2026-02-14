@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { computed, getCurrentInstance } from "vue";
 import LinkPrimitive from "./primitives/Link.vue";
-import { useForwardedAttrs } from "@/composables/useForwardedAttrs";
+import { useForwardedAttrs } from "@/composables";
 
 defineOptions({
   inheritAttrs: false,

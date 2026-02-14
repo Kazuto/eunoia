@@ -26,7 +26,7 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import { useSanitizedId } from "@/composables/useSanitizedId";
+import { useSanitizedId } from "@/composables";
 import TooltipContent from "./primitives/TooltipContent.vue";
 
 defineOptions({

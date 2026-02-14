@@ -40,8 +40,8 @@
 
 <script lang="ts" setup>
 import { tv } from "tailwind-variants";
-import Icon from "@/components/core/Icon/Icon.vue";
-import { useForwardedAttrs } from "@/composables/useForwardedAttrs";
+import { Icon } from "@/components";
+import { useForwardedAttrs } from "@/composables";
 
 defineOptions({
   inheritAttrs: false,

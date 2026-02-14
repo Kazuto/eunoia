@@ -8,7 +8,6 @@
         class: attrs.class as string,
       })
     "
-    :style="style"
     @click="emit('click', $event)"
     @focus="emit('focus', $event)"
     @blur="emit('blur', $event)"
@@ -25,8 +24,8 @@
 <script lang="ts" setup>
 import { computed, useAttrs } from "vue";
 import { tv } from "tailwind-variants";
-import Icon from "@/components/core/Icon/Icon.vue";
-import { useSlotContent } from "@/composables/useSlotContent";
+import { Icon } from "@/components";
+import { useSlotContent } from "@/composables";
 
 defineOptions({
   inheritAttrs: false,

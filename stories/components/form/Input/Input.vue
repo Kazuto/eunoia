@@ -52,7 +52,7 @@ import InputHelper from "./primitives/InputHelper.vue";
 import InputCounter from "./primitives/InputCounter.vue";
 import InputError from "./primitives/InputError.vue";
 import { useAttrs, computed, type Component } from "vue";
-import { useSanitizedId } from "@/composables/useSanitizedId";
+import { useSanitizedId } from "@/composables";
 import PasswordInput from "./variants/PasswordInput.vue";
 import NumberInput from "./variants/NumberInput.vue";
 import TextInput from "./variants/TextInput.vue";
@@ -65,7 +65,7 @@ defineOptions({
 
 const attrs = useAttrs();
 const inputId = useSanitizedId("input", { useAttrId: true });
-const model = defineModel<string | number>();
+const model = defineModel<string | number | boolean>();
 
 const props = defineProps<{
   dense?: boolean;

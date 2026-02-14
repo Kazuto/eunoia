@@ -18,7 +18,7 @@
 
 <script lang="ts" setup>
 import { nextTick, ref, watch } from "vue";
-import { useSanitizedId } from "@/composables/useSanitizedId";
+import { useSanitizedId } from "@/composables";
 import DetailsPrimitive from "./primitives/Details.vue";
 
 defineOptions({

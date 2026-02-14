@@ -2,7 +2,7 @@
   <li>
     <Link
       :href="href"
-      :class="itemStyles({ active: to })"
+      :class="itemStyles()"
       :style="{ paddingLeft: padding }"
     >
       <MenuLabel :icon>

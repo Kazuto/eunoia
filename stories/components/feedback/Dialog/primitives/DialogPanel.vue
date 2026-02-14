@@ -15,7 +15,7 @@
 <script lang="ts" setup>
 import { ref, watch } from "vue";
 import { tv } from "tailwind-variants";
-import { useForwardedAttrs } from "@/composables/useForwardedAttrs";
+import { useForwardedAttrs } from "@/composables";
 
 defineOptions({
   inheritAttrs: false,

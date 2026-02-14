@@ -38,8 +38,8 @@
 
 <script lang="ts" setup>
 import { tv } from "tailwind-variants";
-import { useForwardedAttrs } from "@/composables/useForwardedAttrs";
-import Skeleton from "@/components/core/Skeleton/Skeleton.vue";
+import { useForwardedAttrs } from "@/composables";
+import { Skeleton } from "@/components";
 
 defineOptions({
   inheritAttrs: false,

@@ -3,7 +3,7 @@ import { ref } from "vue";
 import type { Meta, StoryObj } from "@storybook/vue3-vite";
 
 import ConfirmDialog from "./ConfirmDialog.vue";
-import Button from "@/components/core/Button/Button.vue";
+import { Button } from "@/components";
 
 const meta = {
   component: ConfirmDialog,

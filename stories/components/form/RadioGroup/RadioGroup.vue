@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import RadioGroupPrimitive from "./primitives/RadioGroup.vue";
-import { useSanitizedId } from "@/composables/useSanitizedId";
+import { useSanitizedId } from "@/composables";
 
 defineOptions({
   inheritAttrs: false,

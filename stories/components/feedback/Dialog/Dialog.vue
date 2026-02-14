@@ -38,9 +38,8 @@
 
 <script setup lang="ts">
 import { toRef } from "vue";
-import { useSanitizedId } from "@/composables/useSanitizedId";
-import { type LocaleMessages, useLocale } from "@/composables/useLocale";
-import Button from "@/components/core/Button/Button.vue";
+import { useSanitizedId, useLocale, type LocaleMessages } from "@/composables";
+import { Button } from "@/components";
 import DialogPanel from "./primitives/DialogPanel.vue";
 import DialogHeader from "./primitives/DialogHeader.vue";
 import DialogTitle from "./primitives/DialogTitle.vue";

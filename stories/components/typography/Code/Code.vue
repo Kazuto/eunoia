@@ -21,7 +21,7 @@
 import { toRef } from "vue";
 import CodeInline from "./primitives/CodeInline.vue";
 import CodeBlock from "./primitives/CodeBlock.vue";
-import { type LocaleMessages, useLocale } from "@/composables/useLocale";
+import { type LocaleMessages, useLocale } from "@/composables";
 
 defineOptions({
   inheritAttrs: false,

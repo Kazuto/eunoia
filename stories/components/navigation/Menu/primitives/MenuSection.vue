@@ -52,7 +52,7 @@ import { tv } from "tailwind-variants";
 import MenuItemPrimitive from "./MenuItem.vue";
 import MenuLabel from "./MenuLabel.vue";
 import type { MenuItem } from "../types";
-import Icon from "@/components/core/Icon/Icon.vue";
+import { Icon } from "@/components";
 import { ref, computed } from "vue";
 
 const props = defineProps<MenuItem>();

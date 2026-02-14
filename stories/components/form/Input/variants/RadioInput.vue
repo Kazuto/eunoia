@@ -14,8 +14,9 @@
     <span
       v-if="$slots.description"
       :class="descriptionStyles({ dense })"
-      ><slot name="description"
-    /></span>
+    >
+      <slot name="description" />
+    </span>
   </label>
 </template>
 

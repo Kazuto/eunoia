@@ -63,11 +63,11 @@
 
 <script setup lang="ts">
 import { computed, toRef } from "vue";
-import Icon from "@/components/core/Icon/Icon.vue";
+import { Icon } from "@/components";
 import Input from "../primitives/Input.vue";
 import InputGroup from "../primitives/InputGroup.vue";
 import InputGroupAddon from "../primitives/InputGroupAddon.vue";
-import { type LocaleMessages, useLocale } from "@/composables/useLocale";
+import { type LocaleMessages, useLocale } from "@/composables";
 
 defineOptions({
   inheritAttrs: false,

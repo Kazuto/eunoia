@@ -36,10 +36,10 @@
 <script lang="ts" setup>
 import { ref, computed, onBeforeUnmount, toRef } from "vue";
 import { tv } from "tailwind-variants";
-import { type LocaleMessages, useLocale } from "@/composables/useLocale";
+import { type LocaleMessages, useLocale } from "@/composables";
 import Toast from "./primitives/Toast.vue";
 import ToastDismiss from "./primitives/ToastDismiss.vue";
-import TimeoutBar from "@/components/feedback/primitives/TimeoutBar.vue";
+import TimeoutBar from "../primitives/TimeoutBar.vue";
 
 interface ToastItem {
   id: number;

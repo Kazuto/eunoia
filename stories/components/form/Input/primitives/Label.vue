@@ -9,7 +9,7 @@
 
 <script setup lang="ts">
 import { tv } from "tailwind-variants";
-import { useForwardedAttrs } from "@/composables/useForwardedAttrs";
+import { useForwardedAttrs } from "@/composables";
 
 defineProps<{
   dense?: boolean;

@@ -38,8 +38,8 @@
 import { computed, onMounted, onUpdated, ref } from "vue";
 import { tv } from "tailwind-variants";
 import hljs from "highlight.js/lib/core";
-import Button from "@/components/core/Button/Button.vue";
-import { useForwardedAttrs } from "@/composables/useForwardedAttrs";
+import { Button } from "@/components";
+import { useForwardedAttrs } from "@/composables";
 
 defineOptions({
   inheritAttrs: false,

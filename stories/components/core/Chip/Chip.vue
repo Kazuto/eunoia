@@ -20,7 +20,7 @@
 
 <script lang="ts" setup>
 import { toRef } from "vue";
-import { type LocaleMessages, useLocale } from "@/composables/useLocale";
+import { type LocaleMessages, useLocale } from "@/composables";
 import Chip from "./primitives/Chip.vue";
 import ChipRemove from "./primitives/ChipRemove.vue";
 

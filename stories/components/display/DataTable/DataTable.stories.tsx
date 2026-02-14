@@ -2,9 +2,7 @@ import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "@storybook/vue3-vite";
 
 import DataTable from "./DataTable.vue";
-import Button from "@/components/core/Button/Button.vue";
-import Icon from "@/components/core/Icon/Icon.vue";
-import Tooltip from "@/components/feedback/Tooltip/Tooltip.vue";
+import { Button, Icon, Tooltip } from "@/components";
 
 const items = [
   { name: "Alice Johnson", role: "Engineer", salary: 95000, hours: 160 },

@@ -79,9 +79,14 @@
           <Input
             v-model="department"
             type="radio"
+            value="engineer"
             :options="departmentOptions"
           >
             Department
+            <template #description>
+              Engineers are responsible for designing and building software
+              systems.
+            </template>
           </Input>
           <Input
             v-model="newsletter"
@@ -157,10 +162,16 @@
           <Input
             v-model="department"
             type="radio"
+            value="engineer"
             :options="departmentOptions"
             dense
           >
             Department
+
+            <template #description>
+              Engineers are responsible for designing and building software
+              systems.
+            </template>
           </Input>
           <Input
             v-model="newsletter"
@@ -286,16 +297,18 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import Button from "@/components/core/Button/Button.vue";
-import Input from "@/components/form/Input/Input.vue";
-import Select from "@/components/form/Select/Select.vue";
-import Badge from "@/components/core/Badge/Badge.vue";
-import Alert from "@/components/feedback/Alert/Alert.vue";
-import Card from "@/components/display/Card/Card.vue";
-import DataTable from "@/components/display/DataTable/DataTable.vue";
-import Icon from "@/components/core/Icon/Icon.vue";
-import Link from "@/components/core/Link/Link.vue";
-import Tooltip from "@/components/feedback/Tooltip/Tooltip.vue";
+import {
+  Button,
+  Input,
+  Select,
+  Badge,
+  Alert,
+  Card,
+  DataTable,
+  Icon,
+  Link,
+  Tooltip,
+} from "@/components";
 
 const name = ref("");
 const email = ref("invalid-email");

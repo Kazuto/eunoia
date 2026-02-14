@@ -11,7 +11,7 @@
 <script lang="ts" setup>
 import { computed } from "vue";
 import { tv } from "tailwind-variants";
-import { useForwardedAttrs } from "@/composables/useForwardedAttrs";
+import { useForwardedAttrs } from "@/composables";
 import * as icons from "vue-icons-plus/pi";
 
 defineOptions({

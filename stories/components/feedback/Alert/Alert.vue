@@ -27,10 +27,10 @@
 
 <script lang="ts" setup>
 import { ref, onMounted, onBeforeUnmount, watch, toRef } from "vue";
-import { type LocaleMessages, useLocale } from "@/composables/useLocale";
+import { type LocaleMessages, useLocale } from "@/composables";
 import Alert from "./primitives/Alert.vue";
 import AlertDismiss from "./primitives/AlertDismiss.vue";
-import TimeoutBar from "@/components/feedback/primitives/TimeoutBar.vue";
+import TimeoutBar from "../primitives/TimeoutBar.vue";
 
 defineOptions({
   inheritAttrs: false,

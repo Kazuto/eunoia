@@ -31,7 +31,7 @@
 <script setup lang="ts">
 import { ref, toRef, watchEffect } from "vue";
 import { tv } from "tailwind-variants";
-import Icon from "@/components/core/Icon/Icon.vue";
+import { Icon } from "@/components";
 
 defineOptions({
   inheritAttrs: false,

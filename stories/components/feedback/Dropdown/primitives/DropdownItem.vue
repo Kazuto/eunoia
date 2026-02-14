@@ -23,7 +23,7 @@
 
 <script lang="ts" setup>
 import { tv } from "tailwind-variants";
-import { useForwardedAttrs } from "@/composables/useForwardedAttrs";
+import { useForwardedAttrs } from "@/composables";
 
 defineOptions({
   inheritAttrs: false,

@@ -3,7 +3,7 @@ import { ref } from "vue";
 import type { Meta, StoryObj } from "@storybook/vue3-vite";
 
 import Dialog from "./Dialog.vue";
-import Button from "@/components/core/Button/Button.vue";
+import { Button } from "@/components";
 
 const meta = {
   component: Dialog,

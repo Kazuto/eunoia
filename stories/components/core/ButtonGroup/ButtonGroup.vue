@@ -10,7 +10,7 @@
 <script lang="ts" setup>
 import { toRef } from "vue";
 import ButtonGroup from "./primitives/ButtonGroup.vue";
-import { type LocaleMessages, useLocale } from "@/composables/useLocale";
+import { type LocaleMessages, useLocale } from "@/composables";
 
 defineOptions({
   inheritAttrs: false,

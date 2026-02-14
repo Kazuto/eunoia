@@ -4,7 +4,7 @@
 
 <script setup lang="ts">
 import { provide, toRef } from "vue";
-import { type LocaleMessages, LOCALE_KEY } from "@/composables/useLocale";
+import { type LocaleMessages, LOCALE_KEY } from "@/composables";
 
 const props = defineProps<{
   locale?: LocaleMessages;
