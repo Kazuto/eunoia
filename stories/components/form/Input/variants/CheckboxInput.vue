@@ -68,17 +68,17 @@ const wrapperStyles = tv({
 });
 
 const boxStyles = tv({
-  base: "inline-flex shrink-0 items-center justify-center rounded border border-neutral-300 bg-white transition-colors",
+  base: "border-neutral-300 bg-white inline-flex shrink-0 items-center justify-center rounded border transition-colors",
   variants: {
     dense: {
       false: "h-7 w-7",
       true: "h-5 w-5",
     },
     checked: {
-      true: "border-primary bg-primary",
+      true: "border-primary-500 bg-primary-500",
     },
     indeterminate: {
-      true: "border-primary bg-primary",
+      true: "border-primary-500 bg-primary-500",
     },
     invalid: {
       true: "border-red-500",

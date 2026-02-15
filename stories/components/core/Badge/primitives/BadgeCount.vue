@@ -22,7 +22,7 @@ const countStyles = tv({
   base: "ml-1.5 inline-flex items-center justify-center rounded-full font-bold",
   variants: {
     variant: {
-      primary: "bg-white text-primary",
+      primary: "bg-white text-primary-500",
       secondary: "bg-neutral-800 text-white",
       success: "bg-green-800 text-white",
       warning: "bg-yellow-800 text-white",

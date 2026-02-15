@@ -33,7 +33,7 @@ defineProps<{
 }>();
 
 const linkStyles = tv({
-  base: "inline-flex items-center gap-1 rounded-sm px-0.5 font-sans text-primary underline decoration-primary/30 underline-offset-2 transition-colors hover:text-primary-hover hover:decoration-primary-hover focus:ring-2 focus:ring-neutral-300 focus:ring-offset-2 focus:outline-none",
+  base: "focus:ring-neutral-300 text-primary-500 hover:text-primary-600 hover:decoration-primary-600 inline-flex items-center gap-1 rounded-sm px-0.5 font-sans underline decoration-primary/30 underline-offset-2 transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none",
   variants: {
     dense: {
       false: "text-sm",

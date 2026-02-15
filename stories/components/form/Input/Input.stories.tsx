@@ -131,7 +131,7 @@ export const Checkbox: Story = {
                 I accept the{" "}
                 <a
                   href="#"
-                  class="text-primary underline"
+                  class="text-primary-500 underline"
                 >
                   terms and conditions
                 </a>

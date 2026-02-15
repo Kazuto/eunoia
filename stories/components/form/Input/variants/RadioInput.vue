@@ -46,14 +46,14 @@ const wrapperStyles = tv({
 });
 
 const radioStyles = tv({
-  base: "inline-flex shrink-0 items-center justify-center rounded-full border border-neutral-300 bg-white transition-colors",
+  base: "border-neutral-300 bg-white inline-flex shrink-0 items-center justify-center rounded-full border transition-colors",
   variants: {
     dense: {
       false: "h-7 w-7",
       true: "h-5 w-5",
     },
     checked: {
-      true: "border-primary bg-primary",
+      true: "border-primary-500 bg-primary-500",
     },
     invalid: {
       true: "border-red-500",
@@ -68,7 +68,7 @@ const radioStyles = tv({
 });
 
 const dotStyles = tv({
-  base: "rounded-full bg-white transition-opacity",
+  base: "bg-white rounded-full transition-opacity",
   variants: {
     dense: {
       false: "h-2.5 w-2.5",

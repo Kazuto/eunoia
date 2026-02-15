@@ -25,7 +25,7 @@ const chipStyles = tv({
   base: "inline-flex cursor-pointer items-center rounded-full border-0 font-sans leading-none font-bold outline-none focus-visible:ring-2 focus-visible:ring-offset-1",
   variants: {
     variant: {
-      primary: "bg-primary text-white focus-visible:ring-primary",
+      primary: "text-white bg-primary-500 focus-visible:ring-primary-500",
       secondary:
         "bg-neutral-100 text-neutral-800 focus-visible:ring-neutral-400",
       success: "bg-green-100 text-green-800 focus-visible:ring-green-400",
