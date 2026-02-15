@@ -2,7 +2,7 @@
   <Button
     :dense="dense"
     :icon="icon"
-    class="text-white bg-primary-500 hover:bg-primary-600"
+    class="bg-primary-500 text-white hover:bg-primary-600 dark:bg-primary-700 dark:hover:bg-primary-800"
   >
     <slot />
   </Button>

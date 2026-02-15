@@ -49,7 +49,11 @@ const hasIcon = computed(() => !!props.icon);
 const isIconOnly = computed(() => hasIcon.value && !hasDefaultSlot.value);
 
 const buttonStyles = tv({
-  base: "inline-flex cursor-pointer items-center gap-1.5 rounded-lg border-0 font-sans leading-none font-bold outline-none focus:ring-2 focus:ring-neutral-300 focus:ring-offset-2",
+  base: [
+    "inline-flex cursor-pointer items-center gap-1.5 rounded-lg border-0 font-sans leading-none font-bold transition-colors outline-none focus:ring-2",
+    "focus:ring-primary-300 focus:ring-offset-2",
+    "dark:focus:ring-primary-500 dark:focus:ring-offset-neutral-950",
+  ],
   variants: {
     dense: {
       false: "px-5 py-2.5 text-sm",
