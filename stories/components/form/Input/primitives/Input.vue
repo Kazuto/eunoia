@@ -22,14 +22,13 @@ defineProps<{
 }>();
 
 const inputStyles = tv({
-  base: "inline-block w-full [appearance:textfield] rounded-md outline-none hover:bg-neutral-50 focus:bg-neutral-50 active:bg-neutral-100 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none",
+  base: [
+    "inline-block w-full [appearance:textfield] outline-none disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none",
+  ],
   variants: {
     dense: {
       false: "px-3.5 py-2.5 text-sm",
       true: "px-3.5 py-2.5 text-xs",
-    },
-    invalid: {
-      true: "hover:bg-red-100/50 focus:bg-red-100/50 active:bg-red-100",
     },
   },
   defaultVariants: {

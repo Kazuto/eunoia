@@ -32,15 +32,13 @@ const removeStyles = tv({
   variants: {
     variant: {
       primary:
-        "bg-primary-600 text-white hover:bg-primary-400 dark:bg-primary-900 dark:text-primary-100 dark:hover:bg-primary-950",
+        "bg-primary-600 text-white dark:bg-primary-900 dark:text-primary-100",
       secondary:
-        "bg-neutral-600 text-white hover:bg-neutral-400 dark:bg-neutral-900 dark:text-neutral-100 dark:hover:bg-neutral-950",
-      success:
-        "bg-green-600 text-white hover:bg-green-400 dark:bg-green-900 dark:text-green-100 dark:hover:bg-green-950",
+        "bg-neutral-600 text-white dark:bg-neutral-900 dark:text-neutral-100",
+      success: "bg-green-600 text-white dark:bg-green-900 dark:text-green-100",
       warning:
-        "bg-yellow-600 text-white hover:bg-yellow-500 dark:bg-yellow-900 dark:text-yellow-100 dark:hover:bg-yellow-950",
-      danger:
-        "bg-red-600 text-white hover:bg-red-400 dark:bg-red-900 dark:text-red-100 dark:hover:bg-red-950",
+        "bg-yellow-600 text-white dark:bg-yellow-900 dark:text-yellow-100",
+      danger: "bg-red-600 text-white dark:bg-red-900 dark:text-red-100",
     },
     dense: {
       false: "h-4 w-4 p-0.5 text-[10px]",

@@ -26,7 +26,6 @@
     />
 
     <InputGroupAddon
-      position="right"
       role="button"
       :aria-label="t('decrease-value')"
       tabindex="-1"
@@ -43,7 +42,6 @@
       />
     </InputGroupAddon>
     <InputGroupAddon
-      position="right"
       role="button"
       :aria-label="t('increase-value')"
       tabindex="-1"

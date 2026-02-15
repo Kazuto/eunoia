@@ -68,25 +68,41 @@ const wrapperStyles = tv({
 });
 
 const boxStyles = tv({
-  base: "border-neutral-300 bg-white inline-flex shrink-0 items-center justify-center rounded border transition-colors",
+  base: [
+    "inline-flex shrink-0 items-center justify-center rounded border transition-colors",
+    "border-neutral-200 bg-white",
+    "dark:border-neutral-700 dark:bg-neutral-950",
+  ],
   variants: {
     dense: {
       false: "h-7 w-7",
       true: "h-5 w-5",
     },
     checked: {
-      true: "border-primary-500 bg-primary-500",
+      true: "border-primary-500 bg-primary-500 dark:border-primary-500 dark:bg-primary-500",
+      false: [
+        "hover:bg-neutral-50/25 focus:bg-neutral-50/25 focus:ring-neutral-300 active:bg-neutral-50/25 has-[input:focus]:ring-neutral-300",
+        "dark:hover:bg-neutral-900/25 dark:focus:bg-neutral-900/25 dark:focus:ring-primary-500 dark:active:bg-neutral-900/25 dark:has-[input:focus]:ring-primary-500",
+      ],
     },
     indeterminate: {
-      true: "border-primary-500 bg-primary-500",
+      true: "border-primary-500 bg-primary-500 dark:border-primary-500 dark:bg-primary-500",
     },
     invalid: {
       true: "border-red-500",
     },
   },
   compoundVariants: [
-    { checked: true, invalid: true, class: "border-red-500 bg-red-500" },
-    { indeterminate: true, invalid: true, class: "border-red-500 bg-red-500" },
+    {
+      checked: true,
+      invalid: true,
+      class: "border-red-500 bg-red-500 dark:border-red-700 dark:bg-red-950",
+    },
+    {
+      indeterminate: true,
+      invalid: true,
+      class: "border-red-500 bg-red-500 dark:border-red-700 dark:bg-red-950",
+    },
   ],
   defaultVariants: {
     dense: false,
@@ -94,7 +110,7 @@ const boxStyles = tv({
 });
 
 const descriptionStyles = tv({
-  base: "text-neutral-700",
+  base: "text-neutral-700 dark:text-neutral-300",
   variants: {
     dense: {
       false: "text-sm",

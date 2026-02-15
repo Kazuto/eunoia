@@ -29,15 +29,14 @@ defineOptions({
 });
 
 const variants = tv({
-  base: "flex items-center rounded-md border border-transparent px-3 py-1 text-neutral-500",
+  base: [
+    "flex items-center rounded-md border border-transparent px-3 py-1 text-neutral-500",
+  ],
   variants: {
-    position: {
-      left: "rounded-l-md rounded-r-none border-r border-r-neutral-300",
-      right: "rounded-l-none rounded-r-md border-l border-l-neutral-300",
-    },
     role: {
-      button:
-        "cursor-pointer outline-none hover:bg-neutral-50 focus:bg-neutral-50 active:bg-neutral-100 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 dark:focus:ring-offset-0",
+      button: [
+        "cursor-pointer outline-none focus:text-primary-300 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 dark:focus:text-primary-500",
+      ],
     },
   },
   compoundVariants: [
