@@ -1,6 +1,7 @@
 <template>
   <Chip
     v-bind="$attrs"
+    class="inline-flex items-center gap-2"
     :variant
     :dense
     @click="emit('click', $event)"

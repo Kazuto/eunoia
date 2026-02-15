@@ -28,14 +28,19 @@ defineOptions({
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const removeStyles = tv({
-  base: "ml-1.5 inline-flex items-center justify-center rounded-full",
+  base: "inline-flex aspect-square items-center justify-center rounded-full transition-colors",
   variants: {
     variant: {
-      primary: "bg-white/25 text-white hover:bg-white/40",
-      secondary: "bg-neutral-800/15 text-neutral-800 hover:bg-neutral-800/25",
-      success: "bg-green-800/15 text-green-800 hover:bg-green-800/25",
-      warning: "bg-yellow-800/15 text-yellow-800 hover:bg-yellow-800/25",
-      danger: "bg-red-800/15 text-red-800 hover:bg-red-800/25",
+      primary:
+        "bg-primary-600 text-white hover:bg-primary-400 dark:bg-primary-900 dark:text-primary-100 dark:hover:bg-primary-950",
+      secondary:
+        "bg-neutral-600 text-white hover:bg-neutral-400 dark:bg-neutral-900 dark:text-neutral-100 dark:hover:bg-neutral-950",
+      success:
+        "bg-green-600 text-white hover:bg-green-400 dark:bg-green-900 dark:text-green-100 dark:hover:bg-green-950",
+      warning:
+        "bg-yellow-600 text-white hover:bg-yellow-500 dark:bg-yellow-900 dark:text-yellow-100 dark:hover:bg-yellow-950",
+      danger:
+        "bg-red-600 text-white hover:bg-red-400 dark:bg-red-900 dark:text-red-100 dark:hover:bg-red-950",
     },
     dense: {
       false: "h-4 w-4 p-0.5 text-[10px]",
