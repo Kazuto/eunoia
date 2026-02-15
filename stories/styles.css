@@ -3,10 +3,18 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
+  --color-*: initial;
+
   --font-sans: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --color-primary: #555ab9;
-  --color-primary-hover: #4a4ea6;
+
+  --color-primary: #9b86bd;
+  --color-yellow: #e7da62;
+  --color-green: #b6e79d;
+  --color-red: #e79d9d;
+  --color-gray: #d9d5c3;
 }
+
+@plugin "./tailwind/palette.ts";
 
 @keyframes timeout-shrink {
   from {
