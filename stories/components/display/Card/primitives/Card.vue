@@ -18,7 +18,7 @@ defineOptions({
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const cardStyles = tv({
-  base: "rounded-lg border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900",
+  base: ["rounded-lg", "bg-white", "dark:bg-neutral-900"],
   variants: {
     dense: {
       false: "p-6",
