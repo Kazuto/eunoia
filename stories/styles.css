@@ -3,18 +3,219 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-*: initial;
-
   --font-sans: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
-  --color-primary: #9b86bd;
-  --color-yellow: #e7da62;
-  --color-green: #b6e79d;
-  --color-red: #e79d9d;
-  --color-gray: #d9d5c3;
-}
+  --color-gray: #8f877b; /* Light, warm gray/neutrals */
+  --color-neutral: #8a8a8a; /* Medium-dark gray */
+  --color-primary: #a88bc7; /* Soft lavender-purple, gentle and contemplative */
+  --color-red: #fe6e8b; /* Vibrant magenta-pink, energetic and bold */
+  --color-yellow: #e7da62; /* Warm, cheerful yellow */
+  --color-green: #7bc876; /* Fresh, balanced green */
+  --color-blue: #6ea7ec; /* Calm, trustworthy blue */
 
-@plugin "./tailwind/palette.ts";
+  /* Gray scale */
+  --color-gray-50: oklch(from var(--color-gray) calc(l * 1.5) calc(c * 0.06) h);
+  --color-gray-100: oklch(
+    from var(--color-gray) calc(l * 1.45) calc(c * 0.15) h
+  );
+  --color-gray-200: oklch(
+    from var(--color-gray) calc(l * 1.38) calc(c * 0.29) h
+  );
+  --color-gray-300: oklch(
+    from var(--color-gray) calc(l * 1.27) calc(c * 0.53) h
+  );
+  --color-gray-400: oklch(
+    from var(--color-gray) calc(l * 1.12) calc(c * 0.82) h
+  );
+  --color-gray-500: var(--color-gray);
+  --color-gray-600: oklch(
+    from var(--color-gray) calc(l * 0.88) calc(c * 1.04) h
+  );
+  --color-gray-700: oklch(
+    from var(--color-gray) calc(l * 0.77) calc(c * 0.93) h
+  );
+  --color-gray-800: oklch(
+    from var(--color-gray) calc(l * 0.67) calc(c * 0.76) h
+  );
+  --color-gray-900: oklch(from var(--color-gray) calc(l * 0.6) calc(c * 0.6) h);
+  --color-gray-950: oklch(
+    from var(--color-gray) calc(l * 0.42) calc(c * 0.42) h
+  );
+
+  /* Neutral scale */
+  --color-neutral-50: oklch(
+    from var(--color-neutral) calc(l * 1.5) calc(c * 0.06) h
+  );
+  --color-neutral-100: oklch(
+    from var(--color-neutral) calc(l * 1.45) calc(c * 0.15) h
+  );
+  --color-neutral-200: oklch(
+    from var(--color-neutral) calc(l * 1.38) calc(c * 0.29) h
+  );
+  --color-neutral-300: oklch(
+    from var(--color-neutral) calc(l * 1.27) calc(c * 0.53) h
+  );
+  --color-neutral-400: oklch(
+    from var(--color-neutral) calc(l * 1.12) calc(c * 0.82) h
+  );
+  --color-neutral-500: var(--color-neutral);
+  --color-neutral-600: oklch(
+    from var(--color-neutral) calc(l * 0.88) calc(c * 1.04) h
+  );
+  --color-neutral-700: oklch(
+    from var(--color-neutral) calc(l * 0.77) calc(c * 0.93) h
+  );
+  --color-neutral-800: oklch(
+    from var(--color-neutral) calc(l * 0.67) calc(c * 0.76) h
+  );
+  --color-neutral-900: oklch(
+    from var(--color-neutral) calc(l * 0.6) calc(c * 0.6) h
+  );
+  --color-neutral-950: oklch(
+    from var(--color-neutral) calc(l * 0.42) calc(c * 0.42) h
+  );
+
+  /* Primary scale */
+  --color-primary-50: oklch(
+    from var(--color-primary) calc(l * 1.5) calc(c * 0.06) h
+  );
+  --color-primary-100: oklch(
+    from var(--color-primary) calc(l * 1.45) calc(c * 0.15) h
+  );
+  --color-primary-200: oklch(
+    from var(--color-primary) calc(l * 1.38) calc(c * 0.29) h
+  );
+  --color-primary-300: oklch(
+    from var(--color-primary) calc(l * 1.27) calc(c * 0.53) h
+  );
+  --color-primary-400: oklch(
+    from var(--color-primary) calc(l * 1.12) calc(c * 0.82) h
+  );
+  --color-primary-500: var(--color-primary);
+  --color-primary-600: oklch(
+    from var(--color-primary) calc(l * 0.88) calc(c * 1.04) h
+  );
+  --color-primary-700: oklch(
+    from var(--color-primary) calc(l * 0.77) calc(c * 0.93) h
+  );
+  --color-primary-800: oklch(
+    from var(--color-primary) calc(l * 0.67) calc(c * 0.76) h
+  );
+  --color-primary-900: oklch(
+    from var(--color-primary) calc(l * 0.6) calc(c * 0.6) h
+  );
+  --color-primary-950: oklch(
+    from var(--color-primary) calc(l * 0.42) calc(c * 0.42) h
+  );
+
+  /* Red scale */
+  --color-red-50: oklch(from var(--color-red) calc(l * 1.5) calc(c * 0.06) h);
+  --color-red-100: oklch(from var(--color-red) calc(l * 1.45) calc(c * 0.15) h);
+  --color-red-200: oklch(from var(--color-red) calc(l * 1.38) calc(c * 0.29) h);
+  --color-red-300: oklch(from var(--color-red) calc(l * 1.27) calc(c * 0.53) h);
+  --color-red-400: oklch(from var(--color-red) calc(l * 1.12) calc(c * 0.82) h);
+  --color-red-500: var(--color-red);
+  --color-red-600: oklch(from var(--color-red) calc(l * 0.88) calc(c * 1.04) h);
+  --color-red-700: oklch(from var(--color-red) calc(l * 0.77) calc(c * 0.93) h);
+  --color-red-800: oklch(from var(--color-red) calc(l * 0.67) calc(c * 0.76) h);
+  --color-red-900: oklch(from var(--color-red) calc(l * 0.6) calc(c * 0.6) h);
+  --color-red-950: oklch(from var(--color-red) calc(l * 0.42) calc(c * 0.42) h);
+
+  /* Yellow scale */
+  --color-yellow-50: oklch(
+    from var(--color-yellow) calc(l * 1.5) calc(c * 0.06) h
+  );
+  --color-yellow-100: oklch(
+    from var(--color-yellow) calc(l * 1.45) calc(c * 0.15) h
+  );
+  --color-yellow-200: oklch(
+    from var(--color-yellow) calc(l * 1.38) calc(c * 0.29) h
+  );
+  --color-yellow-300: oklch(
+    from var(--color-yellow) calc(l * 1.27) calc(c * 0.53) h
+  );
+  --color-yellow-400: oklch(
+    from var(--color-yellow) calc(l * 1.12) calc(c * 0.82) h
+  );
+  --color-yellow-500: var(--color-yellow);
+  --color-yellow-600: oklch(
+    from var(--color-yellow) calc(l * 0.88) calc(c * 1.04) h
+  );
+  --color-yellow-700: oklch(
+    from var(--color-yellow) calc(l * 0.77) calc(c * 0.93) h
+  );
+  --color-yellow-800: oklch(
+    from var(--color-yellow) calc(l * 0.67) calc(c * 0.76) h
+  );
+  --color-yellow-900: oklch(
+    from var(--color-yellow) calc(l * 0.6) calc(c * 0.6) h
+  );
+  --color-yellow-950: oklch(
+    from var(--color-yellow) calc(l * 0.42) calc(c * 0.42) h
+  );
+
+  /* Green scale */
+  --color-green-50: oklch(
+    from var(--color-green) calc(l * 1.5) calc(c * 0.06) h
+  );
+  --color-green-100: oklch(
+    from var(--color-green) calc(l * 1.45) calc(c * 0.15) h
+  );
+  --color-green-200: oklch(
+    from var(--color-green) calc(l * 1.38) calc(c * 0.29) h
+  );
+  --color-green-300: oklch(
+    from var(--color-green) calc(l * 1.27) calc(c * 0.53) h
+  );
+  --color-green-400: oklch(
+    from var(--color-green) calc(l * 1.12) calc(c * 0.82) h
+  );
+  --color-green-500: var(--color-green);
+  --color-green-600: oklch(
+    from var(--color-green) calc(l * 0.88) calc(c * 1.04) h
+  );
+  --color-green-700: oklch(
+    from var(--color-green) calc(l * 0.77) calc(c * 0.93) h
+  );
+  --color-green-800: oklch(
+    from var(--color-green) calc(l * 0.67) calc(c * 0.76) h
+  );
+  --color-green-900: oklch(
+    from var(--color-green) calc(l * 0.6) calc(c * 0.6) h
+  );
+  --color-green-950: oklch(
+    from var(--color-green) calc(l * 0.42) calc(c * 0.42) h
+  );
+
+  /* Blue scale */
+  --color-blue-50: oklch(from var(--color-blue) calc(l * 1.5) calc(c * 0.06) h);
+  --color-blue-100: oklch(
+    from var(--color-blue) calc(l * 1.45) calc(c * 0.15) h
+  );
+  --color-blue-200: oklch(
+    from var(--color-blue) calc(l * 1.38) calc(c * 0.29) h
+  );
+  --color-blue-300: oklch(
+    from var(--color-blue) calc(l * 1.27) calc(c * 0.53) h
+  );
+  --color-blue-400: oklch(
+    from var(--color-blue) calc(l * 1.12) calc(c * 0.82) h
+  );
+  --color-blue-500: var(--color-blue);
+  --color-blue-600: oklch(
+    from var(--color-blue) calc(l * 0.88) calc(c * 1.04) h
+  );
+  --color-blue-700: oklch(
+    from var(--color-blue) calc(l * 0.77) calc(c * 0.93) h
+  );
+  --color-blue-800: oklch(
+    from var(--color-blue) calc(l * 0.67) calc(c * 0.76) h
+  );
+  --color-blue-900: oklch(from var(--color-blue) calc(l * 0.6) calc(c * 0.6) h);
+  --color-blue-950: oklch(
+    from var(--color-blue) calc(l * 0.42) calc(c * 0.42) h
+  );
+}
 
 @keyframes timeout-shrink {
   from {
