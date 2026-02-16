@@ -22,7 +22,7 @@ defineOptions({
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const contentStyles = tv({
-  base: "z-50 w-max max-w-xs rounded-md bg-neutral-900 font-sans text-white shadow-lg",
+  base: "z-50 w-max max-w-xs rounded-md bg-neutral-700 font-sans text-white shadow-lg dark:bg-neutral-950",
   variants: {
     placement: {
       top: "mb-1.5",
