@@ -23,10 +23,13 @@ const toastStyles = tv({
   base: "relative flex items-start gap-3 overflow-hidden rounded-lg border bg-white font-sans shadow-lg",
   variants: {
     variant: {
-      info: "border-blue-200 text-blue-800",
-      success: "border-green-200 text-green-800",
-      warning: "border-yellow-200 text-yellow-800",
-      danger: "border-red-200 text-red-800",
+      info: "border-blue-400 bg-blue-100 text-blue-800 dark:border-blue-700 dark:bg-blue-950 dark:text-blue-300",
+      success:
+        "border-green-400 bg-green-100 text-green-800 dark:border-green-700 dark:bg-green-950 dark:text-green-300",
+      warning:
+        "border-yellow-500 bg-yellow-100 text-yellow-800 dark:border-yellow-700 dark:bg-yellow-950 dark:text-yellow-300",
+      danger:
+        "border-red-400 bg-red-100 text-red-800 dark:border-red-700 dark:bg-red-950 dark:text-red-300",
     },
     dense: {
       false: "max-w-sm min-w-72 px-4 py-3 text-sm",
