@@ -9,6 +9,7 @@ const meta = {
   tags: ["autodocs"],
   parameters: {
     layout: "fullscreen",
+    unwrapped: true,
   },
 } satisfies Meta<typeof Page>;
 

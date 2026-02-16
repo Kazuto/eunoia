@@ -1,9 +1,13 @@
 <template>
-  <div class="min-h-screen bg-neutral-50 font-sans">
+  <div class="min-h-screen bg-white font-sans dark:bg-neutral-950">
     <!-- Header -->
-    <header class="border-b border-neutral-200 bg-white px-8 py-4">
+    <header
+      class="border-b border-neutral-50 bg-white px-8 py-4 dark:border-neutral-700 dark:bg-neutral-950"
+    >
       <div class="mx-auto flex max-w-6xl items-center justify-between">
-        <h1 class="text-xl font-bold text-neutral-900">Dashboard</h1>
+        <h1 class="text-xl font-bold text-neutral-900 dark:text-neutral-100">
+          Dashboard
+        </h1>
         <div class="flex items-center gap-3">
           <Badge
             variant="success"
@@ -113,7 +117,9 @@
       <!-- Dense Form -->
       <Card dense>
         <template #header>
-          <h3 class="text-base font-semibold text-neutral-900">
+          <h3
+            class="text-base font-semibold text-neutral-900 dark:text-neutral-100"
+          >
             Dense Variant
           </h3>
           <Badge
