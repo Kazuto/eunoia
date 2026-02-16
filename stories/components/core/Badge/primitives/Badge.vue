@@ -22,14 +22,14 @@ const badgeStyles = tv({
   base: "inline-flex items-center font-sans leading-none font-bold",
   variants: {
     variant: {
-      primary: "bg-primary-500 text-white dark:bg-primary-700",
+      primary: "bg-primary-500 text-white dark:bg-primary-500",
       secondary:
-        "bg-neutral-200 text-neutral-800 dark:bg-neutral-700 dark:text-neutral-200",
+        "bg-neutral-100 text-neutral-950 dark:bg-neutral-700 dark:text-neutral-50",
       success:
-        "bg-green-200 text-green-800 dark:bg-green-700 dark:text-green-200",
+        "bg-green-400 text-green-950 dark:bg-green-700 dark:text-green-50",
       warning:
-        "bg-yellow-200 text-yellow-800 dark:bg-yellow-700 dark:text-yellow-200",
-      danger: "bg-red-200 text-red-800 dark:bg-red-700 dark:text-red-200",
+        "bg-yellow-500 text-yellow-950 dark:bg-yellow-700 dark:text-yellow-50",
+      danger: "bg-red-400 text-red-950 dark:bg-red-700 dark:text-red-50",
     },
     dense: {
       false: "px-2.5 py-1 text-xs",
