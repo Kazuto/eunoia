@@ -6,7 +6,7 @@
       type="radio"
       :value="value"
       :disabled
-      class="sr-only"
+      class="peer sr-only"
     />
     <span :class="radioStyles({ dense, invalid, checked: model === value })">
       <span :class="dotStyles({ dense, visible: model === value })" />
@@ -48,8 +48,8 @@ const wrapperStyles = tv({
 const radioStyles = tv({
   base: [
     "inline-flex shrink-0 items-center justify-center rounded-full border transition-colors",
-    "border-neutral-200 hover:bg-neutral-50/25 focus:bg-neutral-50/25 focus:ring-neutral-300 active:bg-neutral-50/25 has-[input:focus]:ring-neutral-300",
-    "dark:border-neutral-700 dark:text-neutral-200 dark:hover:bg-neutral-900/25 dark:focus:bg-neutral-900/25 dark:focus:ring-primary-500 dark:active:bg-neutral-900/25 dark:has-[input:focus]:ring-primary-500",
+    "border-neutral-200 peer-focus-visible:border-primary-500",
+    "dark:border-neutral-700 dark:bg-transparent dark:text-neutral-200 dark:peer-focus-visible:border-primary-500",
   ],
   variants: {
     dense: {
@@ -57,10 +57,10 @@ const radioStyles = tv({
       true: "h-5 w-5",
     },
     checked: {
-      true: "border-primary-500 bg-primary-500 dark:border-primary-500 dark:bg-primary-500",
+      true: "border-primary-500 bg-primary-500 peer-focus-visible:border-primary-700 dark:border-primary-500 dark:bg-primary-500 dark:peer-focus-visible:border-primary-300",
       false: [
-        "hover:bg-neutral-50/25 focus:bg-neutral-50/25 focus:ring-neutral-300 active:bg-neutral-50/25 has-[input:focus]:ring-neutral-300",
-        "dark:hover:bg-neutral-900/25 dark:focus:bg-neutral-900/25 dark:focus:ring-primary-500 dark:active:bg-neutral-900/25 dark:has-[input:focus]:ring-primary-500",
+        "hover:bg-neutral-50/25 active:bg-neutral-50/25",
+        "dark:hover:bg-black/15 dark:active:bg-neutral-900/25",
       ],
     },
     invalid: {

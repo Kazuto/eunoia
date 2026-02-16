@@ -6,7 +6,7 @@
       v-model="model"
       type="checkbox"
       :disabled
-      class="sr-only"
+      class="peer sr-only"
     />
     <span :class="boxStyles({ dense, invalid, checked: model, indeterminate })">
       <Icon
@@ -23,8 +23,9 @@
     <span
       v-if="$slots.description"
       :class="descriptionStyles({ dense })"
-      ><slot name="description"
-    /></span>
+    >
+      <slot name="description" />
+    </span>
   </label>
 </template>
 
@@ -70,8 +71,8 @@ const wrapperStyles = tv({
 const boxStyles = tv({
   base: [
     "inline-flex shrink-0 items-center justify-center rounded border transition-colors",
-    "border-neutral-200 bg-white",
-    "dark:border-neutral-700 dark:bg-neutral-950",
+    "border-neutral-200 bg-white peer-focus-visible:border-primary-500",
+    "dark:border-neutral-700 dark:bg-transparent dark:peer-focus-visible:border-primary-500",
   ],
   variants: {
     dense: {
@@ -79,14 +80,14 @@ const boxStyles = tv({
       true: "h-5 w-5",
     },
     checked: {
-      true: "border-primary-500 bg-primary-500 dark:border-primary-500 dark:bg-primary-500",
+      true: "border-primary-500 bg-primary-500 peer-focus-visible:border-primary-700 dark:border-primary-500 dark:bg-primary-500 dark:peer-focus-visible:border-primary-300",
       false: [
-        "hover:bg-neutral-50/25 focus:bg-neutral-50/25 focus:ring-neutral-300 active:bg-neutral-50/25 has-[input:focus]:ring-neutral-300",
-        "dark:hover:bg-neutral-900/25 dark:focus:bg-neutral-900/25 dark:focus:ring-primary-500 dark:active:bg-neutral-900/25 dark:has-[input:focus]:ring-primary-500",
+        "hover:bg-neutral-50/25 active:bg-neutral-50/25",
+        "dark:hover:bg-black/15 dark:active:bg-neutral-900/25",
       ],
     },
     indeterminate: {
-      true: "border-primary-500 bg-primary-500 dark:border-primary-500 dark:bg-primary-500",
+      true: "border-primary-500 bg-primary-500 peer-focus-visible:border-primary-700 hover:bg-primary-500 active:bg-primary-500 dark:border-primary-500 dark:bg-primary-500 dark:peer-focus-visible:border-primary-300 dark:hover:bg-primary-500 dark:active:bg-primary-500",
     },
     invalid: {
       true: "border-red-500",

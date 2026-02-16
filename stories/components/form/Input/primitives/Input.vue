@@ -27,7 +27,7 @@ const inputStyles = tv({
   ],
   variants: {
     dense: {
-      false: "px-3.5 py-2.5 text-sm",
+      false: "px-3.5 py-3 text-sm",
       true: "px-3.5 py-2.5 text-xs",
     },
   },

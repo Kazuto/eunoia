@@ -3,6 +3,7 @@ import { ref } from "vue";
 import type { Meta, StoryObj } from "@storybook/vue3-vite";
 
 import Input from "./Input.vue";
+import { Link } from "@/components";
 
 const meta = {
   component: Input,
@@ -129,12 +130,12 @@ export const Checkbox: Story = {
             description: () => (
               <span>
                 I accept the{" "}
-                <a
+                <Link
                   href="#"
                   class="text-primary-500 underline"
                 >
                   terms and conditions
-                </a>
+                </Link>
               </span>
             ),
           }}

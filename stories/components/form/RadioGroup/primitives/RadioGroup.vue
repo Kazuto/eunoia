@@ -79,14 +79,14 @@ const groupStyles = tv({
 });
 
 const indicatorStyles = tv({
-  base: "absolute top-1 bottom-1 rounded-md bg-white shadow transition-[left] duration-200 ease-out dark:bg-neutral-700",
+  base: "absolute top-1 bottom-1 rounded-md border border-transparent bg-white shadow transition-[left] duration-200 ease-out dark:bg-neutral-700",
   variants: {
     dense: {
       false: "",
       true: "",
     },
     focused: {
-      true: "ring-2 ring-primary-300 dark:ring-primary-500",
+      true: "border-primary-500 dark:ring-primary-500",
     },
   },
 });

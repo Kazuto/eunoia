@@ -71,20 +71,24 @@ defineOptions({
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const triggerStyles = tv({
-  base: "inline-flex w-full cursor-pointer items-center rounded-md border border-neutral-300 font-sans outline-none focus:ring-2 focus:ring-neutral-300 focus:ring-offset-2",
+  base: [
+    "inline-flex w-full cursor-pointer items-center rounded-md border font-sans transition-colors outline-none hover:bg-neutral-50/25",
+    "border-neutral-300 focus-visible:border-primary-500",
+    "dark:border-neutral-700 dark:hover:bg-black/15 dark:focus-visible:border-primary-500",
+  ],
   variants: {
     dense: {
       false: "min-h-[42px] px-3 py-1.5 text-sm",
       true: "min-h-[38px] px-2.5 py-1.5 text-xs",
     },
     invalid: {
-      true: "border-red-500 bg-red-50 text-red-900 focus:ring-red-300",
+      true: "border-red-500 bg-red-50 text-red-900 focus-visible:border-red-400 dark:focus-visible:border-red-500",
     },
     disabled: {
       true: "pointer-events-none cursor-not-allowed opacity-50",
     },
     open: {
-      true: "ring-2 ring-neutral-300 ring-offset-2",
+      true: "border-primary-500 dark:border-primary-500",
     },
   },
   defaultVariants: {
