@@ -32,7 +32,7 @@ defineOptions({
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const triggerStyles = tv({
-  base: "inline-flex cursor-pointer items-center rounded-md border border-neutral-300 font-sans outline-none focus:ring-2 focus:ring-neutral-300 focus:ring-offset-2",
+  base: "inline-flex cursor-pointer items-center rounded-md border border-neutral-300 font-sans outline-none focus-visible:ring-2 focus-visible:ring-neutral-300 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-neutral-700 dark:focus-visible:ring-offset-neutral-900",
   variants: {
     dense: {
       false: "px-3 py-2 text-sm",
