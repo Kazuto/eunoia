@@ -3,6 +3,7 @@ import "highlight.js/lib/common";
 import "highlight.js/styles/github.css";
 import "../stories/storybook.css";
 import { themes } from "storybook/theming";
+import { Card } from "@/components";
 
 export const globalTypes = {
   darkMode: {
@@ -36,10 +37,20 @@ const preview: Preview = {
       document.documentElement.classList.toggle("dark", isDark);
       context.parameters.docs.theme = isDark ? themes.dark : themes.light;
 
+      const unwrapped =
+        (context.parameters.unwrapped as boolean | undefined) ?? false;
+
+      if (unwrapped) {
+        return {
+          components: { story },
+          template: "<story />",
+        } as ReturnType<typeof story>;
+      }
+
       return {
-        components: { story },
-        template: "<story />",
-      };
+        components: { Card, story },
+        template: "<Card><story /></Card>",
+      } as ReturnType<typeof story>;
     },
   ],
 };
