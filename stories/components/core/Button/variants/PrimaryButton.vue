@@ -2,13 +2,14 @@
   <Button
     :dense="dense"
     :icon="icon"
-    class="bg-primary-500 text-white hover:bg-primary-600 dark:bg-primary-700 dark:hover:bg-primary-800"
+    :class="buttonStyles()"
   >
     <slot />
   </Button>
 </template>
 
 <script lang="ts" setup>
+import { tv } from "tailwind-variants";
 import Button from "../primitives/Button.vue";
 
 withDefaults(
@@ -20,4 +21,10 @@ withDefaults(
     icon: undefined,
   }
 );
+
+const buttonStyles = tv({
+  base: [
+    "bg-primary-500 text-white hover:bg-primary-600 focus-visible:ring-primary-500 dark:bg-primary-700 dark:hover:bg-primary-800 dark:focus-visible:ring-primary-700 dark:active:bg-primary-900",
+  ],
+});
 </script>

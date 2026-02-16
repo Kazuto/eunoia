@@ -50,9 +50,7 @@ const isIconOnly = computed(() => hasIcon.value && !hasDefaultSlot.value);
 
 const buttonStyles = tv({
   base: [
-    "inline-flex cursor-pointer items-center gap-1.5 rounded-lg border-0 font-sans leading-none font-bold transition-colors outline-none focus:ring-2",
-    "focus:ring-primary-300 focus:ring-offset-2",
-    "dark:focus:ring-primary-500 dark:focus:ring-offset-neutral-950",
+    "inline-flex cursor-pointer items-center gap-1.5 rounded-lg border-0 font-sans leading-none font-bold transition-colors outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-neutral-900",
   ],
   variants: {
     dense: {
