@@ -28,7 +28,7 @@ withDefaults(
 );
 
 const textStyles = tv({
-  base: "font-sans leading-relaxed text-neutral-900",
+  base: "font-sans leading-relaxed text-neutral-900 dark:text-neutral-100",
   variants: {
     size: {
       sm: "text-sm",
@@ -36,7 +36,7 @@ const textStyles = tv({
       lg: "text-lg",
     },
     muted: {
-      true: "text-neutral-500",
+      true: "text-neutral-500 dark:text-neutral-400",
     },
   },
   defaultVariants: {
