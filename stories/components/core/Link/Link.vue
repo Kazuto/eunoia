@@ -11,9 +11,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed, getCurrentInstance } from "vue";
+import { computed } from "vue";
 import LinkPrimitive from "./primitives/Link.vue";
-import { useForwardedAttrs } from "@/composables";
+import { useForwardedAttrs, useNuxtLink } from "@/composables";
 
 defineOptions({
   inheritAttrs: false,
@@ -37,11 +37,7 @@ const isExternal = computed(() => {
   return /^(https?:)?\/\//.test(props.href);
 });
 
-const hasNuxtLink = computed(() => {
-  const instance = getCurrentInstance();
-  const components = instance?.appContext.components;
-  return !!(components?.["NuxtLink"] || components?.["nuxt-link"]);
-});
+const { hasNuxtLink } = useNuxtLink();
 
 const linkTag = computed(() => {
   if (isExternal.value) return "a";
