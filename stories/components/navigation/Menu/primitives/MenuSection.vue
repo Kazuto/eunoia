@@ -1,13 +1,17 @@
 <template>
   <li>
-    <ul class="flex flex-col gap-1">
+    <ul class="flex list-none flex-col gap-1">
       <li
-        :class="sectionStyles()"
+        :class="sectionStyles({ parentActive })"
         :style="{ paddingLeft: padding }"
         :aria-expanded="open"
+        :aria-controls="childrenId"
+        :aria-label="toggleSectionLabel"
+        role="button"
         tabindex="0"
         @click="open = !open"
         @keydown.enter="open = !open"
+        @keydown.space.prevent="open = !open"
       >
         <MenuLabel :icon>
           {{ label }}
@@ -24,7 +28,11 @@
       </li>
 
       <li>
-        <ul :class="itemStyles({ open })">
+        <ul
+          :id="childrenId"
+          :class="itemStyles({ open })"
+          role="group"
+        >
           <template
             v-for="(item, index) in items"
             :key="index"
@@ -33,6 +41,8 @@
               v-if="item.items"
               v-bind="item"
               :level="level + 1"
+              :current-path="currentPath"
+              :toggle-section-label="toggleSectionLabel"
             />
 
             <MenuItemPrimitive
@@ -53,15 +63,23 @@ import MenuItemPrimitive from "./MenuItem.vue";
 import MenuLabel from "./MenuLabel.vue";
 import type { MenuItem } from "../types";
 import { Icon } from "@/components";
+import { useSanitizedId } from "@/composables";
 import { ref, computed } from "vue";
 
-const props = defineProps<MenuItem>();
+const props = defineProps<
+  MenuItem & {
+    currentPath?: string;
+    toggleSectionLabel?: string;
+  }
+>();
 
 const padding = computed(() => {
   if (props.level <= 1) return;
 
   return `${props.level * 0.75}rem`;
 });
+
+const childrenId = useSanitizedId("menu-section");
 
 const open = ref(true);
 
@@ -71,6 +89,11 @@ const sectionStyles = tv({
     "text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900 focus-visible:bg-neutral-100 focus-visible:text-neutral-900 focus-visible:ring-neutral-100 focus-visible:ring-offset-white hover:focus-visible:bg-neutral-200 hover:focus-visible:ring-neutral-200",
     "dark:text-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-neutral-200 dark:focus-visible:bg-neutral-700 dark:focus-visible:text-neutral-200 dark:focus-visible:ring-neutral-700 dark:focus-visible:ring-offset-neutral-800 dark:hover:focus-visible:bg-neutral-600 dark:hover:focus-visible:ring-neutral-600",
   ],
+  variants: {
+    parentActive: {
+      true: "font-semibold text-neutral-900 dark:text-neutral-50",
+    },
+  },
 });
 
 const itemStyles = tv({

@@ -17,5 +17,7 @@
   "code.copy": "Copy to clipboard",
   "theme-toggle.system": "Change to system preference",
   "theme-toggle.light": "Change to light mode",
-  "theme-toggle.dark": "Change to dark mode"
+  "theme-toggle.dark": "Change to dark mode",
+  "menu.toggle-section": "Toggle section",
+  "menu.label": "Navigation"
 }

@@ -5,4 +5,6 @@ export interface MenuItem {
   icon?: string;
   level?: number;
   items?: MenuItem[];
+  active?: boolean;
+  parentActive?: boolean;
 }

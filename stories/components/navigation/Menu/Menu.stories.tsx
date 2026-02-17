@@ -81,3 +81,42 @@ export const Nested: Story = {
     />
   ),
 };
+
+export const ActiveRoute: Story = {
+  render: () => (
+    <Menu
+      currentPath="/about/team"
+      items={[
+        { label: "Home", href: "/", icon: "house-simple" },
+        {
+          label: "About",
+          icon: "user",
+          items: [
+            { label: "Team", href: "/about/team", icon: "users" },
+            { label: "History", href: "/about/history", icon: "clock" },
+          ],
+        },
+        {
+          label: "Products",
+          icon: "barcode",
+          items: [
+            { label: "Product 1", href: "/products/1" },
+            { label: "Product 2", href: "/products/2" },
+          ],
+        },
+      ]}
+    />
+  ),
+};
+
+export const WithAriaLabel: Story = {
+  render: () => (
+    <Menu
+      ariaLabel="Main navigation"
+      items={[
+        { label: "Home", href: "/", icon: "house-simple" },
+        { label: "About", href: "/about", icon: "user" },
+      ]}
+    />
+  ),
+};

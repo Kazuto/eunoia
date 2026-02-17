@@ -1,7 +1,14 @@
 <template>
-  <menu class="flex flex-col gap-2">
+  <nav
+    :aria-label="ariaLabel"
+    class="flex list-none flex-col gap-2"
+  >
     <slot />
-  </menu>
+  </nav>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+defineProps<{
+  ariaLabel?: string;
+}>();
+</script>
