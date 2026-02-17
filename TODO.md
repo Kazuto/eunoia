@@ -32,7 +32,7 @@
 
 ## Layout
 
-- [ ] **Sidebar** — Collapsible side navigation panel
+- [x] **Sidebar** — Collapsible side navigation panel
 - [ ] **Container** — Max-width centered wrapper with responsive padding
 - [ ] Footer — Page footer
 - [ ] Grid / Stack — Flexbox/grid layout helpers
