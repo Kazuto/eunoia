@@ -12,7 +12,7 @@
 ## Core
 
 - [x] **Avatar** — User image with fallback initials, size variants; pairs with UserMenu
-- [ ] Divider / Separator — Horizontal/vertical rule with optional label
+- [x] Divider / Separator — Horizontal/vertical rule with optional label
 - [ ] Tag — Non-interactive label for categorization (distinct from Chip)
 
 ## Display
