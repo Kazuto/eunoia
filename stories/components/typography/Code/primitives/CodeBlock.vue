@@ -30,7 +30,8 @@
     <pre
       v-else
       :class="preStyles({ hasFilename: !!filename })"
-    ><code :class="codeStyles()"><slot /></code></pre>
+    >
+<code :class="codeStyles()"><slot /></code></pre>
   </div>
 </template>
 
@@ -108,20 +109,20 @@ const copyButtonStyles = tv({
   base: "absolute top-2 right-2 opacity-0 transition-opacity group-hover:opacity-100 focus:opacity-100",
   variants: {
     copied: {
-      true: "text-green-600 opacity-100",
+      true: "text-green-600 opacity-100 dark:text-green-500",
     },
   },
 });
 
 const filenameStyles = tv({
-  base: "block rounded-t-lg bg-neutral-100 px-4 pt-3 pb-0 font-mono text-xs text-neutral-500",
+  base: "block rounded-t-lg bg-neutral-50 px-4 pt-3 pb-0 font-mono text-xs text-neutral-500 dark:bg-neutral-950",
 });
 
 const preStyles = tv({
-  base: "overflow-x-auto rounded-lg bg-neutral-100 p-4",
+  base: "overflow-x-auto rounded-lg bg-neutral-50 p-4 dark:bg-neutral-950",
   variants: {
     hasFilename: {
-      true: "rounded-t-none pt-2",
+      true: "rounded-t-none border-t-0 pt-2",
     },
   },
 });
