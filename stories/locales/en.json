@@ -19,5 +19,6 @@
   "theme-toggle.light": "Change to light mode",
   "theme-toggle.dark": "Change to dark mode",
   "menu.toggle-section": "Toggle section",
-  "menu.label": "Navigation"
+  "menu.label": "Navigation",
+  "user-menu.toggle": "User menu"
 }
