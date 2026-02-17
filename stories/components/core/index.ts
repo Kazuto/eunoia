@@ -1,3 +1,4 @@
+export { default as Avatar } from "./Avatar/Avatar.vue";
 export { default as Badge } from "./Badge/Badge.vue";
 export { default as Button } from "./Button/Button.vue";
 export { default as ButtonGroup } from "./ButtonGroup/ButtonGroup.vue";
