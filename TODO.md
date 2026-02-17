@@ -39,7 +39,7 @@
 
 ## Navigation
 
-- [ ] **Breadcrumb** — Navigation path with separator support
+- [x] **Breadcrumb** — Navigation path with separator support
 - [ ] **Pagination** — Page navigation for lists/tables
 - [ ] Stepper — Multi-step wizard navigation
 
