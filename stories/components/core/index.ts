@@ -3,6 +3,7 @@ export { default as Button } from "./Button/Button.vue";
 export { default as ButtonGroup } from "./ButtonGroup/ButtonGroup.vue";
 export { default as Chip } from "./Chip/Chip.vue";
 export { default as Icon } from "./Icon/Icon.vue";
+export { default as Image } from "./Image/Image.vue";
 export { default as Link } from "./Link/Link.vue";
 export { default as LocaleProvider } from "./LocaleProvider/LocaleProvider.vue";
 export { default as Skeleton } from "./Skeleton/Skeleton.vue";
