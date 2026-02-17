@@ -1,5 +1,7 @@
 @source "./";
 
+@import "./assets/highlightjs.css";
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
