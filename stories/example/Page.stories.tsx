@@ -5,7 +5,7 @@ import Page from "./Page.vue";
 
 const meta = {
   component: Page,
-  title: "Example/Page",
+  title: "example/Page",
   tags: ["autodocs"],
   parameters: {
     layout: "fullscreen",

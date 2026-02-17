@@ -23,6 +23,11 @@ export const globalTypes = {
 
 const preview: Preview = {
   parameters: {
+    options: {
+      storySort: {
+        order: ["concept", "components", "composables", "example", "*"],
+      },
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,
