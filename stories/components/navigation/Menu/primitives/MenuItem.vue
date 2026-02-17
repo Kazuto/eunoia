@@ -1,6 +1,25 @@
 <template>
   <li>
+    <Tooltip
+      v-if="sidebarCollapsed"
+      :content="label"
+      placement="right"
+      dense
+    >
+      <Link
+        :href="href"
+        :class="itemStyles({ active })"
+        :aria-current="active ? 'page' : undefined"
+        tabindex="0"
+        :style="{ paddingLeft: padding }"
+      >
+        <MenuLabel :icon>
+          {{ label }}
+        </MenuLabel>
+      </Link>
+    </Tooltip>
     <Link
+      v-else
       :href="href"
       :class="itemStyles({ active })"
       :aria-current="active ? 'page' : undefined"
@@ -15,11 +34,15 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, inject } from "vue";
 import { Link } from "@/components";
+import Tooltip from "@/components/feedback/Tooltip/Tooltip.vue";
 import { tv } from "tailwind-variants";
 import MenuLabel from "./MenuLabel.vue";
 import type { MenuItem } from "../types";
+import { sidebarCollapsedKey } from "@/components/layout/Sidebar/keys";
+
+const sidebarCollapsed = inject(sidebarCollapsedKey, undefined);
 
 const props = defineProps<MenuItem>();
 

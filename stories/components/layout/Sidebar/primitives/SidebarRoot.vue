@@ -31,7 +31,7 @@ const sidebarRootStyles = tv({
   variants: {
     collapsed: {
       false: "w-64",
-      true: "w-0 border-r-0",
+      true: "w-fit",
     },
   },
   defaultVariants: {

@@ -1,7 +1,23 @@
 <template>
   <li>
     <ul class="flex list-none flex-col gap-1">
+      <Tooltip
+        v-if="sidebarCollapsed"
+        :content="label"
+        placement="right"
+        dense
+      >
+        <li
+          :class="sectionStyles({ parentActive })"
+          :style="{ paddingLeft: padding }"
+        >
+          <MenuLabel :icon>
+            {{ label }}
+          </MenuLabel>
+        </li>
+      </Tooltip>
       <li
+        v-else
         :class="sectionStyles({ parentActive })"
         :style="{ paddingLeft: padding }"
         :aria-expanded="open"
@@ -27,7 +43,7 @@
         />
       </li>
 
-      <li>
+      <li v-if="!sidebarCollapsed">
         <ul
           :id="childrenId"
           :class="itemStyles({ open })"
@@ -63,8 +79,12 @@ import MenuItemPrimitive from "./MenuItem.vue";
 import MenuLabel from "./MenuLabel.vue";
 import type { MenuItem } from "../types";
 import { Icon } from "@/components";
+import Tooltip from "@/components/feedback/Tooltip/Tooltip.vue";
 import { useSanitizedId } from "@/composables";
-import { ref, computed } from "vue";
+import { sidebarCollapsedKey } from "@/components/layout/Sidebar/keys";
+import { ref, computed, inject } from "vue";
+
+const sidebarCollapsed = inject(sidebarCollapsedKey, undefined);
 
 const props = defineProps<
   MenuItem & {
