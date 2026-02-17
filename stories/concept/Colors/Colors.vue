@@ -22,7 +22,7 @@
         <Gray />
       </tr>
       <tr>
-        <th class="my-4 text-left">Primary</th>
+        <th class="text-left">Primary</th>
         <Primary />
       </tr>
       <tr>

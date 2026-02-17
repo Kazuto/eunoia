@@ -1,305 +1,323 @@
 <template>
-  <div class="min-h-screen bg-white font-sans dark:bg-neutral-950">
+  <div class="flex h-screen flex-col bg-white font-sans dark:bg-neutral-950">
     <!-- Header -->
     <header
-      class="border-b border-neutral-50 bg-white px-8 py-4 dark:border-neutral-700 dark:bg-neutral-950"
+      class="flex shrink-0 items-center justify-between border-b border-neutral-200 bg-white px-4 py-3 dark:border-neutral-700 dark:bg-neutral-950"
     >
-      <div class="mx-auto flex max-w-6xl items-center justify-between">
+      <div class="flex items-center gap-3">
+        <SidebarToggle v-model:collapsed="sidebarCollapsed" />
         <h1 class="text-xl font-bold text-neutral-900 dark:text-neutral-100">
           Dashboard
         </h1>
-        <div class="flex items-center gap-3">
-          <Badge
-            variant="success"
-            pill
-          >
-            5 online
-          </Badge>
-          <Button
-            dense
-            ghost
-          >
-            Settings
-          </Button>
-          <Button
-            dense
-            primary
-          >
-            New Employee
-          </Button>
-        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <Badge
+          variant="success"
+          pill
+        >
+          5 online
+        </Badge>
+        <Button
+          dense
+          ghost
+        >
+          Settings
+        </Button>
+        <Button
+          dense
+          primary
+        >
+          New Employee
+        </Button>
+        <UserMenu
+          name="Alice Johnson"
+          :items="userMenuItems"
+        />
       </div>
     </header>
 
-    <main class="mx-auto flex max-w-6xl flex-col gap-8 px-8 py-8">
-      <!-- Alert -->
-      <Alert
-        variant="info"
-        persistent
-        dismissible
-      >
-        Welcome to the dashboard. This is a reference page showcasing Eunoia
-        components.
-      </Alert>
+    <!-- Body: Sidebar + Main -->
+    <div class="flex flex-1 overflow-hidden">
+      <Sidebar v-model:collapsed="sidebarCollapsed">
+        <Menu
+          class="p-3"
+          :items="menuItems"
+          current-path="/"
+        />
+      </Sidebar>
 
-      <!-- Form Section -->
-      <Card title="Add Employee">
-        <div class="flex flex-col gap-4">
-          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <Input
-              v-model="name"
-              type="text"
-              :maxlength="100"
-              helper="Legal full name"
-              :errors="nameErrors"
-              :invalid="nameErrors.length > 0"
-            >
-              Full Name
-            </Input>
-            <Input
-              v-model="email"
-              type="text"
-              helper="We'll never share your email"
-              :errors="emailErrors"
-              :invalid="emailErrors.length > 0"
-            >
-              Email
-            </Input>
-            <Input
-              v-model="website"
-              type="text"
-              helper="https://..."
-            >
-              Website
-            </Input>
-          </div>
-          <Select
-            v-model="role"
-            :options="roleOptions"
-            multiple
+      <main class="flex-1 overflow-y-auto p-8">
+        <div class="mx-auto flex max-w-6xl flex-col gap-8">
+          <!-- Alert -->
+          <Alert
+            variant="info"
+            persistent
+            dismissible
           >
-            Role
-          </Select>
-          <Input
-            v-model="department"
-            type="radio"
-            value="engineer"
-            :options="departmentOptions"
-          >
-            Department
-            <template #description>
-              Engineers are responsible for designing and building software
-              systems.
-            </template>
-          </Input>
-          <Input
-            v-model="newsletter"
-            type="checkbox"
-          >
-            Newsletter
-            <template #description>
-              Subscribe to our
-              <Link href="https://example.com/newsletter">
-                monthly newsletter
-              </Link>
-            </template>
-          </Input>
-        </div>
+            Welcome to the dashboard. This is a reference page showcasing Eunoia
+            components.
+          </Alert>
 
-        <template #footer>
-          <Button primary> Submit </Button>
-          <Button>Cancel</Button>
-          <Button ghost> Reset </Button>
-          <Button destructive> Delete Draft </Button>
-        </template>
-      </Card>
-
-      <!-- Dense Form -->
-      <Card dense>
-        <template #header>
-          <h3
-            class="text-base font-semibold text-neutral-900 dark:text-neutral-100"
-          >
-            Dense Variant
-          </h3>
-          <Badge
-            variant="secondary"
-            dense
-          >
-            Compact
-          </Badge>
-        </template>
-        <div class="flex flex-col gap-4">
-          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <Input
-              v-model="name"
-              type="text"
-              dense
-              :maxlength="100"
-              helper="Legal full name"
-            >
-              Full Name
-            </Input>
-            <Input
-              v-model="email"
-              type="text"
-              dense
-              helper="We'll never share your email"
-              :errors="emailErrors"
-              :invalid="emailErrors.length > 0"
-            >
-              Email
-            </Input>
-            <Input
-              v-model="website"
-              type="text"
-              dense
-              helper="https://..."
-            >
-              Website
-            </Input>
-          </div>
-          <Select
-            v-model="role"
-            :options="roleOptions"
-            dense
-            multiple
-          >
-            Role
-          </Select>
-          <Input
-            v-model="department"
-            type="radio"
-            value="engineer"
-            :options="departmentOptions"
-            dense
-          >
-            Department
-
-            <template #description>
-              Engineers are responsible for designing and building software
-              systems.
-            </template>
-          </Input>
-          <Input
-            v-model="newsletter"
-            type="checkbox"
-            dense
-          >
-            Newsletter
-            <template #description>
-              Subscribe to our
-              <Link href="https://example.com/newsletter">
-                monthly newsletter
-              </Link>
-            </template>
-          </Input>
-        </div>
-        <template #footer>
-          <Button
-            primary
-            dense
-          >
-            Submit
-          </Button>
-          <Button dense> Cancel </Button>
-          <Button
-            ghost
-            dense
-          >
-            Reset
-          </Button>
-          <Button
-            destructive
-            dense
-          >
-            Delete Draft
-          </Button>
-        </template>
-      </Card>
-
-      <!-- Data Table -->
-      <Card>
-        <template #header>
-          <h3 class="text-lg font-semibold text-neutral-900">Employees</h3>
-          <div class="flex items-center gap-2">
-            <Badge
-              variant="primary"
-              :count="5"
-            >
-              Total
-            </Badge>
-            <Badge
-              variant="success"
-              :count="4"
-            >
-              Active
-            </Badge>
-            <Badge
-              variant="warning"
-              :count="1"
-            >
-              On Leave
-            </Badge>
-          </div>
-        </template>
-        <DataTable
-          :headers="headers"
-          :items="items"
-        >
-          <template #actions="{ item }">
-            <div class="inline-flex items-center gap-1">
-              <Tooltip
-                content="View"
-                placement="top"
-              >
-                <Button
-                  ghost
-                  dense
-                  @click="onView(item)"
+          <!-- Form Section -->
+          <Card title="Add Employee">
+            <div class="flex flex-col gap-4">
+              <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                <Input
+                  v-model="name"
+                  type="text"
+                  :maxlength="100"
+                  helper="Legal full name"
+                  :errors="nameErrors"
+                  :invalid="nameErrors.length > 0"
                 >
-                  <Icon
-                    name="eye"
-                    size="sm"
-                  />
-                </Button>
-              </Tooltip>
-              <Tooltip
-                content="Edit"
-                placement="top"
-              >
-                <Button
-                  ghost
-                  dense
-                  @click="onEdit(item)"
+                  Full Name
+                </Input>
+                <Input
+                  v-model="email"
+                  type="text"
+                  helper="We'll never share your email"
+                  :errors="emailErrors"
+                  :invalid="emailErrors.length > 0"
                 >
-                  <Icon
-                    name="pencil-simple"
-                    size="sm"
-                  />
-                </Button>
-              </Tooltip>
-              <Tooltip
-                content="Delete"
-                placement="top"
-              >
-                <Button
-                  ghost
-                  dense
-                  destructive
-                  @click="onDelete(item)"
+                  Email
+                </Input>
+                <Input
+                  v-model="website"
+                  type="text"
+                  helper="https://..."
                 >
-                  <Icon
-                    name="trash"
-                    size="sm"
-                  />
-                </Button>
-              </Tooltip>
+                  Website
+                </Input>
+              </div>
+              <Select
+                v-model="role"
+                :options="roleOptions"
+                multiple
+              >
+                Role
+              </Select>
+              <Input
+                v-model="department"
+                type="radio"
+                value="engineer"
+                :options="departmentOptions"
+              >
+                Department
+                <template #description>
+                  Engineers are responsible for designing and building software
+                  systems.
+                </template>
+              </Input>
+              <Input
+                v-model="newsletter"
+                type="checkbox"
+              >
+                Newsletter
+                <template #description>
+                  Subscribe to our
+                  <Link href="https://example.com/newsletter">
+                    monthly newsletter
+                  </Link>
+                </template>
+              </Input>
             </div>
-          </template>
-        </DataTable>
-      </Card>
-    </main>
+
+            <template #footer>
+              <Button primary> Submit </Button>
+              <Button>Cancel</Button>
+              <Button ghost> Reset </Button>
+              <Button destructive> Delete Draft </Button>
+            </template>
+          </Card>
+
+          <!-- Dense Form -->
+          <Card dense>
+            <template #header>
+              <h3
+                class="text-base font-semibold text-neutral-900 dark:text-neutral-100"
+              >
+                Dense Variant
+              </h3>
+              <Badge
+                variant="secondary"
+                dense
+              >
+                Compact
+              </Badge>
+            </template>
+            <div class="flex flex-col gap-4">
+              <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                <Input
+                  v-model="name"
+                  type="text"
+                  dense
+                  :maxlength="100"
+                  helper="Legal full name"
+                >
+                  Full Name
+                </Input>
+                <Input
+                  v-model="email"
+                  type="text"
+                  dense
+                  helper="We'll never share your email"
+                  :errors="emailErrors"
+                  :invalid="emailErrors.length > 0"
+                >
+                  Email
+                </Input>
+                <Input
+                  v-model="website"
+                  type="text"
+                  dense
+                  helper="https://..."
+                >
+                  Website
+                </Input>
+              </div>
+              <Select
+                v-model="role"
+                :options="roleOptions"
+                dense
+                multiple
+              >
+                Role
+              </Select>
+              <Input
+                v-model="department"
+                type="radio"
+                value="engineer"
+                :options="departmentOptions"
+                dense
+              >
+                Department
+
+                <template #description>
+                  Engineers are responsible for designing and building software
+                  systems.
+                </template>
+              </Input>
+              <Input
+                v-model="newsletter"
+                type="checkbox"
+                dense
+              >
+                Newsletter
+                <template #description>
+                  Subscribe to our
+                  <Link href="https://example.com/newsletter">
+                    monthly newsletter
+                  </Link>
+                </template>
+              </Input>
+            </div>
+            <template #footer>
+              <Button
+                primary
+                dense
+              >
+                Submit
+              </Button>
+              <Button dense> Cancel </Button>
+              <Button
+                ghost
+                dense
+              >
+                Reset
+              </Button>
+              <Button
+                destructive
+                dense
+              >
+                Delete Draft
+              </Button>
+            </template>
+          </Card>
+
+          <!-- Data Table -->
+          <Card>
+            <template #header>
+              <h3 class="text-lg font-semibold text-neutral-900">Employees</h3>
+              <div class="flex items-center gap-2">
+                <Badge
+                  variant="primary"
+                  :count="5"
+                >
+                  Total
+                </Badge>
+                <Badge
+                  variant="success"
+                  :count="4"
+                >
+                  Active
+                </Badge>
+                <Badge
+                  variant="warning"
+                  :count="1"
+                >
+                  On Leave
+                </Badge>
+              </div>
+            </template>
+            <DataTable
+              :headers="headers"
+              :items="items"
+            >
+              <template #actions="{ item }">
+                <div class="inline-flex items-center gap-1">
+                  <Tooltip
+                    content="View"
+                    placement="top"
+                  >
+                    <Button
+                      ghost
+                      dense
+                      @click="onView(item)"
+                    >
+                      <Icon
+                        name="eye"
+                        size="sm"
+                      />
+                    </Button>
+                  </Tooltip>
+                  <Tooltip
+                    content="Edit"
+                    placement="top"
+                  >
+                    <Button
+                      ghost
+                      dense
+                      @click="onEdit(item)"
+                    >
+                      <Icon
+                        name="pencil-simple"
+                        size="sm"
+                      />
+                    </Button>
+                  </Tooltip>
+                  <Tooltip
+                    content="Delete"
+                    placement="top"
+                  >
+                    <Button
+                      ghost
+                      dense
+                      destructive
+                      @click="onDelete(item)"
+                    >
+                      <Icon
+                        name="trash"
+                        size="sm"
+                      />
+                    </Button>
+                  </Tooltip>
+                </div>
+              </template>
+            </DataTable>
+          </Card>
+        </div>
+      </main>
+    </div>
   </div>
 </template>
 
@@ -316,7 +334,15 @@ import {
   Icon,
   Link,
   Tooltip,
+  Sidebar,
+  SidebarToggle,
 } from "@/components";
+import Menu from "@/components/navigation/Menu/Menu.vue";
+import UserMenu from "@/components/navigation/UserMenu/UserMenu.vue";
+import type { MenuItem } from "@/components/navigation/Menu/types";
+import type { UserMenuItem } from "@/components/navigation/UserMenu/types";
+
+const sidebarCollapsed = ref(false);
 
 const name = ref("");
 const email = ref("invalid-email");
@@ -337,6 +363,19 @@ const emit = defineEmits<{
 const onView = (item: Record<string, unknown>) => emit("view", item);
 const onEdit = (item: Record<string, unknown>) => emit("edit", item);
 const onDelete = (item: Record<string, unknown>) => emit("delete", item);
+
+const menuItems: MenuItem[] = [
+  { label: "Dashboard", href: "/", icon: "house-simple" },
+  { label: "Employees", href: "/employees", icon: "users" },
+  { label: "Projects", href: "/projects", icon: "folder" },
+  { label: "Settings", href: "/settings", icon: "gear" },
+];
+
+const userMenuItems: UserMenuItem[] = [
+  { label: "Profile", icon: "user" },
+  { label: "Account Settings", icon: "gear" },
+  { label: "Sign Out", icon: "sign-out", variant: "danger" },
+];
 
 const departmentOptions = [
   { label: "Engineering", value: "engineering" },
