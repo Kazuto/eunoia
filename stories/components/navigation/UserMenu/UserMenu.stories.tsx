@@ -51,6 +51,13 @@ export const WithIcons: Story = {
   },
 };
 
+export const NoImage: Story = {
+  args: {
+    image: undefined,
+    name: "Jane Doe",
+  },
+};
+
 export const DangerItem: Story = {
   args: {
     items: [

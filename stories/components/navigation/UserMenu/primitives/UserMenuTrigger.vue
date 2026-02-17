@@ -10,12 +10,10 @@
     @click="emit('toggle')"
     @keydown="emit('keydown', $event)"
   >
-    <Image
+    <Avatar
       :src="image"
-      :alt="name ?? ''"
-      rounded="full"
-      loading="eager"
-      class="size-8"
+      :name="name"
+      size="sm"
     />
     <span
       v-if="name"
@@ -28,7 +26,7 @@
 
 <script lang="ts" setup>
 import { tv } from "tailwind-variants";
-import { Image } from "@/components";
+import { Avatar } from "@/components";
 import { useForwardedAttrs } from "@/composables";
 
 defineOptions({
@@ -51,7 +49,7 @@ const triggerStyles = tv({
 });
 
 defineProps<{
-  image: string;
+  image?: string;
   name?: string;
   isOpen?: boolean;
   menuId?: string;

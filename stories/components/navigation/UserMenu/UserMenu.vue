@@ -52,13 +52,14 @@ defineOptions({
 
 const props = withDefaults(
   defineProps<{
-    image: string;
+    image?: string;
     name?: string;
     items: UserMenuItem[];
     dense?: boolean;
     locale?: LocaleMessages;
   }>(),
   {
+    image: undefined,
     name: undefined,
     locale: undefined,
   }
