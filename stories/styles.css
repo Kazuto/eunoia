@@ -8,12 +8,12 @@
   --font-sans: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   --color-gray: #8f877b; /* Light, warm gray/neutrals */
-  --color-neutral: #8a8a8a; /* Medium-dark gray */
+  --color-neutral: #6e6e6e; /* Medium-dark gray */
   --color-primary: #a88bc7; /* Soft lavender-purple, gentle and contemplative */
-  --color-red: #fe6e8b; /* Vibrant magenta-pink, energetic and bold */
-  --color-yellow: #e7da62; /* Warm, cheerful yellow */
-  --color-green: #7bc876; /* Fresh, balanced green */
-  --color-blue: #6ea7ec; /* Calm, trustworthy blue */
+  --color-red: #f83b66; /* Vibrant magenta-pink, energetic and bold */
+  --color-yellow: #f5b40b; /* Golden amber, warm and clean */
+  --color-green: #47a641; /* Fresh, balanced green */
+  --color-blue: #4c87e5; /* Calm, trustworthy blue */
 
   /* Gray scale */
   --color-gray-50: oklch(from var(--color-gray) calc(l * 1.5) calc(c * 0.06) h);
@@ -44,70 +44,70 @@
     from var(--color-gray) calc(l * 0.42) calc(c * 0.42) h
   );
 
-  /* Neutral scale */
+  /* Neutral scale (matched to dove-gray) */
   --color-neutral-50: oklch(
-    from var(--color-neutral) calc(l * 1.5) calc(c * 0.06) h
+    from var(--color-neutral) calc(l * 1.83) calc(c * 0.06) h
   );
   --color-neutral-100: oklch(
-    from var(--color-neutral) calc(l * 1.45) calc(c * 0.15) h
+    from var(--color-neutral) calc(l * 1.8) calc(c * 0.15) h
   );
   --color-neutral-200: oklch(
-    from var(--color-neutral) calc(l * 1.38) calc(c * 0.29) h
+    from var(--color-neutral) calc(l * 1.72) calc(c * 0.29) h
   );
   --color-neutral-300: oklch(
-    from var(--color-neutral) calc(l * 1.27) calc(c * 0.53) h
+    from var(--color-neutral) calc(l * 1.61) calc(c * 0.53) h
   );
   --color-neutral-400: oklch(
-    from var(--color-neutral) calc(l * 1.12) calc(c * 0.82) h
+    from var(--color-neutral) calc(l * 1.33) calc(c * 0.82) h
   );
   --color-neutral-500: var(--color-neutral);
   --color-neutral-600: oklch(
-    from var(--color-neutral) calc(l * 0.88) calc(c * 1.04) h
+    from var(--color-neutral) calc(l * 0.82) calc(c * 1.04) h
   );
   --color-neutral-700: oklch(
-    from var(--color-neutral) calc(l * 0.77) calc(c * 0.93) h
+    from var(--color-neutral) calc(l * 0.68) calc(c * 0.93) h
   );
   --color-neutral-800: oklch(
-    from var(--color-neutral) calc(l * 0.67) calc(c * 0.76) h
+    from var(--color-neutral) calc(l * 0.47) calc(c * 0.76) h
   );
   --color-neutral-900: oklch(
-    from var(--color-neutral) calc(l * 0.6) calc(c * 0.6) h
+    from var(--color-neutral) calc(l * 0.35) calc(c * 0.6) h
   );
   --color-neutral-950: oklch(
-    from var(--color-neutral) calc(l * 0.42) calc(c * 0.42) h
+    from var(--color-neutral) calc(l * 0.19) calc(c * 0.42) h
   );
 
-  /* Primary scale */
+  /* Primary scale (matched to east-side) */
   --color-primary-50: oklch(
-    from var(--color-primary) calc(l * 1.5) calc(c * 0.06) h
+    from var(--color-primary) calc(l * 1.43) calc(c * 0.06) h
   );
   --color-primary-100: oklch(
-    from var(--color-primary) calc(l * 1.45) calc(c * 0.15) h
+    from var(--color-primary) calc(l * 1.4) calc(c * 0.15) h
   );
   --color-primary-200: oklch(
-    from var(--color-primary) calc(l * 1.38) calc(c * 0.29) h
+    from var(--color-primary) calc(l * 1.35) calc(c * 0.29) h
   );
   --color-primary-300: oklch(
-    from var(--color-primary) calc(l * 1.27) calc(c * 0.53) h
+    from var(--color-primary) calc(l * 1.26) calc(c * 0.53) h
   );
   --color-primary-400: oklch(
-    from var(--color-primary) calc(l * 1.12) calc(c * 0.82) h
+    from var(--color-primary) calc(l * 1.14) calc(c * 0.82) h
   );
   --color-primary-500: var(--color-primary);
   --color-primary-600: oklch(
-    from var(--color-primary) calc(l * 0.88) calc(c * 1.04) h
+    from var(--color-primary) calc(l * 0.89) calc(c * 1.04) h
   );
   --color-primary-700: oklch(
-    from var(--color-primary) calc(l * 0.77) calc(c * 0.93) h
+    from var(--color-primary) calc(l * 0.8) calc(c * 0.93) h
   );
   --color-primary-800: oklch(
-    from var(--color-primary) calc(l * 0.67) calc(c * 0.76) h
+    from var(--color-primary) calc(l * 0.71) calc(c * 0.76) h
   );
   --color-primary-900: oklch(
-    from var(--color-primary) calc(l * 0.6) calc(c * 0.6) h
+    from var(--color-primary) calc(l * 0.62) calc(c * 0.6) h
   );
   --color-primary-950: oklch(
-    from var(--color-primary) calc(l * 0.42) calc(c * 0.42) h
+    from var(--color-primary) calc(l * 0.47) calc(c * 0.42) h
   );
 
   /* Red scale */
@@ -123,99 +123,103 @@
   --color-red-900: oklch(from var(--color-red) calc(l * 0.6) calc(c * 0.6) h);
   --color-red-950: oklch(from var(--color-red) calc(l * 0.42) calc(c * 0.42) h);
 
-  /* Yellow scale */
+  /* Yellow scale (matched to lightning-yellow) */
   --color-yellow-50: oklch(
-    from var(--color-yellow) calc(l * 1.5) calc(c * 0.06) h
+    from var(--color-yellow) calc(l * 1.22) calc(c * 0.06) h
   );
   --color-yellow-100: oklch(
-    from var(--color-yellow) calc(l * 1.45) calc(c * 0.15) h
+    from var(--color-yellow) calc(l * 1.18) calc(c * 0.15) h
   );
   --color-yellow-200: oklch(
-    from var(--color-yellow) calc(l * 1.38) calc(c * 0.29) h
+    from var(--color-yellow) calc(l * 1.12) calc(c * 0.29) h
   );
   --color-yellow-300: oklch(
-    from var(--color-yellow) calc(l * 1.27) calc(c * 0.53) h
+    from var(--color-yellow) calc(l * 1.07) calc(c * 0.53) h
   );
   --color-yellow-400: oklch(
-    from var(--color-yellow) calc(l * 1.12) calc(c * 0.82) h
+    from var(--color-yellow) calc(l * 1.04) calc(c * 0.82) h
   );
   --color-yellow-500: var(--color-yellow);
   --color-yellow-600: oklch(
-    from var(--color-yellow) calc(l * 0.88) calc(c * 1.04) h
+    from var(--color-yellow) calc(l * 0.91) calc(c * 1.04) h
   );
   --color-yellow-700: oklch(
-    from var(--color-yellow) calc(l * 0.77) calc(c * 0.93) h
+    from var(--color-yellow) calc(l * 0.8) calc(c * 0.93) h
   );
   --color-yellow-800: oklch(
-    from var(--color-yellow) calc(l * 0.67) calc(c * 0.76) h
+    from var(--color-yellow) calc(l * 0.69) calc(c * 0.76) h
   );
   --color-yellow-900: oklch(
     from var(--color-yellow) calc(l * 0.6) calc(c * 0.6) h
   );
   --color-yellow-950: oklch(
-    from var(--color-yellow) calc(l * 0.42) calc(c * 0.42) h
+    from var(--color-yellow) calc(l * 0.41) calc(c * 0.42) h
   );
 
-  /* Green scale */
+  /* Green scale (matched to mantis) */
   --color-green-50: oklch(
-    from var(--color-green) calc(l * 1.5) calc(c * 0.06) h
+    from var(--color-green) calc(l * 1.51) calc(c * 0.06) h
   );
   --color-green-100: oklch(
-    from var(--color-green) calc(l * 1.45) calc(c * 0.15) h
+    from var(--color-green) calc(l * 1.47) calc(c * 0.15) h
   );
   --color-green-200: oklch(
-    from var(--color-green) calc(l * 1.38) calc(c * 0.29) h
+    from var(--color-green) calc(l * 1.4) calc(c * 0.29) h
   );
   --color-green-300: oklch(
-    from var(--color-green) calc(l * 1.27) calc(c * 0.53) h
+    from var(--color-green) calc(l * 1.29) calc(c * 0.53) h
   );
   --color-green-400: oklch(
-    from var(--color-green) calc(l * 1.12) calc(c * 0.82) h
+    from var(--color-green) calc(l * 1.18) calc(c * 0.82) h
   );
   --color-green-500: var(--color-green);
   --color-green-600: oklch(
-    from var(--color-green) calc(l * 0.88) calc(c * 1.04) h
+    from var(--color-green) calc(l * 0.86) calc(c * 1.04) h
   );
   --color-green-700: oklch(
-    from var(--color-green) calc(l * 0.77) calc(c * 0.93) h
+    from var(--color-green) calc(l * 0.73) calc(c * 0.93) h
   );
   --color-green-800: oklch(
-    from var(--color-green) calc(l * 0.67) calc(c * 0.76) h
+    from var(--color-green) calc(l * 0.63) calc(c * 0.76) h
   );
   --color-green-900: oklch(
-    from var(--color-green) calc(l * 0.6) calc(c * 0.6) h
+    from var(--color-green) calc(l * 0.56) calc(c * 0.6) h
   );
   --color-green-950: oklch(
-    from var(--color-green) calc(l * 0.42) calc(c * 0.42) h
+    from var(--color-green) calc(l * 0.37) calc(c * 0.42) h
   );
 
-  /* Blue scale */
-  --color-blue-50: oklch(from var(--color-blue) calc(l * 1.5) calc(c * 0.06) h);
+  /* Blue scale (matched to jordy-blue) */
+  --color-blue-50: oklch(
+    from var(--color-blue) calc(l * 1.54) calc(c * 0.06) h
+  );
   --color-blue-100: oklch(
-    from var(--color-blue) calc(l * 1.45) calc(c * 0.15) h
+    from var(--color-blue) calc(l * 1.48) calc(c * 0.15) h
   );
   --color-blue-200: oklch(
-    from var(--color-blue) calc(l * 1.38) calc(c * 0.29) h
+    from var(--color-blue) calc(l * 1.4) calc(c * 0.29) h
   );
   --color-blue-300: oklch(
-    from var(--color-blue) calc(l * 1.27) calc(c * 0.53) h
+    from var(--color-blue) calc(l * 1.29) calc(c * 0.53) h
   );
   --color-blue-400: oklch(
-    from var(--color-blue) calc(l * 1.12) calc(c * 0.82) h
+    from var(--color-blue) calc(l * 1.14) calc(c * 0.82) h
   );
   --color-blue-500: var(--color-blue);
   --color-blue-600: oklch(
     from var(--color-blue) calc(l * 0.88) calc(c * 1.04) h
   );
   --color-blue-700: oklch(
-    from var(--color-blue) calc(l * 0.77) calc(c * 0.93) h
+    from var(--color-blue) calc(l * 0.79) calc(c * 0.93) h
   );
   --color-blue-800: oklch(
-    from var(--color-blue) calc(l * 0.67) calc(c * 0.76) h
+    from var(--color-blue) calc(l * 0.69) calc(c * 0.76) h
   );
-  --color-blue-900: oklch(from var(--color-blue) calc(l * 0.6) calc(c * 0.6) h);
+  --color-blue-900: oklch(
+    from var(--color-blue) calc(l * 0.61) calc(c * 0.6) h
+  );
   --color-blue-950: oklch(
-    from var(--color-blue) calc(l * 0.42) calc(c * 0.42) h
+    from var(--color-blue) calc(l * 0.46) calc(c * 0.42) h
   );
 }
 
