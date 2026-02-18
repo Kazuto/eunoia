@@ -175,3 +175,6 @@ dist
 .DS_Store
 
 *storybook.log
+
+# Vitest browser failure screenshots
+__screenshots__/
