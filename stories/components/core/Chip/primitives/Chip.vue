@@ -26,15 +26,15 @@ const chipStyles = tv({
   variants: {
     variant: {
       primary:
-        "bg-primary-500 text-white focus-visible:ring-primary-500 dark:bg-primary-700 dark:focus-visible:ring-primary-700",
+        "bg-primary-500 text-primary-50 focus-visible:ring-primary-500 dark:bg-primary-700 dark:focus-visible:ring-primary-700",
       secondary:
-        "bg-neutral-100 text-neutral-900 focus-visible:ring-neutral-100 dark:bg-neutral-700 dark:text-neutral-50 dark:focus-visible:ring-neutral-700",
+        "bg-neutral-100 text-neutral-900 focus-visible:ring-neutral-100 dark:bg-neutral-600 dark:text-neutral-50 dark:focus-visible:ring-neutral-600",
       success:
-        "bg-green-400 text-green-900 focus-visible:ring-green-400 dark:bg-green-700 dark:text-green-50 dark:focus-visible:ring-green-700",
+        "bg-green-500 text-green-50 focus-visible:ring-green-500 dark:bg-green-600 dark:text-green-50 dark:focus-visible:ring-green-600",
       warning:
-        "bg-yellow-500 text-yellow-900 focus-visible:ring-yellow-500 dark:bg-yellow-700 dark:text-yellow-50 dark:focus-visible:ring-yellow-700",
+        "bg-yellow-500 text-yellow-950 focus-visible:ring-yellow-500 dark:bg-yellow-600 dark:text-yellow-950 dark:focus-visible:ring-yellow-600",
       danger:
-        "bg-red-400 text-red-900 focus-visible:ring-red-400 dark:bg-red-700 dark:text-red-50 dark:focus-visible:ring-red-700",
+        "bg-red-500 text-red-50 focus-visible:ring-red-500 dark:bg-red-600 dark:text-red-50 dark:focus-visible:ring-red-600",
     },
     dense: {
       false: "px-3 py-1.5 text-xs",
