@@ -15,33 +15,37 @@
   --color-green: #47a641; /* Fresh, balanced green */
   --color-blue: #4c87e5; /* Calm, trustworthy blue */
 
-  /* Gray scale */
-  --color-gray-50: oklch(from var(--color-gray) calc(l * 1.5) calc(c * 0.06) h);
+  /* Gray scale (matched to natural-gray) */
+  --color-gray-50: oklch(
+    from var(--color-gray) calc(l * 1.57) calc(c * 0.06) h
+  );
   --color-gray-100: oklch(
-    from var(--color-gray) calc(l * 1.45) calc(c * 0.15) h
+    from var(--color-gray) calc(l * 1.55) calc(c * 0.15) h
   );
   --color-gray-200: oklch(
-    from var(--color-gray) calc(l * 1.38) calc(c * 0.29) h
+    from var(--color-gray) calc(l * 1.48) calc(c * 0.29) h
   );
   --color-gray-300: oklch(
-    from var(--color-gray) calc(l * 1.27) calc(c * 0.53) h
+    from var(--color-gray) calc(l * 1.39) calc(c * 0.53) h
   );
   --color-gray-400: oklch(
-    from var(--color-gray) calc(l * 1.12) calc(c * 0.82) h
+    from var(--color-gray) calc(l * 1.15) calc(c * 0.82) h
   );
   --color-gray-500: var(--color-gray);
   --color-gray-600: oklch(
-    from var(--color-gray) calc(l * 0.88) calc(c * 1.04) h
+    from var(--color-gray) calc(l * 0.72) calc(c * 1.04) h
   );
   --color-gray-700: oklch(
-    from var(--color-gray) calc(l * 0.77) calc(c * 0.93) h
+    from var(--color-gray) calc(l * 0.61) calc(c * 0.93) h
   );
   --color-gray-800: oklch(
-    from var(--color-gray) calc(l * 0.67) calc(c * 0.76) h
+    from var(--color-gray) calc(l * 0.43) calc(c * 0.76) h
   );
-  --color-gray-900: oklch(from var(--color-gray) calc(l * 0.6) calc(c * 0.6) h);
+  --color-gray-900: oklch(
+    from var(--color-gray) calc(l * 0.35) calc(c * 0.6) h
+  );
   --color-gray-950: oklch(
-    from var(--color-gray) calc(l * 0.42) calc(c * 0.42) h
+    from var(--color-gray) calc(l * 0.24) calc(c * 0.42) h
   );
 
   /* Neutral scale (matched to dove-gray) */
