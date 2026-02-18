@@ -24,7 +24,7 @@ withDefaults(
 
 const buttonStyles = tv({
   base: [
-    "bg-primary-500 text-white hover:bg-primary-600 focus-visible:ring-primary-500 dark:bg-primary-700 dark:hover:bg-primary-800 dark:focus-visible:ring-primary-700 dark:active:bg-primary-900",
+    "bg-primary-500 text-primary-50 hover:bg-primary-600 focus-visible:ring-primary-500 active:bg-primary-700 dark:bg-primary-700 dark:hover:bg-primary-800 dark:focus-visible:ring-primary-700 dark:active:bg-primary-900",
   ],
 });
 </script>
