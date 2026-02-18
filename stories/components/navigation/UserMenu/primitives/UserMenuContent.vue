@@ -23,7 +23,11 @@ defineOptions({
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const contentStyles = tv({
-  base: "z-50 mt-1.5 min-w-48 overflow-auto rounded-md border border-neutral-300 bg-white shadow-lg dark:border-neutral-600 dark:bg-neutral-800",
+  base: [
+    "z-50 mt-1.5 min-w-48 overflow-auto rounded-md border shadow-lg",
+    "border-neutral-300 bg-white",
+    "dark:border-neutral-600 dark:bg-neutral-800",
+  ],
 });
 
 const props = defineProps<{

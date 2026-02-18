@@ -46,18 +46,22 @@ defineOptions({
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const itemStyles = tv({
-  base: "flex cursor-pointer items-center gap-2 text-neutral-900 dark:text-neutral-100",
+  base: [
+    "flex cursor-pointer items-center gap-2",
+    "text-neutral-900",
+    "dark:text-neutral-100",
+  ],
   variants: {
     dense: {
       false: "px-3 py-2.5 text-sm",
       true: "px-2.5 py-2 text-xs",
     },
     active: {
-      true: "bg-neutral-100 dark:bg-neutral-700",
+      true: ["bg-neutral-100", "dark:bg-neutral-700"],
     },
     variant: {
       default: "",
-      danger: "text-red-600 dark:text-red-400",
+      danger: ["text-red-600", "dark:text-red-400"],
     },
     disabled: {
       true: "pointer-events-none cursor-not-allowed opacity-50",

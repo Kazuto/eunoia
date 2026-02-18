@@ -61,7 +61,8 @@ const itemStyles = tv({
   variants: {
     active: {
       true: [
-        "bg-primary-200 font-semibold text-primary-800 hover:bg-primary-300 hover:text-primary-900 focus-visible:bg-primary-100 focus-visible:text-primary-900 focus-visible:ring-primary-200 focus-visible:ring-offset-white",
+        "font-semibold",
+        "bg-primary-200 text-primary-800 hover:bg-primary-300 hover:text-primary-900 focus-visible:bg-primary-100 focus-visible:text-primary-900 focus-visible:ring-primary-200 focus-visible:ring-offset-white",
         "dark:bg-primary-950 dark:text-primary-200 dark:hover:bg-primary-900 dark:hover:text-primary-100 dark:focus-visible:bg-primary-900 dark:focus-visible:text-primary-100 dark:focus-visible:ring-primary-800 dark:focus-visible:ring-offset-neutral-800",
       ],
     },

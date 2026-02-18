@@ -109,17 +109,25 @@ const copyButtonStyles = tv({
   base: "absolute top-2 right-2 opacity-0 transition-opacity group-hover:opacity-100 focus:opacity-100",
   variants: {
     copied: {
-      true: "text-green-600 opacity-100 dark:text-green-500",
+      true: ["opacity-100", "text-green-600", "dark:text-green-500"],
     },
   },
 });
 
 const filenameStyles = tv({
-  base: "block rounded-t-lg bg-neutral-50 px-4 pt-3 pb-0 font-mono text-xs text-neutral-500 dark:bg-neutral-950",
+  base: [
+    "block rounded-t-lg px-4 pt-3 pb-0 font-mono text-xs text-neutral-500",
+    "bg-neutral-50",
+    "dark:bg-neutral-950",
+  ],
 });
 
 const preStyles = tv({
-  base: "overflow-x-auto rounded-lg bg-neutral-50 p-4 dark:bg-neutral-950",
+  base: [
+    "overflow-x-auto rounded-lg p-4",
+    "bg-neutral-50",
+    "dark:bg-neutral-950",
+  ],
   variants: {
     hasFilename: {
       true: "rounded-t-none border-t-0 pt-2",

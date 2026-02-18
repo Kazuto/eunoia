@@ -80,7 +80,10 @@ const boxStyles = tv({
       true: "h-5 w-5",
     },
     checked: {
-      true: "border-primary-500 bg-primary-500 peer-focus-visible:border-primary-700 dark:border-primary-500 dark:bg-primary-500 dark:peer-focus-visible:border-primary-300",
+      true: [
+        "border-primary-500 bg-primary-500 peer-focus-visible:border-primary-700",
+        "dark:border-primary-500 dark:bg-primary-500 dark:peer-focus-visible:border-primary-300",
+      ],
       false: [
         "hover:bg-neutral-50/25 active:bg-neutral-50/25",
         "dark:hover:bg-black/15 dark:active:bg-neutral-900/25",
@@ -111,7 +114,7 @@ const boxStyles = tv({
 });
 
 const descriptionStyles = tv({
-  base: "text-neutral-700 dark:text-neutral-300",
+  base: ["text-neutral-700", "dark:text-neutral-300"],
   variants: {
     dense: {
       false: "text-sm",

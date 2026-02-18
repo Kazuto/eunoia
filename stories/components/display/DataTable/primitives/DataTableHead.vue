@@ -62,11 +62,11 @@ defineOptions({
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const rowStyles = tv({
-  base: "border-b border-neutral-300 dark:border-neutral-700",
+  base: ["border-b", "border-neutral-300", "dark:border-neutral-700"],
 });
 
 const cellStyles = tv({
-  base: "font-semibold text-neutral-700 dark:text-neutral-200",
+  base: ["font-semibold", "text-neutral-700", "dark:text-neutral-200"],
   variants: {
     dense: {
       false: "px-4 py-3",

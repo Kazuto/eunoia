@@ -111,7 +111,7 @@ const sectionStyles = tv({
   ],
   variants: {
     parentActive: {
-      true: "font-semibold text-neutral-900 dark:text-neutral-50",
+      true: ["font-semibold", "text-neutral-900", "dark:text-neutral-50"],
     },
   },
 });

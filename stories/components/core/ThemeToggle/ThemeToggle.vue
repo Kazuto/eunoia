@@ -47,7 +47,11 @@ const icon = computed(() => {
 });
 
 const cycleStyles = tv({
-  base: "dark:focus-visible:ring-offset-dark inline-flex aspect-square items-center justify-center text-neutral-800 transition-colors outline-none hover:bg-black/10 focus-visible:ring-2 focus-visible:ring-neutral-300 focus-visible:ring-offset-2 focus-visible:ring-offset-white active:bg-neutral-200 dark:text-neutral-200 dark:hover:bg-white/10 dark:active:bg-neutral-700",
+  base: [
+    "inline-flex aspect-square items-center justify-center transition-colors outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
+    "text-neutral-800 hover:bg-black/10 focus-visible:ring-neutral-300 focus-visible:ring-offset-white active:bg-neutral-200",
+    "dark:focus-visible:ring-offset-dark dark:text-neutral-200 dark:hover:bg-white/10 dark:active:bg-neutral-700",
+  ],
   variants: {
     dense: {
       false: "rounded-lg p-2.5 text-sm",

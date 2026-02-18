@@ -47,6 +47,10 @@ const t = useLocale(
 const collapsed = defineModel<boolean>("collapsed", { default: false });
 
 const toggleStyles = tv({
-  base: "flex aspect-square w-10 items-center justify-center rounded-md p-1 text-neutral-400 hover:bg-black/10 hover:text-neutral-700 dark:hover:bg-white/10 dark:hover:text-neutral-200",
+  base: [
+    "flex aspect-square w-10 items-center justify-center rounded-md p-1",
+    "text-neutral-400 hover:bg-black/10 hover:text-neutral-700",
+    "dark:hover:bg-white/10 dark:hover:text-neutral-200",
+  ],
 });
 </script>

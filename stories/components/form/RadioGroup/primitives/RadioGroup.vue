@@ -66,7 +66,11 @@ const indicatorStyle = computed(() => {
 });
 
 const groupStyles = tv({
-  base: "relative inline-flex w-full rounded-lg bg-neutral-100 p-1 dark:bg-neutral-900",
+  base: [
+    "relative inline-flex w-full rounded-lg p-1",
+    "bg-neutral-100",
+    "dark:bg-neutral-900",
+  ],
   variants: {
     dense: {
       false: "",
@@ -79,7 +83,11 @@ const groupStyles = tv({
 });
 
 const indicatorStyles = tv({
-  base: "absolute top-1 bottom-1 rounded-md border border-transparent bg-white shadow transition-[left] duration-200 ease-out dark:bg-neutral-700",
+  base: [
+    "absolute top-1 bottom-1 rounded-md border border-transparent shadow transition-[left] duration-200 ease-out",
+    "bg-white",
+    "dark:bg-neutral-700",
+  ],
   variants: {
     dense: {
       false: "",
@@ -92,7 +100,11 @@ const indicatorStyles = tv({
 });
 
 const optionStyles = tv({
-  base: "relative z-10 flex-1 cursor-pointer text-center font-sans font-medium text-neutral-500 transition-colors duration-200 select-none dark:text-neutral-200",
+  base: [
+    "relative z-10 flex-1 cursor-pointer text-center font-sans font-medium transition-colors duration-200 select-none",
+    "text-neutral-500",
+    "dark:text-neutral-200",
+  ],
   variants: {
     dense: {
       false: "px-4 py-2 text-sm",

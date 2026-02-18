@@ -27,7 +27,11 @@ withDefaults(
 );
 
 const sidebarRootStyles = tv({
-  base: "flex h-full flex-col overflow-hidden border-r border-neutral-200 bg-white font-sans transition-[width] duration-200 dark:border-neutral-700 dark:bg-neutral-800",
+  base: [
+    "flex h-full flex-col overflow-hidden border-r font-sans transition-[width] duration-200",
+    "border-neutral-200 bg-white",
+    "dark:border-neutral-800 dark:bg-neutral-900",
+  ],
   variants: {
     collapsed: {
       false: "min-w-48",

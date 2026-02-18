@@ -31,7 +31,10 @@ defineOptions({
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const avatarStyles = tv({
-  base: "inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full bg-primary-200 dark:bg-primary-800",
+  base: [
+    "inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full bg-primary-200",
+    "dark:bg-primary-800",
+  ],
   variants: {
     size: {
       xs: "size-6",
@@ -47,7 +50,10 @@ const avatarStyles = tv({
 });
 
 const fallbackStyles = tv({
-  base: "font-sans font-medium text-primary-700 select-none dark:text-primary-200",
+  base: [
+    "font-sans font-medium text-primary-700 select-none",
+    "dark:text-primary-200",
+  ],
   variants: {
     size: {
       xs: "text-[10px]",

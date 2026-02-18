@@ -34,6 +34,6 @@ withDefaults(
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const separatorStyles = tv({
-  base: "text-neutral-400 dark:text-neutral-500",
+  base: ["text-neutral-400", "dark:text-neutral-500"],
 });
 </script>

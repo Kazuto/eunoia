@@ -31,7 +31,7 @@ const props = withDefaults(
 const tag = computed(() => `h${props.level}` as const);
 
 const headlineStyles = tv({
-  base: "font-sans font-bold text-neutral-900 dark:text-neutral-100",
+  base: ["font-sans font-bold", "text-neutral-900", "dark:text-neutral-100"],
   variants: {
     level: {
       1: "text-4xl",

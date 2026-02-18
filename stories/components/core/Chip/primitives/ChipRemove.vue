@@ -31,14 +31,23 @@ const removeStyles = tv({
   base: "inline-flex aspect-square items-center justify-center rounded-full transition-colors",
   variants: {
     variant: {
-      primary:
-        "bg-primary-600 text-white dark:bg-primary-900 dark:text-primary-100",
-      secondary:
-        "bg-neutral-600 text-white dark:bg-neutral-900 dark:text-neutral-100",
-      success: "bg-green-600 text-white dark:bg-green-900 dark:text-green-100",
-      warning:
-        "bg-yellow-600 text-white dark:bg-yellow-900 dark:text-yellow-100",
-      danger: "bg-red-600 text-white dark:bg-red-900 dark:text-red-100",
+      primary: [
+        "bg-primary-600 text-white",
+        "dark:bg-primary-900 dark:text-primary-100",
+      ],
+      secondary: [
+        "bg-neutral-600 text-white",
+        "dark:bg-neutral-900 dark:text-neutral-100",
+      ],
+      success: [
+        "bg-green-600 text-white",
+        "dark:bg-green-900 dark:text-green-100",
+      ],
+      warning: [
+        "bg-yellow-600 text-white",
+        "dark:bg-yellow-900 dark:text-yellow-100",
+      ],
+      danger: ["bg-red-600 text-white", "dark:bg-red-900 dark:text-red-100"],
     },
     dense: {
       false: "h-4 w-4 p-0.5 text-[10px]",

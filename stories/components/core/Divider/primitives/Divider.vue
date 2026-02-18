@@ -53,7 +53,7 @@ withDefaults(
 );
 
 const dividerStyles = tv({
-  base: "border-neutral-200 dark:border-neutral-700",
+  base: ["border-neutral-200", "dark:border-neutral-700"],
   variants: {
     orientation: {
       horizontal: "w-full",
@@ -93,7 +93,7 @@ const dividerStyles = tv({
 });
 
 const lineStyles = tv({
-  base: "flex-1 border-neutral-200 dark:border-neutral-700",
+  base: ["flex-1", "border-neutral-200", "dark:border-neutral-700"],
   variants: {
     orientation: {
       horizontal: "border-t",
@@ -106,6 +106,6 @@ const lineStyles = tv({
 });
 
 const labelStyles = tv({
-  base: "shrink-0 text-xs text-neutral-500 dark:text-neutral-400",
+  base: ["shrink-0 text-xs", "text-neutral-500", "dark:text-neutral-400"],
 });
 </script>

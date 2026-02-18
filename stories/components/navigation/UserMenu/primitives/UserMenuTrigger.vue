@@ -36,10 +36,18 @@ defineOptions({
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const triggerStyles = tv({
-  base: "inline-flex cursor-pointer items-center gap-2 rounded-full border border-neutral-200 bg-white p-1 font-sans outline-none focus-visible:ring-2 focus-visible:ring-neutral-300 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:border-neutral-700 dark:bg-neutral-800 dark:focus-visible:ring-neutral-700 dark:focus-visible:ring-offset-neutral-900",
+  base: [
+    "inline-flex cursor-pointer items-center gap-2 rounded-full border p-1 font-sans outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
+    "border-neutral-200 bg-white focus-visible:ring-neutral-300 focus-visible:ring-offset-white",
+    "dark:border-neutral-700 dark:bg-neutral-800 dark:focus-visible:ring-neutral-700 dark:focus-visible:ring-offset-neutral-900",
+  ],
   variants: {
     open: {
-      true: "ring-2 ring-neutral-300 ring-offset-2 ring-offset-white dark:ring-neutral-600 dark:ring-offset-neutral-900",
+      true: [
+        "ring-2 ring-offset-2",
+        "ring-neutral-300 ring-offset-white",
+        "dark:ring-neutral-600 dark:ring-offset-neutral-900",
+      ],
     },
     hasName: {
       true: "pr-3",
