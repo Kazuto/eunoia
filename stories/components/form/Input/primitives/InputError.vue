@@ -37,7 +37,7 @@ defineProps<{
 }>();
 
 const errorStyles = tv({
-  base: "flex flex-col gap-0.5 text-red-500",
+  base: "flex flex-col gap-0.5 text-red-500 dark:text-red-400",
   variants: {
     dense: {
       false: "text-xs",

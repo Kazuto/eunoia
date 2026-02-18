@@ -1,40 +1,49 @@
 <template>
-  <div class="flex h-screen flex-col bg-white font-sans dark:bg-neutral-950">
+  <div class="flex h-screen flex-col bg-white font-sans dark:bg-neutral-900">
     <!-- Header -->
-    <header
-      class="flex shrink-0 items-center justify-between border-b border-neutral-200 bg-white px-4 py-3 dark:border-neutral-700 dark:bg-neutral-950"
-    >
-      <div class="flex items-center gap-3">
+    <Header>
+      <template #left>
         <SidebarToggle v-model:collapsed="sidebarCollapsed" />
         <h1 class="text-xl font-bold text-neutral-900 dark:text-neutral-100">
           Dashboard
         </h1>
-      </div>
-      <div class="flex items-center gap-3">
-        <Badge
-          variant="success"
-          pill
-        >
-          5 online
-        </Badge>
+      </template>
+      <template #right>
+        <template v-if="loggedIn">
+          <Badge
+            variant="success"
+            pill
+          >
+            5 online
+          </Badge>
+          <Button
+            dense
+            ghost
+          >
+            Settings
+          </Button>
+          <Button
+            dense
+            primary
+          >
+            New Employee
+          </Button>
+          <UserMenu
+            name="Alice Johnson"
+            :items="userMenuItems"
+            @select="onMenuSelect"
+          />
+        </template>
         <Button
-          dense
-          ghost
-        >
-          Settings
-        </Button>
-        <Button
+          v-else
           dense
           primary
+          @click="loggedIn = true"
         >
-          New Employee
+          Log in
         </Button>
-        <UserMenu
-          name="Alice Johnson"
-          :items="userMenuItems"
-        />
-      </div>
-    </header>
+      </template>
+    </Header>
 
     <!-- Body: Sidebar + Main -->
     <div class="flex flex-1 overflow-hidden">
@@ -337,11 +346,19 @@ import {
   Sidebar,
   SidebarToggle,
 } from "@/components";
+import Header from "@/components/layout/Header.vue";
 import Menu from "@/components/navigation/Menu/Menu.vue";
 import UserMenu from "@/components/navigation/UserMenu/UserMenu.vue";
 import type { MenuItem } from "@/components/navigation/Menu/types";
 import type { UserMenuItem } from "@/components/navigation/UserMenu/types";
 
+const emit = defineEmits<{
+  (e: "view", item: Record<string, unknown>): void;
+  (e: "edit", item: Record<string, unknown>): void;
+  (e: "delete", item: Record<string, unknown>): void;
+}>();
+
+const loggedIn = ref(true);
 const sidebarCollapsed = ref(false);
 
 const name = ref("");
@@ -354,11 +371,9 @@ const newsletter = ref(false);
 const nameErrors = ref<string[]>([]);
 const emailErrors = ref(["Please enter a valid email address"]);
 
-const emit = defineEmits<{
-  (e: "view", item: Record<string, unknown>): void;
-  (e: "edit", item: Record<string, unknown>): void;
-  (e: "delete", item: Record<string, unknown>): void;
-}>();
+const onMenuSelect = (label: string) => {
+  if (label === "Sign Out") loggedIn.value = false;
+};
 
 const onView = (item: Record<string, unknown>) => emit("view", item);
 const onEdit = (item: Record<string, unknown>) => emit("edit", item);
@@ -368,7 +383,21 @@ const menuItems: MenuItem[] = [
   { label: "Dashboard", href: "/", icon: "house-simple" },
   { label: "Employees", href: "/employees", icon: "users" },
   { label: "Projects", href: "/projects", icon: "folder" },
-  { label: "Settings", href: "/settings", icon: "gear" },
+  {
+    label: "Settings",
+    href: "/settings",
+    icon: "gear",
+    items: [
+      { label: "Profile", href: "/profile", icon: "user" },
+      { label: "Account Settings", href: "/account", icon: "gear" },
+      {
+        label: "Sign Out",
+        href: "/signout",
+        icon: "sign-out",
+        variant: "danger",
+      },
+    ],
+  },
 ];
 
 const userMenuItems: UserMenuItem[] = [

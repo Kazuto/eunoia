@@ -21,7 +21,7 @@ const cardStyles = tv({
   base: [
     "rounded-lg shadow-[inset_0_0_0_1px_rgba(0,0,0,0.10)]",
     "bg-white",
-    "dark:bg-neutral-900 dark:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.15)]",
+    "dark:bg-neutral-800 dark:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.15)]",
   ],
   variants: {
     dense: {
