@@ -1,7 +1,7 @@
 <template>
   <tbody
     v-bind="forwardedAttrs"
-    :class="classAttr"
+    :class="bodyStyles({ class: classAttr })"
   >
     <tr
       v-for="(item, itemIndex) in items"
@@ -46,6 +46,8 @@ defineOptions({
 });
 
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
+
+const bodyStyles = tv({});
 
 const rowStyles = tv({
   base: [

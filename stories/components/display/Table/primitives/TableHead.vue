@@ -1,7 +1,7 @@
 <template>
   <thead
     v-bind="forwardedAttrs"
-    :class="classAttr"
+    :class="headStyles({ class: classAttr })"
   >
     <tr :class="rowStyles({ dense })">
       <th
@@ -24,6 +24,8 @@ defineOptions({
 });
 
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
+
+const headStyles = tv({});
 
 const rowStyles = tv({
   base: ["border-b", "border-neutral-300", "dark:border-neutral-700"],

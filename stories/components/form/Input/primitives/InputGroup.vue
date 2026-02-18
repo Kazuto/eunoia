@@ -1,6 +1,7 @@
 <template>
   <div
-    :class="variants({ disabled, invalid })"
+    v-bind="forwardedAttrs"
+    :class="variants({ disabled, invalid, class: classAttr })"
     role="group"
   >
     <slot />
@@ -9,6 +10,13 @@
 
 <script setup lang="ts">
 import { tv } from "tailwind-variants";
+import { useForwardedAttrs } from "@/composables";
+
+defineOptions({
+  inheritAttrs: false,
+});
+
+const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 withDefaults(
   defineProps<{

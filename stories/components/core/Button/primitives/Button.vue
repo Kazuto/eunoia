@@ -1,11 +1,12 @@
 <template>
   <button
+    v-bind="forwardedAttrs"
     :class="
       buttonStyles({
         dense,
         icon: hasIcon,
         iconOnly: isIconOnly,
-        class: attrs.class as string,
+        class: classAttr,
       })
     "
     @click="emit('click', $event)"
@@ -22,16 +23,16 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, useAttrs } from "vue";
+import { computed } from "vue";
 import { tv } from "tailwind-variants";
 import { Icon } from "@/components";
-import { useSlotContent } from "@/composables";
+import { useSlotContent, useForwardedAttrs } from "@/composables";
 
 defineOptions({
   inheritAttrs: false,
 });
 
-const attrs = useAttrs();
+const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const props = withDefaults(
   defineProps<{

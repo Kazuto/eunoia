@@ -1,5 +1,8 @@
 <template>
-  <li>
+  <li
+    v-bind="forwardedAttrs"
+    :class="classAttr"
+  >
     <ul class="flex list-none flex-col gap-1">
       <Tooltip
         v-if="sidebarCollapsed"
@@ -80,10 +83,15 @@ import MenuLabel from "./MenuLabel.vue";
 import type { MenuItem } from "../types";
 import { Icon } from "@/components";
 import Tooltip from "@/components/feedback/Tooltip/Tooltip.vue";
-import { useSanitizedId } from "@/composables";
+import { useSanitizedId, useForwardedAttrs } from "@/composables";
 import { sidebarCollapsedKey } from "@/components/layout/Sidebar/keys";
 import { ref, computed, inject } from "vue";
 
+defineOptions({
+  inheritAttrs: false,
+});
+
+const { classAttr, forwardedAttrs } = useForwardedAttrs();
 const sidebarCollapsed = inject(sidebarCollapsedKey, undefined);
 
 const props = defineProps<

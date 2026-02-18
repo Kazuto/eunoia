@@ -1,18 +1,21 @@
 <template>
   <input
-    v-bind="$attrs"
+    v-bind="forwardedAttrs"
     v-model="model"
-    :class="inputStyles({ dense, invalid })"
+    :class="inputStyles({ dense, invalid, class: classAttr })"
     :aria-invalid="invalid || undefined"
   />
 </template>
 
 <script setup lang="ts">
 import { tv } from "tailwind-variants";
+import { useForwardedAttrs } from "@/composables";
 
 defineOptions({
   inheritAttrs: false,
 });
+
+const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const model = defineModel<string | number>();
 

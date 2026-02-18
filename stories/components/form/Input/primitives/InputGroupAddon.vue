@@ -1,22 +1,23 @@
 <template>
   <div
+    v-bind="forwardedAttrs"
     :class="
       variants({
         position,
         invalid,
         disabled,
-        role: $attrs.role,
-        class: $attrs.class,
+        role: forwardedAttrs.role,
+        class: classAttr,
       })
     "
-    :tabindex="$attrs.role === 'button' ? 0 : undefined"
-    v-bind="$attrs"
+    :tabindex="forwardedAttrs.role === 'button' ? 0 : undefined"
   >
     <slot />
   </div>
 </template>
 <script setup lang="ts">
 import { tv } from "tailwind-variants";
+import { useForwardedAttrs } from "@/composables";
 
 defineProps<{
   position?: "left" | "right";
@@ -27,6 +28,8 @@ defineProps<{
 defineOptions({
   inheritAttrs: false,
 });
+
+const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const variants = tv({
   base: [
