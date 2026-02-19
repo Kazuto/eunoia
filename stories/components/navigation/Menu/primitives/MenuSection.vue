@@ -5,46 +5,39 @@
   >
     <ul class="flex list-none flex-col gap-1">
       <Tooltip
-        v-if="sidebarCollapsed"
         :content="label"
+        :disabled="!sidebarCollapsed"
         placement="right"
         dense
+        class="w-full"
       >
         <li
           :class="sectionStyles({ parentActive })"
           :style="{ paddingLeft: padding }"
+          :aria-expanded="sidebarCollapsed ? undefined : open"
+          :aria-controls="sidebarCollapsed ? undefined : childrenId"
+          :aria-label="sidebarCollapsed ? undefined : toggleSectionLabel"
+          :role="sidebarCollapsed ? undefined : 'button'"
+          :tabindex="sidebarCollapsed ? undefined : 0"
+          @click="!sidebarCollapsed && (open = !open)"
+          @keydown.enter="!sidebarCollapsed && (open = !open)"
+          @keydown.space.prevent="!sidebarCollapsed && (open = !open)"
         >
           <MenuLabel :icon>
             {{ label }}
           </MenuLabel>
+
+          <Icon
+            v-if="!sidebarCollapsed"
+            name="caret-right"
+            size="sm"
+            :class="[
+              'shrink-0 transition-transform duration-200',
+              open && 'rotate-90',
+            ]"
+          />
         </li>
       </Tooltip>
-      <li
-        v-else
-        :class="sectionStyles({ parentActive })"
-        :style="{ paddingLeft: padding }"
-        :aria-expanded="open"
-        :aria-controls="childrenId"
-        :aria-label="toggleSectionLabel"
-        role="button"
-        tabindex="0"
-        @click="open = !open"
-        @keydown.enter="open = !open"
-        @keydown.space.prevent="open = !open"
-      >
-        <MenuLabel :icon>
-          {{ label }}
-        </MenuLabel>
-
-        <Icon
-          name="caret-right"
-          size="sm"
-          :class="[
-            'shrink-0 transition-transform duration-200',
-            open && 'rotate-90',
-          ]"
-        />
-      </li>
 
       <li v-if="!sidebarCollapsed">
         <ul
@@ -113,7 +106,7 @@ const open = ref(true);
 
 const sectionStyles = tv({
   base: [
-    "flex cursor-pointer items-center justify-between gap-2 rounded-lg px-3 py-2 text-sm no-underline transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
+    "flex w-full cursor-pointer items-center justify-between gap-2 rounded-lg px-3 py-2 text-sm no-underline transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
     "text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900 focus-visible:bg-neutral-100 focus-visible:text-neutral-900 focus-visible:ring-neutral-100 focus-visible:ring-offset-white hover:focus-visible:bg-neutral-200 hover:focus-visible:ring-neutral-200",
     "dark:text-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-neutral-200 dark:focus-visible:bg-neutral-700 dark:focus-visible:text-neutral-200 dark:focus-visible:ring-neutral-700 dark:focus-visible:ring-offset-neutral-800 dark:hover:focus-visible:bg-neutral-600 dark:hover:focus-visible:ring-neutral-600",
   ],
