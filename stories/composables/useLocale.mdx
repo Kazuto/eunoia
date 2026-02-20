@@ -19,12 +19,32 @@ All files in the `locales/` directory are auto-discovered at build time via `imp
 
 Keys follow the pattern `{category}.{component}.{label}`:
 
-| Key                            | Default        |
-| ------------------------------ | -------------- |
-| `input.number.increase-value`  | Increase value |
-| `input.number.decrease-value`  | Decrease value |
-| `input.password.show-password` | Show password  |
-| `input.password.hide-password` | Hide password  |
+<table class="w-full">
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>input.number.increase-value</td>
+      <td>Increase value</td>
+    </tr>
+    <tr>
+      <td>input.number.decrease-value</td>
+      <td>Decrease value</td>
+    </tr>
+    <tr>
+      <td>input.password.show-password</td>
+      <td>Show password</td>
+    </tr>
+    <tr>
+      <td>input.password.hide-password</td>
+      <td>Hide password</td>
+    </tr>
+  </tbody>
+</table>
 
 ## API
 
@@ -43,10 +63,33 @@ const t = useLocale(
 t("increase-value"); // => "Increase value"
 ```
 
-| Parameter   | Type                               | Description                                      |
-| ----------- | ---------------------------------- | ------------------------------------------------ |
-| `prefix`    | `string`                           | Dot-notation prefix, e.g. `"input.number"`       |
-| `overrides` | `Ref<LocaleMessages \| undefined>` | Optional per-instance overrides using short keys |
+<table class="w-full">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>prefix</td>
+      <td>
+        <code>string</code>
+      </td>
+      <td>
+        Dot-notation prefix, e.g. <code>"input.number"</code>
+      </td>
+    </tr>
+    <tr>
+      <td>overrides</td>
+      <td>
+        <code>Ref&lt;LocaleMessages | undefined&gt;</code>
+      </td>
+      <td>Optional per-instance overrides using short keys</td>
+    </tr>
+  </tbody>
+</table>
 
 ### `setDefaultLocale(locale)`
 
