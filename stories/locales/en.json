@@ -23,5 +23,7 @@
   "user-menu.toggle": "User menu",
   "breadcrumb.label": "Breadcrumb",
   "sidebar.expand": "Expand sidebar",
-  "sidebar.collapse": "Collapse sidebar"
+  "sidebar.collapse": "Collapse sidebar",
+  "slider.lower-handle": "Minimum",
+  "slider.upper-handle": "Maximum"
 }
