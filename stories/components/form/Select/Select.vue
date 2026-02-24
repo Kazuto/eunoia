@@ -4,6 +4,7 @@
     class="relative flex flex-col gap-1"
   >
     <Label
+      v-if="hasDefaultSlot"
       :id="labelId"
       :dense
     >
@@ -65,6 +66,7 @@ import Label from "../Input/primitives/Label.vue";
 import SelectTrigger from "./primitives/SelectTrigger.vue";
 import SelectDropdown from "./primitives/SelectDropdown.vue";
 import SelectOption from "./primitives/SelectOption.vue";
+import { useSlotContent } from "@/composables";
 
 defineOptions({
   inheritAttrs: false,
@@ -91,6 +93,9 @@ const props = withDefaults(
 );
 
 const model = defineModel<string | number | Array<string | number>>();
+
+const { hasSlotContent } = useSlotContent();
+const hasDefaultSlot = hasSlotContent("default");
 
 const t = useLocale(
   "select",
