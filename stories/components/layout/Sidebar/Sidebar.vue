@@ -3,7 +3,7 @@
     v-bind="$attrs"
     :collapsed
   >
-    <div class="flex-1 overflow-y-auto">
+    <div class="scrollbar-subtle flex-1 overflow-y-auto">
       <slot />
     </div>
 
