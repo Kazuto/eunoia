@@ -22,7 +22,11 @@ defineProps<{
 }>();
 
 const bodyStyles = tv({
-  base: "scrollbar-subtle flex-1 overflow-y-auto text-neutral-600",
+  base: [
+    "scrollbar-subtle flex-1 overflow-y-auto",
+    "text-neutral-600",
+    "dark:text-neutral-400",
+  ],
   variants: {
     dense: {
       false: "px-6 py-4 text-sm",
