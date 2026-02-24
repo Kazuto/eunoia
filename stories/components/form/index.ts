@@ -1,3 +1,4 @@
+export { default as DatePicker } from "./DatePicker/DatePicker.vue";
 export { default as Input } from "./Input/Input.vue";
 export { default as Slider } from "./Slider/Slider.vue";
 export { default as RadioGroup } from "./RadioGroup/RadioGroup.vue";

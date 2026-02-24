@@ -13,7 +13,9 @@
       "@/components": ["stories/components/index.ts"],
       "@/components/*": ["stories/components/*"],
       "@/composables": ["stories/composables/index.ts"],
-      "@/composables/*": ["stories/composables/*"]
+      "@/composables/*": ["stories/composables/*"],
+      "@/types": ["stories/types/index.ts"],
+      "@/types/*": ["stories/types/*"]
     }
   },
   "include": ["env.d.ts", "stories/**/*", "vite.config.ts"],
