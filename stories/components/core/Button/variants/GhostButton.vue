@@ -24,8 +24,8 @@ withDefaults(
 
 const buttonStyles = tv({
   base: [
-    "bg-transparent text-neutral-800 hover:bg-black/10 focus-visible:ring-neutral-300 active:bg-black/5",
-    "dark:text-neutral-200 dark:hover:bg-white/10 dark:focus-visible:ring-neutral-700 dark:active:bg-white/5",
+    "bg-transparent text-neutral-800 focus-visible:ring-neutral-300 enabled:hover:bg-black/10 enabled:active:bg-black/5",
+    "dark:text-neutral-200 dark:focus-visible:ring-neutral-700 dark:enabled:hover:bg-white/10 dark:enabled:active:bg-white/5",
   ],
 });
 </script>
