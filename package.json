@@ -64,14 +64,5 @@
     "code:format": "bun lint && bun format",
     "test": "vitest run",
     "prepare": "husky"
-  },
-  "lint-staged": {
-    "*.{ts,tsx,vue}": [
-      "eslint --cache --cache-strategy content --fix",
-      "prettier --write"
-    ],
-    "*.{js,json,css,md,mdx}": [
-      "prettier --write"
-    ]
   }
 }
