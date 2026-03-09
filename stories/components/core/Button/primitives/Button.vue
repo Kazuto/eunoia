@@ -16,7 +16,7 @@
     <Icon
       v-if="icon"
       :name="icon"
-      :size="dense ? 'sm' : 'md'"
+      :size="dense ? 'md' : 'sm'"
     />
     <slot />
   </button>
@@ -51,14 +51,14 @@ const isIconOnly = computed(() => hasIcon.value && !hasDefaultSlot.value);
 
 const buttonStyles = tv({
   base: [
-    "inline-flex cursor-pointer items-center gap-1.5 rounded-lg border-0 font-sans leading-none font-bold transition-colors outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+    "inline-flex cursor-pointer items-center gap-1.5 rounded-lg border-0 font-sans leading-none font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
     "focus-visible:ring-offset-white",
     "dark:focus-visible:ring-offset-neutral-900",
   ],
   variants: {
     dense: {
-      false: "px-5 py-2.5 text-sm",
-      true: "px-4 py-2.5 text-xs",
+      false: "px-3 py-2.25 text-sm",
+      true: "px-2.5 py-2 text-xs",
     },
     icon: {
       true: "",
@@ -68,8 +68,8 @@ const buttonStyles = tv({
     },
   },
   compoundVariants: [
-    { dense: false, icon: true, class: "px-3 py-2.5" },
-    { dense: true, icon: true, class: "px-2.5 py-2" },
+    { dense: true, icon: true, class: "px-3 py-2.5" },
+    { dense: false, icon: true, class: "px-2.5 py-2" },
   ],
   defaultVariants: {
     dense: false,

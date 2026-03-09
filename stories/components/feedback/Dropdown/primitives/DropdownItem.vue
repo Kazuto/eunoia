@@ -33,17 +33,17 @@ const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const itemStyles = tv({
   base: [
-    "flex cursor-pointer items-center gap-2",
+    "flex cursor-pointer items-center gap-2 rounded-md",
     "text-neutral-900",
     "dark:text-neutral-100",
   ],
   variants: {
     dense: {
-      false: "px-3 py-2.5 text-sm",
+      false: "px-3 py-2.25 text-sm",
       true: "px-2.5 py-2 text-xs",
     },
     active: {
-      true: ["bg-neutral-100", "dark:bg-neutral-700"],
+      true: ["bg-neutral-200", "dark:bg-neutral-700"],
     },
     variant: {
       default: "",
@@ -57,7 +57,7 @@ const itemStyles = tv({
     {
       active: true,
       variant: "danger",
-      class: "bg-red-50 dark:bg-red-950",
+      class: "bg-red-200 dark:bg-red-950",
     },
   ],
   defaultVariants: {

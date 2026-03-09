@@ -78,8 +78,8 @@ const triggerStyles = tv({
   ],
   variants: {
     dense: {
-      false: "min-h-[42px] px-3 py-1.5 text-sm",
-      true: "min-h-[38px] px-2.5 py-1.5 text-xs",
+      false: "min-h-[38px] px-3 py-1.5 text-sm",
+      true: "min-h-[32px] px-2.5 py-1.5 text-xs",
     },
     invalid: {
       true: "border-red-500 bg-red-50 text-red-900 focus-visible:border-red-400 dark:focus-visible:border-red-500",

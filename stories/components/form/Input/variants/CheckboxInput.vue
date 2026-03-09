@@ -76,7 +76,7 @@ const boxStyles = tv({
   ],
   variants: {
     dense: {
-      false: "h-7 w-7",
+      false: "h-6 w-6",
       true: "h-5 w-5",
     },
     checked: {
