@@ -32,22 +32,21 @@ defineOptions({
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const variants = tv({
-  base: [
-    "flex items-center rounded-md border border-transparent px-3 py-1 text-neutral-500",
-  ],
+  base: "flex items-center border border-transparent text-neutral-500",
   variants: {
     role: {
       button: [
-        "cursor-pointer outline-none focus-visible:text-primary-300 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 dark:focus-visible:text-primary-500",
+        "cursor-pointer transition-colors outline-none disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
+        "text-neutral-600 hover:bg-neutral-200 focus-visible:bg-neutral-200",
+        "dark:text-neutral-400 dark:hover:bg-neutral-700 dark:focus-visible:bg-neutral-700",
       ],
+      undefined: "rounded-md px-3 py-1",
     },
   },
   compoundVariants: [
     {
-      disabled: true,
       role: "button",
-      class:
-        "cursor-not-allowed hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 active:bg-transparent",
+      class: "px-2 py-0",
     },
     {
       position: "left",
