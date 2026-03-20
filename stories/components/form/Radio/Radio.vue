@@ -2,10 +2,13 @@
   <label :class="wrapperStyles({ disabled })">
     <input
       v-bind="$attrs"
+      :id="radioId"
       v-model="model"
       type="radio"
       :value="value"
       :disabled
+      :aria-label="ariaLabel"
+      :aria-labelledby="ariaLabelledby"
       class="peer sr-only"
     />
     <span :class="radioStyles({ dense, invalid, checked: model === value })">
@@ -22,11 +25,13 @@
 
 <script setup lang="ts">
 import { tv } from "tailwind-variants";
+import { useSanitizedId } from "@/composables";
 
 defineOptions({
   inheritAttrs: false,
 });
 
+const radioId = useSanitizedId("radio", { useAttrId: true });
 const model = defineModel<string | number>();
 
 defineProps<{
@@ -34,6 +39,8 @@ defineProps<{
   dense?: boolean;
   invalid?: boolean;
   disabled?: boolean;
+  ariaLabel?: string;
+  ariaLabelledby?: string;
 }>();
 
 const wrapperStyles = tv({
