@@ -1,44 +1,69 @@
 <template>
-  <label :class="wrapperStyles({ disabled })">
-    <input
-      ref="inputRef"
-      v-bind="$attrs"
-      v-model="model"
-      type="checkbox"
-      :disabled
-      class="peer sr-only"
-    />
-    <span :class="boxStyles({ dense, invalid, checked: model, indeterminate })">
-      <Icon
-        v-if="model && !indeterminate"
-        name="check"
-        :class="iconStyles({ dense })"
+  <div class="flex flex-col gap-1">
+    <label :class="wrapperStyles({ disabled })">
+      <input
+        v-bind="$attrs"
+        :id="checkboxId"
+        ref="inputRef"
+        v-model="model"
+        type="checkbox"
+        :disabled
+        :aria-label="ariaLabel"
+        :aria-labelledby="ariaLabelledby"
+        class="peer sr-only"
       />
-      <Icon
-        v-else-if="indeterminate"
-        name="minus"
-        :class="iconStyles({ dense })"
-      />
-    </span>
-    <span
-      v-if="$slots.description"
-      :class="descriptionStyles({ dense })"
+      <span
+        :class="boxStyles({ dense, invalid, checked: model, indeterminate })"
+      >
+        <Icon
+          v-if="model && !indeterminate"
+          name="check"
+          :class="iconStyles({ dense })"
+        />
+        <Icon
+          v-else-if="indeterminate"
+          name="minus"
+          :class="iconStyles({ dense })"
+        />
+      </span>
+      <span
+        v-if="$slots.description"
+        :class="descriptionStyles({ dense })"
+      >
+        <slot name="description" />
+      </span>
+    </label>
+    <InputHintRow
+      v-if="hasHelper"
+      :dense
     >
-      <slot name="description" />
-    </span>
-  </label>
+      <InputHelper>
+        {{ helper }}
+      </InputHelper>
+    </InputHintRow>
+    <InputError
+      v-if="errors?.length"
+      :errors="errors"
+      :dense
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
-import { ref, toRef, watchEffect } from "vue";
+import { ref, toRef, watchEffect, computed } from "vue";
 import { tv } from "tailwind-variants";
 import { Icon } from "@/components";
+import InputHintRow from "../Input/primitives/InputHintRow.vue";
+import InputHelper from "../Input/primitives/InputHelper.vue";
+import InputError from "../Input/primitives/InputError.vue";
+import { useSanitizedId } from "@/composables";
 
 defineOptions({
   inheritAttrs: false,
 });
 
 const inputRef = ref<HTMLInputElement | null>(null);
+const checkboxId = useSanitizedId("checkbox", { useAttrId: true });
 const model = defineModel<boolean>();
 
 const props = withDefaults(
@@ -47,11 +72,16 @@ const props = withDefaults(
     invalid?: boolean;
     disabled?: boolean;
     indeterminate?: boolean;
+    helper?: string;
+    errors?: string[];
+    ariaLabel?: string;
+    ariaLabelledby?: string;
   }>(),
   {}
 );
 
 const indeterminate = toRef(props, "indeterminate");
+const hasHelper = computed(() => props.helper && !props.errors?.length);
 
 watchEffect(() => {
   if (inputRef.value) {
