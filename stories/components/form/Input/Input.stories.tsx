@@ -3,7 +3,6 @@ import { ref } from "vue";
 import type { Meta, StoryObj } from "@storybook/vue3-vite";
 
 import Input from "./Input.vue";
-import { Link } from "@/components";
 
 const meta = {
   component: Input,
@@ -11,7 +10,7 @@ const meta = {
   argTypes: {
     type: {
       control: "select",
-      options: ["text", "password", "number", "checkbox", "radio"],
+      options: ["text", "email", "password", "url", "tel", "search"],
     },
     dense: { control: "boolean" },
     disabled: { control: "boolean" },
@@ -36,7 +35,7 @@ const meta = {
   },
   render: (args: any) => ({
     setup() {
-      const value = ref<string | number>();
+      const value = ref<string>();
 
       return () => (
         <Input
@@ -105,39 +104,32 @@ export const Password: Story = {
   },
 };
 
-export const Number: Story = {
+export const Email: Story = {
   args: {
-    type: "number",
+    type: "email",
+    default: "Email Address",
+    placeholder: "you@example.com",
   },
 };
 
-export const Checkbox: Story = {
+export const WithPrepend: Story = {
   args: {
-    type: "checkbox",
-    default: "Terms",
+    type: "text",
+    default: "Website",
+    placeholder: "example.com",
   },
   render: (args: any) => ({
     setup() {
-      const checked = ref<boolean>(false);
+      const value = ref<string>();
 
       return () => (
         <Input
           {...args}
-          v-model={checked.value}
+          v-model={value.value}
         >
           {{
             default: () => args.default,
-            description: () => (
-              <span>
-                I accept the{" "}
-                <Link
-                  href="#"
-                  class="text-primary-500 underline"
-                >
-                  terms and conditions
-                </Link>
-              </span>
-            ),
+            prepend: () => "https://",
           }}
         </Input>
       );
@@ -145,73 +137,24 @@ export const Checkbox: Story = {
   }),
 };
 
-export const Radio: Story = {
+export const WithAppend: Story = {
   args: {
-    type: "radio",
-    default: "Preferred Role",
+    type: "text",
+    default: "Domain",
+    placeholder: "mysite",
   },
   render: (args: any) => ({
     setup() {
-      const selected = ref<string>();
-
-      return () => (
-        <div class="flex flex-col gap-1">
-          <Input
-            {...args}
-            v-model={selected.value}
-            name="role"
-            value="engineer"
-          >
-            {{
-              default: () => args.default,
-              description: () => "Engineer",
-            }}
-          </Input>
-          <Input
-            {...args}
-            v-model={selected.value}
-            name="role"
-            value="designer"
-          >
-            {{
-              default: () => null,
-              description: () => "Designer",
-            }}
-          </Input>
-          <Input
-            {...args}
-            v-model={selected.value}
-            name="role"
-            value="manager"
-          >
-            {{
-              default: () => null,
-              description: () => "Manager",
-            }}
-          </Input>
-        </div>
-      );
-    },
-  }),
-};
-
-export const CheckboxIndeterminate: Story = {
-  args: {
-    type: "checkbox",
-    indeterminate: true,
-    default: "Select all",
-  },
-  render: (args: any) => ({
-    setup() {
-      const checked = ref<boolean>(false);
+      const value = ref<string>();
 
       return () => (
         <Input
           {...args}
-          v-model={checked.value}
+          v-model={value.value}
         >
           {{
             default: () => args.default,
+            append: () => ".com",
           }}
         </Input>
       );

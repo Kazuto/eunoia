@@ -13,15 +13,21 @@
       :dense
       :invalid
       :disabled
-      :indeterminate
       :aria-label="ariaLabel"
       :aria-labelledby="ariaLabelledby"
+      :locale
     >
       <template
-        v-if="$slots.description"
-        #description
+        v-if="$slots.prepend"
+        #prepend
       >
-        <slot name="description" />
+        <slot name="prepend" />
+      </template>
+      <template
+        v-if="$slots.append"
+        #append
+      >
+        <slot name="append" />
       </template>
     </component>
     <InputHintRow
@@ -53,11 +59,9 @@ import InputCounter from "./primitives/InputCounter.vue";
 import InputError from "./primitives/InputError.vue";
 import { useAttrs, computed, type Component } from "vue";
 import { useSanitizedId } from "@/composables";
+import { type LocaleMessages } from "@/composables";
 import PasswordInput from "./variants/PasswordInput.vue";
-import NumberInput from "./variants/NumberInput.vue";
 import TextInput from "./variants/TextInput.vue";
-import CheckboxInput from "./variants/CheckboxInput.vue";
-import RadioInput from "./variants/RadioInput.vue";
 
 defineOptions({
   inheritAttrs: false,
@@ -65,17 +69,17 @@ defineOptions({
 
 const attrs = useAttrs();
 const inputId = useSanitizedId("input", { useAttrId: true });
-const model = defineModel<string | number | boolean>();
+const model = defineModel<string>();
 
 const props = defineProps<{
   dense?: boolean;
   invalid?: boolean;
   disabled?: boolean;
-  indeterminate?: boolean;
   helper?: string;
   errors?: string[];
   ariaLabel?: string;
   ariaLabelledby?: string;
+  locale?: LocaleMessages;
 }>();
 
 const hasHelper = computed(() => props.helper && !props.errors?.length);
@@ -90,14 +94,9 @@ const modelLength = computed(() => {
   return 0;
 });
 
-const variantMap = new Map<string, Component>([
-  ["password", PasswordInput],
-  ["number", NumberInput],
-  ["checkbox", CheckboxInput],
-  ["radio", RadioInput],
-]);
+const variantMap = new Map<string, Component>([["password", PasswordInput]]);
 
 const variantComponent = computed(() => {
-  return variantMap.get(attrs.type) ?? TextInput;
+  return variantMap.get(attrs.type as string) ?? TextInput;
 });
 </script>

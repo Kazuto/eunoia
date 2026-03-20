@@ -30,8 +30,8 @@
 
 <script setup lang="ts">
 import Input from "../primitives/Input.vue";
-import InputGroup from "../primitives/InputGroup.vue";
-import InputGroupAddon from "../primitives/InputGroupAddon.vue";
+import InputGroup from "../../InputGroup/InputGroup.vue";
+import InputGroupAddon from "../../InputGroup/InputGroupAddon.vue";
 
 defineOptions({
   inheritAttrs: false,

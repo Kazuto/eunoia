@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import Textarea from "../primitives/Textarea.vue";
-import InputGroup from "../../Input/primitives/InputGroup.vue";
+import InputGroup from "../../InputGroup/InputGroup.vue";
 
 defineOptions({
   inheritAttrs: false,

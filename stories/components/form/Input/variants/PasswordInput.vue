@@ -43,8 +43,8 @@
 import { computed, ref, toRef } from "vue";
 import { Icon } from "@/components";
 import Input from "../primitives/Input.vue";
-import InputGroup from "../primitives/InputGroup.vue";
-import InputGroupAddon from "../primitives/InputGroupAddon.vue";
+import InputGroup from "../../InputGroup/InputGroup.vue";
+import InputGroupAddon from "../../InputGroup/InputGroupAddon.vue";
 import { type LocaleMessages, useLocale } from "@/composables";
 
 const props = withDefaults(
