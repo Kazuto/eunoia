@@ -25,8 +25,8 @@
 
     <!-- Lower handle -->
     <SliderInput
-      range
       :id="id"
+      range
       :aria-label="ariaLabelLower"
       :min="min"
       :max="max"

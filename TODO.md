@@ -2,11 +2,11 @@
 
 ## Form
 
-- [ ] **Textarea** — Multi-line text input with auto-resize, character count
-- [ ] **Switch / Toggle** — On/off toggle, visually distinct from checkbox
+- [x] **Textarea** — Multi-line text input with auto-resize, character count
+- [x] **Switch / Toggle** — On/off toggle, visually distinct from checkbox
 - [ ] **FileUpload** — File picker with drag-and-drop zone, preview support
-- [ ] Slider / Range — Numeric range input with min/max/step
-- [ ] DatePicker — Date/time selection with calendar popup
+- [x] Slider / Range — Numeric range input with min/max/step
+- [x] DatePicker — Date/time selection with calendar popup
 - [ ] FormGroup / FormField — Wrapper composing label + input + error messaging
 
 ## Core
