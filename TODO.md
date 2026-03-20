@@ -7,7 +7,7 @@
 - [ ] **FileUpload** — File picker with drag-and-drop zone, preview support
 - [x] Slider / Range — Numeric range input with min/max/step
 - [x] DatePicker — Date/time selection with calendar popup
-- [ ] FormGroup / FormField — Wrapper composing label + input + error messaging
+- [x] FormGroup / FormField — Wrapper composing label + input + error messaging
 
 ## Core
 
