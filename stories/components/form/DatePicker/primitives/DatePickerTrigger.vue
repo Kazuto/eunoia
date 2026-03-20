@@ -16,34 +16,53 @@
     @keydown="emit('keydown', $event)"
   >
     <div class="flex w-full items-center gap-2">
-      <div class="flex flex-wrap items-center gap-1">
+      <div class="flex min-w-0 flex-1 items-center gap-1">
         <template v-if="selectedDates.length > 0">
           <template v-if="mode === 'single'">
-            <span class="truncate">{{ selectedDates[0] }}</span>
+            <span :class="['truncate', dense ? 'text-xs' : 'text-sm']">{{
+              selectedDates[0]
+            }}</span>
           </template>
           <template v-else>
-            <span class="truncate">{{ selectedDates[0] }}</span>
-            <span class="text-neutral-500 dark:text-neutral-400">-</span>
-            <span class="truncate">{{ selectedDates[1] }}</span>
+            <span :class="['truncate', dense ? 'text-xs' : 'text-sm']">{{
+              selectedDates[0]
+            }}</span>
+            <span
+              :class="[
+                dense ? 'text-xs' : 'text-sm',
+                'text-neutral-500 dark:text-neutral-400',
+              ]"
+              >-</span
+            >
+            <span :class="['truncate', dense ? 'text-xs' : 'text-sm']">{{
+              selectedDates[1]
+            }}</span>
           </template>
         </template>
         <template v-else>
-          <span class="truncate text-neutral-500 dark:text-neutral-400">
+          <span
+            :class="[
+              'truncate text-neutral-500 dark:text-neutral-400',
+              dense ? 'text-xs' : 'text-sm',
+            ]"
+          >
             {{ placeholder }}
           </span>
         </template>
       </div>
       <div class="ml-auto flex items-center gap-1">
-        <Button
+        <button
           v-if="selectedDates.length > 0"
           type="button"
-          ghost
-          icon="x"
-          dense
-          :class="clearButtonStyles()"
+          :class="clearButtonStyles({ dense })"
           :aria-label="t('clear-selection')"
           @click.stop="clearSelection"
-        />
+        >
+          <Icon
+            name="x"
+            :size="dense ? 'xs' : 'sm'"
+          />
+        </button>
         <Icon
           name="calendar"
           size="sm"
@@ -57,7 +76,7 @@
 import { tv } from "tailwind-variants";
 import { useForwardedAttrs } from "@/composables";
 import { useLocale } from "@/composables/useLocale";
-import { Button, Icon } from "@/components";
+import { Icon } from "@/components";
 
 const props = defineProps<{
   mode: "single" | "range";
@@ -139,10 +158,18 @@ const triggerStyles = tv({
 
 const clearButtonStyles = tv({
   base: [
-    "rounded-full p-0.5",
-    "hover:bg-neutral-200 dark:hover:bg-neutral-700",
-    "focus:ring-2 focus:ring-primary-500 focus:outline-none",
-    "transition-colors",
+    "inline-flex cursor-pointer items-center justify-center rounded-full transition-colors",
+    "text-neutral-600 hover:bg-neutral-200 focus:ring-2 focus:ring-primary-500 focus:outline-none",
+    "dark:text-neutral-400 dark:hover:bg-neutral-700",
   ],
+  variants: {
+    dense: {
+      false: "h-5 w-5 p-0.5",
+      true: "h-4 w-4 p-0.5",
+    },
+  },
+  defaultVariants: {
+    dense: false,
+  },
 });
 </script>

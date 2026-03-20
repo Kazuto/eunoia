@@ -87,7 +87,7 @@ const props = withDefaults(
     helper?: string;
     errors?: string[];
     locale?: LocaleMessages;
-    placement?: "top" | "bottom" | "left" | "right";
+    placement?: "top" | "bottom";
     firstDayOfWeek?: Weekday;
   }>(),
   {
@@ -99,6 +99,7 @@ const props = withDefaults(
     helper: undefined,
     errors: undefined,
     placement: undefined,
+    firstDayOfWeek: undefined,
   }
 );
 
@@ -301,17 +302,28 @@ function handleTriggerKeydown(event: KeyboardEvent) {
 }
 
 function onFocusOut(event: FocusEvent) {
+  // Don't close if focus is moving to nothing (clicking on non-focusable element)
+  if (!event.relatedTarget) return;
+
+  // Don't close if focus is staying within the container
   if (containerRef.value?.contains(event.relatedTarget as Node)) return;
+
   closeCalendar();
 }
 
 function onClickOutside(event: MouseEvent) {
-  if (
-    containerRef.value &&
-    !containerRef.value.contains(event.target as Node)
-  ) {
-    closeCalendar();
+  const target = event.target as HTMLElement;
+
+  // Check if clicked element or any ancestor has the calendar data attribute
+  // (This handles cases where the calendar might be portaled/positioned outside)
+  if (target.closest?.("[data-datepicker-calendar]")) {
+    return;
   }
+
+  // Don't close if clicking inside the trigger or container
+  if (containerRef.value?.contains(target)) return;
+
+  closeCalendar();
 }
 
 watch(isOpen, (open) => {

@@ -1,22 +1,29 @@
 <template>
   <div
     :id="id"
+    ref="rootElement"
     :class="calendarStyles({ placement, dense, class: classAttr })"
     v-bind="forwardedAttrs"
     role="dialog"
     aria-modal="true"
     :aria-label="t('label')"
     :style="positionStyle"
+    data-datepicker-calendar
+    @mousedown.stop
   >
     <!-- Calendar Header -->
     <div class="mb-2 flex items-center justify-between gap-1">
-      <Button
-        ghost
-        icon="caret-left"
-        :dense
+      <button
+        type="button"
+        :class="navButtonStyles({ dense })"
         :aria-label="t('previous-month')"
         @click="() => $emit('navigate', 'prev')"
-      />
+      >
+        <Icon
+          name="caret-left"
+          :size="dense ? 'sm' : 'md'"
+        />
+      </button>
 
       <div class="flex items-center gap-1">
         <Select
@@ -40,13 +47,17 @@
         />
       </div>
 
-      <Button
-        ghost
-        icon="caret-right"
-        :dense
+      <button
+        type="button"
+        :class="navButtonStyles({ dense })"
         :aria-label="t('next-month')"
         @click="() => $emit('navigate', 'next')"
-      />
+      >
+        <Icon
+          name="caret-right"
+          :size="dense ? 'sm' : 'md'"
+        />
+      </button>
     </div>
 
     <!-- Weekday Headers -->
@@ -127,7 +138,7 @@ import { computed, ref } from "vue";
 import { tv } from "tailwind-variants";
 import { useForwardedAttrs } from "@/composables";
 import { useLocale } from "@/composables/useLocale";
-import { Button, Select } from "@/components";
+import { Icon, Select } from "@/components";
 import { Weekday } from "@/types";
 
 const currentMonth = defineModel<number>("currentMonth", { default: 0 });
@@ -153,6 +164,12 @@ const emit = defineEmits<{
 }>();
 
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
+
+const rootElement = ref<HTMLElement | null>(null);
+
+defineExpose({
+  rootElement,
+});
 
 const t = useLocale("datepicker");
 
@@ -339,7 +356,25 @@ const selectPrevMonthDay = (day: number) => {
 const selectDay = (day: number) => {
   emit("select", { date: getDateObject(day) });
 };
+
 // Styles
+const navButtonStyles = tv({
+  base: [
+    "inline-flex aspect-square shrink-0 cursor-pointer items-center justify-center rounded-md transition-colors",
+    "text-neutral-600 hover:bg-neutral-200 focus:ring-2 focus:ring-primary-500 focus:outline-none",
+    "dark:text-neutral-400 dark:hover:bg-neutral-700",
+  ],
+  variants: {
+    dense: {
+      false: "p-2.25",
+      true: "p-2",
+    },
+  },
+  defaultVariants: {
+    dense: false,
+  },
+});
+
 const calendarStyles = tv({
   base: [
     "z-50 mt-1 min-w-[280px] rounded-lg border p-3 shadow-lg",
