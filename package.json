@@ -1,5 +1,5 @@
 {
-  "name": "eunoia",
+  "name": "@thkzt/eunoia",
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -64,5 +64,6 @@
     "code:format": "bun lint && bun format",
     "test": "vitest run",
     "prepare": "husky"
-  }
+  },
+  "version": "0.0.1-beta"
 }
