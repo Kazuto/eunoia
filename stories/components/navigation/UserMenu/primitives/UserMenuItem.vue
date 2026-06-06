@@ -24,8 +24,8 @@
       class="shrink-0"
     />
     <component
-      :is="linkTag"
-      v-bind="linkAttrs"
+      :is="props.href ? Link : 'span'"
+      v-bind="props.href ? { href: props.href } : {}"
       class="flex-1"
     >
       {{ label }}
@@ -34,10 +34,9 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from "vue";
 import { tv } from "tailwind-variants";
-import { Icon } from "@/components";
-import { useForwardedAttrs, useNuxtLink } from "@/composables";
+import { Icon, Link } from "@/components";
+import { useForwardedAttrs } from "@/composables";
 
 defineOptions({
   inheritAttrs: false,
@@ -92,22 +91,6 @@ export type UserMenuItem = {
 };
 
 const props = defineProps<UserMenuItem>();
-
-const { hasNuxtLink } = useNuxtLink();
-
-const linkTag = computed(() => {
-  if (!props.href) return "span";
-  if (hasNuxtLink.value) return "NuxtLink";
-
-  return "a";
-});
-
-const linkAttrs = computed(() => {
-  if (!props.href) return {};
-  if (hasNuxtLink.value) return { to: props.href };
-
-  return { href: props.href };
-});
 
 const emit = defineEmits<{
   (e: "select", label: string): void;
