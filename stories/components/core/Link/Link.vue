@@ -11,9 +11,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed, resolveComponent } from "vue";
+import { computed } from "vue";
 import LinkPrimitive from "./primitives/Link.vue";
-import { useForwardedAttrs } from "@/composables";
+import { useForwardedAttrs, useLinkComponent } from "@/composables";
 
 defineOptions({
   inheritAttrs: false,
@@ -38,34 +38,25 @@ const isExternal = computed(() => {
   return /^(https?:)?\/\//.test(props.href);
 });
 
-const nuxtLink = (() => {
-  try {
-    const resolved = resolveComponent("NuxtLink");
-    return typeof resolved !== "string" ? resolved : null;
-  } catch {
-    return null;
-  }
-})();
+const { linkComponent } = useLinkComponent();
 
 const linkTag = computed(() => {
   if (isExternal.value) return "a";
-  if (nuxtLink) return "NuxtLink";
 
-  return "a";
+  return linkComponent;
 });
 
 const linkAttrs = computed(() => {
-  const attrs: Record<string, unknown> = forwardedAttrs.value ?? {};
-
-  if (nuxtLink && !isExternal.value) {
-    attrs.to = props.href;
-  } else {
-    attrs.href = props.href;
-  }
+  const attrs: Record<string, unknown> = {};
 
   if (isExternal.value) {
+    attrs.href = props.href;
     attrs.target = "_blank";
     attrs.rel = "noopener noreferrer";
+  } else if (linkTag.value === "a") {
+    attrs.href = props.href;
+  } else {
+    attrs.to = props.href;
   }
 
   return attrs;

@@ -1,6 +1,6 @@
 <template>
   <component
-    :is="resolveDynamicComponent(props.tag)"
+    :is="props.tag"
     v-bind="forwardedAttrs"
     :class="linkStyles({ dense, class: classAttr })"
   >
@@ -15,15 +15,10 @@
 </template>
 
 <script lang="ts" setup>
-import { type Component, resolveDynamicComponent, onMounted } from "vue";
+import { type Component } from "vue";
 import { tv } from "tailwind-variants";
 import { Icon } from "@/components";
 import { useForwardedAttrs } from "@/composables";
-
-onMounted(() => {
-  console.log("tag prop:", props.tag);
-  console.log("resolved:", resolveDynamicComponent(props.tag));
-});
 
 defineOptions({
   inheritAttrs: false,
