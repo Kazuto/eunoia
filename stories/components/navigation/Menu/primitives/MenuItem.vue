@@ -44,7 +44,7 @@ const sidebarCollapsed = inject(sidebarCollapsedKey, undefined);
 
 export type MenuItem = {
   label: string;
-  href: string;
+  href?: string;
   ariaLabel?: string;
   icon?: string;
   level?: number;
@@ -56,6 +56,7 @@ export type MenuItem = {
 
 const props = withDefaults(defineProps<MenuItem>(), {
   ariaLabel: undefined,
+  href: undefined,
   icon: undefined,
   items: undefined,
   level: 1,
