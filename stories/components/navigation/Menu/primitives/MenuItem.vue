@@ -12,6 +12,7 @@
     >
       <Link
         :href
+        :to="props.to"
         :class="itemStyles({ active })"
         :aria-current="active ? 'page' : undefined"
         tabindex="0"
@@ -50,13 +51,15 @@ export type MenuItem = {
   items?: MenuItem[];
   active?: boolean;
   parentActive?: boolean;
+  to?: string;
 };
 
 const props = withDefaults(defineProps<MenuItem>(), {
   ariaLabel: undefined,
   icon: undefined,
-  level: 1,
   items: undefined,
+  level: 1,
+  to: undefined,
 });
 
 const padding = computed(() => {

@@ -24,8 +24,9 @@
       class="shrink-0"
     />
     <component
-      :is="props.href ? Link : 'span'"
+      :is="props.href || props.to ? Link : 'span'"
       v-bind="props.href ? { href: props.href } : {}"
+      :to="props.to"
       class="flex-1"
     >
       {{ label }}
@@ -88,6 +89,7 @@ export type UserMenuItem = {
   disabled?: boolean;
   isActive?: boolean;
   variant?: "default" | "danger";
+  to?: string;
 };
 
 const props = defineProps<UserMenuItem>();

@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import LinkPrimitive from "./primitives/Link.vue";
-import { useForwardedAttrs, useLinkComponent } from "@/composables";
+import { useForwardedAttrs } from "@/composables";
 
 defineOptions({
   inheritAttrs: false,
@@ -24,10 +24,9 @@ const props = withDefaults(
     href: string;
     external?: boolean;
     dense?: boolean;
+    to?: string;
   }>(),
-  {
-    external: undefined,
-  }
+  { external: undefined, to: undefined }
 );
 
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
@@ -38,27 +37,26 @@ const isExternal = computed(() => {
   return /^(https?:)?\/\//.test(props.href);
 });
 
-const { linkComponent } = useLinkComponent();
-
 const linkTag = computed(() => {
   if (isExternal.value) return "a";
+  if (props.to) return "NuxtLink";
 
-  return linkComponent;
+  return "a";
 });
 
 const linkAttrs = computed(() => {
-  const attrs: Record<string, unknown> = {};
-
   if (isExternal.value) {
-    attrs.href = props.href;
-    attrs.target = "_blank";
-    attrs.rel = "noopener noreferrer";
-  } else if (linkComponent === "a") {
-    attrs.href = props.href;
-  } else {
-    attrs.to = props.href;
+    return {
+      href: props.href,
+      target: "_blank",
+      rel: "noopener noreferrer",
+    };
   }
 
-  return attrs;
+  if (props.to) {
+    return { to: props.to };
+  }
+
+  return { href: props.href };
 });
 </script>
