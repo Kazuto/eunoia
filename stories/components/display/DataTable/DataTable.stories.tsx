@@ -18,7 +18,7 @@ const meta = {
   component: DataTable,
   tags: ["autodocs"],
   argTypes: {
-    headers: { control: "object" },
+    columns: { control: "object" },
     items: { control: "object" },
     dense: { control: "boolean" },
     loading: { control: "boolean" },
@@ -26,7 +26,7 @@ const meta = {
     actions: { table: { category: "slots" } },
   },
   args: {
-    headers: [
+    columns: [
       { title: "Name", key: "name", sortable: true },
       { title: "Role", key: "role", sortable: true },
       {
@@ -56,7 +56,7 @@ export const Dense: Story = {
 
 export const Sortable: Story = {
   args: {
-    headers: [
+    columns: [
       { title: "Name", key: "name", sortable: true },
       { title: "Role", key: "role", sortable: true },
       { title: "Salary", key: "salary", sortable: true },
@@ -67,7 +67,7 @@ export const Sortable: Story = {
 
 export const ComputedValues: Story = {
   args: {
-    headers: [
+    columns: [
       { title: "Name", key: "name" },
       {
         title: "Summary",
@@ -81,7 +81,7 @@ export const ComputedValues: Story = {
 
 export const Aligned: Story = {
   args: {
-    headers: [
+    columns: [
       { title: "Name", key: "name", sortable: true },
       { title: "Role", key: "role", sortable: true },
       { title: "Salary", key: "salary", sortable: true, align: "end" as const },
@@ -98,7 +98,7 @@ export const Loading: Story = {
 
 export const Actions: Story = {
   args: {
-    headers: [
+    columns: [
       { title: "Name", key: "name" },
       { title: "Role", key: "role" },
     ],

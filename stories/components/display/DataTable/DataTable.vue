@@ -4,7 +4,7 @@
     :dense
   >
     <DataTableHead
-      :headers
+      :headers="columns"
       :dense
       :has-actions="hasActions"
       :sort-key="sortKey"
@@ -12,7 +12,7 @@
       @sort="handleSort"
     />
     <DataTableBody
-      :headers
+      :columns
       :items="displayItems"
       :has-actions
       :loading
@@ -31,24 +31,26 @@
   </TablePrimitive>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts">
+import { type DataTableColumn } from "./primitives/DataTableBody.vue";
+
+export type { DataTableColumn };
+</script>
+
+<script lang="ts" setup generic="T extends Record<string, unknown>">
 import { computed, ref, useSlots } from "vue";
 import TablePrimitive from "../Table/primitives/Table.vue";
 import DataTableHead from "./primitives/DataTableHead.vue";
-import DataTableBody, {
-  type DataTableColumn,
-} from "./primitives/DataTableBody.vue";
+import DataTableBody from "./primitives/DataTableBody.vue";
 
 defineOptions({
   inheritAttrs: false,
 });
 
-export type { DataTableColumn };
-
 const props = withDefaults(
   defineProps<{
-    headers: DataTableColumn[];
-    items: Record<string, unknown>[];
+    columns: DataTableColumn<T>[];
+    items: T[];
     loading?: boolean;
     loadingRows?: number;
     dense?: boolean;
@@ -81,7 +83,7 @@ function handleSort(key: string) {
 const sortedItems = computed(() => {
   if (!sortKey.value || !sortDirection.value) return props.items;
 
-  const header = props.headers.find((h) => h.key === sortKey.value);
+  const header = props.columns.find((h) => h.key === sortKey.value);
   if (!header) return props.items;
 
   const dir = sortDirection.value === "asc" ? 1 : -1;
@@ -105,7 +107,7 @@ const sortedItems = computed(() => {
 });
 
 const placeholderItems = computed(() =>
-  Array.from({ length: props.loadingRows }, () => ({}))
+  Array.from({ length: props.loadingRows }, () => ({}) as T)
 );
 
 const displayItems = computed(() =>

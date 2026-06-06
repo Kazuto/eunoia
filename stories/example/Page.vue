@@ -269,7 +269,7 @@
               </div>
             </template>
             <DataTable
-              :headers="headers"
+              :columns
               :items="items"
             >
               <template #actions="{ item }">
@@ -419,7 +419,7 @@ const roleOptions = [
   { label: "QA", value: "qa" },
 ];
 
-const headers = [
+const columns = [
   { title: "Name", key: "name", sortable: true },
   { title: "Role", key: "role", sortable: true },
   { title: "Department", key: "department", sortable: true },

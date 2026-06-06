@@ -9,13 +9,18 @@
       :class="rowStyles()"
     >
       <td
-        v-for="header in headers"
-        :key="header.key"
-        :class="cellStyles({ dense, align: header.align })"
+        v-for="column in columns"
+        :key="column.key"
+        :class="cellStyles({ dense, align: column.align })"
       >
         <Skeleton v-if="loading" />
         <template v-else>
-          {{ header.value ? header.value(item) : item[header.key] }}
+          <slot
+            :name="column.key"
+            :item="item"
+          >
+            {{ column.value ? column.value(item) : item[column.key] }}
+          </slot>
         </template>
       </td>
       <td
@@ -36,7 +41,17 @@
   </tbody>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts">
+export type DataTableColumn<T = Record<string, unknown>> = {
+  title: string;
+  key: string;
+  sortable?: boolean;
+  align?: "start" | "end";
+  value?: (item: T) => unknown;
+};
+</script>
+
+<script lang="ts" setup generic="T extends Record<string, unknown>">
 import { tv } from "tailwind-variants";
 import { useForwardedAttrs } from "@/composables";
 import { Skeleton } from "@/components";
@@ -75,17 +90,9 @@ const cellStyles = tv({
   },
 });
 
-export interface DataTableColumn {
-  title: string;
-  key: string;
-  sortable?: boolean;
-  align?: "start" | "end";
-  value?: (item: Record<string, unknown>) => unknown;
-}
-
 defineProps<{
-  headers: DataTableColumn[];
-  items: Record<string, unknown>[];
+  columns: DataTableColumn<T>[];
+  items: T[];
   hasActions?: boolean;
   loading?: boolean;
   dense?: boolean;

@@ -52,7 +52,7 @@
 
 <script lang="ts" setup>
 import { tv } from "tailwind-variants";
-import { Icon } from "@/components";
+import { type DataTableColumn, Icon } from "@/components";
 import { useForwardedAttrs } from "@/composables";
 
 defineOptions({
@@ -89,12 +89,7 @@ const cellStyles = tv({
 });
 
 const props = defineProps<{
-  headers: {
-    title: string;
-    key: string;
-    sortable?: boolean;
-    align?: "start" | "end";
-  }[];
+  headers: Omit<DataTableColumn, "value">[];
   dense?: boolean;
   hasActions?: boolean;
   sortKey?: string | null;
