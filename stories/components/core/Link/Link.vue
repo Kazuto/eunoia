@@ -53,7 +53,7 @@ const linkAttrs = computed(() => {
     attrs.href = props.href;
     attrs.target = "_blank";
     attrs.rel = "noopener noreferrer";
-  } else if (linkTag.value === "a") {
+  } else if (linkComponent === "a") {
     attrs.href = props.href;
   } else {
     attrs.to = props.href;
