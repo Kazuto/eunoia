@@ -33,16 +33,17 @@ const props = defineProps<{
 }>();
 
 const resolvedTag = computed(() => {
-  if (typeof props.tag === "string") {
-    try {
-      const resolved = resolveComponent(props.tag);
+  if (typeof props.tag !== "string") return props.tag;
 
-      return resolved;
-    } catch {
-      return props.tag;
-    }
+  // native HTML elements should never go through resolveComponent
+  if (props.tag === props.tag.toLowerCase()) return props.tag;
+
+  try {
+    const resolved = resolveComponent(props.tag);
+    return resolved;
+  } catch {
+    return props.tag;
   }
-  return props.tag;
 });
 
 const linkStyles = tv({
