@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import LinkPrimitive from "./primitives/Link.vue";
-import { useForwardedAttrs } from "@/composables";
+import { useForwardedAttrs, useLinkComponent } from "@/composables";
 
 defineOptions({
   inheritAttrs: false,
@@ -38,9 +38,11 @@ const isExternal = computed(() => {
   return /^(https?:)?\/\//.test(props.href);
 });
 
+const { linkComponent } = useLinkComponent();
+
 const linkTag = computed(() => {
   if (isExternal.value) return "a";
-  if (props.to) return "NuxtLink";
+  if (props.to) return linkComponent;
 
   return "a";
 });
