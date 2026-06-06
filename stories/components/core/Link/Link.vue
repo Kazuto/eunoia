@@ -34,6 +34,7 @@ const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const isExternal = computed(() => {
   if (props.external !== undefined) return props.external;
+
   return /^(https?:)?\/\//.test(props.href);
 });
 

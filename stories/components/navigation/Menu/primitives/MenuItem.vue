@@ -11,7 +11,7 @@
       class="w-full"
     >
       <Link
-        :href="href"
+        :href
         :class="itemStyles({ active })"
         :aria-current="active ? 'page' : undefined"
         tabindex="0"
@@ -42,7 +42,9 @@ defineOptions({
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 const sidebarCollapsed = inject(sidebarCollapsedKey, undefined);
 
-const props = defineProps<MenuItem>();
+const props = withDefaults(defineProps<MenuItem>(), {
+  level: 1,
+});
 
 const padding = computed(() => {
   if (props.level <= 1) return;
