@@ -1,6 +1,6 @@
 export interface MenuItem {
   label: string;
-  href?: string;
+  href: string;
   ariaLabel?: string;
   icon?: string;
   level?: number;
