@@ -1,6 +1,6 @@
 <template>
   <component
-    :is="resolvedTag"
+    :is="resolveDynamicComponent(props.tag)"
     v-bind="forwardedAttrs"
     :class="linkStyles({ dense, class: classAttr })"
   >
@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts" setup>
-import { type Component, computed, resolveComponent } from "vue";
+import { type Component, resolveDynamicComponent } from "vue";
 import { tv } from "tailwind-variants";
 import { Icon } from "@/components";
 import { useForwardedAttrs } from "@/composables";
@@ -31,20 +31,6 @@ const props = defineProps<{
   external?: boolean;
   dense?: boolean;
 }>();
-
-const resolvedTag = computed(() => {
-  if (typeof props.tag !== "string") return props.tag;
-
-  // native HTML elements should never go through resolveComponent
-  if (props.tag === props.tag.toLowerCase()) return props.tag;
-
-  try {
-    const resolved = resolveComponent(props.tag);
-    return resolved;
-  } catch {
-    return props.tag;
-  }
-});
 
 const linkStyles = tv({
   base: [
