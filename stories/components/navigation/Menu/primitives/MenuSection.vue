@@ -73,7 +73,7 @@
 import { tv } from "tailwind-variants";
 import MenuItemPrimitive from "./MenuItem.vue";
 import MenuLabel from "./MenuLabel.vue";
-import type { MenuItem } from "../types";
+import type { MenuItem } from "./MenuItem.vue";
 import { Icon } from "@/components";
 import Tooltip from "@/components/feedback/Tooltip/Tooltip.vue";
 import { useSanitizedId, useForwardedAttrs } from "@/composables";
@@ -87,12 +87,16 @@ defineOptions({
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 const sidebarCollapsed = inject(sidebarCollapsedKey, undefined);
 
-const props = defineProps<
-  MenuItem & {
-    currentPath?: string;
-    toggleSectionLabel?: string;
-  }
->();
+export type MenuSection = MenuItem & {
+  currentPath?: string;
+  toggleSectionLabel?: string;
+};
+
+const props = withDefaults(defineProps<MenuSection>(), {
+  level: 1,
+  currentPath: undefined,
+  toggleSectionLabel: undefined,
+});
 
 const padding = computed(() => {
   if (props.level <= 1) return;
