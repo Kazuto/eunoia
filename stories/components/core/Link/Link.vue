@@ -43,6 +43,7 @@ const { hasNuxtLink } = useNuxtLink();
 const linkTag = computed(() => {
   if (isExternal.value) return "a";
   if (hasNuxtLink.value) return "NuxtLink";
+
   return "a";
 });
 

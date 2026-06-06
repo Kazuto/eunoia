@@ -1,6 +1,6 @@
 <template>
   <component
-    :is="tag"
+    :is="resolvedTag"
     v-bind="forwardedAttrs"
     :class="linkStyles({ dense, class: classAttr })"
   >
@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts" setup>
-import { type Component } from "vue";
+import { type Component, computed, resolveComponent } from "vue";
 import { tv } from "tailwind-variants";
 import { Icon } from "@/components";
 import { useForwardedAttrs } from "@/composables";
@@ -26,11 +26,24 @@ defineOptions({
 
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
-defineProps<{
+const props = defineProps<{
   tag: string | Component;
   external?: boolean;
   dense?: boolean;
 }>();
+
+const resolvedTag = computed(() => {
+  if (typeof props.tag === "string") {
+    try {
+      const resolved = resolveComponent(props.tag);
+
+      return resolved;
+    } catch {
+      return props.tag;
+    }
+  }
+  return props.tag;
+});
 
 const linkStyles = tv({
   base: [
