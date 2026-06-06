@@ -25,10 +25,14 @@
 <script setup lang="ts">
 import { computed, toRef } from "vue";
 import MenuPrimitive from "./primitives/Menu.vue";
-import MenuItemPrimitive from "./primitives/MenuItem.vue";
+import {
+  default as MenuItemPrimitive,
+  type MenuItem,
+} from "./primitives/MenuItem.vue";
 import MenuSection from "./primitives/MenuSection.vue";
-import type { MenuItem } from "./types";
 import { useLocale, type LocaleMessages } from "@/composables";
+
+export type { MenuItem } from "./primitives/MenuItem.vue";
 
 const props = defineProps<{
   items: MenuItem[];

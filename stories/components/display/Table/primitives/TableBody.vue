@@ -26,6 +26,7 @@
 import { tv } from "tailwind-variants";
 import { useForwardedAttrs } from "@/composables";
 import { Skeleton } from "@/components";
+import type { TableHeader } from "./TableHead.vue";
 
 defineOptions({
   inheritAttrs: false,
@@ -56,10 +57,16 @@ const cellStyles = tv({
   },
 });
 
-defineProps<{
-  headers: { title: string; key: string }[];
-  items: Record<string, unknown>[];
+export type TableItem = {
+  [key: string]: unknown;
+};
+
+type TableBody = {
+  headers: TableHeader[];
+  items: TableItem[];
   loading?: boolean;
   dense?: boolean;
-}>();
+};
+
+defineProps<TableBody>();
 </script>

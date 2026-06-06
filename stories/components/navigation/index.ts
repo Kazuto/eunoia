@@ -1,8 +1,8 @@
 export { default as Breadcrumb } from "./Breadcrumb/Breadcrumb.vue";
-export * from "./Breadcrumb/types";
+export type { BreadcrumbItem } from "./Breadcrumb/Breadcrumb.vue";
 
 export { default as Menu } from "./Menu/Menu.vue";
-export * from "./Menu/types";
+export type { MenuItem } from "./Menu/Menu.vue";
 
 export { default as UserMenu } from "./UserMenu/UserMenu.vue";
-export * from "./UserMenu/types";
+export type { UserMenuItem } from "./UserMenu/UserMenu.vue";

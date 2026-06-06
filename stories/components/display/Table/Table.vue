@@ -7,7 +7,7 @@
       :headers
       :dense
     />
-    <TableBody
+    <TableBodyPrimitive
       :headers
       :items="displayItems"
       :loading
@@ -19,30 +19,32 @@
 <script lang="ts" setup>
 import { computed } from "vue";
 import TablePrimitive from "./primitives/Table.vue";
-import TableHead from "./primitives/TableHead.vue";
-import TableBody from "./primitives/TableBody.vue";
+import {
+  default as TableHead,
+  type TableHeader,
+} from "./primitives/TableHead.vue";
+import {
+  default as TableBodyPrimitive,
+  type TableItem,
+} from "./primitives/TableBody.vue";
+
+export type { TableHeader, TableItem };
 
 defineOptions({
   inheritAttrs: false,
 });
 
-export interface TableHeader {
-  title: string;
-  key: string;
-}
+type Table = {
+  headers: TableHeader[];
+  items: TableItem[];
+  loading?: boolean;
+  loadingRows?: number;
+  dense?: boolean;
+};
 
-const props = withDefaults(
-  defineProps<{
-    headers: TableHeader[];
-    items: Record<string, unknown>[];
-    loading?: boolean;
-    loadingRows?: number;
-    dense?: boolean;
-  }>(),
-  {
-    loadingRows: 3,
-  }
-);
+const props = withDefaults(defineProps<Table>(), {
+  loadingRows: 3,
+});
 
 const placeholderItems = computed(() =>
   Array.from({ length: props.loadingRows }, () => ({}))

@@ -80,7 +80,7 @@ const itemStyles = tv({
   },
 });
 
-const props = defineProps<{
+export type UserMenuItem = {
   id?: string;
   label: string;
   href?: string;
@@ -89,7 +89,9 @@ const props = defineProps<{
   disabled?: boolean;
   isActive?: boolean;
   variant?: "default" | "danger";
-}>();
+};
+
+const props = defineProps<UserMenuItem>();
 
 const { hasNuxtLink } = useNuxtLink();
 

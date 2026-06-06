@@ -32,7 +32,6 @@ import Tooltip from "@/components/feedback/Tooltip/Tooltip.vue";
 import { tv } from "tailwind-variants";
 import { useForwardedAttrs } from "@/composables";
 import MenuLabel from "./MenuLabel.vue";
-import type { MenuItem } from "../types";
 import { sidebarCollapsedKey } from "@/components/layout/Sidebar/keys";
 
 defineOptions({
@@ -42,8 +41,22 @@ defineOptions({
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 const sidebarCollapsed = inject(sidebarCollapsedKey, undefined);
 
+export type MenuItem = {
+  label: string;
+  href: string;
+  ariaLabel?: string;
+  icon?: string;
+  level?: number;
+  items?: MenuItem[];
+  active?: boolean;
+  parentActive?: boolean;
+};
+
 const props = withDefaults(defineProps<MenuItem>(), {
+  ariaLabel: undefined,
+  icon: undefined,
   level: 1,
+  items: undefined,
 });
 
 const padding = computed(() => {

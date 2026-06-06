@@ -11,7 +11,7 @@
         v-if="index > 0"
         :icon="separator"
       />
-      <BreadcrumbItem
+      <BreadcrumbItemPrimitive
         v-bind="item"
         :active="index === items.length - 1"
       />
@@ -22,17 +22,21 @@
 <script setup lang="ts">
 import { toRef } from "vue";
 import BreadcrumbPrimitive from "./primitives/Breadcrumb.vue";
-import BreadcrumbItem from "./primitives/BreadcrumbItem.vue";
+import {
+  default as BreadcrumbItemPrimitive,
+  type BreadcrumbItem,
+} from "./primitives/BreadcrumbItem.vue";
 import BreadcrumbSeparator from "./primitives/BreadcrumbSeparator.vue";
-import type { BreadcrumbItem as BreadcrumbItemType } from "./types";
 import { useLocale, type LocaleMessages } from "@/composables";
+
+export type { BreadcrumbItem };
 
 defineOptions({
   inheritAttrs: false,
 });
 
 const props = defineProps<{
-  items: BreadcrumbItemType[];
+  items: BreadcrumbItem[];
   separator?: string;
   ariaLabel?: string;
   locale?: LocaleMessages;

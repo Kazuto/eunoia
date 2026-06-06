@@ -3,7 +3,7 @@
     v-bind="forwardedAttrs"
     :class="headStyles({ class: classAttr })"
   >
-    <tr :class="rowStyles({ dense })">
+    <tr :class="rowStyles()">
       <th
         v-for="header in headers"
         :key="header.key"
@@ -48,8 +48,15 @@ const cellStyles = tv({
   },
 });
 
-defineProps<{
-  headers: { title: string; key: string }[];
+export type TableHeader = {
+  title: string;
+  key: string;
+};
+
+type TableHead = {
+  headers: TableHeader[];
   dense?: boolean;
-}>();
+};
+
+defineProps<TableHead>();
 </script>

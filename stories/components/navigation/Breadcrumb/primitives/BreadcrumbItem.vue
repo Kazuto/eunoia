@@ -36,12 +36,14 @@ defineOptions({
   inheritAttrs: false,
 });
 
-defineProps<{
+export type BreadcrumbItem = {
   label: string;
   href?: string;
   icon?: string;
   active?: boolean;
-}>();
+};
+
+defineProps<BreadcrumbItem>();
 
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 

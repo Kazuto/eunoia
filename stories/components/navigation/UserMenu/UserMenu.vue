@@ -41,10 +41,14 @@
 <script lang="ts" setup>
 import { computed, onBeforeUnmount, ref, toRef, watch } from "vue";
 import { useSanitizedId, useLocale, type LocaleMessages } from "@/composables";
-import type { UserMenuItem } from "./types";
 import UserMenuTrigger from "./primitives/UserMenuTrigger.vue";
 import UserMenuContent from "./primitives/UserMenuContent.vue";
-import UserMenuItemPrimitive from "./primitives/UserMenuItem.vue";
+import {
+  default as UserMenuItemPrimitive,
+  type UserMenuItem,
+} from "./primitives/UserMenuItem.vue";
+
+export type { UserMenuItem } from "./primitives/UserMenuItem.vue";
 
 defineOptions({
   inheritAttrs: false,
