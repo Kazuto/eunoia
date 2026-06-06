@@ -21,18 +21,19 @@ defineOptions({
 
 const props = withDefaults(
   defineProps<{
-    href: string;
     external?: boolean;
     dense?: boolean;
+    href?: string;
     to?: string;
   }>(),
-  { external: undefined, to: undefined }
+  { external: undefined, dense: false, href: undefined, to: undefined }
 );
 
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const isExternal = computed(() => {
   if (props.external !== undefined) return props.external;
+  if (props.href === undefined) return false;
 
   return /^(https?:)?\/\//.test(props.href);
 });
