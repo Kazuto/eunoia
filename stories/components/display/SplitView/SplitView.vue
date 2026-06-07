@@ -13,7 +13,7 @@ defineProps<{
 }>();
 
 defineSlots<{
-  default: () => unknown;
+  default: (props: { item: SplitViewItem | undefined }) => unknown;
   item: (props: { item: SplitViewItem }) => unknown;
 }>();
 
@@ -46,7 +46,7 @@ const variants = tv({
     </LeftPanel>
 
     <div class="w-full rounded-sm p-4">
-      <slot :selected="selected" />
+      <slot :item="selected" />
     </div>
   </div>
 </template>
