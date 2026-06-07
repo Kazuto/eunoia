@@ -47,6 +47,11 @@ defineOptions({
   inheritAttrs: false,
 });
 
+defineSlots<{
+  [key: string]: (props: { item: T }) => unknown;
+  actions: (props: { item: T }) => unknown;
+}>();
+
 const props = withDefaults(
   defineProps<{
     columns: DataTableColumn<T>[];

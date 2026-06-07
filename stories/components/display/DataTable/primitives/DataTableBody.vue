@@ -60,6 +60,11 @@ defineOptions({
   inheritAttrs: false,
 });
 
+defineSlots<{
+  [key: string]: (props: { item: T }) => unknown;
+  actions: (props: { item: T }) => unknown;
+}>();
+
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const bodyStyles = tv({});
