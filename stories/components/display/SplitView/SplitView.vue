@@ -10,6 +10,7 @@ export type { SplitViewItem };
 defineProps<{
   items: SplitViewItem[];
   selected?: SplitViewItem;
+  searchable?: boolean;
 }>();
 
 defineSlots<{
@@ -19,6 +20,7 @@ defineSlots<{
 
 const emit = defineEmits<{
   select: [item: SplitViewItem];
+  search: [search: string];
 }>();
 
 const variants = tv({
@@ -34,8 +36,10 @@ const variants = tv({
   <div :class="variants()">
     <LeftPanel
       :items="items"
+      :searchable
       :selected="selected"
       @select="emit('select', $event)"
+      @search="emit('search', $event)"
     >
       <template #item="{ item }">
         <slot

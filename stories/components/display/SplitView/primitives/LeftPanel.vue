@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import Input from "@/components/form/Input/Input.vue";
 import { tv } from "tailwind-variants";
+import { ref, computed } from "vue";
 
 export type SplitViewItem = {
   key: string | number;
@@ -7,10 +9,21 @@ export type SplitViewItem = {
   [key: string]: unknown; // allow extra fields
 };
 
-defineProps<{
+const props = defineProps<{
   items: SplitViewItem[];
   selected?: SplitViewItem;
+  searchable?: boolean;
 }>();
+
+const search = ref("");
+
+const filteredItems = computed(() => {
+  if (!search.value) return props.items;
+
+  return props.items.filter((item: SplitViewItem) =>
+    item.label.toLowerCase().includes(search.value.toLowerCase())
+  );
+});
 
 defineSlots<{
   item: (props: { item: SplitViewItem }) => unknown;
@@ -18,6 +31,7 @@ defineSlots<{
 
 const emit = defineEmits<{
   select: [item: SplitViewItem];
+  search: [search: string];
 }>();
 
 const variants = tv({
@@ -29,9 +43,8 @@ const variants = tv({
   variants: {
     active: {
       true: [
-        "pointer-events-none",
-        "bg-primary-200 text-neutral-900",
-        "dark:bg-primary-800 dark:text-neutral-100",
+        "bg-primary-200 text-neutral-900 hover:bg-primary-200",
+        "dark:bg-primary-800 dark:text-neutral-100 dark:hover:bg-primary-800",
       ],
       false: "",
     },
@@ -43,8 +56,15 @@ const variants = tv({
   <div
     class="flex shrink-0 flex-col gap-1 overflow-y-auto bg-neutral-100 p-2 shadow-sm dark:bg-neutral-700"
   >
+    <div v-if="searchable">
+      <Input
+        v-model="search"
+        placeholder="Search..."
+        @change="emit('search', search)"
+      />
+    </div>
     <div
-      v-for="item in items"
+      v-for="item in filteredItems"
       :key="item.key"
       :class="variants({ active: item.key === selected?.key })"
       @click="emit('select', item)"

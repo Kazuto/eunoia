@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/vue3-vite";
 import SplitView from "./SplitView.vue";
 import { type SplitViewItem } from "./SplitView.vue";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 
 const items: SplitViewItem[] = [
   { key: 0, label: "Alice Johnson" },
@@ -21,10 +21,12 @@ const meta = {
   argTypes: {
     items: { control: "object" },
     selected: { control: "object" },
+    searchable: { control: "boolean" },
   },
   args: {
     items,
     selected: items[0],
+    searchable: false,
   },
 } satisfies Meta<typeof SplitView>;
 
@@ -36,15 +38,24 @@ export const Default: Story = {
     components: { SplitView },
     setup() {
       const selected = ref(args.selected);
+      const search = ref("");
 
-      return { selected, items, information };
+      const filteredItems = computed(() => {
+        if (!search.value) return items;
+
+        return items.filter((item: SplitViewItem) =>
+          item.label.toLowerCase().includes(search.value.toLowerCase())
+        );
+      });
+
+      return { args, selected, information, filteredItems };
     },
     template: `
-      <SplitView :items="items" :selected="selected" @select="selected = $event">
-        <template #default="{ selected }">
-          {{ information.find(i => i.key === selected?.key)?.label }} is
-          {{ information.find(i => i.key === selected?.key)?.age }} years old
-          and lives in {{ information.find(i => i.key === selected?.key)?.location }}.
+      <SplitView :searchable="args.searchable" :items="filteredItems" :selected="selected" @select="selected = $event" @search="search = $event">
+        <template #default="{ item }">
+          {{ information.find(i => i.key === item?.key)?.label }} is
+          {{ information.find(i => i.key === item?.key)?.age }} years old
+          and lives in {{ information.find(i => i.key === item?.key)?.location }}.
         </template>
       </SplitView>
     `,
