@@ -29,8 +29,8 @@ withDefaults(
 const variants = tv({
   base: [
     "inline-flex overflow-hidden rounded-md border transition-colors",
-    "border-neutral-200 text-neutral-600 hover:bg-neutral-50/25 active:bg-neutral-50/25 has-[input:focus]:border-primary-500 has-[textarea:focus]:border-primary-500",
-    "dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-black/15 dark:active:bg-neutral-900/25 dark:has-[input:focus]:border-primary-500 dark:has-[textarea:focus]:border-primary-500",
+    "border-neutral-200 bg-white text-neutral-600 hover:bg-neutral-200/50 active:bg-neutral-50/25 has-[input:focus]:border-primary-500 has-[textarea:focus]:border-primary-500",
+    "dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-900 dark:active:bg-neutral-900/25 dark:has-[input:focus]:border-primary-500 dark:has-[textarea:focus]:border-primary-500",
   ],
   variants: {
     disabled: {

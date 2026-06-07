@@ -38,9 +38,12 @@ const variants = tv({
       button: [
         "cursor-pointer transition-colors outline-none disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
         "text-neutral-600 hover:bg-neutral-200 focus-visible:bg-neutral-200",
-        "dark:text-neutral-400 dark:hover:bg-neutral-700 dark:focus-visible:bg-neutral-700",
+        "dark:text-neutral-400 dark:hover:bg-black/50 dark:focus-visible:bg-neutral-700",
       ],
-      undefined: "rounded-md px-3 py-1",
+    },
+    position: {
+      left: "pl-2",
+      right: "pr-2",
     },
   },
   compoundVariants: [

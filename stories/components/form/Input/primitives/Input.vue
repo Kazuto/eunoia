@@ -2,7 +2,7 @@
   <input
     v-bind="forwardedAttrs"
     v-model="model"
-    :class="inputStyles({ dense, invalid, class: classAttr })"
+    :class="inputStyles({ dense, class: classAttr })"
     :aria-invalid="invalid || undefined"
   />
 </template>
