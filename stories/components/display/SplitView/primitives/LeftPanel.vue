@@ -12,6 +12,10 @@ defineProps<{
   selected?: SplitViewItem;
 }>();
 
+defineSlots<{
+  item: (props: { item: SplitViewItem }) => unknown;
+}>();
+
 const emit = defineEmits<{
   select: [item: SplitViewItem];
 }>();

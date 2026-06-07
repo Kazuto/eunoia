@@ -12,6 +12,11 @@ defineProps<{
   selected?: SplitViewItem;
 }>();
 
+defineSlots<{
+  default: () => unknown;
+  item: (props: { item: SplitViewItem }) => unknown;
+}>();
+
 const emit = defineEmits<{
   select: [item: SplitViewItem];
 }>();
@@ -31,7 +36,14 @@ const variants = tv({
       :items="items"
       :selected="selected"
       @select="emit('select', $event)"
-    />
+    >
+      <template #item="{ item }">
+        <slot
+          name="item"
+          :item="item"
+        />
+      </template>
+    </LeftPanel>
 
     <div class="w-full rounded-sm p-4">
       <slot :selected="selected" />
