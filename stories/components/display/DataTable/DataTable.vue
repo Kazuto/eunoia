@@ -19,6 +19,16 @@
       :dense
     >
       <template
+        v-for="column in columns"
+        #[column.key]="{ item }"
+      >
+        <slot
+          :name="column.key"
+          :item="item"
+        />
+      </template>
+
+      <template
         v-if="hasActions"
         #actions="{ item }"
       >
