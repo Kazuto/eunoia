@@ -7,3 +7,6 @@ export { default as Details } from "./Details/Details.vue";
 
 export { default as Table } from "./Table/Table.vue";
 export type { TableHeader, TableItem } from "./Table/Table.vue";
+
+export { default as SplitView } from "./SplitView/SplitView.vue";
+export type { SplitViewItem } from "./SplitView/SplitView.vue";
