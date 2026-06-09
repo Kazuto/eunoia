@@ -6,7 +6,7 @@
     <tr
       v-for="(item, itemIndex) in items"
       :key="itemIndex"
-      :class="rowStyles()"
+      :class="rowStyles({ class: rowClass?.(item) })"
     >
       <td
         v-for="column in columns"
@@ -72,13 +72,13 @@ const bodyStyles = tv({});
 const rowStyles = tv({
   base: [
     "border-b last:border-b-0",
-    "border-neutral-200",
-    "dark:border-neutral-700",
+    "border-neutral-200 text-neutral-900",
+    "dark:border-neutral-700 dark:text-neutral-300",
   ],
 });
 
 const cellStyles = tv({
-  base: ["text-neutral-900", "dark:text-neutral-300"],
+  base: [],
   variants: {
     dense: {
       false: "px-4 py-3",
@@ -101,5 +101,6 @@ defineProps<{
   hasActions?: boolean;
   loading?: boolean;
   dense?: boolean;
+  rowClass?: (item: T) => string;
 }>();
 </script>

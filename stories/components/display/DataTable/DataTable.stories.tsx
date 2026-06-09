@@ -24,6 +24,7 @@ const meta = {
     loading: { control: "boolean" },
     loadingRows: { control: "number" },
     actions: { table: { category: "slots" } },
+    rowClass: { control: "function" },
   },
   args: {
     columns: [
@@ -51,6 +52,17 @@ export const Default: Story = {};
 export const Dense: Story = {
   args: {
     dense: true,
+  },
+};
+
+export const RowClass: Story = {
+  args: {
+    columns: [
+      { title: "Name", key: "name" },
+      { title: "Role", key: "role" },
+    ],
+    rowClass: (item: Record<string, unknown>) =>
+      item.name === "Bob Smith" ? "text-neutral-400 dark:text-neutral-600" : "",
   },
 };
 

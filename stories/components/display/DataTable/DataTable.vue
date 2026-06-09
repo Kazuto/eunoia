@@ -17,6 +17,7 @@
       :has-actions
       :loading
       :dense
+      :row-class
     >
       <template
         v-for="column in columns"
@@ -69,9 +70,11 @@ const props = withDefaults(
     loading?: boolean;
     loadingRows?: number;
     dense?: boolean;
+    rowClass?: (item: T) => string;
   }>(),
   {
     loadingRows: 3,
+    rowClass: undefined,
   }
 );
 
