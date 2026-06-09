@@ -43,7 +43,7 @@ export const Default: Story = {
     },
     template: `
       <Button @click="open = true">Open Dialog</Button>
-      <Dialog v-model="open" v-bind="args">
+      <Dialog :open v-bind="args" @close="open = false">
         {{ args.default }}
         <template #footer>
           <Button @click="open = false">Close</Button>
@@ -67,7 +67,7 @@ export const Dense: Story = {
     },
     template: `
       <Button dense @click="open = true">Open Dense Dialog</Button>
-      <Dialog v-model="open" v-bind="args">
+      <Dialog :open v-bind="args" @close="open = false">
         {{ args.default }}
         <template #footer>
           <Button dense @click="open = false">Close</Button>
@@ -92,7 +92,7 @@ export const Persistent: Story = {
     },
     template: `
       <Button @click="open = true">Open Persistent Dialog</Button>
-      <Dialog v-model="open" v-bind="args">
+      <Dialog :open v-bind="args" @close="open = false">
         You must accept the terms to continue. This dialog cannot be dismissed.
         <template #footer>
           <Button primary @click="open = false">I Accept</Button>

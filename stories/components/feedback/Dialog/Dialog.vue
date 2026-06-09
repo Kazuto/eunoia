@@ -1,7 +1,7 @@
 <template>
   <DialogPanel
     v-bind="$attrs"
-    :open="model"
+    :open
     :persistent
     :dense
     :aria-labelledby="titleId"
@@ -53,6 +53,7 @@ defineOptions({
 const props = withDefaults(
   defineProps<{
     title: string;
+    open: boolean;
     persistent?: boolean;
     dense?: boolean;
     locale?: LocaleMessages;
@@ -67,7 +68,6 @@ const t = useLocale(
   toRef(() => props.locale)
 );
 
-const model = defineModel<boolean>({ default: false });
 const titleId = useSanitizedId("dialog-title");
 
 const emit = defineEmits<{
@@ -75,7 +75,6 @@ const emit = defineEmits<{
 }>();
 
 function close() {
-  model.value = false;
   emit("close");
 }
 </script>

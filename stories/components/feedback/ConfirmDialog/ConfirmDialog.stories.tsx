@@ -26,6 +26,7 @@ const meta = {
     persistent: false,
     onConfirm: fn(),
     onCancel: fn(),
+    onClose: fn(),
   },
 } satisfies Meta<typeof ConfirmDialog>;
 
@@ -43,8 +44,11 @@ export const Default: Story = {
     template: `
       <Button destructive @click="open = true">Delete Item</Button>
       <ConfirmDialog
-        v-model="open"
+        :open
         v-bind="args"
+        @confirm="open = false"
+        @cancel="open = false"
+        @close="open = false"
       >
         {{ args.default }}
       </ConfirmDialog>
@@ -67,8 +71,11 @@ export const WithFriction: Story = {
     template: `
       <Button destructive @click="open = true">Delete Repository</Button>
       <ConfirmDialog
-        v-model="open"
+        :open
         v-bind="args"
+        @confirm="open = false"
+        @cancel="open = false"
+        @close="open = false"
       >
         This will permanently delete the repository and all its data. This action cannot be undone.
       </ConfirmDialog>
@@ -92,8 +99,11 @@ export const Persistent: Story = {
     template: `
       <Button destructive @click="open = true">Dangerous Action</Button>
       <ConfirmDialog
-        v-model="open"
+        :open
         v-bind="args"
+        @confirm="open = false"
+        @cancel="open = false"
+        @close="open = false"
       >
         This action is irreversible. You must type the confirmation phrase to proceed.
       </ConfirmDialog>

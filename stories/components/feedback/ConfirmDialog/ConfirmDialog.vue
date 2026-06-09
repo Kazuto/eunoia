@@ -1,7 +1,7 @@
 <template>
   <DialogPanel
     v-bind="$attrs"
-    :open="model"
+    :open
     :persistent
     :dense
     :aria-labelledby="titleId"
@@ -76,6 +76,7 @@ defineOptions({
 const props = withDefaults(
   defineProps<{
     title: string;
+    open: boolean;
     confirmPhrase?: string;
     persistent?: boolean;
     dense?: boolean;
@@ -92,13 +93,13 @@ const t = useLocale(
   toRef(() => props.locale)
 );
 
-const model = defineModel<boolean>({ default: false });
 const titleId = useSanitizedId("dialog-title");
 const frictionValue = ref("");
 
 const emit = defineEmits<{
   (e: "confirm"): void;
   (e: "cancel"): void;
+  (e: "close"): void;
 }>();
 
 const isConfirmEnabled = computed(() => {
@@ -108,20 +109,25 @@ const isConfirmEnabled = computed(() => {
 
 function confirm() {
   if (!isConfirmEnabled.value) return;
-  model.value = false;
   frictionValue.value = "";
+
   emit("confirm");
 }
 
 function cancel() {
-  model.value = false;
   frictionValue.value = "";
+
   emit("cancel");
+  emit("close");
 }
 
-watch(model, (open) => {
-  if (open) {
-    frictionValue.value = "";
-  }
-});
+watch(
+  props,
+  (props) => {
+    if (props.open) {
+      frictionValue.value = "";
+    }
+  },
+  { deep: true }
+);
 </script>
