@@ -54,8 +54,8 @@ function getRelativeTime(msDiff: number): [number, TimeUnit] {
 export function useRelativeTime(
   date: MaybeRefOrGetter<Date | string | undefined>,
   options: {
-    locale: "en";
-    interval: 60000;
+    locale: string;
+    interval: number;
   }
 ) {
   const { locale = "en", interval = 1000 } = options;
