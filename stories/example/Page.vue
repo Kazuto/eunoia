@@ -1,3 +1,141 @@
+<script lang="ts" setup>
+import { ref } from "vue";
+import {
+  Button,
+  Input,
+  Select,
+  Badge,
+  Alert,
+  Card,
+  DataTable,
+  Icon,
+  Link,
+  Tooltip,
+  Sidebar,
+  SidebarToggle,
+} from "@/components";
+import { Header, Menu, UserMenu } from "@/components";
+import type { MenuItem, UserMenuItem } from "@/components";
+
+const emit = defineEmits<{
+  (e: "view", item: Record<string, unknown>): void;
+  (e: "edit", item: Record<string, unknown>): void;
+  (e: "delete", item: Record<string, unknown>): void;
+}>();
+
+const loggedIn = ref(true);
+const sidebarCollapsed = ref(false);
+
+const name = ref("");
+const email = ref("invalid-email");
+const website = ref("");
+const role = ref<string>("");
+const department = ref<string>();
+const newsletter = ref(false);
+
+const nameErrors = ref<string[]>([]);
+const emailErrors = ref(["Please enter a valid email address"]);
+
+const onMenuSelect = (label: string) => {
+  if (label === "Sign Out") loggedIn.value = false;
+};
+
+const onView = (item: Record<string, unknown>) => emit("view", item);
+const onEdit = (item: Record<string, unknown>) => emit("edit", item);
+const onDelete = (item: Record<string, unknown>) => emit("delete", item);
+
+const menuItems: MenuItem[] = [
+  { label: "Dashboard", href: "/", icon: "house-simple" },
+  { label: "Employees", href: "/employees", icon: "users" },
+  { label: "Projects", href: "/projects", icon: "folder" },
+  {
+    label: "Settings",
+    href: "/settings",
+    icon: "gear",
+    items: [
+      { label: "Profile", href: "/profile", icon: "user" },
+      { label: "Account Settings", href: "/account", icon: "gear" },
+      {
+        label: "Sign Out",
+        href: "/signout",
+        icon: "sign-out",
+      },
+    ],
+  },
+];
+
+const userMenuItems: UserMenuItem[] = [
+  { label: "Profile", icon: "user" },
+  { label: "Account Settings", icon: "gear" },
+  { label: "Sign Out", icon: "sign-out", variant: "danger" },
+];
+
+const departmentOptions = [
+  { label: "Engineering", value: "engineering" },
+  { label: "Product", value: "product" },
+  { label: "Design", value: "design" },
+];
+
+const roleOptions = [
+  { label: "Engineer", value: "engineer" },
+  { label: "Designer", value: "designer" },
+  { label: "Manager", value: "manager" },
+  { label: "QA", value: "qa" },
+];
+
+const columns = [
+  { title: "Name", key: "name", sortable: true },
+  { title: "Role", key: "role", sortable: true },
+  { title: "Department", key: "department", sortable: true },
+  {
+    title: "Salary",
+    key: "salary",
+    sortable: true,
+    align: "end" as const,
+    value: (item: Record<string, unknown>) =>
+      `$${(item.salary as number).toLocaleString()}`,
+  },
+  { title: "Status", key: "status", sortable: true },
+];
+
+const items = [
+  {
+    name: "Alice Johnson",
+    role: "Engineer",
+    department: "Platform",
+    salary: 95000,
+    status: "Active",
+  },
+  {
+    name: "Bob Smith",
+    role: "Designer",
+    department: "Product",
+    salary: 82000,
+    status: "Active",
+  },
+  {
+    name: "Carol White",
+    role: "Manager",
+    department: "Engineering",
+    salary: 110000,
+    status: "On Leave",
+  },
+  {
+    name: "David Lee",
+    role: "Engineer",
+    department: "Platform",
+    salary: 98000,
+    status: "Active",
+  },
+  {
+    name: "Eva Martinez",
+    role: "QA",
+    department: "Quality",
+    salary: 78000,
+    status: "Active",
+  },
+];
+</script>
 <template>
   <div class="flex h-screen flex-col bg-white font-sans dark:bg-neutral-950">
     <!-- Header -->
@@ -329,146 +467,3 @@
     </div>
   </div>
 </template>
-
-<script lang="ts" setup>
-import { ref } from "vue";
-import {
-  Button,
-  Input,
-  Select,
-  Badge,
-  Alert,
-  Card,
-  DataTable,
-  Icon,
-  Link,
-  Tooltip,
-  Sidebar,
-  SidebarToggle,
-} from "@/components";
-import Header from "@/components/layout/Header.vue";
-import Menu from "@/components/navigation/Menu/Menu.vue";
-import UserMenu from "@/components/navigation/UserMenu/UserMenu.vue";
-import type { MenuItem } from "@/components/navigation/Menu/types";
-import type { UserMenuItem } from "@/components/navigation/UserMenu/types";
-
-const emit = defineEmits<{
-  (e: "view", item: Record<string, unknown>): void;
-  (e: "edit", item: Record<string, unknown>): void;
-  (e: "delete", item: Record<string, unknown>): void;
-}>();
-
-const loggedIn = ref(true);
-const sidebarCollapsed = ref(false);
-
-const name = ref("");
-const email = ref("invalid-email");
-const website = ref("");
-const role = ref<string>("");
-const department = ref<string>();
-const newsletter = ref(false);
-
-const nameErrors = ref<string[]>([]);
-const emailErrors = ref(["Please enter a valid email address"]);
-
-const onMenuSelect = (label: string) => {
-  if (label === "Sign Out") loggedIn.value = false;
-};
-
-const onView = (item: Record<string, unknown>) => emit("view", item);
-const onEdit = (item: Record<string, unknown>) => emit("edit", item);
-const onDelete = (item: Record<string, unknown>) => emit("delete", item);
-
-const menuItems: MenuItem[] = [
-  { label: "Dashboard", href: "/", icon: "house-simple" },
-  { label: "Employees", href: "/employees", icon: "users" },
-  { label: "Projects", href: "/projects", icon: "folder" },
-  {
-    label: "Settings",
-    href: "/settings",
-    icon: "gear",
-    items: [
-      { label: "Profile", href: "/profile", icon: "user" },
-      { label: "Account Settings", href: "/account", icon: "gear" },
-      {
-        label: "Sign Out",
-        href: "/signout",
-        icon: "sign-out",
-        variant: "danger",
-      },
-    ],
-  },
-];
-
-const userMenuItems: UserMenuItem[] = [
-  { label: "Profile", icon: "user" },
-  { label: "Account Settings", icon: "gear" },
-  { label: "Sign Out", icon: "sign-out", variant: "danger" },
-];
-
-const departmentOptions = [
-  { label: "Engineering", value: "engineering" },
-  { label: "Product", value: "product" },
-  { label: "Design", value: "design" },
-];
-
-const roleOptions = [
-  { label: "Engineer", value: "engineer" },
-  { label: "Designer", value: "designer" },
-  { label: "Manager", value: "manager" },
-  { label: "QA", value: "qa" },
-];
-
-const columns = [
-  { title: "Name", key: "name", sortable: true },
-  { title: "Role", key: "role", sortable: true },
-  { title: "Department", key: "department", sortable: true },
-  {
-    title: "Salary",
-    key: "salary",
-    sortable: true,
-    align: "end" as const,
-    value: (item: Record<string, unknown>) =>
-      `$${(item.salary as number).toLocaleString()}`,
-  },
-  { title: "Status", key: "status", sortable: true },
-];
-
-const items = [
-  {
-    name: "Alice Johnson",
-    role: "Engineer",
-    department: "Platform",
-    salary: 95000,
-    status: "Active",
-  },
-  {
-    name: "Bob Smith",
-    role: "Designer",
-    department: "Product",
-    salary: 82000,
-    status: "Active",
-  },
-  {
-    name: "Carol White",
-    role: "Manager",
-    department: "Engineering",
-    salary: 110000,
-    status: "On Leave",
-  },
-  {
-    name: "David Lee",
-    role: "Engineer",
-    department: "Platform",
-    salary: 98000,
-    status: "Active",
-  },
-  {
-    name: "Eva Martinez",
-    role: "QA",
-    department: "Quality",
-    salary: 78000,
-    status: "Active",
-  },
-];
-</script>
