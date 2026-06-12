@@ -4,10 +4,11 @@ import {
   default as PageSecondaryActions,
   type HeaderAction,
 } from "./PageSecondaryActions.vue";
+import { MaybeRefOrGetter, toRef } from "vue";
 
 export type PageHeaderOptions = {
-  title: string;
-  description?: string;
+  title: MaybeRefOrGetter;
+  description?: MaybeRefOrGetter;
   backAction?: HeaderAction;
   copyAction?: HeaderAction;
   primaryAction?: HeaderAction;
@@ -15,7 +16,7 @@ export type PageHeaderOptions = {
   truncateTitleAfter?: number;
 };
 
-withDefaults(defineProps<PageHeaderOptions>(), {
+const props = withDefaults(defineProps<PageHeaderOptions>(), {
   description: undefined,
   backAction: undefined,
   copyAction: undefined,
@@ -23,6 +24,9 @@ withDefaults(defineProps<PageHeaderOptions>(), {
   secondaryActions: undefined,
   truncateTitleAfter: undefined,
 });
+
+const title: string = toRef(props.title);
+const description: string | undefined = toRef(props.description);
 </script>
 
 <template>
@@ -33,10 +37,9 @@ withDefaults(defineProps<PageHeaderOptions>(), {
           <Tooltip :content="backAction.content">
             <Button
               ghost
-              :icon="backAction.icon"
+              :icon="backAction.icon ?? 'arrow-left'"
               @click="backAction.onClick"
-            >
-            </Button>
+            />
           </Tooltip>
         </template>
 
@@ -53,10 +56,9 @@ withDefaults(defineProps<PageHeaderOptions>(), {
           <Tooltip :content="copyAction.content">
             <Button
               ghost
-              :icon="copyAction.icon"
+              :icon="copyAction.icon ?? 'copy'"
               @click="copyAction.onClick"
-            >
-            </Button>
+            />
           </Tooltip>
         </template>
       </div>
