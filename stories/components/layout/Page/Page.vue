@@ -1,15 +1,35 @@
-<template>
-  <article>
-    <Header
-      :user="user"
-      @login="onLogin"
-      @logout="onLogout"
-      @create-account="onCreateAccount"
-    />
+<script lang="ts" setup>
+import { tv } from "tailwind-variants";
+import {
+  default as PageHeader,
+  type PageHeaderOptions,
+} from "./primitives/PageHeader.vue";
 
-    <section
-      class="mx-auto max-w-xl px-5 py-12 font-sans text-sm leading-6 text-neutral-800"
-    >
+export type PageOptions = {
+  width?: "narrow" | "wide";
+} & PageHeaderOptions;
+
+const props = withDefaults(defineProps<PageOptions>(), {
+  backAction: undefined,
+  width: "narrow",
+});
+
+const pageVariants = tv({
+  base: ["flex flex-col gap-6"],
+  variants: {
+    width: {
+      narrow: ["mx-auto max-w-screen-lg px-4 py-12"],
+      wide: ["mx-auto max-w-screen-xl px-4 py-12"],
+    },
+  },
+});
+</script>
+
+<template>
+  <div :class="pageVariants({ width: props.width })">
+    <PageHeader v-bind="props" />
+
+    <section>
       <h2 class="mb-1 inline-block align-top text-3xl leading-none font-bold">
         Pages in Storybook
       </h2>
@@ -86,22 +106,5 @@
         Viewports addon in the toolbar
       </div>
     </section>
-  </article>
+  </div>
 </template>
-
-<script lang="ts" setup>
-import Header from "./Header.vue";
-import { ref } from "vue";
-
-const user = ref<{ name: string } | null>(null);
-
-const onLogin = () => {
-  user.value = { name: "Jane Doe" };
-};
-const onLogout = () => {
-  user.value = null;
-};
-const onCreateAccount = () => {
-  user.value = { name: "Jane Doe" };
-};
-</script>
