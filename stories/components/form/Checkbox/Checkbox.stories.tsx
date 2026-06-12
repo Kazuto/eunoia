@@ -4,7 +4,6 @@ import Checkbox from "./Checkbox.vue";
 import FormGroup from "../FormGroup/FormGroup.vue";
 
 const meta = {
-  title: "Components/Form/Checkbox",
   component: Checkbox,
   tags: ["autodocs"],
   argTypes: {

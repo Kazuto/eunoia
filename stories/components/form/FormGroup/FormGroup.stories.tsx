@@ -5,7 +5,6 @@ import Radio from "../Radio/Radio.vue";
 import Checkbox from "../Checkbox/Checkbox.vue";
 
 const meta = {
-  title: "Components/Form/FormGroup",
   component: FormGroup,
   tags: ["autodocs"],
   argTypes: {

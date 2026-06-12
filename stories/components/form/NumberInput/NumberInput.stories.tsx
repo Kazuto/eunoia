@@ -3,7 +3,6 @@ import { ref } from "vue";
 import NumberInput from "./NumberInput.vue";
 
 const meta = {
-  title: "Components/Form/NumberInput",
   component: NumberInput,
   tags: ["autodocs"],
   argTypes: {

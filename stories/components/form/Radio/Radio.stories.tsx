@@ -4,7 +4,6 @@ import Radio from "./Radio.vue";
 import FormGroup from "../FormGroup/FormGroup.vue";
 
 const meta = {
-  title: "Components/Form/Radio",
   component: Radio,
   tags: ["autodocs"],
   argTypes: {

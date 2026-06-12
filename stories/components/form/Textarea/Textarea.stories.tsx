@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from "@storybook/vue3-vite";
 import Textarea from "./Textarea.vue";
 
 const meta = {
-  title: "Components/Form/Textarea",
   component: Textarea,
   tags: ["autodocs"],
   argTypes: {
