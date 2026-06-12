@@ -56,12 +56,12 @@ defineOptions({
   inheritAttrs: false,
 });
 
-export interface DropdownItemOption {
+export type DropdownItemOption = {
   label: string;
   value: string;
   disabled?: boolean;
   variant?: "default" | "danger";
-}
+};
 
 const props = withDefaults(
   defineProps<{
