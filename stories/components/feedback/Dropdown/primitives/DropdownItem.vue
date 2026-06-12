@@ -66,7 +66,7 @@ const itemStyles = tv({
   },
 });
 
-defineProps<{
+export type DropdownItem = {
   id?: string;
   label: string;
   value: string;
@@ -74,7 +74,15 @@ defineProps<{
   disabled?: boolean;
   isActive?: boolean;
   variant?: "default" | "danger";
-}>();
+};
+
+withDefaults(defineProps<DropdownItem>(), {
+  id: undefined,
+  dense: false,
+  disabled: false,
+  isActive: false,
+  variant: "default",
+});
 
 const emit = defineEmits<{
   (e: "select", value: string): void;

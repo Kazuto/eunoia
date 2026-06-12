@@ -23,7 +23,7 @@
       :dense
       :active-descendant-id="activeDescendantId"
     >
-      <DropdownItem
+      <DropdownItemPrimitive
         v-for="(item, index) in items"
         :id="`${menuId}-item-${index}`"
         :key="item.value"
@@ -45,7 +45,12 @@ import { computed, onBeforeUnmount, ref, toRef, watch } from "vue";
 import { useSanitizedId, useLocale, type LocaleMessages } from "@/composables";
 import DropdownTrigger from "./primitives/DropdownTrigger.vue";
 import DropdownMenu from "./primitives/DropdownMenu.vue";
-import DropdownItem from "./primitives/DropdownItem.vue";
+import {
+  default as DropdownItemPrimitive,
+  type DropdownItem,
+} from "./primitives/DropdownItem.vue";
+
+export type { DropdownItem };
 
 defineOptions({
   inheritAttrs: false,
