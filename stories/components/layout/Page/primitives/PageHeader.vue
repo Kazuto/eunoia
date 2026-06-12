@@ -1,13 +1,13 @@
 <script lang="ts" setup>
-import { Button, Tooltip } from "@/components";
+import { Button, Tooltip, Headline, Truncate, Text } from "@/components";
 import {
   default as PageSecondaryActions,
   type HeaderAction,
 } from "./PageSecondaryActions.vue";
-import { tv } from "tailwind-variants";
 
 export type PageHeaderOptions = {
   title: string;
+  description?: string;
   backAction?: HeaderAction;
   copyAction?: HeaderAction;
   primaryAction?: HeaderAction;
@@ -16,61 +16,75 @@ export type PageHeaderOptions = {
 };
 
 withDefaults(defineProps<PageHeaderOptions>(), {
+  description: undefined,
   backAction: undefined,
   copyAction: undefined,
   primaryAction: undefined,
   secondaryActions: undefined,
   truncateTitleAfter: undefined,
 });
-
-const headerStyles = tv({
-  base: ["flex items-center justify-between py-3"],
-});
 </script>
 
 <template>
-  <header :class="headerStyles()">
-    <div class="flex items-center gap-3">
-      <template v-if="backAction">
-        <Tooltip :content="backAction.content">
-          <Button
-            ghost
-            :icon="backAction.icon"
-            @click="backAction.onClick"
+  <header>
+    <div class="flex items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <template v-if="backAction">
+          <Tooltip :content="backAction.content">
+            <Button
+              ghost
+              :icon="backAction.icon"
+              @click="backAction.onClick"
+            >
+            </Button>
+          </Tooltip>
+        </template>
+
+        <Headline :level="3">
+          <Truncate
+            :content="title"
+            :max-length="truncateTitleAfter"
           >
-          </Button>
-        </Tooltip>
-      </template>
+            {{ title }}
+          </Truncate>
+        </Headline>
 
-      <h3 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
-        {{ title }}
-      </h3>
+        <template v-if="copyAction">
+          <Tooltip :content="copyAction.content">
+            <Button
+              ghost
+              :icon="copyAction.icon"
+              @click="copyAction.onClick"
+            >
+            </Button>
+          </Tooltip>
+        </template>
+      </div>
 
-      <template v-if="copyAction">
-        <Tooltip :content="copyAction.content">
-          <Button
-            ghost
-            :icon="copyAction.icon"
-            @click="copyAction.onClick"
-          >
-          </Button>
-        </Tooltip>
-      </template>
+      <div class="flex items-center gap-2">
+        <Button
+          v-if="primaryAction"
+          primary
+          :icon="primaryAction.icon"
+          @click="primaryAction.onClick"
+        >
+          {{ primaryAction.content }}
+        </Button>
+
+        <PageSecondaryActions
+          v-if="secondaryActions"
+          :actions="secondaryActions"
+        />
+      </div>
     </div>
-    <div class="flex items-center gap-2">
-      <Button
-        v-if="primaryAction"
-        primary
-        :icon="primaryAction.icon"
-        @click="primaryAction.onClick"
-      >
-        {{ primaryAction.content }}
-      </Button>
 
-      <PageSecondaryActions
-        v-if="secondaryActions"
-        :actions="secondaryActions"
-      />
-    </div>
+    <Text
+      v-if="description"
+      muted
+      size="sm"
+      class="pt-3"
+    >
+      {{ description }}
+    </Text>
   </header>
 </template>
