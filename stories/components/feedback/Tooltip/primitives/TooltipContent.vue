@@ -23,7 +23,7 @@ const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const contentStyles = tv({
   base: [
-    "z-50 w-max max-w-xs rounded-md font-sans shadow-lg",
+    "z-50 w-max rounded-md font-sans font-light shadow-lg",
     "bg-neutral-700 text-white",
     "dark:bg-neutral-100 dark:text-neutral-900",
   ],
