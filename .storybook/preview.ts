@@ -48,7 +48,8 @@ const preview: Preview = {
       if (unwrapped) {
         return {
           components: { story },
-          template: "<story />",
+          template:
+            '<div class="bg-white dark:bg-neutral-900 min-h-svh"><story /></div>',
         } as ReturnType<typeof story>;
       }
 
