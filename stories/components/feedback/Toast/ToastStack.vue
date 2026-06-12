@@ -41,14 +41,14 @@ import Toast from "./primitives/Toast.vue";
 import ToastDismiss from "./primitives/ToastDismiss.vue";
 import TimeoutBar from "../primitives/TimeoutBar.vue";
 
-interface ToastItem {
+export type ToastItem = {
   id: number;
   message: string;
   variant: "info" | "success" | "warning" | "danger";
   dismissible: boolean;
   persistent: boolean;
   duration: number;
-}
+};
 
 const props = withDefaults(
   defineProps<{

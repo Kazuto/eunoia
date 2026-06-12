@@ -51,6 +51,11 @@ const toastStyles = tv({
   },
 });
 
+export type Toast = {
+  variant: "info" | "success" | "warning" | "danger";
+  dense: boolean;
+};
+
 withDefaults(
   defineProps<{
     variant?: "info" | "success" | "warning" | "danger";
