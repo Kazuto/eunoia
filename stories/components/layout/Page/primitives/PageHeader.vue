@@ -4,7 +4,6 @@ import {
   default as PageSecondaryActions,
   type HeaderAction,
 } from "./PageSecondaryActions.vue";
-import { toRefs } from "vue";
 
 export type PageHeaderOptions = {
   title: string;
@@ -16,7 +15,7 @@ export type PageHeaderOptions = {
   truncateTitleAfter?: number;
 };
 
-const props = withDefaults(defineProps<PageHeaderOptions>(), {
+withDefaults(defineProps<PageHeaderOptions>(), {
   description: undefined,
   backAction: undefined,
   copyAction: undefined,
@@ -24,8 +23,6 @@ const props = withDefaults(defineProps<PageHeaderOptions>(), {
   secondaryActions: undefined,
   truncateTitleAfter: undefined,
 });
-
-const { title, description } = toRefs(props);
 </script>
 
 <template>
