@@ -43,11 +43,13 @@ function toPascalCase(str: string): string {
     .join("");
 }
 
-const props = defineProps<{
+export type IconOptions = {
   name: string;
   type?: "thin" | "light" | "regular" | "bold" | "fill" | "duotone";
   size?: "xs" | "sm" | "md" | "lg" | "xl";
-}>();
+};
+
+const props = defineProps<IconOptions>();
 
 const resolvedIcon = computed(() => {
   const pascalName = toPascalCase(props.name);

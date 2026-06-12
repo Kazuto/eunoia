@@ -8,21 +8,19 @@
 </template>
 
 <script lang="ts" setup>
-import IconPrimitive from "./primitives/Icon.vue";
+import {
+  default as IconPrimitive,
+  type IconOptions,
+} from "./primitives/Icon.vue";
+
+export type { IconOptions };
 
 defineOptions({
   inheritAttrs: false,
 });
 
-withDefaults(
-  defineProps<{
-    name: string;
-    type?: "thin" | "light" | "regular" | "bold" | "fill" | "duotone";
-    size?: "xs" | "sm" | "md" | "lg" | "xl";
-  }>(),
-  {
-    type: "regular",
-    size: "md",
-  }
-);
+withDefaults(defineProps<IconOptions>(), {
+  type: "regular",
+  size: "md",
+});
 </script>
