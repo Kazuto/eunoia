@@ -16,7 +16,7 @@
     <Icon
       v-if="icon"
       :name="icon"
-      :size="dense ? 'md' : 'sm'"
+      :size="dense ? 'xs' : 'sm'"
     />
     <slot />
   </button>
@@ -68,8 +68,8 @@ const buttonStyles = tv({
     },
   },
   compoundVariants: [
-    { dense: true, icon: true, class: "px-3 py-2.5" },
-    { dense: false, icon: true, class: "px-2.5 py-2" },
+    { dense: true, icon: true, class: "py-1.75" },
+    { dense: false, icon: true, class: "px-2.75" },
   ],
   defaultVariants: {
     dense: false,
