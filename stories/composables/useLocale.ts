@@ -29,13 +29,19 @@ export function useLocale(
 ) {
   const provided = inject(LOCALE_KEY, ref<LocaleMessages>({}));
 
-  return (key: string): string => {
+  return (key: string, vars?: Record<string, string | number>): string => {
     const fullKey = `${prefix}.${key}`;
-    return (
+    const raw =
       overrides?.value?.[key] ??
       provided.value[fullKey] ??
       defaultMessages.value[fullKey] ??
-      fullKey
+      fullKey;
+
+    if (!vars) return raw;
+
+    return Object.entries(vars).reduce(
+      (str, [k, v]) => str.replaceAll(`{${k}}`, String(v)),
+      raw
     );
   };
 }

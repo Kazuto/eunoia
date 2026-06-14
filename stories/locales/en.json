@@ -60,6 +60,8 @@
   "datepicker.weekdays.friday": "Friday",
   "datepicker.weekdays.saturday": "Saturday",
   "datepicker.weekdays.sunday": "Sunday",
+  "pagination.navigation": "Pagination",
   "pagination.previous": "Previous",
-  "pagination.next": "Next"
+  "pagination.next": "Next",
+  "pagination.go-to": "Go to page {page}"
 }

@@ -55,6 +55,7 @@ const visiblePages = computed<Array<number | "...">>(() => {
 
 function goTo(page: number) {
   if (page < 1 || page > props.total) return;
+  if (page === currentModel.value) return;
 
   emit("update:current", page);
 }
@@ -66,7 +67,10 @@ const t = useLocale(
 </script>
 
 <template>
-  <nav class="flex items-center justify-between gap-2">
+  <nav
+    :aria-label="t('navigation')"
+    class="flex items-center justify-between gap-2"
+  >
     <Select
       v-model="perPageModel"
       :dense
@@ -80,6 +84,7 @@ const t = useLocale(
       >
         <PaginationButton
           icon="arrow-left"
+          :aria-label="t('previous')"
           :dense
           :disabled="currentModel <= 1"
           @click="goTo(currentModel - 1)"
@@ -93,10 +98,14 @@ const t = useLocale(
         <Icon
           v-if="page === '...'"
           name="dots-three"
+          aria-hidden="true"
         />
 
         <PaginationButton
           v-else
+          :aria-label="t('go-to', { page })"
+          :aria-current="page === currentModel ? 'page' : undefined"
+          :aria-disabled="page === currentModel ? 'true' : undefined"
           :dense
           :active="page === currentModel"
           @click="goTo(page)"
@@ -111,6 +120,7 @@ const t = useLocale(
       >
         <PaginationButton
           icon="arrow-right"
+          :aria-label="t('next')"
           :dense
           :disabled="currentModel >= props.total"
           @click="goTo(currentModel + 1)"
@@ -119,16 +129,3 @@ const t = useLocale(
     </div>
   </nav>
 </template>
-
-<style scoped>
-.pagination-ellipsis {
-  width: 2.5rem;
-  height: 2.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.875rem;
-  color: var(--color-text-secondary);
-  user-select: none;
-}
-</style>
