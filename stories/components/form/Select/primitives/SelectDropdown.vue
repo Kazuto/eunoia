@@ -32,8 +32,8 @@ const dropdownStyles = tv({
       true: "py-0.5",
     },
     placement: {
-      top: "top-full mt-1",
-      bottom: "bottom-full mb-1",
+      top: "bottom-full mb-1",
+      bottom: "top-full mt-1",
     },
   },
   defaultVariants: {
