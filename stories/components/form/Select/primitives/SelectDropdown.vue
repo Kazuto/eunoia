@@ -2,7 +2,7 @@
   <ul
     :id
     v-bind="forwardedAttrs"
-    :class="dropdownStyles({ dense, class: classAttr })"
+    :class="dropdownStyles({ dense, placement, class: classAttr })"
     role="listbox"
     :aria-multiselectable="multiple || undefined"
   >
@@ -22,7 +22,7 @@ const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const dropdownStyles = tv({
   base: [
-    "absolute top-full right-0 left-0 z-50 mt-1 scrollbar-subtle max-h-60 overflow-auto rounded-md border shadow-lg",
+    "absolute right-0 left-0 z-50 scrollbar-subtle max-h-60 overflow-auto rounded-md border shadow-lg",
     "border-neutral-300 bg-white",
     "dark:border-neutral-700 dark:bg-neutral-900",
   ],
@@ -30,6 +30,10 @@ const dropdownStyles = tv({
     dense: {
       false: "py-1",
       true: "py-0.5",
+    },
+    placement: {
+      top: "top-full mt-1",
+      bottom: "bottom-full mb-1",
     },
   },
   defaultVariants: {
@@ -41,5 +45,6 @@ defineProps<{
   id?: string;
   multiple?: boolean;
   dense?: boolean;
+  placement?: "top" | "bottom";
 }>();
 </script>

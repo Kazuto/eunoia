@@ -34,6 +34,7 @@
       :id="listboxId"
       :multiple
       :dense
+      :placement="dropdownPlacement"
     >
       <li
         v-if="options.length === 0"
@@ -60,7 +61,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onBeforeUnmount, ref, toRef, watch } from "vue";
+import { computed, nextTick, onBeforeUnmount, ref, toRef, watch } from "vue";
 import { type LocaleMessages, useLocale, useSanitizedId } from "@/composables";
 import Label from "../Input/primitives/Label.vue";
 import SelectTrigger from "./primitives/SelectTrigger.vue";
@@ -131,10 +132,34 @@ const activeDescendantId = computed(() => {
   return `${listboxId}-option-${activeIndex.value}`;
 });
 
-function openDropdown() {
+const dropdownPlacement = ref<"bottom" | "top">("bottom");
+
+async function openDropdown() {
   if (props.disabled) return;
+
   isOpen.value = true;
   activeIndex.value = -1;
+
+  await nextTick();
+
+  updatePlacement();
+}
+
+function updatePlacement() {
+  if (!containerRef.value) return;
+
+  const rect = containerRef.value.getBoundingClientRect();
+  const spaceBelow = window.innerHeight - rect.bottom;
+  const spaceAbove = rect.top;
+
+  const dropdownEl = containerRef.value.querySelector(
+    "[role='listbox']"
+  ) as HTMLElement | null;
+
+  const dropdownHeight = dropdownEl?.offsetHeight ?? 200;
+
+  dropdownPlacement.value =
+    spaceBelow >= dropdownHeight || spaceBelow >= spaceAbove ? "bottom" : "top";
 }
 
 function closeDropdown() {
