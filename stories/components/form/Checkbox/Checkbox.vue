@@ -77,7 +77,12 @@ const props = withDefaults(
     ariaLabel?: string;
     ariaLabelledby?: string;
   }>(),
-  {}
+  {
+    helper: undefined,
+    errors: () => [],
+    ariaLabel: undefined,
+    ariaLabelledby: undefined,
+  }
 );
 
 const indeterminate = toRef(props, "indeterminate");

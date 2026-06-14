@@ -122,6 +122,10 @@ const props = withDefaults(
     max: undefined,
     step: 1,
     locale: undefined,
+    helper: undefined,
+    errors: () => [],
+    ariaLabel: undefined,
+    ariaLabelledby: undefined,
   }
 );
 
