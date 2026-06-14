@@ -59,5 +59,7 @@
   "datepicker.weekdays.thursday": "Thursday",
   "datepicker.weekdays.friday": "Friday",
   "datepicker.weekdays.saturday": "Saturday",
-  "datepicker.weekdays.sunday": "Sunday"
+  "datepicker.weekdays.sunday": "Sunday",
+  "pagination.previous": "Previous",
+  "pagination.next": "Next"
 }
