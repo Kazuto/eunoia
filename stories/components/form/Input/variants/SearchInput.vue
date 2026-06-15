@@ -15,25 +15,27 @@
     <Input
       v-model="model"
       v-bind="{ ...$attrs, ...forwardedProps }"
-      :type="inputType"
+      type="search"
       :disabled
       :invalid
     />
 
-    <Tooltip :content="isVisible ? t('hide-password') : t('show-password')">
+    <Tooltip
+      v-if="model"
+      :content="t('clear-search')"
+    >
       <InputGroupAddon
         position="right"
         role="button"
-        :aria-label="isVisible ? t('hide-password') : t('show-password')"
-        :aria-pressed="isVisible"
+        :aria-label="t('clear-search')"
         :disabled
         :invalid
-        @click="toggleVisibility"
-        @keydown.enter="toggleVisibility"
-        @keydown.space="toggleVisibility"
+        @click="clearSearch"
+        @keydown.enter="clearSearch"
+        @keydown.space="clearSearch"
       >
         <Icon
-          :name="isVisible ? 'eye' : 'eye-closed'"
+          name="backspace"
           size="sm"
         />
       </InputGroupAddon>
@@ -42,12 +44,14 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, toRef } from "vue";
+import { computed, toRef } from "vue";
 import { Icon, Tooltip } from "@/components";
 import Input from "../primitives/Input.vue";
 import InputGroup from "../../InputGroup/InputGroup.vue";
 import InputGroupAddon from "../../InputGroup/InputGroupAddon.vue";
 import { type LocaleMessages, useLocale } from "@/composables";
+
+const model = defineModel<string>({ default: "" });
 
 const props = withDefaults(
   defineProps<{
@@ -61,29 +65,21 @@ const props = withDefaults(
   }
 );
 
-const t = useLocale(
-  "input.password",
-  toRef(() => props.locale)
-);
+defineOptions({
+  inheritAttrs: false,
+});
 
 const forwardedProps = computed(() => {
   const { locale: _locale, ...rest } = props;
   return rest;
 });
 
-defineOptions({
-  inheritAttrs: false,
-});
+const t = useLocale(
+  "input.search",
+  toRef(() => props.locale)
+);
 
-const model = defineModel<string>();
-
-const isVisible = ref(false);
-
-const inputType = computed(() => (isVisible.value ? "text" : "password"));
-
-function toggleVisibility() {
-  if (props.disabled) return;
-
-  isVisible.value = !isVisible.value;
+function clearSearch() {
+  model.value = "";
 }
 </script>

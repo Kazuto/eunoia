@@ -62,6 +62,7 @@ import { useSanitizedId } from "@/composables";
 import { type LocaleMessages } from "@/composables";
 import PasswordInput from "./variants/PasswordInput.vue";
 import TextInput from "./variants/TextInput.vue";
+import SearchInput from "./variants/SearchInput.vue";
 
 defineOptions({
   inheritAttrs: false,
@@ -94,7 +95,10 @@ const modelLength = computed(() => {
   return 0;
 });
 
-const variantMap = new Map<string, Component>([["password", PasswordInput]]);
+const variantMap = new Map<string, Component>([
+  ["password", PasswordInput],
+  ["search", SearchInput],
+]);
 
 const variantComponent = computed(() => {
   return variantMap.get(attrs.type as string) ?? TextInput;

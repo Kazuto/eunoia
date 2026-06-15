@@ -104,6 +104,12 @@ export const Password: Story = {
   },
 };
 
+export const Search: Story = {
+  args: {
+    type: "search",
+  },
+};
+
 export const Email: Story = {
   args: {
     type: "email",

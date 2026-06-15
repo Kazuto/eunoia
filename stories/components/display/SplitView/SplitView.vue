@@ -7,6 +7,8 @@ import {
 
 export type { SplitViewItem };
 
+const search = defineModel<string>("search", { default: "" });
+
 defineProps<{
   items: SplitViewItem[];
   selected?: SplitViewItem;
@@ -20,12 +22,11 @@ defineSlots<{
 
 const emit = defineEmits<{
   select: [item: SplitViewItem];
-  search: [search: string];
 }>();
 
 const variants = tv({
   base: [
-    "flex h-full gap-4 overflow-hidden rounded-md border",
+    "grid h-full grid-cols-12 gap-4 overflow-hidden rounded-md border",
     "border-neutral-200 bg-white text-neutral-900",
     "dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100",
   ],
@@ -35,11 +36,12 @@ const variants = tv({
 <template>
   <div :class="variants()">
     <LeftPanel
-      :items="items"
+      v-model:search="search"
+      class="col-span-2"
+      :items
       :searchable
-      :selected="selected"
+      :selected
       @select="emit('select', $event)"
-      @search="emit('search', $event)"
     >
       <template #item="{ item }">
         <slot
@@ -49,7 +51,7 @@ const variants = tv({
       </template>
     </LeftPanel>
 
-    <div class="w-full rounded-sm p-4">
+    <div class="col-span-10 rounded-sm p-4">
       <slot :item="selected" />
     </div>
   </div>

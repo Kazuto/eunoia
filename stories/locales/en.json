@@ -3,6 +3,7 @@
   "input.number.decrease-value": "Decrease value",
   "input.password.show-password": "Show password",
   "input.password.hide-password": "Hide password",
+  "input.search.clear-search": "Clear search",
   "select.placeholder": "Select an option",
   "select.no-results": "No options",
   "chip.remove": "Remove",

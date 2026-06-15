@@ -1,3 +1,4 @@
+import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "@storybook/vue3-vite";
 import SplitView from "./SplitView.vue";
 import { type SplitViewItem } from "./SplitView.vue";
@@ -19,21 +20,41 @@ const meta = {
   component: SplitView,
   tags: ["autodocs"],
   argTypes: {
+    search: { control: "text" },
     items: { control: "object" },
     selected: { control: "object" },
-    searchable: { control: "boolean" },
   },
   args: {
     items,
+    search: "",
     selected: items[0],
-    searchable: false,
+    onSelect: fn(),
   },
+  render: (args) => ({
+    components: { SplitView },
+    setup() {
+      const selected = ref(args.selected);
+
+      return { args, selected, information, items };
+    },
+    template: `
+      <SplitView v-bind="args" :items="items" :selected="selected" @select="selected = $event">
+        <template #default="{ item }">
+          {{ information.find(i => i.key === item?.key)?.label }} is
+          {{ information.find(i => i.key === item?.key)?.age }} years old
+          and lives in {{ information.find(i => i.key === item?.key)?.location }}.
+        </template>
+      </SplitView>
+    `,
+  }),
 } satisfies Meta<typeof SplitView>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Default: Story = {};
+
+export const Searchable: Story = {
   render: (args) => ({
     components: { SplitView },
     setup() {
@@ -48,10 +69,10 @@ export const Default: Story = {
         );
       });
 
-      return { args, selected, information, filteredItems };
+      return { args, selected, information, filteredItems, search };
     },
     template: `
-      <SplitView :searchable="args.searchable" :items="filteredItems" :selected="selected" @select="selected = $event" @search="search = $event">
+      <SplitView v-bind="args" :items="filteredItems" :selected="selected" @select="selected = $event" searchable v-model:search="search">
         <template #default="{ item }">
           {{ information.find(i => i.key === item?.key)?.label }} is
           {{ information.find(i => i.key === item?.key)?.age }} years old

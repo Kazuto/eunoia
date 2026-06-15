@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import Input from "@/components/form/Input/Input.vue";
 import { tv } from "tailwind-variants";
-import { ref, computed } from "vue";
 
 export type SplitViewItem = {
   key: string | number;
@@ -9,21 +8,13 @@ export type SplitViewItem = {
   [key: string]: unknown; // allow extra fields
 };
 
-const props = defineProps<{
+const search = defineModel<string>("search", { default: "" });
+
+defineProps<{
   items: SplitViewItem[];
   selected?: SplitViewItem;
   searchable?: boolean;
 }>();
-
-const search = ref("");
-
-const filteredItems = computed(() => {
-  if (!search.value) return props.items;
-
-  return props.items.filter((item: SplitViewItem) =>
-    item.label.toLowerCase().includes(search.value.toLowerCase())
-  );
-});
 
 defineSlots<{
   item: (props: { item: SplitViewItem }) => unknown;
@@ -31,7 +22,6 @@ defineSlots<{
 
 const emit = defineEmits<{
   select: [item: SplitViewItem];
-  search: [search: string];
 }>();
 
 const variants = tv({
@@ -54,27 +44,29 @@ const variants = tv({
 
 <template>
   <div
-    class="flex shrink-0 flex-col gap-1 overflow-y-auto bg-neutral-100 p-2 shadow-sm dark:bg-neutral-700"
+    class="flex flex-col gap-1 overflow-y-auto bg-neutral-100 p-2 shadow-sm dark:bg-neutral-700"
   >
     <div v-if="searchable">
       <Input
         v-model="search"
+        type="search"
         placeholder="Search..."
-        @change="emit('search', search)"
       />
     </div>
-    <div
-      v-for="item in filteredItems"
-      :key="item.key"
-      :class="variants({ active: item.key === selected?.key })"
-      @click="emit('select', item)"
-    >
-      <slot
-        name="item"
-        :item="item"
+    <ul>
+      <li
+        v-for="item in items"
+        :key="item.key"
+        :class="variants({ active: item.key === selected?.key })"
+        @click="emit('select', item)"
       >
-        {{ item.label }}
-      </slot>
-    </div>
+        <slot
+          name="item"
+          :item="item"
+        >
+          {{ item.label }}
+        </slot>
+      </li>
+    </ul>
   </div>
 </template>
