@@ -4,12 +4,14 @@
     :disabled
   >
     <InputGroupAddon
-      v-if="$slots.prepend"
       position="left"
       :disabled
       :invalid
     >
-      <slot name="prepend" />
+      <Icon
+        name="magnifying-glass"
+        size="sm"
+      />
     </InputGroupAddon>
 
     <Input
