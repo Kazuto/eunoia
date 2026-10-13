@@ -2,6 +2,7 @@
   <HeadlinePrimitive
     v-bind="$attrs"
     :level
+    :scale
   >
     <slot />
   </HeadlinePrimitive>
@@ -17,9 +18,11 @@ defineOptions({
 withDefaults(
   defineProps<{
     level?: 1 | 2 | 3 | 4 | 5 | 6;
+    scale?: 1 | 2 | 3 | 4 | 5 | 6;
   }>(),
   {
     level: 1,
+    scale: undefined,
   }
 );
 </script>

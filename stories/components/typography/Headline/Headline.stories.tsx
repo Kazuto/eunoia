@@ -9,6 +9,12 @@ const meta = {
     level: {
       control: "select",
       options: [1, 2, 3, 4, 5, 6],
+      description: "Semantic heading level (h1–h6)",
+    },
+    scale: {
+      control: "select",
+      options: [1, 2, 3, 4, 5, 6],
+      description: "Visual heading scale; defaults to level",
     },
     default: {
       control: "text",
@@ -55,6 +61,10 @@ export const H5: Story = {
 
 export const H6: Story = {
   args: { level: 6 },
+};
+
+export const IndependentScale: Story = {
+  args: { level: 1, scale: 6 },
 };
 
 export const AllLevels: Story = {
