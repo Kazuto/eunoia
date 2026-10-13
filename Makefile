@@ -18,6 +18,7 @@ release-beta: bump-beta
 	git add package.json
 	git commit -m "chore: bump version to v$(VERSION)"
 	git push
+	@set -a; if [ -f .env ]; then . ./.env; fi; set +a; \
 	gh release create v$(VERSION) \
 		--prerelease \
 		--target $(BRANCH) \
@@ -29,6 +30,7 @@ release: bump-patch
 	git add package.json
 	git commit -m "chore: bump version to v$(VERSION)"
 	git push
+	@set -a; if [ -f .env ]; then . ./.env; fi; set +a; \
 	gh release create v$(VERSION) \
 		--target $(BRANCH) \
 		--title "v$(VERSION)" \
