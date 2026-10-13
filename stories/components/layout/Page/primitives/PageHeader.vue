@@ -1,9 +1,7 @@
 <script lang="ts" setup>
 import { Button, Tooltip, Headline, Truncate, Text } from "@/components";
-import {
-  default as PageSecondaryActions,
-  type HeaderAction,
-} from "./PageSecondaryActions.vue";
+import PageSecondaryActions from "./PageSecondaryActions.vue";
+import type { HeaderAction } from "@/types";
 
 export type PageHeaderOptions = {
   title: string;

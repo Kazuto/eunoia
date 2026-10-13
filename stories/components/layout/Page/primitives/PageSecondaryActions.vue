@@ -3,17 +3,11 @@ import { Button } from "@/components";
 import { tv } from "tailwind-variants";
 import { Icon } from "@/components";
 import { ref } from "vue";
+import type { HeaderAction } from "@/types";
 
 defineOptions({
   inheritAttrs: false,
 });
-
-export type HeaderAction = {
-  content: string;
-  icon?: string;
-  disabled?: boolean;
-  onClick?: () => void;
-};
 
 defineProps<{ actions: HeaderAction[]; dense?: boolean }>();
 

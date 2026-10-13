@@ -28,7 +28,7 @@ const meta = {
       <div class="min-h-screen bg-neutral-100 dark:bg-neutral-950">
         <Header v-bind="args">
           <template #left>
-            <Button ghost dense icon="sidebar" aria-label="Toggle sidebar" />
+            <Button ghost icon="sidebar" aria-label="Toggle sidebar" />
           </template>
           <template #right>
             <Button ghost>Admin User</Button>
@@ -49,6 +49,12 @@ type Story = StoryObj<typeof meta>;
 
 export const PageContext: Story = {};
 
+export const WithoutDescription: Story = {
+  args: {
+    description: undefined,
+  },
+};
+
 export const WithSecondaryActions: Story = {
   args: {
     secondaryActions: [
@@ -63,10 +69,9 @@ export const WithoutPageContext: Story = {
   render: () => ({
     components: { Header, Button },
     template: `
-      <Header>
+      <Header title="Dashboard">
         <template #left>
-          <Button ghost dense icon="sidebar" aria-label="Toggle sidebar" />
-          <span class="font-semibold">Dashboard</span>
+          <Button ghost icon="sidebar" aria-label="Toggle sidebar" />
         </template>
         <template #right>
           <Button ghost>Admin User</Button>
