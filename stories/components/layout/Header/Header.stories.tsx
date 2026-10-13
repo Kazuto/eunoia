@@ -1,47 +1,77 @@
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "@storybook/vue3-vite";
-
-import { Header as MyHeader } from "@/components";
+import { Header, Page, Card, Button } from "@/components";
 
 const meta = {
-  /* 👇 The title prop is optional.
-   * See https://storybook.js.org/docs/configure/#configure-story-loading
-   * to learn how to generate automatic titles
-   */
-  component: MyHeader,
-  render: (args: any) => ({
-    components: { MyHeader },
+  component: Header,
+  parameters: {
+    layout: "fullscreen",
+    unwrapped: true,
+  },
+  tags: ["autodocs"],
+  args: {
+    title: "Locales",
+    description: "Manage languages and regional variants for your translations",
+    backAction: { content: "Back to Dashboard", onClick: fn() },
+    primaryAction: {
+      content: "Create Locale",
+      icon: "plus",
+      onClick: fn(),
+    },
+  },
+  render: (args) => ({
+    components: { Header, Page, Card, Button },
     setup() {
       return { args };
     },
-    template: '<my-header :user="args.user" />',
+    template: `
+      <div class="min-h-screen bg-neutral-100 dark:bg-neutral-950">
+        <Header v-bind="args">
+          <template #left>
+            <Button ghost dense icon="sidebar" aria-label="Toggle sidebar" />
+          </template>
+          <template #right>
+            <Button ghost>Admin User</Button>
+          </template>
+        </Header>
+        <Page :show-header="false" width="wide">
+          <Card title="Languages">
+            <p class="text-sm text-neutral-500">Page content starts here. The title, description, and page actions are in the app header.</p>
+          </Card>
+        </Page>
+      </div>
+    `,
   }),
-  parameters: {
-    // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
-    layout: "fullscreen",
-  },
-  args: {
-    onLogin: fn(),
-    onLogout: fn(),
-    onCreateAccount: fn(),
-  },
-  // This component will have an automatically generated docsPage entry: https://storybook.js.org/docs/writing-docs/autodocs
-  tags: ["autodocs"],
-} satisfies Meta<typeof MyHeader>;
+} satisfies Meta<typeof Header>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const LoggedIn: Story = {
+export const PageContext: Story = {};
+
+export const WithSecondaryActions: Story = {
   args: {
-    user: {
-      name: "Jane Doe",
-    },
+    secondaryActions: [
+      { content: "Import locales", icon: "upload", onClick: fn() },
+      { content: "Export locales", icon: "download", onClick: fn() },
+      { content: "Unavailable action", disabled: true, onClick: fn() },
+    ],
   },
 };
 
-export const LoggedOut: Story = {
-  args: {
-    user: null,
-  },
+export const WithoutPageContext: Story = {
+  render: () => ({
+    components: { Header, Button },
+    template: `
+      <Header>
+        <template #left>
+          <Button ghost dense icon="sidebar" aria-label="Toggle sidebar" />
+          <span class="font-semibold">Dashboard</span>
+        </template>
+        <template #right>
+          <Button ghost>Admin User</Button>
+        </template>
+      </Header>
+    `,
+  }),
 };

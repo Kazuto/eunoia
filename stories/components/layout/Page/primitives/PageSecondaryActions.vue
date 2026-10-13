@@ -15,9 +15,16 @@ export type HeaderAction = {
   onClick?: () => void;
 };
 
-defineProps<{ actions: HeaderAction[] }>();
+defineProps<{ actions: HeaderAction[]; dense?: boolean }>();
 
 const open = ref(false);
+
+function selectAction(action: HeaderAction) {
+  if (action.disabled) return;
+
+  action.onClick?.();
+  open.value = false;
+}
 
 const menuStyles = tv({
   base: [
@@ -45,6 +52,7 @@ const itemStyles = tv({
   <div class="relative inline-block">
     <Button
       ghost
+      :dense
       icon="dots-three-vertical"
       :aria-haspopup="true"
       :aria-expanded="open"
@@ -62,7 +70,7 @@ const itemStyles = tv({
         :class="itemStyles({ disabled: action.disabled })"
         role="menuitem"
         :aria-disabled="action.disabled || undefined"
-        @click="!action.disabled && action.onClick"
+        @click="selectAction(action)"
       >
         <Icon
           v-if="action.icon"
