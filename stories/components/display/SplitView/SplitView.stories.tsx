@@ -82,3 +82,45 @@ export const Searchable: Story = {
     `,
   }),
 };
+
+export const ScrollableContent: Story = {
+  render: (args) => ({
+    components: { SplitView },
+    setup() {
+      const entries = Array.from({ length: 40 }, (_, key) => ({
+        key,
+        label: `Entry ${key + 1}`,
+      }));
+      const selected = ref(entries[0]);
+      const search = ref("");
+      const filteredItems = computed(() =>
+        entries.filter((item) =>
+          item.label.toLowerCase().includes(search.value.toLowerCase())
+        )
+      );
+
+      return { args, selected, search, filteredItems };
+    },
+    template: `
+      <div class="h-[480px]">
+        <SplitView v-bind="args" :items="filteredItems" :selected="selected" @select="selected = $event" searchable v-model:search="search">
+          <template #header="{ item }">
+            <h2 class="font-semibold">{{ item?.label }}</h2>
+            <p class="text-sm text-neutral-500">The header stays visible while the content scrolls.</p>
+          </template>
+          <template #default="{ item }">
+            <div class="space-y-6">
+              <label v-for="field in 20" :key="field" class="block">
+                <span class="mb-2 block text-sm">{{ item?.label }} — Field {{ field }}</span>
+                <textarea class="w-full rounded-sm border border-neutral-200 p-3 dark:border-neutral-700" rows="2" placeholder="Enter content" />
+              </label>
+            </div>
+          </template>
+          <template #footer="{ item }">
+            <p class="text-sm text-neutral-500">Editing {{ item?.label }} — the footer stays visible.</p>
+          </template>
+        </SplitView>
+      </div>
+    `,
+  }),
+};
