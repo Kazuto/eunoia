@@ -13,6 +13,7 @@
     <SelectTrigger
       v-bind="$attrs"
       :id="triggerId"
+      ref="triggerRef"
       :selected-labels="selectedLabels"
       :selected-values="selectedValues"
       :multiple
@@ -29,39 +30,56 @@
       @keydown="handleTriggerKeydown"
       @remove-chip="removeValue"
     />
-    <SelectDropdown
-      v-if="isOpen"
-      :id="listboxId"
-      :multiple
-      :dense
-      :placement="dropdownPlacement"
+    <Teleport
+      :to="teleportTarget ?? 'body'"
+      :disabled="!teleportTo"
     >
-      <li
-        v-if="options.length === 0"
-        role="option"
-        :aria-selected="false"
-        class="px-3 py-2.5 text-sm text-neutral-400"
-      >
-        {{ t("no-results") }}
-      </li>
-      <SelectOption
-        v-for="(option, index) in options"
-        v-else
-        :id="`${listboxId}-option-${index}`"
-        :key="option.value"
-        :option="option"
-        :is-selected="selectedValues.includes(option.value)"
-        :is-active="activeIndex === index"
+      <SelectDropdown
+        v-if="isOpen"
+        :id="listboxId"
+        ref="dropdownRef"
+        :multiple
         :dense
-        @select="handleOptionSelect"
-        @mouseenter="activeIndex = index"
-      />
-    </SelectDropdown>
+        :placement="teleportTo ? undefined : dropdownPlacement"
+        :floating="!!teleportTo"
+        :style="teleportTo ? floatingStyles : undefined"
+        @keydown="handleTriggerKeydown"
+      >
+        <li
+          v-if="options.length === 0"
+          role="option"
+          :aria-selected="false"
+          class="px-3 py-2.5 text-sm text-neutral-400"
+        >
+          {{ t("no-results") }}
+        </li>
+        <SelectOption
+          v-for="(option, index) in options"
+          v-else
+          :id="`${listboxId}-option-${index}`"
+          :key="option.value"
+          :option="option"
+          :is-selected="selectedValues.includes(option.value)"
+          :is-active="activeIndex === index"
+          :dense
+          @select="handleOptionSelect"
+          @mouseenter="activeIndex = index"
+        />
+      </SelectDropdown>
+    </Teleport>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { computed, nextTick, onBeforeUnmount, ref, toRef, watch } from "vue";
+import {
+  autoUpdate,
+  flip,
+  offset,
+  shift,
+  size,
+  useFloating,
+} from "@floating-ui/vue";
 import { type LocaleMessages, useLocale, useSanitizedId } from "@/composables";
 import Label from "../Input/primitives/Label.vue";
 import SelectTrigger from "./primitives/SelectTrigger.vue";
@@ -84,12 +102,15 @@ const props = withDefaults(
     ariaLabel?: string;
     ariaLabelledby?: string;
     locale?: LocaleMessages;
+    /** Teleport outside overflow containers. Native dialogs own their dropdowns. */
+    teleportTo?: string | HTMLElement;
   }>(),
   {
     placeholder: undefined,
     ariaLabel: undefined,
     ariaLabelledby: undefined,
     locale: undefined,
+    teleportTo: undefined,
   }
 );
 
@@ -110,6 +131,43 @@ const listboxId = useSanitizedId("select-listbox");
 const isOpen = ref(false);
 const activeIndex = ref(-1);
 const containerRef = ref<HTMLElement | null>(null);
+const triggerRef = ref<InstanceType<typeof SelectTrigger> | null>(null);
+const dropdownRef = ref<InstanceType<typeof SelectDropdown> | null>(null);
+const triggerElement = computed<HTMLElement | null>(
+  () => triggerRef.value?.$el ?? null
+);
+const dropdownElement = computed<HTMLElement | null>(
+  () => dropdownRef.value?.$el ?? null
+);
+const teleportTarget = ref<string | HTMLElement>();
+
+const { floatingStyles } = useFloating(triggerElement, dropdownElement, {
+  open: isOpen,
+  placement: "bottom-start",
+  strategy: "fixed",
+  middleware: computed(() =>
+    props.teleportTo
+      ? [
+          offset(4),
+          flip(),
+          shift({ padding: 8 }),
+          size({
+            padding: 8,
+            apply({ rects, availableHeight, elements }) {
+              Object.assign(elements.floating.style, {
+                width: `${rects.reference.width}px`,
+                maxHeight: `${Math.max(0, Math.min(240, availableHeight))}px`,
+              });
+            },
+          }),
+        ]
+      : []
+  ),
+  whileElementsMounted(reference, floating, update) {
+    if (props.teleportTo) return autoUpdate(reference, floating, update);
+    return () => {};
+  },
+});
 
 const selectedValues = computed<Array<string | number>>(() => {
   if (props.multiple) {
@@ -137,12 +195,16 @@ const dropdownPlacement = ref<"bottom" | "top">("bottom");
 async function openDropdown() {
   if (props.disabled) return;
 
+  // A body portal is inert beneath showModal(). Keep the dropdown in the
+  // dialog's top layer, but outside its scrolling body.
+  teleportTarget.value =
+    triggerElement.value?.closest("dialog") ?? props.teleportTo;
   isOpen.value = true;
   activeIndex.value = -1;
 
   await nextTick();
 
-  updatePlacement();
+  if (!props.teleportTo) updatePlacement();
 }
 
 function updatePlacement() {
@@ -240,8 +302,12 @@ function handleTriggerKeydown(event: KeyboardEvent) {
       break;
 
     case "Escape":
-      event.preventDefault();
-      closeDropdown();
+      if (isOpen.value) {
+        event.preventDefault();
+        event.stopPropagation();
+        closeDropdown();
+        triggerElement.value?.focus({ preventScroll: true });
+      }
       break;
 
     case "Tab":
@@ -266,27 +332,44 @@ function handleTriggerKeydown(event: KeyboardEvent) {
 
 function onClickOutside(event: MouseEvent) {
   if (
-    containerRef.value &&
-    !containerRef.value.contains(event.target as Node)
+    !event.composedPath().includes(containerRef.value as EventTarget) &&
+    !event.composedPath().includes(dropdownElement.value as EventTarget)
   ) {
     closeDropdown();
   }
 }
 
-watch(isOpen, (open) => {
+watch(isOpen, (open, _, onCleanup) => {
   if (open) {
     document.addEventListener("mousedown", onClickOutside);
-  } else {
-    document.removeEventListener("mousedown", onClickOutside);
+    const dialog = triggerElement.value?.closest("dialog");
+    dialog?.addEventListener("close", closeDropdown);
+    onCleanup(() => {
+      document.removeEventListener("mousedown", onClickOutside);
+      dialog?.removeEventListener("close", closeDropdown);
+    });
   }
 });
 
-watch(activeIndex, (index) => {
-  if (index >= 0 && isOpen.value) {
-    const optionEl = document.getElementById(`${listboxId}-option-${index}`);
-    optionEl?.scrollIntoView({ block: "nearest" });
-  }
-});
+watch(
+  activeIndex,
+  (index) => {
+    if (index >= 0 && isOpen.value) {
+      const optionEl = document.getElementById(`${listboxId}-option-${index}`);
+      const dropdown = dropdownElement.value;
+      if (!optionEl || !dropdown) return;
+      // Scroll only the listbox, never the surrounding dialog or page.
+      const optionRect = optionEl.getBoundingClientRect();
+      const dropdownRect = dropdown.getBoundingClientRect();
+      const top = dropdownRect.top + dropdown.clientTop;
+      const bottom = top + dropdown.clientHeight;
+      if (optionRect.top < top) dropdown.scrollTop -= top - optionRect.top;
+      else if (optionRect.bottom > bottom)
+        dropdown.scrollTop += optionRect.bottom - bottom;
+    }
+  },
+  { flush: "post" }
+);
 
 onBeforeUnmount(() => {
   document.removeEventListener("mousedown", onClickOutside);

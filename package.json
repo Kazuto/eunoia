@@ -66,5 +66,8 @@
     "test": "vitest run",
     "prepare": "husky"
   },
-  "version": "0.0.1-beta.36"
+  "version": "0.0.1-beta.36",
+  "dependencies": {
+    "@floating-ui/vue": "^2.0.1"
+  }
 }

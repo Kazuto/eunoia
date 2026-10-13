@@ -1,8 +1,10 @@
-import { fn } from "storybook/test";
+import { expect, fn, userEvent, waitFor, within } from "storybook/test";
 import { ref } from "vue";
 import type { Meta, StoryObj } from "@storybook/vue3-vite";
 
 import Select from "./Select.vue";
+import Dialog from "../../feedback/Dialog/Dialog.vue";
+import Button from "../../core/Button/Button.vue";
 
 const sampleOptions = [
   { label: "Apple", value: "apple" },
@@ -24,6 +26,11 @@ const meta = {
     disabled: { control: "boolean" },
     invalid: { control: "boolean" },
     placeholder: { control: "text" },
+    teleportTo: {
+      control: "text",
+      description:
+        "Portal target (selector or HTMLElement). Inside native dialogs, the dialog owns the portal to preserve modal focus and stacking.",
+    },
     default: {
       control: "text",
       description: "Default slot content (label)",
@@ -175,4 +182,104 @@ export const PreselectedMulti: Story = {
       );
     },
   }),
+};
+
+export const Teleported: Story = {
+  args: { teleportTo: "body" },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "The dropdown escapes overflow containers and follows its trigger when scrolling or resizing.",
+      },
+    },
+  },
+};
+
+export const InScrollableDialog: Story = {
+  args: {
+    multiple: true,
+    teleportTo: "body",
+    options: Array.from({ length: 30 }, (_, index) => ({
+      label: `Scope ${index + 1}`,
+      value: index + 1,
+    })),
+  },
+  render: (args: any) => ({
+    components: { Select, Dialog, Button },
+    setup() {
+      const open = ref(false);
+      const value = ref<Array<string | number>>([]);
+      return { args, open, value };
+    },
+    template: `
+      <Button @click="open = true">Open scrollable dialog</Button>
+      <Dialog :open="open" title="Choose scopes" class="h-[min(480px,calc(100dvh-2rem))]" @close="open = false">
+        <div class="flex min-h-[600px] flex-col justify-end gap-4">
+          <p>Scroll to the bottom, then open the Select. The dropdown should escape the scrolling body without changing its scroll height.</p>
+          <Select v-model="value" v-bind="args">Scopes</Select>
+        </div>
+        <template #footer>
+          <Button @click="open = false">Done</Button>
+        </template>
+      </Dialog>
+    `,
+  }),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(
+      canvas.getByRole("button", { name: "Open scrollable dialog" })
+    );
+    const dialog = canvas.getByRole("dialog");
+    const trigger = within(dialog).getByRole("combobox");
+    const scroller = trigger.closest(".overflow-y-auto") as HTMLElement;
+    scroller.scrollTop = scroller.scrollHeight;
+    const scrollHeight = scroller.scrollHeight;
+
+    await userEvent.click(trigger);
+    const listbox = within(dialog).getByRole("listbox");
+    await waitFor(() => {
+      expect(listbox.parentElement).toBe(dialog);
+      expect(listbox.style.position).toBe("fixed");
+      expect(listbox.getBoundingClientRect().width).toBeCloseTo(
+        trigger.getBoundingClientRect().width,
+        0
+      );
+    });
+    expect(scroller.scrollHeight).toBe(scrollHeight);
+    const rect = listbox.getBoundingClientRect();
+    expect(rect.top).toBeGreaterThanOrEqual(8);
+    expect(rect.bottom).toBeLessThanOrEqual(window.innerHeight - 8);
+    expect(
+      listbox.contains(document.elementFromPoint(rect.left + 10, rect.top + 10))
+    ).toBe(true);
+
+    await userEvent.click(
+      within(listbox).getByRole("option", { name: "Scope 1", exact: true })
+    );
+    expect(dialog.hasAttribute("open")).toBe(true);
+    expect(
+      within(listbox)
+        .getByRole("option", { name: "Scope 1", exact: true })
+        .getAttribute("aria-selected")
+    ).toBe("true");
+    trigger.focus({ preventScroll: true });
+    const scrollTop = scroller.scrollTop;
+    await userEvent.keyboard("{End}");
+    expect(listbox.scrollTop).toBeGreaterThan(0);
+    expect(scroller.scrollTop).toBe(scrollTop);
+    await userEvent.keyboard("{Enter}");
+    expect(
+      within(listbox)
+        .getByRole("option", { name: "Scope 30", exact: true })
+        .getAttribute("aria-selected")
+    ).toBe("true");
+    await userEvent.keyboard("{Escape}");
+    expect(within(dialog).queryByRole("listbox")).toBeNull();
+    expect(dialog.hasAttribute("open")).toBe(true);
+    await userEvent.keyboard("{ArrowDown}{Tab}");
+    expect(within(dialog).queryByRole("listbox")).toBeNull();
+    expect(document.activeElement?.closest("dialog")).toBe(dialog);
+    await userEvent.click(within(dialog).getByRole("button", { name: "Done" }));
+  },
 };
