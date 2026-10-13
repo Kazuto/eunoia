@@ -12,19 +12,35 @@ jobs:
 
       - uses: oven-sh/setup-bun@v2
 
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org/
+          scope: "@thkzt"
+
       - run: bun install
 
       - run: bun run build
 
       - run: bun run build:types
 
-      - name: Write .npmrc
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+      - name: Verify npm authentication
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          if [ -z "$NODE_AUTH_TOKEN" ]; then
+            echo "::error::The NPM_TOKEN secret is missing. Set a granular npm token with publish access to @thkzt and bypass 2FA enabled."
+            exit 1
+          fi
+          npm whoami
 
       - name: Publish to npm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          PRERELEASE: ${{ github.event.release.prerelease }}
         run: |
-          if [ "${{ github.event.release.prerelease }}" = "true" ]; then
-            bunx npm publish --access public --tag beta
+          if [ "$PRERELEASE" = "true" ]; then
+            npm publish --access public --tag beta
           else
-            bunx npm publish --access public
+            npm publish --access public
           fi
