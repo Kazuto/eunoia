@@ -68,6 +68,7 @@
   },
   "version": "0.0.1-beta.37",
   "dependencies": {
-    "@floating-ui/vue": "^2.0.1"
+    "@floating-ui/vue": "^2.0.1",
+    "@tanstack/vue-virtual": "^3.13.12"
   }
 }

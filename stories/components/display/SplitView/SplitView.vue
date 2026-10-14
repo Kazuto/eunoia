@@ -10,21 +10,46 @@ export type { SplitViewItem };
 
 const search = defineModel<string>("search", { default: "" });
 
-defineProps<{
-  items: SplitViewItem[];
-  selected?: SplitViewItem;
-  searchable?: boolean;
-}>();
+withDefaults(
+  defineProps<{
+    items: SplitViewItem[];
+    selected?: SplitViewItem;
+    searchable?: boolean;
+    /** Keep the search field pinned while the list scrolls underneath. */
+    stickySearch?: boolean;
+    /** Render only the rows in view. Use for long lists. */
+    virtual?: boolean;
+    /** Estimated row height in px for `virtual`; rows are measured once rendered. */
+    itemSize?: number;
+    /** More items can be loaded; `endReached` fires when the end comes into view. */
+    hasMore?: boolean;
+    /** Items are being loaded; suppresses `endReached`. */
+    loading?: boolean;
+    /** Distance in px from the end at which `endReached` fires. */
+    endThreshold?: number;
+    /** Total item count, if known, announced to assistive tech for partial lists. */
+    total?: number;
+  }>(),
+  {
+    selected: undefined,
+    itemSize: undefined,
+    endThreshold: undefined,
+    total: undefined,
+  }
+);
 
 defineSlots<{
   default: (props: { item: SplitViewItem | undefined }) => unknown;
   header?: (props: { item: SplitViewItem | undefined }) => unknown;
   footer?: (props: { item: SplitViewItem | undefined }) => unknown;
   item: (props: { item: SplitViewItem }) => unknown;
+  listFooter?: () => unknown;
+  empty?: () => unknown;
 }>();
 
 const emit = defineEmits<{
   select: [item: SplitViewItem];
+  endReached: [];
 }>();
 
 const variants = tv({
@@ -44,13 +69,35 @@ const variants = tv({
       :items
       :searchable
       :selected
+      :sticky-search
+      :virtual
+      :has-more
+      :loading
+      :total
+      v-bind="{
+        ...(itemSize === undefined ? {} : { itemSize }),
+        ...(endThreshold === undefined ? {} : { endThreshold }),
+      }"
       @select="emit('select', $event)"
+      @end-reached="emit('endReached')"
     >
       <template #item="{ item }">
         <slot
           name="item"
           :item="item"
         />
+      </template>
+      <template
+        v-if="$slots.empty"
+        #empty
+      >
+        <slot name="empty" />
+      </template>
+      <template
+        v-if="$slots.listFooter"
+        #listFooter
+      >
+        <slot name="listFooter" />
       </template>
     </LeftPanel>
 

@@ -124,3 +124,72 @@ export const ScrollableContent: Story = {
     `,
   }),
 };
+
+export const VirtualInfinite: Story = {
+  render: (args) => ({
+    components: { SplitView },
+    setup() {
+      const TOTAL = 10000;
+      const PAGE = 100;
+      const items = ref<SplitViewItem[]>([]);
+      const loading = ref(false);
+      const selected = ref<SplitViewItem>();
+      const search = ref("");
+
+      async function loadMore() {
+        if (loading.value || items.value.length >= TOTAL) return;
+        loading.value = true;
+        await new Promise((resolve) => setTimeout(resolve, 300));
+        const start = items.value.length;
+        items.value = [
+          ...items.value,
+          ...Array.from({ length: PAGE }, (_, offset) => ({
+            key: start + offset,
+            label: `key.number${start + offset + 1}`,
+          })),
+        ];
+        selected.value ??= items.value[0];
+        loading.value = false;
+      }
+      loadMore();
+
+      const hasMore = computed(() => items.value.length < TOTAL);
+
+      return {
+        args,
+        items,
+        loading,
+        hasMore,
+        selected,
+        search,
+        loadMore,
+        TOTAL,
+      };
+    },
+    template: `
+      <div class="h-[480px]">
+        <SplitView
+          v-bind="args"
+          :items="items"
+          :selected="selected"
+          searchable
+          sticky-search
+          virtual
+          :has-more="hasMore"
+          :loading="loading"
+          :total="TOTAL"
+          v-model:search="search"
+          @select="selected = $event"
+          @end-reached="loadMore"
+        >
+          <template #listFooter>
+            <p v-if="loading" class="px-4 py-2 text-xs text-neutral-500">Loading…</p>
+          </template>
+          <template #default="{ item }">
+            {{ item?.label }} — {{ items.length }} of {{ TOTAL }} loaded, only the visible rows are in the DOM.
+          </template>
+        </SplitView>
+      </div>
+    `,
+  }),
+};
