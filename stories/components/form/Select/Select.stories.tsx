@@ -201,7 +201,7 @@ export const InScrollableDialog: Story = {
     multiple: true,
     teleportTo: "body",
     options: Array.from({ length: 30 }, (_, index) => ({
-      label: `Scope ${index + 1}`,
+      label: `Option ${index + 1}`,
       value: index + 1,
     })),
   },
@@ -214,10 +214,10 @@ export const InScrollableDialog: Story = {
     },
     template: `
       <Button @click="open = true">Open scrollable dialog</Button>
-      <Dialog :open="open" title="Choose scopes" class="h-[min(480px,calc(100dvh-2rem))]" @close="open = false">
+      <Dialog :open="open" title="Choose options" class="h-[min(480px,calc(100dvh-2rem))]" @close="open = false">
         <div class="flex min-h-[600px] flex-col justify-end gap-4">
           <p>Scroll to the bottom, then open the Select. The dropdown should escape the scrolling body without changing its scroll height.</p>
-          <Select v-model="value" v-bind="args">Scopes</Select>
+          <Select v-model="value" v-bind="args">Options</Select>
         </div>
         <template #footer>
           <Button @click="open = false">Done</Button>
@@ -255,12 +255,12 @@ export const InScrollableDialog: Story = {
     ).toBe(true);
 
     await userEvent.click(
-      within(listbox).getByRole("option", { name: "Scope 1", exact: true })
+      within(listbox).getByRole("option", { name: "Option 1", exact: true })
     );
     expect(dialog.hasAttribute("open")).toBe(true);
     expect(
       within(listbox)
-        .getByRole("option", { name: "Scope 1", exact: true })
+        .getByRole("option", { name: "Option 1", exact: true })
         .getAttribute("aria-selected")
     ).toBe("true");
     trigger.focus({ preventScroll: true });
@@ -271,7 +271,7 @@ export const InScrollableDialog: Story = {
     await userEvent.keyboard("{Enter}");
     expect(
       within(listbox)
-        .getByRole("option", { name: "Scope 30", exact: true })
+        .getByRole("option", { name: "Option 30", exact: true })
         .getAttribute("aria-selected")
     ).toBe("true");
     await userEvent.keyboard("{Escape}");

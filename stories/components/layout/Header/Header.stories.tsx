@@ -10,11 +10,11 @@ const meta = {
   },
   tags: ["autodocs"],
   args: {
-    title: "Locales",
-    description: "Manage languages and regional variants for your translations",
-    backAction: { content: "Back to Dashboard", onClick: fn() },
+    title: "Page title",
+    description: "A short description of what this page is for",
+    backAction: { content: "Back", onClick: fn() },
     primaryAction: {
-      content: "Create Locale",
+      content: "Create item",
       icon: "plus",
       onClick: fn(),
     },
@@ -31,11 +31,11 @@ const meta = {
             <Button ghost icon="sidebar" aria-label="Toggle sidebar" />
           </template>
           <template #right>
-            <Button ghost>Admin User</Button>
+            <Button ghost>Jane Doe</Button>
           </template>
         </Header>
         <Page :show-header="false" width="wide">
-          <Card title="Languages">
+          <Card title="Content">
             <p class="text-sm text-neutral-500">Page content starts here. The title, description, and page actions are in the app header.</p>
           </Card>
         </Page>
@@ -58,8 +58,8 @@ export const WithoutDescription: Story = {
 export const WithSecondaryActions: Story = {
   args: {
     secondaryActions: [
-      { content: "Import locales", icon: "upload", onClick: fn() },
-      { content: "Export locales", icon: "download", onClick: fn() },
+      { content: "Import", icon: "upload", onClick: fn() },
+      { content: "Export", icon: "download", onClick: fn() },
       { content: "Unavailable action", disabled: true, onClick: fn() },
     ],
   },
@@ -69,12 +69,12 @@ export const WithoutPageContext: Story = {
   render: () => ({
     components: { Header, Button },
     template: `
-      <Header title="Dashboard">
+      <Header title="Overview">
         <template #left>
           <Button ghost icon="sidebar" aria-label="Toggle sidebar" />
         </template>
         <template #right>
-          <Button ghost>Admin User</Button>
+          <Button ghost>Jane Doe</Button>
         </template>
       </Header>
     `,

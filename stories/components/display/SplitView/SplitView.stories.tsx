@@ -87,14 +87,14 @@ export const ScrollableContent: Story = {
   render: (args) => ({
     components: { SplitView },
     setup() {
-      const entries = Array.from({ length: 40 }, (_, key) => ({
+      const rows = Array.from({ length: 40 }, (_, key) => ({
         key,
-        label: `Entry ${key + 1}`,
+        label: `Item ${key + 1}`,
       }));
-      const selected = ref(entries[0]);
+      const selected = ref(rows[0]);
       const search = ref("");
       const filteredItems = computed(() =>
-        entries.filter((item) =>
+        rows.filter((item) =>
           item.label.toLowerCase().includes(search.value.toLowerCase())
         )
       );
@@ -145,7 +145,7 @@ export const VirtualInfinite: Story = {
           ...items.value,
           ...Array.from({ length: PAGE }, (_, offset) => ({
             key: start + offset,
-            label: `key.number${start + offset + 1}`,
+            label: `Item ${start + offset + 1}`,
           })),
         ];
         selected.value ??= items.value[0];
