@@ -21,7 +21,7 @@ defineOptions({
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const iconStyles = tv({
-  base: "inline-block shrink-0",
+  base: "inline-block shrink-0 text-neutral-700 dark:text-neutral-300",
   variants: {
     size: {
       xs: "h-3 w-3",
