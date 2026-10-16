@@ -30,6 +30,7 @@ const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const props = defineProps<{
   dense?: boolean;
+  locale?: string;
 }>();
 
 const { theme, nextTheme, cycleTheme } = useTheme();
