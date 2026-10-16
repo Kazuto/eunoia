@@ -57,7 +57,7 @@ const emit = defineEmits<{
 
 const variants = tv({
   base: [
-    "grid h-full min-h-0 grid-cols-12 grid-rows-[minmax(0,1fr)] gap-4 overflow-hidden rounded-md border",
+    "grid h-full min-h-0 grid-cols-12 grid-rows-[minmax(0,1fr)] overflow-hidden rounded-md border",
     "border-neutral-200 bg-white text-neutral-900",
     "dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100",
   ],

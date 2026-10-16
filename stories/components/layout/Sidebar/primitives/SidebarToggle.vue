@@ -8,6 +8,7 @@
       type="button"
       v-bind="forwardedAttrs"
       :class="toggleStyles({ class: classAttr })"
+      :aria-label="collapsed ? t('expand') : t('collapse')"
       @click="collapsed = !collapsed"
     >
       <Icon
