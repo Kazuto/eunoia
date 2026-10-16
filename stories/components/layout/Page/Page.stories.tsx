@@ -24,6 +24,10 @@ const meta = {
     title: {
       control: "text",
     },
+    width: {
+      control: "select",
+      options: ["narrow", "wide", "extra-wide"],
+    },
   },
   args: {
     backAction: {
@@ -54,6 +58,7 @@ const meta = {
       onClick: () => console.log("Copy"),
     },
     title: "Page Title",
+    width: "narrow",
   },
   render: (args) => ({
     components: { Page, Card, DataTable },

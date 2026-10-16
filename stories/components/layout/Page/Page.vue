@@ -7,7 +7,8 @@ import {
 import { computed } from "vue";
 
 export type PageOptions = {
-  width?: "narrow" | "wide";
+  /** narrow ≈ 1024px, wide ≈ 1280px, extra-wide 1680px (still centered, not edge-to-edge). */
+  width?: "narrow" | "wide" | "extra-wide";
   title?: string;
   showHeader?: boolean;
 } & Omit<PageHeaderOptions, "title">;
@@ -25,6 +26,7 @@ const pageVariants = tv({
     width: {
       narrow: ["mx-auto max-w-screen-lg px-4"],
       wide: ["mx-auto max-w-screen-xl px-4"],
+      "extra-wide": ["mx-auto max-w-[1680px] px-4"],
     },
     showHeader: {
       true: "py-12",
