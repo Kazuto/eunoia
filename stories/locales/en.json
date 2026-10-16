@@ -64,5 +64,8 @@
   "pagination.navigation": "Pagination",
   "pagination.previous": "Previous",
   "pagination.next": "Next",
-  "pagination.go-to": "Go to page {page}"
+  "pagination.go-to": "Go to page {page}",
+  "dropzone.drop-file": "Drop file here",
+  "dropzone.drop-or-browse": "Drop file here or click to browse",
+  "dropzone.remove-file": "Remove file"
 }

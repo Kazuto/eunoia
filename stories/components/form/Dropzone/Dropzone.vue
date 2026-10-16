@@ -42,7 +42,7 @@
             class="text-xs text-red-600 underline hover:text-red-700"
             @click.stop="clearFile"
           >
-            Remove file
+            {{ t("remove-file") }}
           </button>
         </div>
 
@@ -75,7 +75,7 @@
               class="text-xs text-red-600 underline hover:text-red-700"
               @click.stop="clearFile"
             >
-              Remove file
+              {{ t("remove-file") }}
             </button>
           </div>
 
@@ -85,9 +85,9 @@
                 v-if="isDragging"
                 class="text-blue-600"
               >
-                Drop file here
+                {{ t("drop-file") }}
               </span>
-              <span v-else> Drop file here or click to browse </span>
+              <span v-else>{{ t("drop-or-browse") }}</span>
             </p>
             <p
               v-if="accept && accept !== '*'"
@@ -124,13 +124,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, onUnmounted } from "vue";
+import { ref, computed, toRef, watch, onUnmounted } from "vue";
 import Label from "../Input/primitives/Label.vue";
 import InputHintRow from "../Input/primitives/InputHintRow.vue";
 import InputHelper from "../Input/primitives/InputHelper.vue";
 import InputError from "../Input/primitives/InputError.vue";
 import Icon from "../../core/Icon/Icon.vue";
-import { useSanitizedId } from "@/composables";
+import { type LocaleMessages, useLocale, useSanitizedId } from "@/composables";
 
 defineOptions({
   inheritAttrs: false,
@@ -143,7 +143,13 @@ const props = defineProps<{
   dense?: boolean;
   helper?: string;
   errors?: string[];
+  locale?: LocaleMessages;
 }>();
+
+const t = useLocale(
+  "dropzone",
+  toRef(() => props.locale)
+);
 
 const model = defineModel<File | undefined>();
 
