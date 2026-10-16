@@ -2,6 +2,7 @@
 import { Button, Icon } from "@/components";
 import { tv } from "tailwind-variants";
 import { ref } from "vue";
+import { useLocale } from "@/composables";
 import type { HeaderAction } from "@/types";
 
 defineOptions({
@@ -10,6 +11,7 @@ defineOptions({
 
 defineProps<{ actions: HeaderAction[]; dense?: boolean }>();
 
+const t = useLocale("header");
 const open = ref(false);
 
 function selectAction(action: HeaderAction) {
@@ -47,6 +49,7 @@ const itemStyles = tv({
       ghost
       :dense
       icon="dots-three-vertical"
+      :aria-label="t('more-actions')"
       :aria-haspopup="true"
       :aria-expanded="open"
       @click="open = !open"
