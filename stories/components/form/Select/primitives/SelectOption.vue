@@ -16,7 +16,7 @@
     @mouseenter="emit('mouseenter')"
     @mousedown.prevent
   >
-    <span class="flex-1">{{ option.label }}</span>
+    <span class="flex-1 dark:text-neutral-100">{{ option.label }}</span>
     <Icon
       v-if="isSelected"
       name="check"

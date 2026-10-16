@@ -41,13 +41,13 @@
     </div>
     <span
       v-else-if="!multiple && selectedLabels.length > 0"
-      class="flex-1 truncate"
+      class="flex-1 truncate dark:text-neutral-100"
     >
       {{ selectedLabels[0] }}
     </span>
     <span
       v-else
-      class="flex-1 truncate text-neutral-400"
+      class="flex-1 truncate text-neutral-400 dark:text-neutral-500"
     >
       {{ placeholder }}
     </span>
