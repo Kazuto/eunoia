@@ -9,10 +9,11 @@
     <div
       class="relative cursor-pointer rounded-lg border-2 border-dashed transition-colors"
       :class="{
-        'border-blue-400 bg-blue-50': isDragging && !disabled,
-        'border-neutral-300 bg-white hover:border-neutral-400':
+        'border-blue-400 bg-blue-50 dark:border-blue-500 dark:bg-blue-950/20':
+          isDragging && !disabled,
+        'border-neutral-300 bg-white hover:border-neutral-400 dark:border-neutral-700 dark:bg-neutral-800 dark:hover:border-neutral-600':
           !isDragging && !disabled,
-        'cursor-not-allowed border-neutral-200 bg-neutral-50 opacity-60':
+        'cursor-not-allowed border-neutral-200 bg-neutral-50 opacity-60 dark:border-neutral-800 dark:bg-neutral-900':
           disabled,
       }"
       @drop.prevent="handleDrop"
@@ -30,16 +31,16 @@
             :alt="model.name"
             class="mx-auto max-h-48 rounded-lg object-contain"
           />
-          <p class="text-sm font-medium text-neutral-900">
+          <p class="text-sm font-medium text-neutral-900 dark:text-neutral-100">
             {{ model.name }}
           </p>
-          <p class="text-xs text-neutral-500">
+          <p class="text-xs text-neutral-500 dark:text-neutral-400">
             {{ (model.size / 1024).toFixed(1) }} KB
           </p>
           <button
             v-if="!disabled && !required"
             type="button"
-            class="text-xs text-red-600 underline hover:text-red-700"
+            class="text-xs text-red-600 underline hover:text-red-700 dark:text-red-400 dark:hover:text-red-300"
             @click.stop="clearFile"
           >
             {{ t("remove-file") }}
@@ -52,10 +53,11 @@
             size="2xl"
             class="mx-auto mb-3"
             :class="{
-              'text-blue-500': isDragging && !disabled,
-              'text-neutral-400': !isDragging && !disabled && !model,
-              'text-green-500': model && !disabled,
-              'text-neutral-300': disabled,
+              'text-blue-500 dark:text-blue-400': isDragging && !disabled,
+              'text-neutral-400 dark:text-neutral-500':
+                !isDragging && !disabled && !model,
+              'text-green-500 dark:text-green-400': model && !disabled,
+              'text-neutral-300 dark:text-neutral-600': disabled,
             }"
           />
 
@@ -63,16 +65,18 @@
             v-if="model"
             class="space-y-2"
           >
-            <p class="text-sm font-medium text-neutral-900">
+            <p
+              class="text-sm font-medium text-neutral-900 dark:text-neutral-100"
+            >
               {{ model.name }}
             </p>
-            <p class="text-xs text-neutral-500">
+            <p class="text-xs text-neutral-500 dark:text-neutral-400">
               {{ (model.size / 1024).toFixed(1) }} KB
             </p>
             <button
               v-if="!disabled && !required"
               type="button"
-              class="text-xs text-red-600 underline hover:text-red-700"
+              class="text-xs text-red-600 underline hover:text-red-700 dark:text-red-400 dark:hover:text-red-300"
               @click.stop="clearFile"
             >
               {{ t("remove-file") }}
@@ -80,10 +84,12 @@
           </div>
 
           <div v-else>
-            <p class="text-sm font-medium text-neutral-900">
+            <p
+              class="text-sm font-medium text-neutral-900 dark:text-neutral-100"
+            >
               <span
                 v-if="isDragging"
-                class="text-blue-600"
+                class="text-blue-600 dark:text-blue-400"
               >
                 {{ t("drop-file") }}
               </span>
@@ -91,7 +97,7 @@
             </p>
             <p
               v-if="accept && accept !== '*'"
-              class="mt-1 text-xs text-neutral-500"
+              class="mt-1 text-xs text-neutral-500 dark:text-neutral-400"
             >
               {{ accept }}
             </p>
