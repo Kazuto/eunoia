@@ -1,5 +1,6 @@
 <template>
   <InputGroup
+    class="group/input"
     :invalid
     :disabled
   >
@@ -21,6 +22,20 @@
       :disabled
       :invalid
     />
+
+    <InputGroupAddon
+      v-if="shortcut && !model"
+      position="right"
+      class="pointer-events-none group-has-[input:focus]/input:hidden"
+      aria-hidden="true"
+      :disabled
+      :invalid
+    >
+      <Kbd
+        :shortcut
+        :dense
+      />
+    </InputGroupAddon>
 
     <Tooltip
       v-if="model"
@@ -51,6 +66,7 @@ import { Icon, Tooltip } from "@/components";
 import Input from "../primitives/Input.vue";
 import InputGroup from "../../InputGroup/InputGroup.vue";
 import InputGroupAddon from "../../InputGroup/InputGroupAddon.vue";
+import Kbd from "../../../core/Kbd/Kbd.vue";
 import { type LocaleMessages, useLocale } from "@/composables";
 
 const model = defineModel<string>({ default: "" });
@@ -61,9 +77,11 @@ const props = withDefaults(
     invalid?: boolean;
     disabled?: boolean;
     locale?: LocaleMessages;
+    shortcut?: string;
   }>(),
   {
     locale: undefined,
+    shortcut: undefined,
   }
 );
 
@@ -72,7 +90,7 @@ defineOptions({
 });
 
 const forwardedProps = computed(() => {
-  const { locale: _locale, ...rest } = props;
+  const { locale: _locale, shortcut: _shortcut, ...rest } = props;
   return rest;
 });
 

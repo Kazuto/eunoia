@@ -15,6 +15,8 @@
       :disabled
       :aria-label="ariaLabel"
       :aria-labelledby="ariaLabelledby"
+      :aria-keyshortcuts="shortcut ? ariaKeyShortcut(shortcut) : undefined"
+      :shortcut="variantComponent === PasswordInput ? undefined : shortcut"
       :locale
     >
       <template
@@ -59,6 +61,7 @@ import InputCounter from "./primitives/InputCounter.vue";
 import InputError from "./primitives/InputError.vue";
 import { useAttrs, computed, type Component } from "vue";
 import { useSanitizedId } from "@/composables";
+import { ariaKeyShortcut, useShortcut } from "@/composables/useShortcut";
 import { type LocaleMessages } from "@/composables";
 import PasswordInput from "./variants/PasswordInput.vue";
 import TextInput from "./variants/TextInput.vue";
@@ -81,7 +84,19 @@ const props = defineProps<{
   ariaLabel?: string;
   ariaLabelledby?: string;
   locale?: LocaleMessages;
+  /** Focuses the input when pressed, e.g. "/" or "Mod+K", and shows it as a hint. */
+  shortcut?: string;
 }>();
+
+useShortcut(
+  () => (props.disabled ? undefined : props.shortcut),
+  () => {
+    const input = document.getElementById(inputId);
+    if (!(input instanceof HTMLInputElement)) return;
+    input.focus();
+    input.select();
+  }
+);
 
 const hasHelper = computed(() => props.helper && !props.errors?.length);
 

@@ -15,6 +15,11 @@ const meta = {
     dense: { control: "boolean" },
     disabled: { control: "boolean" },
     invalid: { control: "boolean" },
+    shortcut: {
+      control: "text",
+      description:
+        'Focuses the input when pressed and shows it as a hint, e.g. "/" or "Mod+K".',
+    },
     default: {
       control: "text",
       description: "Default slot content",
@@ -107,6 +112,15 @@ export const Password: Story = {
 export const Search: Story = {
   args: {
     type: "search",
+  },
+};
+
+export const SearchWithShortcut: Story = {
+  args: {
+    type: "search",
+    default: "Search",
+    placeholder: "Search…",
+    shortcut: "/",
   },
 };
 
