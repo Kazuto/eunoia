@@ -12,6 +12,7 @@
       <Icon
         name="magnifying-glass"
         size="sm"
+        class="text-neutral-700 dark:text-neutral-300"
       />
     </InputGroupAddon>
 
@@ -54,6 +55,7 @@
         <Icon
           name="backspace"
           size="sm"
+          class="text-neutral-700 dark:text-neutral-300"
         />
       </InputGroupAddon>
     </Tooltip>

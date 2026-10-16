@@ -61,11 +61,13 @@
           <Icon
             name="x"
             :size="dense ? 'xs' : 'sm'"
+            class="text-neutral-700 dark:text-neutral-300"
           />
         </button>
         <Icon
           name="calendar"
           size="sm"
+          class="text-neutral-700 dark:text-neutral-300"
         />
       </div>
     </div>

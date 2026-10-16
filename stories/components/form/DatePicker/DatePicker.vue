@@ -14,6 +14,7 @@
     <DatePickerTrigger
       v-bind="$attrs"
       :id="inputId"
+      ref="triggerRef"
       :mode="mode"
       :selected-dates="selectedDates"
       :dense
@@ -29,20 +30,28 @@
       @keydown="handleTriggerKeydown"
       @remove-date="removeDate"
     />
-    <DatePickerCalendar
-      v-if="isOpen"
-      :id="calendarId"
-      :mode="mode"
-      :selected-dates="selectedDates"
-      :current-month="currentMonth"
-      :current-year="currentYear"
-      :anchor-name="anchorName"
-      :placement="placement"
-      :first-day-of-week="firstDayOfWeek"
-      :dense
-      @select="handleDateSelect"
-      @navigate="handleNavigate"
-    />
+    <Teleport
+      :to="teleportTarget ?? 'body'"
+      :disabled="!teleportTo"
+    >
+      <DatePickerCalendar
+        v-if="isOpen"
+        :id="calendarId"
+        ref="calendarRef"
+        :mode="mode"
+        :selected-dates="selectedDates"
+        :current-month="currentMonth"
+        :current-year="currentYear"
+        :anchor-name="teleportTo ? undefined : anchorName"
+        :placement="teleportTo ? undefined : calendarPlacement"
+        :floating="!!teleportTo"
+        :style="teleportTo ? floatingStyles : undefined"
+        :first-day-of-week="firstDayOfWeek"
+        :dense
+        @select="handleDateSelect"
+        @navigate="handleNavigate"
+      />
+    </Teleport>
     <InputHintRow
       v-if="hasHelper || maxlength"
       :dense
@@ -60,7 +69,15 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeUnmount, ref, toRef, watch } from "vue";
+import { computed, nextTick, onBeforeUnmount, ref, toRef, watch } from "vue";
+import {
+  autoUpdate,
+  flip,
+  offset,
+  shift,
+  size,
+  useFloating,
+} from "@floating-ui/vue";
 import { type LocaleMessages, useLocale, useSanitizedId } from "@/composables";
 import { Weekday } from "@/types";
 import Label from "../Input/primitives/Label.vue";
@@ -89,6 +106,8 @@ const props = withDefaults(
     locale?: LocaleMessages;
     placement?: "top" | "bottom";
     firstDayOfWeek?: Weekday;
+    /** Teleport outside overflow containers. Native dialogs own their calendars. */
+    teleportTo?: string | HTMLElement;
   }>(),
   {
     mode: "single",
@@ -100,6 +119,7 @@ const props = withDefaults(
     errors: undefined,
     placement: undefined,
     firstDayOfWeek: undefined,
+    teleportTo: undefined,
   }
 );
 
@@ -123,8 +143,46 @@ const anchorStyle = { "anchor-name": anchorName } as Record<string, string>;
 
 const isOpen = ref(false);
 const containerRef = ref<HTMLElement | null>(null);
+const triggerRef = ref<InstanceType<typeof DatePickerTrigger> | null>(null);
+const calendarRef = ref<InstanceType<typeof DatePickerCalendar> | null>(null);
+const triggerElement = computed<HTMLElement | null>(
+  () => triggerRef.value?.$el ?? null
+);
+const calendarElement = computed<HTMLElement | null>(
+  () => calendarRef.value?.$el ?? null
+);
+const teleportTarget = ref<string | HTMLElement>();
+const calendarPlacement = ref<"top" | "bottom">(props.placement ?? "bottom");
 const currentMonth = ref(new Date().getMonth());
 const currentYear = ref(new Date().getFullYear());
+
+const { floatingStyles } = useFloating(triggerElement, calendarElement, {
+  open: isOpen,
+  placement: "bottom-start",
+  strategy: "fixed",
+  middleware: computed(() =>
+    props.teleportTo
+      ? [
+          offset(4),
+          flip(),
+          shift({ padding: 8 }),
+          size({
+            padding: 8,
+            apply({ rects, availableHeight, elements }) {
+              Object.assign(elements.floating.style, {
+                width: `${rects.reference.width}px`,
+                maxHeight: `${Math.max(0, Math.min(400, availableHeight))}px`,
+              });
+            },
+          }),
+        ]
+      : []
+  ),
+  whileElementsMounted(reference, floating, update) {
+    if (props.teleportTo) return autoUpdate(reference, floating, update);
+    return () => {};
+  },
+});
 
 // Format dates for display
 const formatDate = (date: Date): string => {
@@ -161,9 +219,35 @@ const hasHelper = computed(() => props.helper && !props.errors?.length);
 
 const maxlength = computed(() => undefined); // DatePickers don't typically have maxlength
 
-function openCalendar() {
+async function openCalendar() {
   if (props.disabled) return;
+
+  // A body portal is inert beneath showModal(). Keep the calendar in the
+  // dialog's top layer, but outside its scrolling body.
+  teleportTarget.value =
+    triggerElement.value?.closest("dialog") ?? props.teleportTo;
   isOpen.value = true;
+
+  await nextTick();
+
+  if (!props.teleportTo) updateCalendarPlacement();
+}
+
+function updateCalendarPlacement() {
+  if (!containerRef.value) return;
+
+  const rect = containerRef.value.getBoundingClientRect();
+  const spaceBelow = window.innerHeight - rect.bottom;
+  const spaceAbove = rect.top;
+
+  const calendarEl = containerRef.value.querySelector(
+    "[data-datepicker-calendar]"
+  ) as HTMLElement | null;
+
+  const calendarHeight = calendarEl?.offsetHeight ?? 400;
+
+  calendarPlacement.value =
+    spaceBelow >= calendarHeight || spaceBelow >= spaceAbove ? "bottom" : "top";
 }
 
 function closeCalendar() {

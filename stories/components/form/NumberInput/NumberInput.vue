@@ -48,6 +48,7 @@
         <Icon
           name="minus"
           size="sm"
+          class="text-neutral-700 dark:text-neutral-300"
         />
       </InputGroupAddon>
       <InputGroupAddon
@@ -64,6 +65,7 @@
         <Icon
           name="plus"
           size="sm"
+          class="text-neutral-700 dark:text-neutral-300"
         />
       </InputGroupAddon>
     </InputGroup>

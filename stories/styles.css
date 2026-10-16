@@ -227,6 +227,38 @@
   );
 }
 
+/* Dark mode palette inspired by Catppuccin Mocha with purple hues */
+@variant dark {
+  @theme {
+    /* Base backgrounds with purple tint - replacing pure black/neutral */
+    --color-neutral-50: #e5e1ec; /* Very light purple-gray for light text - WCAG AAA */
+    --color-neutral-100: #d5cfe0; /* Light purple-gray - improved contrast */
+    --color-neutral-200: #b8adc9; /* Medium-light purple-gray - brighter */
+    --color-neutral-300: #a393bf; /* Medium purple-gray for secondary text - WCAG AA */
+    --color-neutral-400: #8a7ca8; /* Medium-dark purple-gray for muted text - WCAG AA */
+    --color-neutral-500: #6b5d7f; /* Medium purple for subtle elements */
+    --color-neutral-600: #4a3f5a; /* Dark purple for borders */
+    --color-neutral-700: #342d3d; /* Darker purple for elevated surfaces */
+    --color-neutral-800: #251f2e; /* Very dark purple for cards/panels */
+    --color-neutral-900: #1a1625; /* Deep purple for main background */
+    --color-neutral-950: #110e17; /* Deepest purple for darkest elements */
+
+    /* Adjust primary colors for better dark mode visibility */
+    --color-primary-300: oklch(
+      from var(--color-primary) calc(l * 1.35) calc(c * 0.65) h
+    );
+    --color-primary-400: oklch(
+      from var(--color-primary) calc(l * 1.2) calc(c * 0.9) h
+    );
+    --color-primary-500: oklch(
+      from var(--color-primary) calc(l * 1.1) calc(c * 1) h
+    );
+    --color-primary-600: oklch(
+      from var(--color-primary) calc(l * 0.95) calc(c * 1.05) h
+    );
+  }
+}
+
 @utility scrollbar-subtle {
   scrollbar-width: thin;
   scrollbar-color: color-mix(in oklch, var(--color-black) 30%, transparent)

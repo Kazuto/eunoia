@@ -35,6 +35,7 @@
         <Icon
           :name="isVisible ? 'eye' : 'eye-closed'"
           size="sm"
+          class="text-neutral-700 dark:text-neutral-300"
         />
       </InputGroupAddon>
     </Tooltip>

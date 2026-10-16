@@ -61,7 +61,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, toRef } from "vue";
 import {
   type LocaleMessages,
   useSanitizedId,
@@ -120,9 +120,9 @@ const props = withDefaults(
   }
 );
 
-const { t } = useLocale(
+const t = useLocale(
   "slider",
-  computed(() => props.locale)
+  toRef(() => props.locale)
 );
 
 const variantComponent = computed(() =>

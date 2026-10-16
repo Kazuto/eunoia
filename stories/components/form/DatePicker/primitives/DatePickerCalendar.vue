@@ -2,7 +2,7 @@
   <div
     :id="id"
     ref="rootElement"
-    :class="calendarStyles({ placement, dense, class: classAttr })"
+    :class="calendarStyles({ placement, dense, floating, class: classAttr })"
     v-bind="forwardedAttrs"
     role="dialog"
     aria-modal="true"
@@ -22,6 +22,7 @@
         <Icon
           name="caret-left"
           :size="dense ? 'sm' : 'md'"
+          class="text-neutral-700 dark:text-neutral-300"
         />
       </button>
 
@@ -56,6 +57,7 @@
         <Icon
           name="caret-right"
           :size="dense ? 'sm' : 'md'"
+          class="text-neutral-700 dark:text-neutral-300"
         />
       </button>
     </div>
@@ -149,9 +151,10 @@ const props = defineProps<{
   mode: "single" | "range";
   selectedDates: string[];
   dense?: boolean;
-  anchorName: string;
+  anchorName?: string;
   placement?: "top" | "bottom";
   firstDayOfWeek?: Weekday;
+  floating?: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -377,7 +380,7 @@ const navButtonStyles = tv({
 
 const calendarStyles = tv({
   base: [
-    "z-50 mt-1 min-w-[280px] rounded-lg border p-3 shadow-lg",
+    "z-50 min-w-[280px] rounded-lg border shadow-lg",
     "border-neutral-300 bg-white",
     "dark:border-neutral-700 dark:bg-neutral-800",
   ],
@@ -390,10 +393,15 @@ const calendarStyles = tv({
       true: "p-2",
       false: "p-3",
     },
+    floating: {
+      true: "overflow-auto",
+      false: "",
+    },
   },
   defaultVariants: {
     placement: "bottom",
     dense: false,
+    floating: false,
   },
 });
 
@@ -468,12 +476,14 @@ const dayStyles = tv({
   },
 });
 
-const positionStyle = computed(
-  () =>
-    ({
-      position: "fixed",
-      "position-anchor": props.anchorName,
-      "position-area": `${props.placement ?? "bottom"} span-right`,
-    }) as Record<string, string>
-);
+const positionStyle = computed(() => {
+  if (props.floating) {
+    return {};
+  }
+  return {
+    position: "fixed",
+    "position-anchor": props.anchorName,
+    "position-area": `${props.placement ?? "bottom"} span-right`,
+  } as Record<string, string>;
+});
 </script>
