@@ -46,7 +46,7 @@ const iconWrapperStyles = tv({
   base: "flex aspect-square h-6 w-6 items-center justify-center rounded-md p-1",
   variants: {
     icon: {
-      true: "bg-primary-700 text-neutral-50",
+      true: "bg-primary-700 text-neutral-50 dark:bg-primary-600 dark:text-neutral-50",
     },
   },
 });

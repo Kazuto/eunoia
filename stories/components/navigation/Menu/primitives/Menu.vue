@@ -1,10 +1,11 @@
 <template>
-  <nav
-    v-bind="forwardedAttrs"
-    :aria-label="ariaLabel"
-    :class="navStyles({ class: classAttr })"
-  >
-    <slot />
+  <nav :aria-label="ariaLabel">
+    <ul
+      v-bind="forwardedAttrs"
+      :class="navStyles({ class: classAttr })"
+    >
+      <slot />
+    </ul>
   </nav>
 </template>
 

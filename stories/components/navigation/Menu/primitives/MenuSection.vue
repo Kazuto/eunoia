@@ -3,68 +3,65 @@
     v-bind="forwardedAttrs"
     :class="classAttr"
   >
-    <ul class="flex list-none flex-col gap-1">
-      <Tooltip
-        :content="label"
-        :disabled="!sidebarCollapsed"
-        placement="right"
-        dense
-        class="w-full"
+    <Tooltip
+      :content="label"
+      :disabled="!sidebarCollapsed"
+      placement="right"
+      dense
+      class="w-full"
+    >
+      <div
+        :class="sectionStyles({ parentActive })"
+        :style="{ paddingLeft: padding }"
+        :aria-expanded="sidebarCollapsed ? undefined : open"
+        :aria-controls="sidebarCollapsed ? undefined : childrenId"
+        :aria-label="sidebarCollapsed ? undefined : toggleSectionLabel"
+        :role="sidebarCollapsed ? undefined : 'button'"
+        :tabindex="sidebarCollapsed ? undefined : 0"
+        @click="!sidebarCollapsed && (open = !open)"
+        @keydown.enter="!sidebarCollapsed && (open = !open)"
+        @keydown.space.prevent="!sidebarCollapsed && (open = !open)"
       >
-        <li
-          :class="sectionStyles({ parentActive })"
-          :style="{ paddingLeft: padding }"
-          :aria-expanded="sidebarCollapsed ? undefined : open"
-          :aria-controls="sidebarCollapsed ? undefined : childrenId"
-          :aria-label="sidebarCollapsed ? undefined : toggleSectionLabel"
-          :role="sidebarCollapsed ? undefined : 'button'"
-          :tabindex="sidebarCollapsed ? undefined : 0"
-          @click="!sidebarCollapsed && (open = !open)"
-          @keydown.enter="!sidebarCollapsed && (open = !open)"
-          @keydown.space.prevent="!sidebarCollapsed && (open = !open)"
-        >
-          <MenuLabel :icon>
-            {{ label }}
-          </MenuLabel>
+        <MenuLabel :icon>
+          {{ label }}
+        </MenuLabel>
 
-          <Icon
-            v-if="!sidebarCollapsed"
-            name="caret-right"
-            size="sm"
-            :class="[
-              'shrink-0 transition-transform duration-200',
-              open && 'rotate-90',
-            ]"
-          />
-        </li>
-      </Tooltip>
+        <Icon
+          v-if="!sidebarCollapsed"
+          name="caret-right"
+          size="sm"
+          :class="[
+            'shrink-0 transition-transform duration-200',
+            open && 'rotate-90',
+          ]"
+        />
+      </div>
+    </Tooltip>
 
-      <li v-if="!sidebarCollapsed">
-        <ul
-          :id="childrenId"
-          :class="itemStyles({ open })"
-          role="group"
-        >
-          <template
-            v-for="(item, index) in items"
-            :key="index"
-          >
-            <MenuSection
-              v-if="item.items"
-              v-bind="item"
-              :level="level + 1"
-              :current-path="currentPath"
-              :toggle-section-label="toggleSectionLabel"
-            />
+    <ul
+      v-if="!sidebarCollapsed"
+      :id="childrenId"
+      :class="itemStyles({ open })"
+      role="group"
+    >
+      <template
+        v-for="(item, index) in items"
+        :key="index"
+      >
+        <MenuSection
+          v-if="item.items"
+          v-bind="item"
+          :level="level + 1"
+          :current-path="currentPath"
+          :toggle-section-label="toggleSectionLabel"
+        />
 
-            <MenuItemPrimitive
-              v-else
-              v-bind="item"
-              :level="level + 1"
-            />
-          </template>
-        </ul>
-      </li>
+        <MenuItemPrimitive
+          v-else
+          v-bind="item"
+          :level="level + 1"
+        />
+      </template>
     </ul>
   </li>
 </template>

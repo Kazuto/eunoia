@@ -149,7 +149,7 @@ const boxStyles = tv({
 });
 
 const descriptionStyles = tv({
-  base: ["text-neutral-700", "dark:text-neutral-300"],
+  base: ["text-neutral-700", "dark:text-neutral-200"],
   variants: {
     dense: {
       false: "text-sm",

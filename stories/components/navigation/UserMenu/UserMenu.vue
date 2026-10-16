@@ -10,7 +10,7 @@
       :name
       :is-open="isOpen"
       :menu-id="menuId"
-      :aria-label="t('toggle')"
+      :aria-label="name ? undefined : t('toggle')"
       @toggle="toggleMenu"
       @keydown="handleTriggerKeydown"
     />

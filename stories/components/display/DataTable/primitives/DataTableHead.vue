@@ -45,7 +45,9 @@
       <th
         v-if="hasActions"
         :class="cellStyles({ dense, align: 'end' })"
-      />
+      >
+        <span class="sr-only">Actions</span>
+      </th>
     </tr>
   </thead>
 </template>

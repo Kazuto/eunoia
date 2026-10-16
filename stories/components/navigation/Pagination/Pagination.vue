@@ -75,6 +75,7 @@ const t = useLocale(
       v-model="perPageModel"
       :dense
       :options="perPageOptions"
+      :aria-label="t('items-per-page')"
     />
 
     <div class="flex items-center gap-2">
