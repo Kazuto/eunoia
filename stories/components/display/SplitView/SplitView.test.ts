@@ -113,3 +113,22 @@ describe("SplitView virtual", () => {
     expect(rows[0]?.getAttribute("aria-setsize")).toBe("5000");
   });
 });
+
+describe("SplitView search", () => {
+  it("labels the search field and focuses it with the search shortcut", async () => {
+    render(SplitView, {
+      props: {
+        items: items.slice(0, 5),
+        searchable: true,
+        searchShortcut: "/",
+      },
+      attachTo: document.body,
+    });
+    const search = screen.getByRole("searchbox", { name: "Search…" });
+    expect(search.getAttribute("aria-keyshortcuts")).toBe("/");
+    expect(document.querySelector("kbd")?.textContent).toBe("/");
+
+    await fireEvent.keyDown(window, { key: "/" });
+    expect(document.activeElement).toBe(search);
+  });
+});

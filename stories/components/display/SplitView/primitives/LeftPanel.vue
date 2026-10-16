@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Input from "@/components/form/Input/Input.vue";
+import { type LocaleMessages, useLocale } from "@/composables";
 import { useVirtualizer } from "@tanstack/vue-virtual";
 import { tv } from "tailwind-variants";
 import {
@@ -8,6 +9,7 @@ import {
   onBeforeUnmount,
   onMounted,
   ref,
+  toRef,
   useTemplateRef,
   watch,
 } from "vue";
@@ -39,8 +41,23 @@ const props = withDefaults(
     endThreshold?: number;
     /** Total item count, if known, announced to assistive tech for partial lists. */
     total?: number;
+    /** Focuses the search field when pressed, e.g. "/" or "Mod+K", and shows it as a hint. */
+    searchShortcut?: string;
+    locale?: LocaleMessages;
   }>(),
-  { itemSize: 36, endThreshold: 200, total: undefined, selected: undefined }
+  {
+    itemSize: 36,
+    endThreshold: 200,
+    total: undefined,
+    selected: undefined,
+    searchShortcut: undefined,
+    locale: undefined,
+  }
+);
+
+const t = useLocale(
+  "split-view",
+  toRef(() => props.locale)
 );
 
 defineSlots<{
@@ -169,7 +186,9 @@ watch(
       <Input
         v-model="search"
         type="search"
-        placeholder="Search..."
+        :placeholder="t('search')"
+        :aria-label="t('search')"
+        :shortcut="searchShortcut"
       />
     </div>
     <ul

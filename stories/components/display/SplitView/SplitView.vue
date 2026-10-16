@@ -29,12 +29,15 @@ withDefaults(
     endThreshold?: number;
     /** Total item count, if known, announced to assistive tech for partial lists. */
     total?: number;
+    /** Focuses the search field when pressed, e.g. "/" or "Mod+K", and shows it as a hint. */
+    searchShortcut?: string;
   }>(),
   {
     selected: undefined,
     itemSize: undefined,
     endThreshold: undefined,
     total: undefined,
+    searchShortcut: undefined,
   }
 );
 
@@ -70,6 +73,7 @@ const variants = tv({
       :searchable
       :selected
       :sticky-search
+      :search-shortcut
       :virtual
       :has-more
       :loading
