@@ -1,10 +1,13 @@
 <template>
   <div class="flex flex-col gap-1">
     <Label
+      v-if="hasDefaultSlot"
       :dense
       :for="inputId"
-      ><slot
-    /></Label>
+    >
+      <slot />
+    </Label>
+
     <component
       :is="variantComponent"
       v-bind="$attrs"
@@ -32,6 +35,7 @@
         <slot name="append" />
       </template>
     </component>
+
     <InputHintRow
       v-if="hasHelper || maxlength"
       :dense
@@ -45,6 +49,7 @@
         :max="maxlength"
       />
     </InputHintRow>
+
     <InputError
       v-if="errors?.length"
       :errors="errors"
@@ -66,6 +71,7 @@ import { type LocaleMessages } from "@/composables";
 import PasswordInput from "./variants/PasswordInput.vue";
 import TextInput from "./variants/TextInput.vue";
 import SearchInput from "./variants/SearchInput.vue";
+import { useSlotContent } from "@/composables";
 
 defineOptions({
   inheritAttrs: false,
@@ -87,6 +93,9 @@ const props = defineProps<{
   /** Focuses the input when pressed, e.g. "/" or "Mod+K", and shows it as a hint. */
   shortcut?: string;
 }>();
+
+const { hasSlotContent } = useSlotContent();
+const hasDefaultSlot = hasSlotContent("default");
 
 useShortcut(
   () => (props.disabled ? undefined : props.shortcut),
