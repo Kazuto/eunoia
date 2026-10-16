@@ -2,7 +2,7 @@
   <!-- A label, so the text names the switch and clicking it toggles the switch too. -->
   <label
     :class="[
-      'inline-flex items-center gap-2 text-sm',
+      'inline-flex items-center gap-2 text-sm dark:text-neutral-100',
       disabled ? 'cursor-not-allowed' : 'cursor-pointer',
       classAttr,
     ]"
