@@ -8,6 +8,7 @@
         v-if="icon"
         :name="icon"
         size="sm"
+        class="text-neutral-50"
       />
     </div>
 
