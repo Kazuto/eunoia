@@ -54,7 +54,10 @@
     <Icon
       name="caret-down"
       size="sm"
-      :class="['ml-2 shrink-0 transition-transform', isOpen && 'rotate-180']"
+      :class="[
+        'ml-2 shrink-0 text-neutral-700 transition-transform dark:text-neutral-300',
+        isOpen && 'rotate-180',
+      ]"
     />
   </div>
 </template>

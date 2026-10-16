@@ -21,7 +21,7 @@
       v-if="isSelected"
       name="check"
       size="sm"
-      class="shrink-0"
+      class="shrink-0 text-neutral-700 dark:text-neutral-300"
     />
   </li>
 </template>

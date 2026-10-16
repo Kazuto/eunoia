@@ -18,12 +18,14 @@
         <Icon
           v-if="model && !indeterminate"
           name="check"
-          :class="iconStyles({ dense })"
+          :size="dense ? 'xs' : 'sm'"
+          class="text-white"
         />
         <Icon
           v-else-if="indeterminate"
           name="minus"
-          :class="iconStyles({ dense })"
+          :size="dense ? 'xs' : 'sm'"
+          class="text-white"
         />
       </span>
       <span
@@ -154,19 +156,6 @@ const descriptionStyles = tv({
     dense: {
       false: "text-sm",
       true: "text-xs",
-    },
-  },
-  defaultVariants: {
-    dense: false,
-  },
-});
-
-const iconStyles = tv({
-  base: "text-white",
-  variants: {
-    dense: {
-      false: "h-4.5 w-4.5",
-      true: "h-3.5 w-3.5",
     },
   },
   defaultVariants: {
