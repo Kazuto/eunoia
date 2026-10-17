@@ -1,19 +1,22 @@
-import { ref, onMounted, onUnmounted, getCurrentInstance } from "vue";
+import { ref, type Ref } from "vue";
 
 /**
  * Creates an animated typing placeholder that cycles through multiple strings.
  *
  * @param placeholders - Array of strings to cycle through
  * @param options - Configuration options for typing animation
- * @returns A reactive ref containing the current animated placeholder text
+ * @returns An object with the placeholder ref, animate function, and stop function
  *
  * @example
  * ```vue
  * <script setup>
- * const placeholder = useTypingPlaceholder(
+ * const { placeholder, animate, stop } = useTypingPlaceholder(
  *   ['John Doe', 'Jane Smith', 'Alex Johnson'],
  *   { typingSpeed: 100, deletingSpeed: 50, pauseDuration: 2000 }
  * );
+ *
+ * onMounted(() => animate());
+ * onUnmounted(() => stop());
  * </script>
  *
  * <template>
@@ -28,7 +31,11 @@ export function useTypingPlaceholder(
     deletingSpeed?: number;
     pauseDuration?: number;
   } = {}
-) {
+): {
+  placeholder: Ref<string>;
+  animate: () => void;
+  stop: () => void;
+} {
   const {
     typingSpeed = 100,
     deletingSpeed = 50,
@@ -75,16 +82,16 @@ export function useTypingPlaceholder(
     }
   };
 
-  // Only use lifecycle hooks if we're in a component context
-  if (getCurrentInstance()) {
-    onMounted(() => {
-      animate();
-    });
+  const stop = () => {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+      timeoutId = undefined;
+    }
+  };
 
-    onUnmounted(() => {
-      if (timeoutId) clearTimeout(timeoutId);
-    });
-  }
-
-  return currentPlaceholder;
+  return {
+    placeholder: currentPlaceholder,
+    animate,
+    stop,
+  };
 }

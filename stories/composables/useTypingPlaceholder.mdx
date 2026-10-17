@@ -37,14 +37,18 @@ A composable that creates an animated typing placeholder that cycles through mul
 
 ```vue
 <script setup lang="ts">
+import { onMounted, onUnmounted } from "vue";
 import { Input } from "@thkzt/eunoia";
 import { useTypingPlaceholder } from "@/composables/useTypingPlaceholder";
 
-const placeholder = useTypingPlaceholder([
+const { placeholder, animate, stop } = useTypingPlaceholder([
   "John Doe",
   "Jane Smith",
   "Alex Johnson",
 ]);
+
+onMounted(() => animate());
+onUnmounted(() => stop());
 </script>
 
 <template>
@@ -56,9 +60,10 @@ const placeholder = useTypingPlaceholder([
 
 ```vue
 <script setup lang="ts">
+import { onMounted, onUnmounted } from "vue";
 import { useTypingPlaceholder } from "@/composables/useTypingPlaceholder";
 
-const placeholder = useTypingPlaceholder(
+const { placeholder, animate, stop } = useTypingPlaceholder(
   ["admin@company.com", "hello@startup.io"],
   {
     typingSpeed: 80, // Faster typing
@@ -66,6 +71,9 @@ const placeholder = useTypingPlaceholder(
     pauseDuration: 1500, // Shorter pause
   }
 );
+
+onMounted(() => animate());
+onUnmounted(() => stop());
 </script>
 
 <template>
@@ -81,19 +89,34 @@ const placeholder = useTypingPlaceholder(
 
 ```vue
 <script setup lang="ts">
+import { onMounted, onUnmounted } from "vue";
 import { useTypingPlaceholder } from "@/composables/useTypingPlaceholder";
 
-const namePlaceholder = useTypingPlaceholder([
-  "John Doe",
-  "Jane Smith",
-  "Alex Johnson",
-]);
+const {
+  placeholder: namePlaceholder,
+  animate: animateName,
+  stop: stopName,
+} = useTypingPlaceholder(["John Doe", "Jane Smith", "Alex Johnson"]);
 
-const emailPlaceholder = useTypingPlaceholder([
+const {
+  placeholder: emailPlaceholder,
+  animate: animateEmail,
+  stop: stopEmail,
+} = useTypingPlaceholder([
   "admin@company.com",
   "hello@startup.io",
   "contact@business.org",
 ]);
+
+onMounted(() => {
+  animateName();
+  animateEmail();
+});
+
+onUnmounted(() => {
+  stopName();
+  stopEmail();
+});
 </script>
 
 <template>
@@ -110,7 +133,10 @@ const emailPlaceholder = useTypingPlaceholder([
 
 ```vue
 <script setup lang="ts">
-const placeholder = useTypingPlaceholder(
+import { onMounted, onUnmounted } from "vue";
+import { useTypingPlaceholder } from "@/composables/useTypingPlaceholder";
+
+const { placeholder, animate, stop } = useTypingPlaceholder(
   ["Think carefully...", "Take your time...", "No rush..."],
   {
     typingSpeed: 200, // Slow typing
@@ -118,6 +144,9 @@ const placeholder = useTypingPlaceholder(
     pauseDuration: 3000, // Long pause
   }
 );
+
+onMounted(() => animate());
+onUnmounted(() => stop());
 </script>
 
 <template>
@@ -129,7 +158,7 @@ const placeholder = useTypingPlaceholder(
 
 ### `useTypingPlaceholder(placeholders, options?)`
 
-Returns a reactive ref containing the current animated placeholder text.
+Returns an object with the placeholder ref, animate function, and stop function.
 
 <table class="w-full">
   <thead>
@@ -178,7 +207,11 @@ Returns a reactive ref containing the current animated placeholder text.
   </tbody>
 </table>
 
-**Returns:** `Ref<string>` - A reactive reference to the current placeholder text
+**Returns:** `{ placeholder: Ref<string>, animate: () => void, stop: () => void }`
+
+- `placeholder` - A reactive reference to the current placeholder text
+- `animate` - Function to start the animation (call in `onMounted`)
+- `stop` - Function to stop the animation (call in `onUnmounted`)
 
 ## Behavior
 
@@ -190,7 +223,7 @@ The animation follows this cycle:
 4. **Move** to the next placeholder
 5. **Repeat** infinitely
 
-The animation automatically starts when the component mounts and cleans up when it unmounts.
+Call the `animate()` function in your component's `onMounted()` hook to start the animation, and call `stop()` in `onUnmounted()` to clean up.
 
 ## Use Cases
 
@@ -204,4 +237,4 @@ The animation automatically starts when the component mounts and cleans up when 
 
 The composable is lightweight and uses `setTimeout` for animations. Each instance runs independently, so multiple typing placeholders on the same page won't interfere with each other.
 
-The animation automatically stops when the component unmounts to prevent memory leaks.
+Remember to call `stop()` in `onUnmounted()` to prevent memory leaks when the component is destroyed.
