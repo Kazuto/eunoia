@@ -8,3 +8,4 @@ export { useSanitizedId } from "./useSanitizedId";
 export { useShortcut } from "./useShortcut";
 export { useSlotContent } from "./useSlotContent";
 export { useTheme } from "./useTheme";
+export { useTypingPlaceholder } from "./useTypingPlaceholder";

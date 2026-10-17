@@ -1,0 +1,207 @@
+# useTypingPlaceholder
+
+A composable that creates an animated typing placeholder that cycles through multiple strings with a typewriter effect.
+
+## Defaults
+
+<table class="w-full">
+  <thead>
+    <tr>
+      <th>Option</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>typingSpeed</td>
+      <td>100</td>
+      <td>Milliseconds per character when typing</td>
+    </tr>
+    <tr>
+      <td>deletingSpeed</td>
+      <td>50</td>
+      <td>Milliseconds per character when deleting</td>
+    </tr>
+    <tr>
+      <td>pauseDuration</td>
+      <td>2000</td>
+      <td>Pause duration after typing before deletion starts</td>
+    </tr>
+  </tbody>
+</table>
+
+## Usage
+
+### Basic Example
+
+```vue
+<script setup lang="ts">
+import { Input } from "@thkzt/eunoia";
+import { useTypingPlaceholder } from "@/composables/useTypingPlaceholder";
+
+const placeholder = useTypingPlaceholder([
+  "John Doe",
+  "Jane Smith",
+  "Alex Johnson",
+]);
+</script>
+
+<template>
+  <Input :placeholder="placeholder">Name</Input>
+</template>
+```
+
+### Custom Animation Speed
+
+```vue
+<script setup lang="ts">
+import { useTypingPlaceholder } from "@/composables/useTypingPlaceholder";
+
+const placeholder = useTypingPlaceholder(
+  ["admin@company.com", "hello@startup.io"],
+  {
+    typingSpeed: 80, // Faster typing
+    deletingSpeed: 30, // Faster deleting
+    pauseDuration: 1500, // Shorter pause
+  }
+);
+</script>
+
+<template>
+  <Input
+    type="email"
+    :placeholder="placeholder"
+    >Email</Input
+  >
+</template>
+```
+
+### Multiple Inputs
+
+```vue
+<script setup lang="ts">
+import { useTypingPlaceholder } from "@/composables/useTypingPlaceholder";
+
+const namePlaceholder = useTypingPlaceholder([
+  "John Doe",
+  "Jane Smith",
+  "Alex Johnson",
+]);
+
+const emailPlaceholder = useTypingPlaceholder([
+  "admin@company.com",
+  "hello@startup.io",
+  "contact@business.org",
+]);
+</script>
+
+<template>
+  <Input :placeholder="namePlaceholder">Name</Input>
+  <Input
+    type="email"
+    :placeholder="emailPlaceholder"
+    >Email</Input
+  >
+</template>
+```
+
+### Slow, Deliberate Typing
+
+```vue
+<script setup lang="ts">
+const placeholder = useTypingPlaceholder(
+  ["Think carefully...", "Take your time...", "No rush..."],
+  {
+    typingSpeed: 200, // Slow typing
+    deletingSpeed: 100, // Slow deleting
+    pauseDuration: 3000, // Long pause
+  }
+);
+</script>
+
+<template>
+  <Textarea :placeholder="placeholder">Your thoughts</Textarea>
+</template>
+```
+
+## API
+
+### `useTypingPlaceholder(placeholders, options?)`
+
+Returns a reactive ref containing the current animated placeholder text.
+
+<table class="w-full">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>placeholders</td>
+      <td>
+        <code>string[]</code>
+      </td>
+      <td>Array of strings to cycle through</td>
+    </tr>
+    <tr>
+      <td>options</td>
+      <td>
+        <code>object</code>
+      </td>
+      <td>Optional configuration for animation timing</td>
+    </tr>
+    <tr>
+      <td>options.typingSpeed</td>
+      <td>
+        <code>number</code>
+      </td>
+      <td>Milliseconds per character when typing (default: 100)</td>
+    </tr>
+    <tr>
+      <td>options.deletingSpeed</td>
+      <td>
+        <code>number</code>
+      </td>
+      <td>Milliseconds per character when deleting (default: 50)</td>
+    </tr>
+    <tr>
+      <td>options.pauseDuration</td>
+      <td>
+        <code>number</code>
+      </td>
+      <td>Pause in milliseconds before deleting (default: 2000)</td>
+    </tr>
+  </tbody>
+</table>
+
+**Returns:** `Ref<string>` - A reactive reference to the current placeholder text
+
+## Behavior
+
+The animation follows this cycle:
+
+1. **Type** the first placeholder character by character
+2. **Pause** for the configured duration
+3. **Delete** the text character by character
+4. **Move** to the next placeholder
+5. **Repeat** infinitely
+
+The animation automatically starts when the component mounts and cleans up when it unmounts.
+
+## Use Cases
+
+- **Form fields** - Show example inputs to guide users
+- **Search boxes** - Display popular search queries
+- **Email signup** - Demonstrate email format variations
+- **Landing pages** - Create engaging, dynamic placeholders
+- **Multi-step forms** - Provide contextual examples for each field
+
+## Performance
+
+The composable is lightweight and uses `setTimeout` for animations. Each instance runs independently, so multiple typing placeholders on the same page won't interfere with each other.
+
+The animation automatically stops when the component unmounts to prevent memory leaks.
