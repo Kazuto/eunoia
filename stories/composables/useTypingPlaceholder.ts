@@ -1,3 +1,5 @@
+import { ref, onMounted, onUnmounted } from "vue";
+
 /**
  * Creates an animated typing placeholder that cycles through multiple strings.
  *
