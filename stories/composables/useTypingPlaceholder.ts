@@ -1,4 +1,4 @@
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted, getCurrentInstance } from "vue";
 
 /**
  * Creates an animated typing placeholder that cycles through multiple strings.
@@ -40,7 +40,7 @@ export function useTypingPlaceholder(
   const isDeleting = ref(false);
   const charIndex = ref(0);
 
-  let timeoutId: NodeJS.Timeout;
+  let timeoutId: NodeJS.Timeout | undefined;
 
   const animate = () => {
     const fullText = placeholders[currentIndex.value];
@@ -75,13 +75,16 @@ export function useTypingPlaceholder(
     }
   };
 
-  onMounted(() => {
-    animate();
-  });
+  // Only use lifecycle hooks if we're in a component context
+  if (getCurrentInstance()) {
+    onMounted(() => {
+      animate();
+    });
 
-  onUnmounted(() => {
-    clearTimeout(timeoutId);
-  });
+    onUnmounted(() => {
+      if (timeoutId) clearTimeout(timeoutId);
+    });
+  }
 
   return currentPlaceholder;
 }
