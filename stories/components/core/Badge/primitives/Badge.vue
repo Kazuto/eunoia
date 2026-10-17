@@ -25,7 +25,7 @@ const badgeStyles = tv({
       primary: ["bg-primary-500 text-primary-50", "dark:bg-primary-700"],
       secondary: [
         "bg-neutral-100 text-neutral-950",
-        "dark:bg-neutral-600 dark:text-neutral-50",
+        "dark:bg-neutral-700 dark:text-neutral-100",
       ],
       success: [
         "bg-green-500 text-green-50",
