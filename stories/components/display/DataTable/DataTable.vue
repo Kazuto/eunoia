@@ -38,6 +38,10 @@
           :item="item"
         />
       </template>
+
+      <template #empty>
+        <slot name="empty" />
+      </template>
     </DataTableBody>
   </TablePrimitive>
 </template>
@@ -61,6 +65,7 @@ defineOptions({
 defineSlots<{
   [key: string]: (props: { item: T }) => unknown;
   actions: (props: { item: T }) => unknown;
+  empty: () => unknown;
 }>();
 
 const props = withDefaults(

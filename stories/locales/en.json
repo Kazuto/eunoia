@@ -70,5 +70,6 @@
   "dropzone.drop-file": "Drop file here",
   "dropzone.drop-or-browse": "Drop file here or click to browse",
   "dropzone.remove-file": "Remove file",
-  "split-view.search": "Search…"
+  "split-view.search": "Search…",
+  "common.no-data": "No data available"
 }

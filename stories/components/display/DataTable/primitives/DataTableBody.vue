@@ -38,6 +38,18 @@
         />
       </td>
     </tr>
+    <tr v-if="!loading && items.length === 0">
+      <td
+        :colspan="columns.length + (hasActions ? 1 : 0)"
+        class="py-12 text-center"
+      >
+        <slot name="empty">
+          <div class="text-neutral-500 dark:text-neutral-400">
+            {{ t("no-data") }}
+          </div>
+        </slot>
+      </td>
+    </tr>
   </tbody>
 </template>
 
@@ -53,16 +65,19 @@ export type DataTableColumn<T = Record<string, unknown>> = {
 
 <script lang="ts" setup generic="T extends Record<string, unknown>">
 import { tv } from "tailwind-variants";
-import { useForwardedAttrs } from "@/composables";
+import { useForwardedAttrs, useLocale } from "@/composables";
 import { Skeleton } from "@/components";
 
 defineOptions({
   inheritAttrs: false,
 });
 
+const t = useLocale("common");
+
 defineSlots<{
   [key: string]: (props: { item: T }) => unknown;
   actions: (props: { item: T }) => unknown;
+  empty: () => unknown;
 }>();
 
 const { classAttr, forwardedAttrs } = useForwardedAttrs();

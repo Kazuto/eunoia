@@ -137,3 +137,48 @@ export const Actions: Story = {
     `,
   }),
 };
+
+export const Empty: Story = {
+  args: {
+    items: [],
+    columns: [
+      { title: "Name", key: "name" },
+      { title: "Role", key: "role" },
+      { title: "Salary", key: "salary" },
+    ],
+  },
+};
+
+export const EmptyWithCustomContent: Story = {
+  args: {
+    items: [],
+    columns: [
+      { title: "Name", key: "name" },
+      { title: "Role", key: "role" },
+      { title: "Salary", key: "salary" },
+    ],
+  },
+  render: (args) => ({
+    components: { DataTable, Button, Icon },
+    setup: () => ({ args }),
+    template: `
+      <DataTable v-bind="args">
+        <template #empty>
+          <div class="flex flex-col items-center py-12">
+            <Icon name="user-list" class="h-12 w-12 text-neutral-400 dark:text-neutral-500" />
+            <h3 class="mt-4 text-sm font-medium text-neutral-900 dark:text-neutral-100">
+              No employees found
+            </h3>
+            <p class="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
+              Get started by adding your first employee.
+            </p>
+            <Button primary class="mt-6">
+              <Icon name="plus" size="sm" />
+              Add Employee
+            </Button>
+          </div>
+        </template>
+      </DataTable>
+    `,
+  }),
+};
