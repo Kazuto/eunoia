@@ -71,5 +71,6 @@
   "dropzone.drop-or-browse": "Datei hier ablegen oder zum Durchsuchen klicken",
   "dropzone.remove-file": "Datei entfernen",
   "split-view.search": "Suchen…",
-  "common.no-data": "Keine Daten verfügbar"
+  "common.no-data": "Keine Daten verfügbar",
+  "datatable.actions": "Aktionen"
 }

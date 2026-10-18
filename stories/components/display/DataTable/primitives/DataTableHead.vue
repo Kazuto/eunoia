@@ -46,7 +46,7 @@
         v-if="hasActions"
         :class="cellStyles({ dense, align: 'end' })"
       >
-        <span class="sr-only">Actions</span>
+        <span class="sr-only">{{ t("actions") }}</span>
       </th>
     </tr>
   </thead>
@@ -55,7 +55,9 @@
 <script lang="ts" setup>
 import { tv } from "tailwind-variants";
 import { type DataTableColumn, Icon } from "@/components";
-import { useForwardedAttrs } from "@/composables";
+import { useForwardedAttrs, useLocale } from "@/composables";
+
+const t = useLocale("datatable");
 
 defineOptions({
   inheritAttrs: false,

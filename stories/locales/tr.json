@@ -71,5 +71,6 @@
   "dropzone.drop-or-browse": "Dosyayı buraya bırakın veya göz atmak için tıklayın",
   "dropzone.remove-file": "Dosyayı kaldır",
   "split-view.search": "Ara…",
-  "common.no-data": "Kullanılabilir veri yok"
+  "common.no-data": "Kullanılabilir veri yok",
+  "datatable.actions": "İşlemler"
 }
