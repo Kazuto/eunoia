@@ -41,11 +41,10 @@ import { onMounted, onUnmounted } from "vue";
 import { Input } from "@thkzt/eunoia";
 import { useTypingPlaceholder } from "@/composables/useTypingPlaceholder";
 
-const { placeholder, animate, stop } = useTypingPlaceholder([
-  "John Doe",
-  "Jane Smith",
-  "Alex Johnson",
-]);
+const { placeholder, animate, stop } = useTypingPlaceholder(
+  ["John Doe", "Jane Smith", "Alex Johnson"],
+  { autoStart: false }
+);
 
 onMounted(() => animate());
 onUnmounted(() => stop());

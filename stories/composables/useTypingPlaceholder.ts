@@ -1,4 +1,4 @@
-import { ref, type Ref } from "vue";
+import { ref, type Ref, onMounted, onUnmounted } from "vue";
 
 /**
  * Creates an animated typing placeholder that cycles through multiple strings.
@@ -10,13 +10,17 @@ import { ref, type Ref } from "vue";
  * @example
  * ```vue
  * <script setup>
+ * // Auto-start animation (default behavior)
+ * const { placeholder } = useTypingPlaceholder(['John Doe', 'Jane Smith', 'Alex Johnson']);
+ *
+ * // Manual control
  * const { placeholder, animate, stop } = useTypingPlaceholder(
  *   ['John Doe', 'Jane Smith', 'Alex Johnson'],
- *   { typingSpeed: 100, deletingSpeed: 50, pauseDuration: 2000 }
+ *   { autoStart: false, typingSpeed: 100, deletingSpeed: 50, pauseDuration: 2000 }
  * );
  *
- * onMounted(() => animate());
- * onUnmounted(() => stop());
+ * // Manually start later
+ * animate();
  * </script>
  *
  * <template>
@@ -30,6 +34,7 @@ export function useTypingPlaceholder(
     typingSpeed?: number;
     deletingSpeed?: number;
     pauseDuration?: number;
+    autoStart?: boolean;
   } = {}
 ): {
   placeholder: Ref<string>;
@@ -40,6 +45,7 @@ export function useTypingPlaceholder(
     typingSpeed = 100,
     deletingSpeed = 50,
     pauseDuration = 2000,
+    autoStart = true,
   } = options;
 
   const currentPlaceholder = ref("");
@@ -88,6 +94,17 @@ export function useTypingPlaceholder(
       timeoutId = undefined;
     }
   };
+
+  // Register lifecycle hooks unconditionally, but only execute based on autoStart
+  onMounted(() => {
+    if (autoStart) {
+      animate();
+    }
+  });
+
+  onUnmounted(() => {
+    stop();
+  });
 
   return {
     placeholder: currentPlaceholder,
