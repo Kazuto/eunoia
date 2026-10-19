@@ -304,10 +304,45 @@
 
 /* Every scroll container gets the subtle scrollbar, including ones in the
    consuming app. Browsers don't adapt their default scrollbar to a dark page
-   the same way (Firefox does, Chrome doesn't), so set it explicitly. */
+   the same way (Firefox does, Chrome doesn't), so set it explicitly.
+   Plain CSS on purpose: an @apply here makes the library build compile this file,
+   which drops @source/@theme and leaves consuming apps without component styles. */
 @layer base {
   * {
-    @apply scrollbar-subtle;
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in oklch, var(--color-black) 30%, transparent)
+      transparent;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: color-mix(in oklch, var(--color-black) 30%, transparent);
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: color-mix(in oklch, var(--color-black) 50%, transparent);
+  }
+
+  :where(.dark, .dark *) {
+    scrollbar-color: color-mix(in oklch, var(--color-white) 30%, transparent)
+      transparent;
+  }
+
+  :where(.dark, .dark *)::-webkit-scrollbar-thumb {
+    background-color: color-mix(in oklch, var(--color-white) 30%, transparent);
+  }
+
+  :where(.dark, .dark *)::-webkit-scrollbar-thumb:hover {
+    background-color: color-mix(in oklch, var(--color-white) 50%, transparent);
   }
 }
 
