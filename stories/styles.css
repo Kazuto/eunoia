@@ -302,6 +302,15 @@
   }
 }
 
+/* Every scroll container gets the subtle scrollbar, including ones in the
+   consuming app. Browsers don't adapt their default scrollbar to a dark page
+   the same way (Firefox does, Chrome doesn't), so set it explicitly. */
+@layer base {
+  * {
+    @apply scrollbar-subtle;
+  }
+}
+
 @keyframes timeout-shrink {
   from {
     width: 100%;

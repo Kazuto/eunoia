@@ -22,7 +22,7 @@ function selectAction(action: HeaderAction) {
 
 const menuStyles = tv({
   base: [
-    "absolute top-full right-0 z-50 mt-1 scrollbar-subtle rounded-lg border p-1 shadow-lg",
+    "absolute top-full right-0 z-50 mt-1 rounded-lg border p-1 shadow-lg",
     "border-neutral-300 bg-white",
     "dark:border-neutral-600 dark:bg-neutral-800",
   ],
