@@ -71,6 +71,7 @@
   "dropzone.drop-or-browse": "ファイルをここにドロップまたはクリックして参照",
   "dropzone.remove-file": "ファイルを削除",
   "split-view.search": "検索…",
+  "split-view.select-item": "{label} を選択",
   "common.no-data": "データがありません",
   "datatable.actions": "アクション"
 }

@@ -71,6 +71,7 @@
   "dropzone.drop-or-browse": "Перетащите файл сюда или нажмите для выбора",
   "dropzone.remove-file": "Удалить файл",
   "split-view.search": "Поиск…",
+  "split-view.select-item": "Выбрать {label}",
   "common.no-data": "Нет доступных данных",
   "datatable.actions": "Действия"
 }

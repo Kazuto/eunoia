@@ -71,6 +71,7 @@
   "dropzone.drop-or-browse": "将文件拖放到此处或点击浏览",
   "dropzone.remove-file": "删除文件",
   "split-view.search": "搜索…",
+  "split-view.select-item": "选择 {label}",
   "common.no-data": "无可用数据",
   "datatable.actions": "操作"
 }

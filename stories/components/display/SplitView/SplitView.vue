@@ -9,6 +9,10 @@ import RightPanel from "./primitives/RightPanel.vue";
 export type { SplitViewItem };
 
 const search = defineModel<string>("search", { default: "" });
+/** Keys of the checked items when `selectable`. */
+const selection = defineModel<SplitViewItem["key"][]>("selection", {
+  default: () => [],
+});
 
 withDefaults(
   defineProps<{
@@ -31,6 +35,8 @@ withDefaults(
     total?: number;
     /** Focuses the search field when pressed, e.g. "/" or "Mod+K", and shows it as a hint. */
     searchShortcut?: string;
+    /** Show a checkbox per row to check several items, e.g. for bulk actions. Shift extends from the last checked row. */
+    selectable?: boolean;
   }>(),
   {
     selected: undefined,
@@ -68,6 +74,7 @@ const variants = tv({
   <div :class="variants()">
     <LeftPanel
       v-model:search="search"
+      v-model:selection="selection"
       class="col-span-2"
       :items
       :searchable
@@ -78,6 +85,7 @@ const variants = tv({
       :has-more
       :loading
       :total
+      :selectable
       v-bind="{
         ...(itemSize === undefined ? {} : { itemSize }),
         ...(endThreshold === undefined ? {} : { endThreshold }),

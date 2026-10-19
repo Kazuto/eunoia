@@ -71,6 +71,7 @@
   "dropzone.drop-or-browse": "Bestand hier neerzetten of klik om te bladeren",
   "dropzone.remove-file": "Bestand verwijderen",
   "split-view.search": "Zoeken…",
+  "split-view.select-item": "{label} selecteren",
   "common.no-data": "Geen gegevens beschikbaar",
   "datatable.actions": "Acties"
 }

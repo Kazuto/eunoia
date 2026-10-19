@@ -71,6 +71,7 @@
   "dropzone.drop-or-browse": "Solte o arquivo aqui ou clique para navegar",
   "dropzone.remove-file": "Remover arquivo",
   "split-view.search": "Pesquisar…",
+  "split-view.select-item": "Selecionar {label}",
   "common.no-data": "Nenhum dado disponível",
   "datatable.actions": "Ações"
 }

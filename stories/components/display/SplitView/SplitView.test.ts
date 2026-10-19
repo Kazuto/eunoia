@@ -132,3 +132,39 @@ describe("SplitView search", () => {
     expect(document.activeElement).toBe(search);
   });
 });
+
+describe("SplitView selectable", () => {
+  function checkbox(label: string) {
+    return screen.getByRole("checkbox", { name: `Select ${label}` });
+  }
+
+  it("checks rows without selecting them", async () => {
+    const { emitted } = render(SplitView, {
+      props: { items: items.slice(0, 5), selectable: true },
+    });
+    await fireEvent.click(checkbox("Item 1"));
+    expect(emitted()["update:selection"]).toEqual([[[1]]]);
+    expect(emitted().select).toBeUndefined();
+  });
+
+  it("extends from the last checked row with shift", async () => {
+    const { emitted, rerender } = render(SplitView, {
+      props: { items: items.slice(0, 6), selectable: true, selection: [] },
+    });
+    await fireEvent.click(checkbox("Item 1"));
+    await rerender({ selection: [1] });
+    await fireEvent.pointerDown(checkbox("Item 4"), { shiftKey: true });
+    await fireEvent.click(checkbox("Item 4"));
+    expect(emitted()["update:selection"]?.at(-1)).toEqual([[1, 2, 3, 4]]);
+
+    await rerender({ selection: [1, 2, 3, 4] });
+    await fireEvent.pointerDown(checkbox("Item 2"), { shiftKey: true });
+    await fireEvent.click(checkbox("Item 2"));
+    expect(emitted()["update:selection"]?.at(-1)).toEqual([[1]]);
+  });
+
+  it("renders no checkboxes by default", () => {
+    render(SplitView, { props: { items: items.slice(0, 5) } });
+    expect(screen.queryAllByRole("checkbox")).toHaveLength(0);
+  });
+});

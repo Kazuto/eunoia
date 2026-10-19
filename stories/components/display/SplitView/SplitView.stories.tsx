@@ -193,3 +193,29 @@ export const VirtualInfinite: Story = {
     `,
   }),
 };
+
+export const Selectable: Story = {
+  render: (args) => ({
+    components: { SplitView },
+    setup() {
+      const selected = ref(args.selected);
+      const selection = ref<SplitViewItem["key"][]>([]);
+
+      return { args, selected, selection, information, items };
+    },
+    template: `
+      <SplitView
+        v-bind="args"
+        v-model:selection="selection"
+        selectable
+        :items="items"
+        :selected="selected"
+        @select="selected = $event"
+      >
+        <template #default="{ item }">
+          {{ selection.length }} checked. Hold Shift to check a range.
+        </template>
+      </SplitView>
+    `,
+  }),
+};

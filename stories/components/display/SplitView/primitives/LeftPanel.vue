@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Checkbox from "@/components/form/Checkbox/Checkbox.vue";
 import Input from "@/components/form/Input/Input.vue";
 import { type LocaleMessages, useLocale } from "@/composables";
 import { useVirtualizer } from "@tanstack/vue-virtual";
@@ -21,6 +22,10 @@ export type SplitViewItem = {
 };
 
 const search = defineModel<string>("search", { default: "" });
+/** Keys of the checked items when `selectable`. */
+const selection = defineModel<SplitViewItem["key"][]>("selection", {
+  default: () => [],
+});
 
 const props = withDefaults(
   defineProps<{
@@ -43,6 +48,8 @@ const props = withDefaults(
     total?: number;
     /** Focuses the search field when pressed, e.g. "/" or "Mod+K", and shows it as a hint. */
     searchShortcut?: string;
+    /** Show a checkbox per row to check several items, e.g. for bulk actions. Shift extends from the last checked row. */
+    selectable?: boolean;
     locale?: LocaleMessages;
   }>(),
   {
@@ -85,7 +92,21 @@ const variants = tv({
       ],
       false: "",
     },
+    selectable: {
+      true: "justify-start",
+    },
   },
+});
+
+// Rows sit on tinted backgrounds (the pane, hover, the active row), where the
+// checkbox's transparent fill and faint border disappear. Give the unchecked box an
+// opaque fill and a stronger border here, without changing Checkbox itself.
+const checkVariants = tv({
+  base: [
+    "me-2 flex shrink-0 select-none",
+    "[&_input:not(:checked,:indeterminate)+span]:border-neutral-300 [&_input:not(:checked,:indeterminate)+span]:bg-white [&_input:not(:checked,:indeterminate)+span]:hover:border-neutral-500",
+    "dark:[&_input:not(:checked,:indeterminate)+span]:border-neutral-500 dark:[&_input:not(:checked,:indeterminate)+span]:bg-neutral-800 dark:[&_input:not(:checked,:indeterminate)+span]:hover:border-neutral-300",
+  ],
 });
 
 const searchVariants = tv({
@@ -93,7 +114,7 @@ const searchVariants = tv({
   variants: {
     sticky: {
       true: [
-        "sticky top-0 z-10 -mx-2 -mt-2 px-2 pt-2",
+        "sticky -top-2 z-10 -mx-2 -mt-2 px-2 pt-2",
         "bg-neutral-100",
         "dark:bg-neutral-700",
       ],
@@ -125,6 +146,34 @@ function measureRow(element: unknown) {
 
 function isActive(item: SplitViewItem) {
   return item.key === props.selected?.key;
+}
+
+function isChecked(item: SplitViewItem) {
+  return selection.value.includes(item.key);
+}
+
+// Shift is read on press, before the checkbox reports its change.
+let extendRange = false;
+let anchorKey: SplitViewItem["key"] | undefined;
+
+function onCheckPress(event: PointerEvent | KeyboardEvent) {
+  extendRange = event.shiftKey;
+}
+
+function setChecked(item: SplitViewItem, checked: boolean | undefined) {
+  const anchor = props.items.findIndex((other) => other.key === anchorKey);
+  const index = props.items.indexOf(item);
+  const keys =
+    extendRange && anchor >= 0
+      ? props.items
+          .slice(Math.min(anchor, index), Math.max(anchor, index) + 1)
+          .map((other) => other.key)
+      : [item.key];
+  selection.value = checked
+    ? [...new Set([...selection.value, ...keys])]
+    : selection.value.filter((key) => !keys.includes(key));
+  anchorKey = item.key;
+  extendRange = false;
 }
 
 function checkEnd() {
@@ -207,12 +256,26 @@ watch(
           :aria-setsize="total ?? items.length"
           :aria-posinset="row.index + 1"
           :class="[
-            variants({ active: isActive(items[row.index]!) }),
+            variants({ active: isActive(items[row.index]!), selectable }),
             'absolute top-0 left-0 w-full',
           ]"
           :style="{ transform: `translateY(${row.start - listOffset}px)` }"
           @click="emit('select', items[row.index]!)"
         >
+          <span
+            v-if="selectable"
+            :class="checkVariants()"
+            @click.stop
+            @pointerdown="onCheckPress"
+            @keydown="onCheckPress"
+          >
+            <Checkbox
+              dense
+              :model-value="isChecked(items[row.index]!)"
+              :aria-label="t('select-item', { label: items[row.index]!.label })"
+              @update:model-value="setChecked(items[row.index]!, $event)"
+            />
+          </span>
           <slot
             name="item"
             :item="items[row.index]!"
@@ -228,9 +291,23 @@ watch(
           :data-index="index"
           :aria-setsize="total"
           :aria-posinset="total === undefined ? undefined : index + 1"
-          :class="variants({ active: isActive(item) })"
+          :class="variants({ active: isActive(item), selectable })"
           @click="emit('select', item)"
         >
+          <span
+            v-if="selectable"
+            :class="checkVariants()"
+            @click.stop
+            @pointerdown="onCheckPress"
+            @keydown="onCheckPress"
+          >
+            <Checkbox
+              dense
+              :model-value="isChecked(item)"
+              :aria-label="t('select-item', { label: item.label })"
+              @update:model-value="setChecked(item, $event)"
+            />
+          </span>
           <slot
             name="item"
             :item="item"
