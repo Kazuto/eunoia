@@ -64,6 +64,8 @@
     "lint:check": "eslint . --cache --cache-strategy content",
     "code:format": "bun lint && bun format",
     "test": "vitest run",
+    "check:dist": "node scripts/check-dist-css.mjs",
+    "prepublishOnly": "node scripts/check-dist-css.mjs",
     "prepare": "husky"
   },
   "version": "0.0.1-beta.71",
