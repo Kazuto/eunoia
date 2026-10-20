@@ -13,10 +13,10 @@
       <Link
         :href
         :to="props.to"
-        :class="itemStyles({ active })"
+        :class="itemStyles({ active, collapsed: !!unref(sidebarCollapsed) })"
         :aria-current="active ? 'page' : undefined"
         tabindex="0"
-        :style="{ paddingLeft: padding }"
+        :style="{ paddingLeft: unref(sidebarCollapsed) ? undefined : padding }"
       >
         <MenuLabel :icon>
           {{ label }}
@@ -27,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject } from "vue";
+import { computed, inject, unref } from "vue";
 import { Link } from "@/components";
 import Tooltip from "@/components/feedback/Tooltip/Tooltip.vue";
 import { tv } from "tailwind-variants";
@@ -76,6 +76,10 @@ const itemStyles = tv({
     "dark:text-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-neutral-200 dark:focus-visible:bg-neutral-700 dark:focus-visible:text-neutral-200 dark:focus-visible:ring-neutral-700 dark:focus-visible:ring-offset-neutral-800 dark:hover:focus-visible:bg-neutral-600 dark:hover:focus-visible:ring-neutral-600",
   ],
   variants: {
+    // In a collapsed sidebar only the icon shows: keep the item square around it.
+    collapsed: {
+      true: "aspect-square justify-center",
+    },
     active: {
       true: [
         "font-semibold",

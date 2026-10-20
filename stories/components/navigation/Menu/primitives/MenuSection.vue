@@ -11,7 +11,9 @@
       class="w-full"
     >
       <div
-        :class="sectionStyles({ parentActive })"
+        :class="
+          sectionStyles({ parentActive, collapsed: !!unref(sidebarCollapsed) })
+        "
         :style="{ paddingLeft: padding }"
         :aria-expanded="sidebarCollapsed ? undefined : open"
         :aria-controls="sidebarCollapsed ? undefined : childrenId"
@@ -75,7 +77,7 @@ import { Icon } from "@/components";
 import Tooltip from "@/components/feedback/Tooltip/Tooltip.vue";
 import { useSanitizedId, useForwardedAttrs } from "@/composables";
 import { sidebarCollapsedKey } from "@/components/layout/Sidebar/keys";
-import { ref, computed, inject } from "vue";
+import { ref, computed, inject, unref } from "vue";
 
 defineOptions({
   inheritAttrs: false,
@@ -112,6 +114,10 @@ const sectionStyles = tv({
     "dark:text-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-neutral-200 dark:focus-visible:bg-neutral-700 dark:focus-visible:text-neutral-200 dark:focus-visible:ring-neutral-700 dark:focus-visible:ring-offset-neutral-800 dark:hover:focus-visible:bg-neutral-600 dark:hover:focus-visible:ring-neutral-600",
   ],
   variants: {
+    // In a collapsed sidebar only the icon shows: keep the section square around it.
+    collapsed: {
+      true: "aspect-square justify-center",
+    },
     parentActive: {
       true: ["font-semibold", "text-neutral-900", "dark:text-neutral-50"],
     },
