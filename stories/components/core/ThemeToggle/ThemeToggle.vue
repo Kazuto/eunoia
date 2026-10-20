@@ -44,7 +44,7 @@ const icon = computed(() => {
     return (icons as Record<string, unknown>)["PiMoon"];
   }
 
-  return (icons as Record<string, unknown>)["PiCircle"];
+  return (icons as Record<string, unknown>)["PiMonitor"];
 });
 
 const cycleStyles = tv({
