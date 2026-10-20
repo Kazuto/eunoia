@@ -107,7 +107,7 @@ const wrapperStyles = tv({
 
 const boxStyles = tv({
   base: [
-    "inline-flex shrink-0 items-center justify-center rounded border transition-colors",
+    "inline-flex shrink-0 items-center justify-center rounded-[100%] border transition-colors superellipse",
     "border-neutral-200 bg-white peer-focus-visible:border-primary-500",
     "dark:border-neutral-700 dark:bg-transparent dark:peer-focus-visible:border-primary-500",
   ],

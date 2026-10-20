@@ -92,6 +92,13 @@ export const Removable: Story = {
   },
 };
 
+export const Pill: Story = {
+  args: {
+    pill: true,
+    removable: true,
+  },
+};
+
 export const RemovableDense: Story = {
   args: {
     removable: true,

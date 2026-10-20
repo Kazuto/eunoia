@@ -117,7 +117,7 @@ function clearSelection(event: Event) {
 const triggerStyles = tv({
   base: [
     "flex w-full items-center justify-between",
-    "rounded-md border transition-colors",
+    "rounded-[10px] border transition-colors squircle",
     "focus-within:border-primary-500 focus-within:ring-2 focus-within:ring-primary-500",
     "cursor-pointer",
     "transition-all duration-200 ease-in-out",

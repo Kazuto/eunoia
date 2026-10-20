@@ -40,7 +40,7 @@ const labels = computed(() =>
 
 const keyStyles = tv({
   base: [
-    "inline-flex min-w-[1.5em] items-center justify-center rounded border border-b-2 font-sans leading-none",
+    "inline-flex min-w-[1.5em] items-center justify-center rounded-[8px] border border-b-2 font-sans leading-none squircle",
     "border-neutral-200 bg-neutral-50 text-neutral-500",
     "dark:border-neutral-600 dark:bg-neutral-700 dark:text-neutral-300",
   ],

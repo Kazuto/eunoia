@@ -42,7 +42,7 @@ const badgeStyles = tv({
       true: "px-2 py-0.5 text-[10px]",
     },
     pill: {
-      false: "rounded-md",
+      false: "rounded-[10px] squircle",
       true: "rounded-full",
     },
   },

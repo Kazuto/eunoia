@@ -49,7 +49,7 @@ const tooltipStyle = computed(() => {
 
 const bubbleStyles = tv({
   base: [
-    "rounded px-1.5 font-medium tabular-nums",
+    "rounded-[8px] px-1.5 font-medium tabular-nums squircle",
     "bg-neutral-800 text-white",
     "dark:bg-neutral-100 dark:text-neutral-900",
   ],

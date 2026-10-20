@@ -257,6 +257,17 @@
   );
 }
 
+/* Smooth corners on top of a border-radius. Browsers without corner-shape keep
+   the plain rounded corners. `squircle` is for the usual radii; `superellipse` is
+   squarer and meant for square elements with a 100% radius (avatars, icon buttons). */
+@utility squircle {
+  corner-shape: squircle;
+}
+
+@utility superellipse {
+  corner-shape: superellipse(3);
+}
+
 @utility scrollbar-subtle {
   scrollbar-width: thin;
   scrollbar-color: color-mix(in oklch, var(--color-black) 30%, transparent)

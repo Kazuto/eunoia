@@ -25,7 +25,7 @@ const imageStyles = tv({
   base: "inline-block",
   variants: {
     rounded: {
-      true: "rounded-lg",
+      true: "rounded-[14px] squircle",
       full: "rounded-full",
     },
     fit: {

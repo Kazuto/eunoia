@@ -20,7 +20,7 @@ defineOptions({
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const toastStyles = tv({
-  base: "relative flex items-start gap-3 overflow-hidden rounded-lg border bg-white font-sans shadow-lg",
+  base: "relative flex items-start gap-3 overflow-hidden rounded-[16px] border bg-white font-sans shadow-lg squircle",
   variants: {
     variant: {
       info: [

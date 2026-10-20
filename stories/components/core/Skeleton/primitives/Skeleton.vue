@@ -22,12 +22,12 @@ const skeletonStyles = tv({
   base: "animate-pulse bg-neutral-200",
   variants: {
     variant: {
-      text: "rounded",
+      text: "rounded-[8px] squircle",
       circular: "rounded-full",
       rectangular: "rounded-none",
     },
     rounded: {
-      true: "rounded-lg",
+      true: "rounded-[14px] squircle",
     },
   },
   defaultVariants: {

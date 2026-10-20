@@ -116,7 +116,7 @@ const copyButtonStyles = tv({
 
 const filenameStyles = tv({
   base: [
-    "block rounded-t-lg px-4 pt-3 pb-0 font-mono text-xs text-neutral-500",
+    "block rounded-t-[14px] px-4 pt-3 pb-0 font-mono text-xs text-neutral-500 squircle",
     "bg-neutral-50",
     "dark:bg-neutral-950",
   ],
@@ -124,7 +124,7 @@ const filenameStyles = tv({
 
 const preStyles = tv({
   base: [
-    "overflow-x-auto rounded-lg p-4",
+    "overflow-x-auto rounded-[14px] p-4 squircle",
     "bg-neutral-50",
     "dark:bg-neutral-950",
   ],

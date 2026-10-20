@@ -55,8 +55,8 @@ const cycleStyles = tv({
   ],
   variants: {
     dense: {
-      false: "rounded-lg p-2.5 text-sm",
-      true: "rounded-md p-1.5 text-xs",
+      false: "rounded-[100%] p-2.5 text-sm superellipse",
+      true: "rounded-[100%] p-1.5 text-xs superellipse",
     },
   },
 });

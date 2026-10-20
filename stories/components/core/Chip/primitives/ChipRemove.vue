@@ -1,7 +1,7 @@
 <template>
   <span
     v-bind="forwardedAttrs"
-    :class="removeStyles({ variant, dense, class: classAttr })"
+    :class="removeStyles({ variant, dense, pill, class: classAttr })"
     role="button"
     tabindex="-1"
     :aria-label="ariaLabel"
@@ -28,7 +28,7 @@ defineOptions({
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const removeStyles = tv({
-  base: "inline-flex aspect-square items-center justify-center rounded-full transition-colors",
+  base: "inline-flex aspect-square items-center justify-center transition-colors",
   variants: {
     variant: {
       primary: [
@@ -53,16 +53,23 @@ const removeStyles = tv({
       false: "h-4 w-4 p-0.5 text-[10px]",
       true: "h-3.5 w-3.5 text-[8px]",
     },
+    // Matches the chip: a squircle chip gets a squircle button, a pill a round one.
+    pill: {
+      false: "rounded-[100%] superellipse",
+      true: "rounded-full",
+    },
   },
   defaultVariants: {
     variant: "primary",
     dense: false,
+    pill: false,
   },
 });
 
 defineProps<{
   variant?: "primary" | "secondary" | "success" | "warning" | "danger";
   dense?: boolean;
+  pill?: boolean;
   ariaLabel: string;
 }>();
 

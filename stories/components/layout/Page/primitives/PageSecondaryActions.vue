@@ -22,7 +22,7 @@ function selectAction(action: HeaderAction) {
 
 const menuStyles = tv({
   base: [
-    "absolute top-full right-0 z-50 mt-1 rounded-lg border p-1 shadow-lg",
+    "absolute top-full right-0 z-50 mt-1 rounded-[16px] border p-1 shadow-lg squircle",
     "border-neutral-300 bg-white",
     "dark:border-neutral-600 dark:bg-neutral-800",
   ],
@@ -30,7 +30,7 @@ const menuStyles = tv({
 
 const itemStyles = tv({
   base: [
-    "flex cursor-pointer items-center gap-2 rounded-md px-3 py-2.25 text-sm text-nowrap",
+    "flex cursor-pointer items-center gap-2 rounded-[10px] px-3 py-2.25 text-sm text-nowrap squircle",
     "text-neutral-900 hover:bg-neutral-200",
     "dark:text-neutral-100 dark:hover:bg-neutral-700",
   ],

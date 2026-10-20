@@ -31,15 +31,15 @@ const emit = defineEmits<{
 
 const variants = tv({
   base: [
-    "cursor-pointer rounded-md font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary-500",
-    "text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900",
-    "dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-100",
+    "cursor-pointer rounded-[10px] text-center font-semibold transition-colors outline-none squircle focus-visible:ring-2 focus-visible:ring-primary-500",
+    "text-neutral-500 hover:text-neutral-900",
+    "dark:text-neutral-400 dark:hover:text-neutral-100",
   ],
   variants: {
     active: {
       true: [
-        "bg-primary-100 text-primary-800 hover:bg-primary-100 hover:text-primary-800",
-        "dark:bg-primary-900 dark:text-primary-200 dark:hover:bg-primary-900 dark:hover:text-primary-200",
+        "bg-white font-bold text-neutral-900 shadow-sm",
+        "dark:bg-neutral-700 dark:text-neutral-50 dark:shadow-none",
       ],
     },
     dense: {

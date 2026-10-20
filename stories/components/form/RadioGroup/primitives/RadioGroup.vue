@@ -67,7 +67,7 @@ const indicatorStyle = computed(() => {
 
 const groupStyles = tv({
   base: [
-    "relative inline-flex w-full rounded-lg p-1",
+    "relative inline-flex w-full rounded-[14px] p-1 squircle",
     "bg-neutral-100",
     "dark:bg-neutral-900",
   ],
@@ -84,7 +84,7 @@ const groupStyles = tv({
 
 const indicatorStyles = tv({
   base: [
-    "absolute top-1 bottom-1 rounded-md border border-transparent shadow transition-[left] duration-200 ease-out",
+    "absolute top-1 bottom-1 rounded-[10px] border border-transparent shadow transition-[left] duration-200 ease-out squircle",
     "bg-white",
     "dark:bg-neutral-700",
   ],

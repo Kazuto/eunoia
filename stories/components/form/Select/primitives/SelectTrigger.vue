@@ -75,7 +75,7 @@ const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const triggerStyles = tv({
   base: [
-    "inline-flex w-full cursor-pointer items-center rounded-md border font-sans transition-colors outline-none hover:bg-neutral-50/25",
+    "inline-flex w-full cursor-pointer items-center rounded-[14px] border font-sans transition-colors outline-none squircle hover:bg-neutral-50/25",
     "border-neutral-300 focus-visible:border-primary-500",
     "dark:border-neutral-700 dark:hover:bg-black/15 dark:focus-visible:border-primary-500",
   ],

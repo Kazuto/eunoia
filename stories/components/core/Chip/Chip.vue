@@ -4,6 +4,7 @@
     class="inline-flex items-center gap-2"
     :variant
     :dense
+    :pill
     @click="emit('click', $event)"
     @focus="emit('focus', $event)"
     @blur="emit('blur', $event)"
@@ -13,6 +14,7 @@
       v-if="removable"
       :variant
       :dense
+      :pill
       :aria-label="t('remove')"
       @remove="emit('remove', $event)"
     />
@@ -33,6 +35,8 @@ const props = withDefaults(
   defineProps<{
     variant?: "primary" | "secondary" | "success" | "warning" | "danger";
     dense?: boolean;
+    /** Fully round ends instead of the default squircle corners. */
+    pill?: boolean;
     removable?: boolean;
     locale?: LocaleMessages;
   }>(),

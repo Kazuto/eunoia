@@ -363,7 +363,7 @@ const selectDay = (day: number) => {
 // Styles
 const navButtonStyles = tv({
   base: [
-    "inline-flex aspect-square shrink-0 cursor-pointer items-center justify-center rounded-md transition-colors",
+    "inline-flex aspect-square shrink-0 cursor-pointer items-center justify-center rounded-[10px] transition-colors squircle",
     "text-neutral-600 hover:bg-neutral-200 focus:ring-2 focus:ring-primary-500 focus:outline-none",
     "dark:text-neutral-400 dark:hover:bg-neutral-700",
   ],
@@ -380,7 +380,7 @@ const navButtonStyles = tv({
 
 const calendarStyles = tv({
   base: [
-    "z-50 min-w-[280px] rounded-lg border shadow-lg",
+    "z-50 min-w-[280px] rounded-[14px] border shadow-lg squircle",
     "border-neutral-300 bg-white",
     "dark:border-neutral-700 dark:bg-neutral-800",
   ],
@@ -421,7 +421,7 @@ const weekdayStyles = tv({
 
 const dayStyles = tv({
   base: [
-    "rounded-lg text-center transition-colors",
+    "rounded-[14px] text-center transition-colors squircle",
     "focus:ring-2 focus:ring-primary-500 focus:outline-none",
   ],
   variants: {

@@ -17,12 +17,17 @@ defineProps<{
   dense?: boolean;
 }>();
 
+// A segmented control: the tabs share one track and split its width evenly.
 const variants = tv({
-  base: "flex flex-wrap items-center",
+  base: [
+    "grid auto-cols-fr grid-flow-col items-center rounded-[14px] squircle",
+    "bg-neutral-100",
+    "dark:bg-neutral-950",
+  ],
   variants: {
     dense: {
-      true: "gap-1",
-      false: "gap-2",
+      true: "gap-0.5 p-0.5",
+      false: "gap-1 p-1",
     },
   },
 });

@@ -20,7 +20,7 @@ defineOptions({
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const alertStyles = tv({
-  base: "relative flex items-start gap-3 overflow-hidden rounded-md border font-sans",
+  base: "relative flex items-start gap-3 overflow-hidden rounded-[16px] border font-sans squircle",
   variants: {
     variant: {
       info: [

@@ -50,7 +50,7 @@ defineOptions({
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const detailsStyles = tv({
-  base: "rounded-md border border-neutral-300 font-sans",
+  base: "rounded-[14px] border border-neutral-300 font-sans squircle",
   variants: {
     dense: {
       false: "text-sm",

@@ -80,15 +80,15 @@ const emit = defineEmits<{
 
 const variants = tv({
   base: [
-    "flex cursor-pointer items-center justify-between rounded-sm px-4 py-2 text-sm font-medium",
-    "text-neutral-900 hover:bg-neutral-200",
-    "dark:text-neutral-100 dark:hover:bg-neutral-800",
+    "flex cursor-pointer items-center justify-between rounded-[12px] px-2.5 py-1.5 text-sm font-medium squircle",
+    "text-neutral-700 hover:bg-neutral-100",
+    "dark:text-neutral-200 dark:hover:bg-white/5",
   ],
   variants: {
     active: {
       true: [
-        "bg-primary-200 text-neutral-900 hover:bg-primary-200",
-        "dark:bg-primary-800 dark:text-neutral-100 dark:hover:bg-primary-800",
+        "bg-primary-100 text-primary-900 hover:bg-primary-100",
+        "dark:bg-primary-500/15 dark:text-primary-100 dark:hover:bg-primary-500/15",
       ],
       false: "",
     },
@@ -115,8 +115,8 @@ const searchVariants = tv({
     sticky: {
       true: [
         "sticky -top-2 z-10 -mx-2 -mt-2 px-2 pt-2",
-        "bg-neutral-100",
-        "dark:bg-neutral-700",
+        "bg-white",
+        "dark:bg-neutral-900",
       ],
     },
   },
@@ -225,7 +225,7 @@ watch(
 <template>
   <div
     ref="scroller"
-    class="relative flex flex-col gap-1 overflow-y-auto bg-neutral-100 p-2 shadow-sm dark:bg-neutral-700"
+    class="relative flex flex-col gap-0.5 overflow-y-auto border-r border-neutral-200 p-2 dark:border-white/5"
     @scroll.passive="checkEnd"
   >
     <div

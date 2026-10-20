@@ -7,7 +7,7 @@
       ><slot
     /></Label>
     <div
-      class="relative cursor-pointer rounded-lg border-2 border-dashed transition-colors"
+      class="relative cursor-pointer rounded-[14px] border-2 border-dashed transition-colors squircle"
       :class="{
         'border-blue-400 bg-blue-50 dark:border-blue-500 dark:bg-blue-950/20':
           isDragging && !disabled,
@@ -29,7 +29,7 @@
           <img
             :src="previewUrl"
             :alt="model.name"
-            class="mx-auto max-h-48 rounded-lg object-contain"
+            class="mx-auto max-h-48 rounded-[14px] object-contain squircle"
           />
           <p class="text-sm font-medium text-neutral-900 dark:text-neutral-100">
             {{ model.name }}

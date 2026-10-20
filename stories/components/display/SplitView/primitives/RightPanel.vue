@@ -13,10 +13,12 @@ defineSlots<{
 </script>
 
 <template>
-  <div class="flex min-h-0 min-w-0 flex-col overflow-hidden rounded-sm">
+  <div
+    class="flex min-h-0 min-w-0 flex-col overflow-hidden rounded-[6px] squircle"
+  >
     <div
       v-if="$slots.header"
-      class="shrink-0 border-b border-neutral-200 p-4 dark:border-neutral-700"
+      class="shrink-0 border-b border-neutral-200 p-4 dark:border-white/5"
     >
       <slot
         name="header"
@@ -28,7 +30,7 @@ defineSlots<{
     </div>
     <div
       v-if="$slots.footer"
-      class="shrink-0 border-t border-neutral-200 p-4 dark:border-neutral-700"
+      class="shrink-0 border-t border-neutral-200 p-4 dark:border-white/5"
     >
       <slot
         name="footer"

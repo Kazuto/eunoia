@@ -2,7 +2,7 @@
   <button
     type="button"
     v-bind="forwardedAttrs"
-    :class="chipStyles({ variant, dense, class: classAttr })"
+    :class="chipStyles({ variant, dense, pill, class: classAttr })"
     @click="emit('click', $event)"
     @focus="emit('focus', $event)"
     @blur="emit('blur', $event)"
@@ -23,7 +23,7 @@ const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const chipStyles = tv({
   base: [
-    "inline-flex cursor-pointer items-center rounded-full border-0 font-sans leading-none font-bold outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
+    "inline-flex cursor-pointer items-center border-0 font-sans leading-none font-bold outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
     "focus-visible:ring-offset-white",
     "dark:focus-visible:ring-offset-neutral-900",
   ],
@@ -54,10 +54,17 @@ const chipStyles = tv({
       false: "px-3 py-1.5 text-xs",
       true: "px-2.5 py-1 text-[10px]",
     },
+    // Squircle by default, like Badge; `pill` keeps the fully round shape.
+    pill: {
+      false: "rounded-[10px] squircle",
+      true: "rounded-full",
+    },
   },
+  compoundVariants: [{ dense: true, pill: false, class: "rounded-[8px]" }],
   defaultVariants: {
     variant: "primary",
     dense: false,
+    pill: false,
   },
 });
 
@@ -65,6 +72,7 @@ withDefaults(
   defineProps<{
     variant?: "primary" | "secondary" | "success" | "warning" | "danger";
     dense?: boolean;
+    pill?: boolean;
   }>(),
   {
     variant: "primary",

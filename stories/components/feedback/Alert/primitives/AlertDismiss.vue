@@ -26,7 +26,7 @@ const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const dismissStyles = tv({
   base: [
-    "ml-auto inline-flex shrink-0 cursor-pointer items-center justify-center rounded-md border border-transparent transition-colors outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
+    "ml-auto inline-flex shrink-0 cursor-pointer items-center justify-center rounded-[100%] border border-transparent transition-colors outline-none superellipse focus-visible:ring-2 focus-visible:ring-offset-2",
     "bg-transparent",
   ],
   variants: {
