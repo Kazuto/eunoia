@@ -50,6 +50,12 @@ type Story = StoryObj<typeof meta>;
 
 export const PageContext: Story = {};
 
+export const Transparent: Story = {
+  args: {
+    transparent: true,
+  },
+};
+
 export const WithoutDescription: Story = {
   args: {
     description: undefined,

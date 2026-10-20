@@ -81,3 +81,19 @@ describe("Header alignment", () => {
     expect(alignedRow(container).getAttribute("style")).toBeNull();
   });
 });
+
+describe("Header transparent", () => {
+  it("drops the background and border only when transparent", () => {
+    const { container, rerender } = render(Header, {
+      props: { title: "Entries" },
+    });
+    const header = container.querySelector("header")!;
+    expect(header.classList.contains("bg-white")).toBe(true);
+
+    return rerender({ title: "Entries", transparent: true }).then(() => {
+      expect(header.classList.contains("bg-white")).toBe(false);
+      expect(header.classList.contains("bg-transparent")).toBe(true);
+      expect(header.classList.contains("border-transparent")).toBe(true);
+    });
+  });
+});

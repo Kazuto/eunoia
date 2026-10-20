@@ -27,6 +27,8 @@ export type HeaderOptions = {
   width?: "narrow" | "wide" | "extra-wide";
   /** The element the `Page` is centered in, e.g. the app's `<main>`. */
   alignTo?: HTMLElement | null;
+  /** Drop the background and bottom border, so the header sits on the page's background. */
+  transparent?: boolean;
 };
 
 const props = defineProps<HeaderOptions>();
@@ -102,11 +104,16 @@ const headerStyles = tv({
     "border-neutral-200 bg-white",
     "dark:border-neutral-800 dark:bg-neutral-900",
   ],
+  variants: {
+    transparent: {
+      true: "border-transparent bg-transparent dark:border-transparent dark:bg-transparent",
+    },
+  },
 });
 </script>
 
 <template>
-  <header :class="headerStyles()">
+  <header :class="headerStyles({ transparent })">
     <div
       v-if="$slots.left"
       class="flex shrink-0 items-center gap-3"
