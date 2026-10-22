@@ -2,6 +2,16 @@
 
 A composable that creates an animated typing placeholder that cycles through multiple strings with a typewriter effect.
 
+Users who ask for reduced motion (`prefers-reduced-motion: reduce`) see the first string, without animation. The strings can also be a ref or a getter, such as translations: when they change, the animation starts over with the new ones.
+
+```ts
+const { t } = useI18n();
+const { placeholder } = useTypingPlaceholder(() => [
+  t("search.keys"),
+  t("search.text"),
+]);
+```
+
 ## Defaults
 
 <table class="w-full">
