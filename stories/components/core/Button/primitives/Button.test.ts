@@ -75,6 +75,174 @@ describe("Button primitive", () => {
     expect(onBlur).toHaveBeenCalledOnce();
   });
 
+  describe("as a link", () => {
+    it("renders an <a> with the href instead of a <button>", () => {
+      render(Button, {
+        props: { href: "/entries" },
+        slots: { default: "Entries" },
+      });
+      const link = screen.getByRole("link", { name: "Entries" });
+      expect(link.tagName).toBe("A");
+      expect(link.getAttribute("href")).toBe("/entries");
+      expect(screen.queryByRole("button")).toBeNull();
+    });
+
+    it("keeps the button look", () => {
+      render(Button, {
+        props: { href: "/entries", dense: true, icon: "plus" },
+        slots: { default: "Entries" },
+      });
+      const link = screen.getByRole("link", { name: "Entries" });
+      expect(link.className).toMatch(/inline-flex/);
+      expect(link.className).toMatch(/text-xs/);
+      expect(link.className).toMatch(/no-underline/);
+      expect(link.querySelector("svg")).not.toBeNull();
+    });
+
+    it("can be icon-only", () => {
+      render(Button, {
+        props: { href: "/entries", icon: "eye" },
+        attrs: { "aria-label": "View" },
+      });
+      const link = screen.getByRole("link", { name: "View" });
+      expect(link.className).toMatch(/aspect-square/);
+    });
+
+    it("protects the opener when opening a new tab", () => {
+      render(Button, {
+        props: { href: "https://example.com", target: "_blank" },
+        slots: { default: "External" },
+      });
+      const link = screen.getByRole("link", { name: "External" });
+      expect(link.getAttribute("target")).toBe("_blank");
+      expect(link.getAttribute("rel")).toBe("noopener noreferrer");
+    });
+
+    it("keeps an explicit rel", () => {
+      render(Button, {
+        props: { href: "https://example.com", target: "_blank", rel: "me" },
+        slots: { default: "External" },
+      });
+      expect(screen.getByRole("link").getAttribute("rel")).toBe("me");
+    });
+
+    it("sets no rel for links in the same tab", () => {
+      render(Button, {
+        props: { href: "/entries" },
+        slots: { default: "Entries" },
+      });
+      expect(screen.getByRole("link").hasAttribute("rel")).toBe(false);
+      expect(screen.getByRole("link").hasAttribute("target")).toBe(false);
+    });
+
+    it("renders the given component and passes it attributes such as `to`", () => {
+      const RouterLink = {
+        name: "RouterLink",
+        props: ["to"],
+        template: '<a :href="to" data-router-link><slot /></a>',
+      };
+      render(Button, {
+        props: { as: RouterLink },
+        attrs: { to: "/entries?locales=en" },
+        slots: { default: "Entries" },
+      });
+      const link = screen.getByRole("link", { name: "Entries" });
+      expect(link.hasAttribute("data-router-link")).toBe(true);
+      expect(link.getAttribute("href")).toBe("/entries?locales=en");
+    });
+
+    it("emits click", async () => {
+      const onClick = vi.fn();
+      render(Button, {
+        props: { href: "#section" },
+        attrs: { onClick },
+        slots: { default: "Jump" },
+      });
+      await userEvent.click(screen.getByRole("link", { name: "Jump" }));
+      expect(onClick).toHaveBeenCalledOnce();
+    });
+
+    describe("when disabled", () => {
+      it("leads nowhere and says it is disabled", () => {
+        render(Button, {
+          props: { href: "/entries", target: "_blank" },
+          attrs: { disabled: true },
+          slots: { default: "Entries" },
+        });
+        const link = screen.getByRole("link", { name: "Entries" });
+        expect(link.hasAttribute("href")).toBe(false);
+        expect(link.hasAttribute("target")).toBe(false);
+        expect(link.hasAttribute("disabled")).toBe(false);
+        expect(link.getAttribute("aria-disabled")).toBe("true");
+        expect(link.getAttribute("tabindex")).toBe("-1");
+        expect(link.className).toMatch(/aria-disabled:pointer-events-none/);
+      });
+
+      it("does not emit click", async () => {
+        const onClick = vi.fn();
+        render(Button, {
+          props: { href: "/entries" },
+          attrs: { disabled: true, onClick },
+          slots: { default: "Entries" },
+        });
+        const link = screen.getByRole("link", { name: "Entries" });
+        const event = new MouseEvent("click", {
+          bubbles: true,
+          cancelable: true,
+        });
+        link.dispatchEvent(event);
+        expect(onClick).not.toHaveBeenCalled();
+        expect(event.defaultPrevented).toBe(true);
+      });
+
+      it("does not render the router link, which would still navigate", () => {
+        const RouterLink = {
+          name: "RouterLink",
+          props: ["to"],
+          template: '<a :href="to" data-router-link><slot /></a>',
+        };
+        render(Button, {
+          props: { as: RouterLink },
+          attrs: { to: "/entries", disabled: "" },
+          slots: { default: "Entries" },
+        });
+        const link = screen.getByRole("link", { name: "Entries" });
+        expect(link.hasAttribute("data-router-link")).toBe(false);
+        expect(link.hasAttribute("to")).toBe(false);
+        expect(link.hasAttribute("href")).toBe(false);
+      });
+    });
+
+    it("keeps disabled buttons natively disabled", () => {
+      render(Button, {
+        attrs: { disabled: true },
+        slots: { default: "Save" },
+      });
+      const button = screen.getByRole("button", { name: "Save" });
+      expect((button as HTMLButtonElement).disabled).toBe(true);
+      expect(button.hasAttribute("aria-disabled")).toBe(false);
+    });
+
+    it("has no axe violations", async () => {
+      const { container } = render(Button, {
+        props: { href: "/entries", target: "_blank" },
+        slots: { default: "Entries" },
+      });
+      const results = await axe.run(container);
+      expect(results.violations).toEqual([]);
+    });
+
+    it("has no axe violations when disabled", async () => {
+      const { container } = render(Button, {
+        props: { href: "/entries" },
+        attrs: { disabled: true },
+        slots: { default: "Entries" },
+      });
+      const results = await axe.run(container);
+      expect(results.violations).toEqual([]);
+    });
+  });
+
   describe("accessibility", () => {
     it("has no axe violations", async () => {
       const { container } = render(Button, {

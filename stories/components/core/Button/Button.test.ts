@@ -55,4 +55,39 @@ describe("Button orchestrator", () => {
     const button = screen.getByRole("button", { name: "Override" });
     expect(button.className).toMatch(/bg-red-500/);
   });
+
+  it.each([
+    [{ primary: true }, /bg-primary-500/],
+    [{ ghost: true }, /bg-transparent/],
+    [{ destructive: true }, /bg-red-500/],
+    [{}, /shadow-\[inset/],
+  ])("renders %o as a link with its variant's look", (variant, look) => {
+    render(Button, {
+      props: { ...variant, href: "/entries", target: "_blank" },
+      slots: { default: "Entries" },
+    });
+    const link = screen.getByRole("link", { name: "Entries" });
+    expect(link.getAttribute("href")).toBe("/entries");
+    expect(link.getAttribute("rel")).toBe("noopener noreferrer");
+    expect(link.className).toMatch(look);
+    // :enabled never matches a link, so hover must not depend on it.
+    expect(link.className).toMatch(/not-disabled:hover:/);
+    expect(link.className).not.toMatch(/(^|\s)enabled:/);
+  });
+
+  it("passes `as` and its attributes through the variants", () => {
+    const RouterLink = {
+      name: "RouterLink",
+      props: ["to"],
+      template: '<a :href="to"><slot /></a>',
+    };
+    render(Button, {
+      props: { primary: true, as: RouterLink },
+      attrs: { to: "/entries" },
+      slots: { default: "Entries" },
+    });
+    expect(
+      screen.getByRole("link", { name: "Entries" }).getAttribute("href")
+    ).toBe("/entries");
+  });
 });

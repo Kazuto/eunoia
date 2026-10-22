@@ -9,6 +9,25 @@ const meta = {
   argTypes: {
     dense: { control: "boolean" },
     icon: { control: "text" },
+    href: {
+      control: "text",
+      description: "Renders the button as a link to this URL",
+    },
+    target: {
+      control: "select",
+      options: [undefined, "_self", "_blank"],
+      description: "Where the link opens",
+    },
+    rel: {
+      control: "text",
+      description:
+        'Defaults to "noopener noreferrer" when the link opens in a new tab',
+    },
+    as: {
+      control: false,
+      description:
+        "Element or component to render, e.g. a router's link component",
+    },
     default: {
       control: "text",
       description: "Default slot content",
@@ -98,4 +117,41 @@ export const IconOnly: Story = {
     icon: "x",
     default: "",
   },
+};
+
+export const AsLink: Story = {
+  args: {
+    primary: true,
+    icon: "arrow-right",
+    href: "#",
+    default: "Open entries",
+  },
+};
+
+export const LinkInNewTab: Story = {
+  args: {
+    href: "https://example.com",
+    target: "_blank",
+    icon: "arrow-square-out",
+    default: "Open in new tab",
+  },
+};
+
+export const IconOnlyLink: Story = {
+  args: {
+    ghost: true,
+    icon: "eye",
+    href: "#",
+    default: "",
+    "aria-label": "View",
+  } as any,
+};
+
+export const DisabledLink: Story = {
+  args: {
+    primary: true,
+    href: "#",
+    disabled: true,
+    default: "Unavailable",
+  } as any,
 };
