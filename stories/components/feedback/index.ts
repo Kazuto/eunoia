@@ -1,3 +1,8 @@
+export { default as ActionMenu } from "./ActionMenu/ActionMenu.vue";
+export type {
+  ActionMenuItem,
+  ActionMenuPlacement,
+} from "./ActionMenu/ActionMenu.vue";
 export { default as Alert } from "./Alert/Alert.vue";
 export { default as ConfirmDialog } from "./ConfirmDialog/ConfirmDialog.vue";
 export { default as Dialog } from "./Dialog/Dialog.vue";
