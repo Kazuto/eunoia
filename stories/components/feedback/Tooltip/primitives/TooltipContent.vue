@@ -14,6 +14,7 @@
 import { computed } from "vue";
 import { tv } from "tailwind-variants";
 import { useForwardedAttrs } from "@/composables";
+import type { TooltipPlacement } from "./placement";
 
 defineOptions({
   inheritAttrs: false,
@@ -30,7 +31,9 @@ const contentStyles = tv({
   variants: {
     placement: {
       top: "mb-1.5",
+      "top-start": "mb-1.5",
       bottom: "mt-1.5",
+      "bottom-start": "mt-1.5",
       left: "mr-1.5",
       right: "ml-1.5",
     },
@@ -48,16 +51,31 @@ const contentStyles = tv({
 const props = defineProps<{
   id?: string;
   anchorName: string;
-  placement?: "top" | "bottom" | "left" | "right";
+  placement?: TooltipPlacement;
   dense?: boolean;
 }>();
+
+// "-start" placements line up with the anchor's start edge instead of centering
+// on it, which suits short anchors near an edge, and flip to the other side
+// when there is no room.
+const positionAreas: Record<TooltipPlacement, string> = {
+  top: "top",
+  bottom: "bottom",
+  left: "left",
+  right: "right",
+  "top-start": "top span-right",
+  "bottom-start": "bottom span-right",
+};
 
 const positionStyle = computed(
   () =>
     ({
       position: "fixed",
       "position-anchor": props.anchorName,
-      "position-area": props.placement ?? "top",
+      "position-area": positionAreas[props.placement ?? "top"],
+      ...(props.placement?.endsWith("-start") && {
+        "position-try-fallbacks": "flip-block",
+      }),
     }) as Record<string, string>
 );
 </script>

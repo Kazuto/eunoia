@@ -8,10 +8,18 @@ const meta = {
   argTypes: {
     placement: {
       control: "select",
-      options: ["top", "bottom", "left", "right"],
+      options: ["top", "bottom", "left", "right", "top-start", "bottom-start"],
     },
     dense: { control: "boolean" },
     content: { control: "text" },
+    teleportTo: {
+      control: "text",
+      description: "Teleport outside clipping containers, e.g. body",
+    },
+    delay: {
+      control: "number",
+      description: "Milliseconds the pointer must rest before showing",
+    },
   },
   args: {
     content: "Tooltip text",
@@ -87,5 +95,19 @@ export const LongContent: Story = {
   args: {
     content:
       "This is a longer tooltip message that provides more detailed information.",
+  },
+};
+
+export const Delayed: Story = {
+  args: {
+    delay: 500,
+    content: "Shows after the pointer rests for half a second",
+  },
+};
+
+export const TopStart: Story = {
+  args: {
+    placement: "top-start",
+    content: "Lines up with the start of a short anchor",
   },
 };
