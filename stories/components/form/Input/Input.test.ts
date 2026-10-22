@@ -41,3 +41,16 @@ describe("Input shortcut", () => {
     expect(document.activeElement).not.toBe(screen.getByRole("textbox"));
   });
 });
+
+describe("Search input", () => {
+  // It has its own clear button, so the browser's must not show next to it.
+  it("hides the browser's clear button", () => {
+    render(Input, {
+      props: { type: "search", ariaLabel: "Search" },
+    });
+    const input = screen.getByRole("searchbox", { name: "Search" });
+    expect(input.className).toContain(
+      "[&::-webkit-search-cancel-button]:appearance-none"
+    );
+  });
+});

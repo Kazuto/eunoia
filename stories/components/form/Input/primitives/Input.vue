@@ -27,6 +27,8 @@ defineProps<{
 const inputStyles = tv({
   base: [
     "inline-block w-full [appearance:textfield] outline-none disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none",
+    // Search inputs bring their own clear button; hide the browser's.
+    "[&::-webkit-search-cancel-button]:appearance-none [&::-webkit-search-decoration]:appearance-none",
   ],
   variants: {
     dense: {
