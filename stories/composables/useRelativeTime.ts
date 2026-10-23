@@ -1,4 +1,11 @@
-import { ref, computed, onUnmounted, toValue, MaybeRefOrGetter } from "vue";
+import {
+  computed,
+  getCurrentScope,
+  onScopeDispose,
+  ref,
+  toValue,
+  type MaybeRefOrGetter,
+} from "vue";
 
 type TimeUnit =
   | "second"
@@ -51,45 +58,80 @@ function getRelativeTime(msDiff: number): [number, TimeUnit] {
   return [years, "year"];
 }
 
+// One clock for every relative time on the page, so they change together and no
+// caller runs a timer of its own. It ticks only while something uses it.
+const now = ref(Date.now());
+let users = 0;
+let timer: ReturnType<typeof setInterval> | undefined;
+
+function useClock() {
+  users++;
+
+  if (timer === undefined) {
+    now.value = Date.now();
+    timer = setInterval(() => (now.value = Date.now()), 1000);
+  }
+
+  // Outside a component or effect scope, nothing tells when it is no longer used.
+  if (getCurrentScope()) {
+    onScopeDispose(() => {
+      users--;
+
+      if (users === 0 && timer !== undefined) {
+        clearInterval(timer);
+        timer = undefined;
+      }
+    });
+  }
+
+  return now;
+}
+
+/**
+ * Formats a date relative to now, such as "5 minutes ago" or "in 2 hours", and
+ * keeps it current: every relative time shares one clock that ticks each second
+ * while any is in use. Without a date, it formats the current time. An invalid
+ * date formats as empty strings.
+ */
 export function useRelativeTime(
   date: MaybeRefOrGetter<Date | string | undefined>,
   options: {
-    locale: string;
-    interval: number;
-  }
+    /** The locale to format in, also as a ref or getter; "en" by default. */
+    locale?: MaybeRefOrGetter<string | undefined>;
+  } = {}
 ) {
-  const { locale = "en", interval = 1000 } = options;
-  const now = ref(Date.now());
+  const clock = useClock();
+  const locale = computed(() => toValue(options.locale) ?? "en");
 
-  // auto-update every interval
-  const timer = setInterval(() => (now.value = Date.now()), interval);
+  const target = computed(() => {
+    const value = toValue(date);
 
-  onUnmounted(() => clearInterval(timer));
+    return value === undefined ? undefined : new Date(value);
+  });
+  const shown = computed(() => target.value ?? new Date(clock.value));
+  const valid = computed(() => !Number.isNaN(shown.value.getTime()));
 
   const rtf = computed(
-    () => new Intl.RelativeTimeFormat(options.locale, { numeric: "auto" })
+    () => new Intl.RelativeTimeFormat(locale.value, { numeric: "auto" })
   );
 
   const relative = computed(() => {
-    const target = new Date(toValue(date) ?? new Date()).getTime();
-    const diff = target - now.value;
+    if (!valid.value) {
+      return "";
+    }
 
-    const [value, unit] = getRelativeTime(diff);
+    const [value, unit] = getRelativeTime(shown.value.getTime() - clock.value);
 
     return rtf.value.format(value, unit);
   });
 
-  const formattedDate = computed(() => {
-    const d = new Date(toValue(date) ?? new Date());
+  const formattedDate = computed(() =>
+    valid.value ? shown.value.toLocaleDateString(locale.value) : ""
+  );
 
-    return d.toLocaleDateString(locale);
-  });
-
-  const formattedTime = computed(() => {
-    const d = new Date(toValue(date) ?? new Date());
-
-    return d.toLocaleTimeString(locale);
-  });
+  const formattedTime = computed(() =>
+    valid.value ? shown.value.toLocaleTimeString(locale.value) : ""
+  );
 
   return {
     relative,

@@ -1,27 +1,42 @@
 # useRelativeTime
 
-A lightweight composable for formatting relative time.
+A lightweight composable for formatting a date relative to now, such as
+"5 minutes ago" or "in 2 hours", that keeps itself current.
 
-## Defaults
+All relative times share one clock that ticks every second while any of them is in
+use, so the times on a page change together and no caller runs a timer of its own.
+The clock stops once the last component using it unmounts.
+
+## Options
 
 <table class="w-full">
   <thead>
     <tr>
       <th>Option</th>
       <th>Default</th>
+      <th>Description</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>locale</td>
       <td>en</td>
-    </tr>
-    <tr>
-      <td>interval</td>
-      <td>60000</td>
+      <td>
+        The locale to format in. A ref or getter works too, so the output
+        follows a language switch.
+      </td>
     </tr>
   </tbody>
 </table>
+
+The date can be a `Date`, a date string, or a ref or getter returning one. Without
+a date, the current time is formatted. An invalid date gives empty strings.
+
+## Returns
+
+- `relative`: the date relative to now, e.g. "yesterday" or "in 30 seconds"
+- `date`: the date in the locale, e.g. "23/10/2026"
+- `time`: the time of day in the locale, e.g. "14:30:00"
 
 ## Usage
 
@@ -32,13 +47,11 @@ A lightweight composable for formatting relative time.
 >
   import { useRelativeTime } from "@/composables/useRelativeTime";
 
-  const { relative, date, time } = useRelativeTime(
-    new Date("2023-01-01T00:00:00.000Z"),
-    {
-      locale: "en",
-      interval: 60000,
-    }
-  );
+  const { locale } = useI18n();
+
+  const { relative, date, time } = useRelativeTime(() => props.timestamp, {
+    locale,
+  });
 </script>
 
 <template>
