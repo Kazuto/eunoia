@@ -1,6 +1,13 @@
 <template>
-  <Teleport to="body">
-    <div :class="containerStyles({ position })">
+  <Teleport :to="target">
+    <!-- A manual popover, so toasts show in the top layer above open modal dialogs,
+         which no z-index can reach. While a modal dialog is open, the stack moves
+         into it: everything outside a modal dialog is inert, popovers included. -->
+    <div
+      ref="container"
+      popover="manual"
+      :class="containerStyles({ position })"
+    >
       <div
         v-for="(toast, index) in orderedToasts"
         :key="toast.id"
@@ -34,7 +41,15 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, onBeforeUnmount, toRef } from "vue";
+import {
+  ref,
+  computed,
+  onBeforeUnmount,
+  onMounted,
+  toRef,
+  nextTick,
+  watch,
+} from "vue";
 import { tv } from "tailwind-variants";
 import { type LocaleMessages, useLocale } from "@/composables";
 import Toast from "./primitives/Toast.vue";
@@ -77,16 +92,19 @@ const t = useLocale(
 
 const isBottom = computed(() => props.position.startsWith("bottom"));
 
+// The resets undo the browser's popover styles: centered, bordered, with a background.
 const containerStyles = tv({
-  base: "fixed z-50 flex gap-2",
+  base: "fixed z-50 m-0 flex gap-2 overflow-visible border-0 bg-transparent p-0",
   variants: {
     position: {
-      "top-left": "top-4 left-4 flex-col",
-      "top-center": "top-4 left-1/2 -translate-x-1/2 flex-col",
-      "top-right": "top-4 right-4 flex-col",
-      "bottom-left": "bottom-4 left-4 flex-col-reverse",
-      "bottom-center": "bottom-4 left-1/2 -translate-x-1/2 flex-col-reverse",
-      "bottom-right": "right-4 bottom-4 flex-col-reverse",
+      "top-left": "top-4 right-auto bottom-auto left-4 flex-col",
+      "top-center":
+        "top-4 right-auto bottom-auto left-1/2 -translate-x-1/2 flex-col",
+      "top-right": "top-4 right-4 bottom-auto left-auto flex-col",
+      "bottom-left": "top-auto right-auto bottom-4 left-4 flex-col-reverse",
+      "bottom-center":
+        "top-auto right-auto bottom-4 left-1/2 -translate-x-1/2 flex-col-reverse",
+      "bottom-right": "top-auto right-4 bottom-4 left-auto flex-col-reverse",
     },
   },
   defaultVariants: {
@@ -95,6 +113,82 @@ const containerStyles = tv({
 });
 
 const toasts = ref<ToastItem[]>([]);
+const container = ref<HTMLElement>();
+
+// The top layer stacks in the order things were shown, so the stack is shown again
+// with each toast to come above dialogs opened since. Without popover support it
+// stays a fixed layer.
+function raise() {
+  const element = container.value;
+
+  if (!element || typeof element.showPopover !== "function") return;
+
+  if (element.matches(":popover-open")) element.hidePopover();
+
+  element.showPopover();
+}
+
+// Modal dialogs by the order they opened; the stack lives in the last one.
+let openDialogs: HTMLDialogElement[] = [];
+const target = ref<string | HTMLElement>("body");
+let observer: MutationObserver | undefined;
+
+function isModal(dialog: HTMLDialogElement) {
+  try {
+    return dialog.matches(":modal");
+  } catch {
+    return dialog.open;
+  }
+}
+
+function trackDialogs() {
+  const current = Array.from(document.querySelectorAll("dialog")).filter(
+    (dialog) => dialog.open && isModal(dialog)
+  );
+
+  openDialogs = [
+    ...openDialogs.filter((dialog) => current.includes(dialog)),
+    ...current.filter((dialog) => !openDialogs.includes(dialog)),
+  ];
+  target.value = openDialogs.at(-1) ?? "body";
+}
+
+onMounted(() => {
+  if (typeof MutationObserver === "undefined") return;
+
+  trackDialogs();
+  observer = new MutationObserver(trackDialogs);
+  observer.observe(document.body, {
+    attributes: true,
+    attributeFilter: ["open"],
+    childList: true,
+    subtree: true,
+  });
+});
+
+// Moving a shown popover hides it, so it is shown again in its new place.
+watch(target, () => {
+  if (toasts.value.length) nextTick(raise);
+});
+
+watch(
+  () => toasts.value.length,
+  (count, previous) => {
+    const element = container.value;
+
+    if (count > (previous ?? 0)) {
+      nextTick(raise);
+    } else if (
+      count === 0 &&
+      element &&
+      typeof element.hidePopover === "function" &&
+      element.matches(":popover-open")
+    ) {
+      element.hidePopover();
+    }
+  }
+);
+
 const timers = new Map<number, ReturnType<typeof setTimeout>>();
 let nextId = 1;
 
@@ -191,6 +285,8 @@ function dismissAll() {
 }
 
 onBeforeUnmount(() => {
+  observer?.disconnect();
+
   for (const timer of timers.values()) {
     clearTimeout(timer);
   }
