@@ -111,6 +111,10 @@ describe("SplitView virtual", () => {
     expect(rows.length).toBeLessThan(100);
     expect(rows[0]?.getAttribute("aria-posinset")).toBe("1");
     expect(rows[0]?.getAttribute("aria-setsize")).toBe("5000");
+    // Placed with `top`, as Firefox anchors a row's tooltips as if it had no transform.
+    expect(rows[0]?.style.top).toBe("0px");
+    expect(rows[1]?.style.top).toMatch(/^[1-9]\d*px$/);
+    expect(rows[1]?.style.transform).toBe("");
   });
 });
 

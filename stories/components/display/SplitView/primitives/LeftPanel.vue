@@ -248,6 +248,8 @@ watch(
       "
     >
       <template v-if="virtual">
+        <!-- Rows are placed with `top`, not a transform: Firefox anchors popups such
+             as tooltips in a row to where the row would be without its transform. -->
         <li
           v-for="row in virtualRows"
           :key="row.key as PropertyKey"
@@ -257,9 +259,9 @@ watch(
           :aria-posinset="row.index + 1"
           :class="[
             variants({ active: isActive(items[row.index]!), selectable }),
-            'absolute top-0 left-0 w-full',
+            'absolute left-0 w-full',
           ]"
-          :style="{ transform: `translateY(${row.start - listOffset}px)` }"
+          :style="{ top: `${row.start - listOffset}px` }"
           @click="emit('select', items[row.index]!)"
         >
           <span
