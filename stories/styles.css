@@ -266,6 +266,15 @@
 
 @utility superellipse {
   corner-shape: superellipse(3);
+
+  /* Without corner-shape the 100% radius would draw a circle, and a checkbox
+     would look like a radio button. A smaller radius keeps it a rounded square;
+     the doubled selector outranks the rounded-[100%] that comes after it. */
+  @supports not (corner-shape: superellipse(3)) {
+    && {
+      border-radius: 30%;
+    }
+  }
 }
 
 @utility scrollbar-subtle {
