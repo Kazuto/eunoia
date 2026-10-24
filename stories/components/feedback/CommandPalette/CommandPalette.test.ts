@@ -145,9 +145,47 @@ describe("CommandPalette", () => {
       props: { items, open: true },
     });
 
+    await fireEvent.pointerDown(screen.getByRole("dialog"));
     await fireEvent.click(screen.getByRole("dialog"));
 
     expect(emitted()["update:open"]).toEqual([[false]]);
+  });
+
+  it("stays open when a drag from the search field ends on the backdrop", async () => {
+    const { emitted } = render(CommandPalette, {
+      props: { items, open: true },
+    });
+
+    await fireEvent.pointerDown(screen.getByRole("combobox"));
+    await fireEvent.click(screen.getByRole("dialog"));
+
+    expect(emitted()["update:open"]).toBeUndefined();
+  });
+
+  it("keeps focus in the search field when a heading or the list is clicked", async () => {
+    render(CommandPalette, { props: { items, open: true } });
+    await nextTick();
+    const input = screen.getByRole("combobox");
+
+    for (const target of [
+      screen.getByText("Files"),
+      screen.getByRole("listbox"),
+    ]) {
+      const event = new MouseEvent("mousedown", {
+        bubbles: true,
+        cancelable: true,
+      });
+      target.dispatchEvent(event);
+      expect(event.defaultPrevented).toBe(true);
+      expect(document.activeElement).toBe(input);
+    }
+
+    const onInput = new MouseEvent("mousedown", {
+      bubbles: true,
+      cancelable: true,
+    });
+    input.dispatchEvent(onInput);
+    expect(onInput.defaultPrevented).toBe(false);
   });
 
   it("resets the search each time it opens", async () => {

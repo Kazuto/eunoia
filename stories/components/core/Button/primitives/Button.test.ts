@@ -78,21 +78,21 @@ describe("Button primitive", () => {
   describe("as a link", () => {
     it("renders an <a> with the href instead of a <button>", () => {
       render(Button, {
-        props: { href: "/entries" },
-        slots: { default: "Entries" },
+        props: { href: "/docs" },
+        slots: { default: "Documentation" },
       });
-      const link = screen.getByRole("link", { name: "Entries" });
+      const link = screen.getByRole("link", { name: "Documentation" });
       expect(link.tagName).toBe("A");
-      expect(link.getAttribute("href")).toBe("/entries");
+      expect(link.getAttribute("href")).toBe("/docs");
       expect(screen.queryByRole("button")).toBeNull();
     });
 
     it("keeps the button look", () => {
       render(Button, {
-        props: { href: "/entries", dense: true, icon: "plus" },
-        slots: { default: "Entries" },
+        props: { href: "/docs", dense: true, icon: "plus" },
+        slots: { default: "Documentation" },
       });
-      const link = screen.getByRole("link", { name: "Entries" });
+      const link = screen.getByRole("link", { name: "Documentation" });
       expect(link.className).toMatch(/inline-flex/);
       expect(link.className).toMatch(/text-xs/);
       expect(link.className).toMatch(/no-underline/);
@@ -101,7 +101,7 @@ describe("Button primitive", () => {
 
     it("can be icon-only", () => {
       render(Button, {
-        props: { href: "/entries", icon: "eye" },
+        props: { href: "/docs", icon: "eye" },
         attrs: { "aria-label": "View" },
       });
       const link = screen.getByRole("link", { name: "View" });
@@ -128,8 +128,8 @@ describe("Button primitive", () => {
 
     it("sets no rel for links in the same tab", () => {
       render(Button, {
-        props: { href: "/entries" },
-        slots: { default: "Entries" },
+        props: { href: "/docs" },
+        slots: { default: "Documentation" },
       });
       expect(screen.getByRole("link").hasAttribute("rel")).toBe(false);
       expect(screen.getByRole("link").hasAttribute("target")).toBe(false);
@@ -143,12 +143,12 @@ describe("Button primitive", () => {
       };
       render(Button, {
         props: { as: RouterLink },
-        attrs: { to: "/entries?locales=en" },
-        slots: { default: "Entries" },
+        attrs: { to: "/docs?page=2" },
+        slots: { default: "Documentation" },
       });
-      const link = screen.getByRole("link", { name: "Entries" });
+      const link = screen.getByRole("link", { name: "Documentation" });
       expect(link.hasAttribute("data-router-link")).toBe(true);
-      expect(link.getAttribute("href")).toBe("/entries?locales=en");
+      expect(link.getAttribute("href")).toBe("/docs?page=2");
     });
 
     it("emits click", async () => {
@@ -165,11 +165,11 @@ describe("Button primitive", () => {
     describe("when disabled", () => {
       it("leads nowhere and says it is disabled", () => {
         render(Button, {
-          props: { href: "/entries", target: "_blank" },
+          props: { href: "/docs", target: "_blank" },
           attrs: { disabled: true },
-          slots: { default: "Entries" },
+          slots: { default: "Documentation" },
         });
-        const link = screen.getByRole("link", { name: "Entries" });
+        const link = screen.getByRole("link", { name: "Documentation" });
         expect(link.hasAttribute("href")).toBe(false);
         expect(link.hasAttribute("target")).toBe(false);
         expect(link.hasAttribute("disabled")).toBe(false);
@@ -181,11 +181,11 @@ describe("Button primitive", () => {
       it("does not emit click", async () => {
         const onClick = vi.fn();
         render(Button, {
-          props: { href: "/entries" },
+          props: { href: "/docs" },
           attrs: { disabled: true, onClick },
-          slots: { default: "Entries" },
+          slots: { default: "Documentation" },
         });
-        const link = screen.getByRole("link", { name: "Entries" });
+        const link = screen.getByRole("link", { name: "Documentation" });
         const event = new MouseEvent("click", {
           bubbles: true,
           cancelable: true,
@@ -203,10 +203,10 @@ describe("Button primitive", () => {
         };
         render(Button, {
           props: { as: RouterLink },
-          attrs: { to: "/entries", disabled: "" },
-          slots: { default: "Entries" },
+          attrs: { to: "/docs", disabled: "" },
+          slots: { default: "Documentation" },
         });
-        const link = screen.getByRole("link", { name: "Entries" });
+        const link = screen.getByRole("link", { name: "Documentation" });
         expect(link.hasAttribute("data-router-link")).toBe(false);
         expect(link.hasAttribute("to")).toBe(false);
         expect(link.hasAttribute("href")).toBe(false);
@@ -225,8 +225,8 @@ describe("Button primitive", () => {
 
     it("has no axe violations", async () => {
       const { container } = render(Button, {
-        props: { href: "/entries", target: "_blank" },
-        slots: { default: "Entries" },
+        props: { href: "/docs", target: "_blank" },
+        slots: { default: "Documentation" },
       });
       const results = await axe.run(container);
       expect(results.violations).toEqual([]);
@@ -234,9 +234,9 @@ describe("Button primitive", () => {
 
     it("has no axe violations when disabled", async () => {
       const { container } = render(Button, {
-        props: { href: "/entries" },
+        props: { href: "/docs" },
         attrs: { disabled: true },
-        slots: { default: "Entries" },
+        slots: { default: "Documentation" },
       });
       const results = await axe.run(container);
       expect(results.violations).toEqual([]);

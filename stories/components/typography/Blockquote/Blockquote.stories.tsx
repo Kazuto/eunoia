@@ -54,6 +54,26 @@ export const PullQuote: Story = {
   },
 };
 
+export const PullQuoteParagraphs: Story = {
+  args: {
+    variant: "pull",
+    author: "Ada Lovelace",
+    source: undefined,
+  },
+  render: (args: any) => ({
+    setup() {
+      return () => (
+        <Blockquote {...args}>
+          <p>
+            The more I study, the more insatiable do I feel my genius for it to
+            be.
+          </p>
+        </Blockquote>
+      );
+    },
+  }),
+};
+
 export const WithoutAttribution: Story = {
   args: {
     author: undefined,

@@ -172,12 +172,13 @@ function onKeydown(event: KeyboardEvent, current: number) {
   let next: number | undefined;
 
   switch (event.key) {
+    // Same direction as native radio groups: down and right go forward.
     case "ArrowRight":
-    case "ArrowUp":
+    case "ArrowDown":
       next = list[Math.min(list.length - 1, index + 1)];
       break;
     case "ArrowLeft":
-    case "ArrowDown":
+    case "ArrowUp":
       next = list[Math.max(0, index - 1)];
       break;
     case "Home":

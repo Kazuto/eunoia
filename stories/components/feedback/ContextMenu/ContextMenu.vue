@@ -167,7 +167,11 @@ async function open(at: ReferenceElement, focusFirst: boolean) {
   }
   reference.value = at;
   // A body portal is inert beneath showModal(), so stay in the dialog's top layer.
-  teleportTarget.value = regionRef.value?.closest("dialog") ?? props.teleportTo;
+  // Staying inside non-modal dialogs too (e.g. a Popover) keeps their outside-click
+  // checks from treating a click on the menu as a click outside.
+  teleportTarget.value =
+    regionRef.value?.closest<HTMLElement>("dialog, [role=dialog]") ??
+    props.teleportTo;
   activeIndex.value = focusFirst ? (enabledIndices.value[0] ?? -1) : -1;
   isOpen.value = true;
   await nextTick();

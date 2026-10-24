@@ -1,7 +1,7 @@
 <template>
   <div
     v-bind="forwardedAttrs"
-    :class="['relative w-full overflow-hidden *:size-full', classAttr]"
+    :class="ratioStyles({ class: classAttr })"
     :style="{ aspectRatio: String(ratio) }"
   >
     <slot />
@@ -9,6 +9,7 @@
 </template>
 
 <script lang="ts" setup>
+import { tv } from "tailwind-variants";
 import { useForwardedAttrs } from "@/composables";
 
 defineOptions({
@@ -16,6 +17,10 @@ defineOptions({
 });
 
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
+
+const ratioStyles = tv({
+  base: "relative w-full overflow-hidden *:size-full",
+});
 
 withDefaults(
   defineProps<{

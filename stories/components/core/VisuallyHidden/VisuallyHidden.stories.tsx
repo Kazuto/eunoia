@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/vue3-vite";
 
-import { Button } from "@/components";
+import { Link } from "@/components";
 import VisuallyHidden from "./VisuallyHidden.vue";
 
 const meta = {
@@ -8,25 +8,28 @@ const meta = {
   tags: ["autodocs"],
   argTypes: {
     as: { control: "text" },
+    focusable: { control: "boolean" },
   },
   args: {
     as: "span",
+    focusable: false,
   },
 } satisfies Meta<typeof VisuallyHidden>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const IconButtonLabel: Story = {
+export const LinkContext: Story = {
   render: () => ({
     setup() {
       return () => (
-        <Button
-          ghost
-          icon="trash"
-        >
-          <VisuallyHidden>Delete project</VisuallyHidden>
-        </Button>
+        <p class="text-sm dark:text-neutral-100">
+          The token migration is done.{" "}
+          <Link href="#">
+            Read more
+            <VisuallyHidden> about the token migration</VisuallyHidden>
+          </Link>
+        </p>
       );
     },
   }),
@@ -42,6 +45,26 @@ export const HiddenHeading: Story = {
             The heading above is only announced by screen readers.
           </p>
         </section>
+      );
+    },
+  }),
+};
+
+export const SkipLink: Story = {
+  render: () => ({
+    setup() {
+      return () => (
+        <div class="text-sm dark:text-neutral-100">
+          <VisuallyHidden focusable>
+            <a
+              href="#main"
+              class="mb-3 inline-block rounded-[10px] bg-primary-600 px-3 py-2 text-white squircle"
+            >
+              Skip to content
+            </a>
+          </VisuallyHidden>
+          <p>Press Tab to reveal the skip link above this text.</p>
+        </div>
       );
     },
   }),

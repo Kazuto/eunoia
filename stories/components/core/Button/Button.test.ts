@@ -63,11 +63,11 @@ describe("Button orchestrator", () => {
     [{}, /shadow-\[inset/],
   ])("renders %o as a link with its variant's look", (variant, look) => {
     render(Button, {
-      props: { ...variant, href: "/entries", target: "_blank" },
-      slots: { default: "Entries" },
+      props: { ...variant, href: "/docs", target: "_blank" },
+      slots: { default: "Documentation" },
     });
-    const link = screen.getByRole("link", { name: "Entries" });
-    expect(link.getAttribute("href")).toBe("/entries");
+    const link = screen.getByRole("link", { name: "Documentation" });
+    expect(link.getAttribute("href")).toBe("/docs");
     expect(link.getAttribute("rel")).toBe("noopener noreferrer");
     expect(link.className).toMatch(look);
     // :enabled never matches a link, so hover must not depend on it.
@@ -83,11 +83,11 @@ describe("Button orchestrator", () => {
     };
     render(Button, {
       props: { primary: true, as: RouterLink },
-      attrs: { to: "/entries" },
-      slots: { default: "Entries" },
+      attrs: { to: "/docs" },
+      slots: { default: "Documentation" },
     });
     expect(
-      screen.getByRole("link", { name: "Entries" }).getAttribute("href")
-    ).toBe("/entries");
+      screen.getByRole("link", { name: "Documentation" }).getAttribute("href")
+    ).toBe("/docs");
   });
 });

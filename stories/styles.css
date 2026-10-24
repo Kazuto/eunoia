@@ -391,17 +391,20 @@
 @utility eunoia-prose {
   color: var(--color-neutral-800);
   font-family: var(--font-sans);
+  /* text-sm/base/lg set line-height from --tw-leading when it's defined, so
+     setting it here keeps the size classes from overriding the 1.7. */
+  --tw-leading: 1.7;
   line-height: 1.7;
 
   @variant dark {
     color: var(--color-neutral-200);
   }
 
-  & > :first-child {
+  & > :first-child:not(:where(.not-prose)) {
     margin-top: 0;
   }
 
-  & > :last-child {
+  & > :last-child:not(:where(.not-prose)) {
     margin-bottom: 0;
   }
 

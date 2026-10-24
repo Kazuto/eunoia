@@ -42,23 +42,49 @@ function escapeRegExp(value: string) {
 }
 
 const parts = computed(() => {
+  // NFC so "é" typed as one character matches "e" + a combining accent.
+  const text = props.text.normalize("NFC");
   const terms = (Array.isArray(props.query) ? props.query : [props.query])
-    .map((term) => term.trim())
-    .filter(Boolean)
-    // Longer terms first, so "data table" wins over "data" where both match.
-    .sort((a, b) => b.length - a.length);
+    .map((term) => term.trim().normalize("NFC"))
+    .filter(Boolean);
 
-  if (terms.length === 0) return [{ text: props.text, match: false }];
+  if (terms.length === 0) return [{ text, match: false }];
 
-  const pattern = new RegExp(
-    `(${terms.map(escapeRegExp).join("|")})`,
-    props.caseSensitive ? "g" : "gi"
-  );
+  // Each term is searched on its own, so overlapping terms ("data table",
+  // "table view") are all found; overlapping ranges then merge into one mark.
+  const ranges: [number, number][] = [];
+  for (const term of terms) {
+    const pattern = new RegExp(
+      escapeRegExp(term),
+      props.caseSensitive ? "g" : "gi"
+    );
+    for (const match of text.matchAll(pattern)) {
+      ranges.push([match.index, match.index + match[0].length]);
+    }
+  }
+  ranges.sort((a, b) => a[0] - b[0]);
 
-  // With a capturing group, split() puts each match at an odd index.
-  return props.text
-    .split(pattern)
-    .map((text, index) => ({ text, match: index % 2 === 1 }))
-    .filter((part) => part.text !== "");
+  const result: { text: string; match: boolean }[] = [];
+  let cursor = 0;
+  for (const [start, end] of ranges) {
+    const last = result.at(-1);
+    if (last?.match && start <= cursor) {
+      if (end > cursor) {
+        last.text += text.slice(cursor, end);
+        cursor = end;
+      }
+      continue;
+    }
+    if (start > cursor) {
+      result.push({ text: text.slice(cursor, start), match: false });
+    }
+    result.push({ text: text.slice(start, end), match: true });
+    cursor = end;
+  }
+  if (cursor < text.length) {
+    result.push({ text: text.slice(cursor), match: false });
+  }
+
+  return result;
 });
 </script>

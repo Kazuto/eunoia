@@ -6,6 +6,8 @@
     :aria-labelledby="ariaLabelledby"
     @close="onNativeClose"
     @cancel="onCancel"
+    @keydown.esc="onEscape"
+    @pointerdown="onPointerdown"
     @click="onBackdropClick"
   >
     <slot />
@@ -61,20 +63,38 @@ function onCancel(e: Event) {
   }
 }
 
+// Chrome stops letting `cancel` be prevented after repeated Escapes without user activation,
+// so a persistent drawer also blocks the key itself.
+function onEscape(e: KeyboardEvent) {
+  if (props.persistent) {
+    e.preventDefault();
+  }
+}
+
 // Only report closes the parent did not ask for (Escape), so closing via `open` doesn't echo back.
 function onNativeClose() {
   if (props.open) emit("close");
 }
 
+// Only a press that also started on the backdrop counts, so a text selection
+// dragged out of the drawer doesn't close it.
+let pressedBackdrop = false;
+
+function onPointerdown(e: PointerEvent) {
+  pressedBackdrop = e.target === dialogRef.value;
+}
+
 function onBackdropClick(e: MouseEvent) {
-  if (e.target === dialogRef.value && !props.persistent) {
+  const fromBackdrop = pressedBackdrop;
+  pressedBackdrop = false;
+  if (fromBackdrop && e.target === dialogRef.value && !props.persistent) {
     emit("close");
   }
 }
 
 const panelStyles = tv({
   base: [
-    "fixed m-0 max-h-none max-w-none flex-col overflow-hidden border p-0 shadow-lg squircle",
+    "fixed m-0 max-w-none flex-col overflow-hidden border p-0 shadow-lg squircle",
     "border-neutral-200 bg-white",
     "dark:border-neutral-700 dark:bg-neutral-900",
     "backdrop:bg-black/50",
@@ -85,20 +105,20 @@ const panelStyles = tv({
   variants: {
     side: {
       right: [
-        "inset-y-0 right-0 left-auto h-dvh w-[min(24rem,100vw)] rounded-l-[24px] border-r-0",
-        "translate-x-full open:translate-x-0 starting:open:translate-x-full",
+        "inset-y-0 right-0 left-auto h-dvh max-h-none w-[min(24rem,100vw)] rounded-l-[24px] border-r-0",
+        "translate-x-full open:translate-none starting:open:translate-x-full",
       ],
       left: [
-        "inset-y-0 right-auto left-0 h-dvh w-[min(24rem,100vw)] rounded-r-[24px] border-l-0",
-        "-translate-x-full open:translate-x-0 starting:open:-translate-x-full",
+        "inset-y-0 right-auto left-0 h-dvh max-h-none w-[min(24rem,100vw)] rounded-r-[24px] border-l-0",
+        "-translate-x-full open:translate-none starting:open:-translate-x-full",
       ],
       top: [
         "inset-x-0 top-0 bottom-auto max-h-[80dvh] w-full rounded-b-[24px] border-t-0",
-        "-translate-y-full open:translate-y-0 starting:open:-translate-y-full",
+        "-translate-y-full open:translate-none starting:open:-translate-y-full",
       ],
       bottom: [
         "inset-x-0 top-auto bottom-0 max-h-[80dvh] w-full rounded-t-[24px] border-b-0",
-        "translate-y-full open:translate-y-0 starting:open:translate-y-full",
+        "translate-y-full open:translate-none starting:open:translate-y-full",
       ],
     },
     dense: {

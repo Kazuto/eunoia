@@ -5,8 +5,8 @@
   >
     <slot>
       <DescriptionItem
-        v-for="item in items"
-        :key="item.term"
+        v-for="(item, index) in items"
+        :key="index"
         :term="item.term"
       >
         {{ item.description }}

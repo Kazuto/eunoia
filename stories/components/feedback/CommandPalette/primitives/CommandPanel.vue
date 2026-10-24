@@ -4,6 +4,7 @@
     v-bind="forwardedAttrs"
     :class="panelStyles({ dense, class: classAttr })"
     @close="onNativeClose"
+    @pointerdown="onPointerdown"
     @click="onBackdropClick"
   >
     <slot />
@@ -46,8 +47,18 @@ function onNativeClose() {
   if (props.open) emit("close");
 }
 
+// Only a press that also started on the backdrop counts, so a text selection
+// dragged out of the panel doesn't close it.
+let pressedBackdrop = false;
+
+function onPointerdown(e: PointerEvent) {
+  pressedBackdrop = e.target === dialogRef.value;
+}
+
 function onBackdropClick(e: MouseEvent) {
-  if (e.target === dialogRef.value) emit("close");
+  const fromBackdrop = pressedBackdrop;
+  pressedBackdrop = false;
+  if (fromBackdrop && e.target === dialogRef.value) emit("close");
 }
 
 const panelStyles = tv({

@@ -185,10 +185,21 @@ const selectedLabels = computed<string[]>(() => {
   });
 });
 
-const activeDescendantId = computed(() => {
-  if (!isOpen.value || activeIndex.value < 0) return undefined;
-  return `${listboxId}-option-${activeIndex.value}`;
-});
+const activeOption = computed(() =>
+  isOpen.value ? props.options[activeIndex.value] : undefined
+);
+
+const activeDescendantId = computed(() =>
+  activeOption.value ? `${listboxId}-option-${activeIndex.value}` : undefined
+);
+
+// The options can shrink while the list is open; keep the active row on one that exists.
+watch(
+  () => props.options.length,
+  (length) => {
+    if (activeIndex.value >= length) activeIndex.value = length - 1;
+  }
+);
 
 const dropdownPlacement = ref<"bottom" | "top">("bottom");
 
@@ -259,17 +270,16 @@ function removeValue(value: string | number) {
 }
 
 function handleTriggerKeydown(event: KeyboardEvent) {
+  const lastIndex = props.options.length - 1;
+
   switch (event.key) {
     case "ArrowDown":
       event.preventDefault();
       if (!isOpen.value) {
         openDropdown();
-        activeIndex.value = 0;
+        activeIndex.value = Math.min(0, lastIndex);
       } else {
-        activeIndex.value = Math.min(
-          activeIndex.value + 1,
-          props.options.length - 1
-        );
+        activeIndex.value = Math.min(activeIndex.value + 1, lastIndex);
       }
       break;
 
@@ -277,25 +287,17 @@ function handleTriggerKeydown(event: KeyboardEvent) {
       event.preventDefault();
       if (!isOpen.value) {
         openDropdown();
-        activeIndex.value = props.options.length - 1;
-      } else {
+        activeIndex.value = lastIndex;
+      } else if (lastIndex >= 0) {
         activeIndex.value = Math.max(activeIndex.value - 1, 0);
       }
       break;
 
     case "Enter":
-      event.preventDefault();
-      if (isOpen.value && activeIndex.value >= 0) {
-        handleOptionSelect(props.options[activeIndex.value]);
-      } else if (!isOpen.value) {
-        openDropdown();
-      }
-      break;
-
     case " ":
       event.preventDefault();
-      if (isOpen.value && activeIndex.value >= 0) {
-        handleOptionSelect(props.options[activeIndex.value]);
+      if (activeOption.value) {
+        handleOptionSelect(activeOption.value);
       } else if (!isOpen.value) {
         openDropdown();
       }
@@ -317,14 +319,14 @@ function handleTriggerKeydown(event: KeyboardEvent) {
     case "Home":
       if (isOpen.value) {
         event.preventDefault();
-        activeIndex.value = 0;
+        activeIndex.value = Math.min(0, lastIndex);
       }
       break;
 
     case "End":
       if (isOpen.value) {
         event.preventDefault();
-        activeIndex.value = props.options.length - 1;
+        activeIndex.value = lastIndex;
       }
       break;
   }

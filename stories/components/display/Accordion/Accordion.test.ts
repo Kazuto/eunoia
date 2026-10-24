@@ -72,6 +72,12 @@ describe("Accordion", () => {
     expect(model.value).toEqual(["two"]);
   });
 
+  it("names each panel after its summary", () => {
+    renderAccordion({}, "one");
+    const region = screen.getByRole("region", { name: "Summary one" });
+    expect(region.textContent).toContain("Body one");
+  });
+
   it("refuses to render an item outside an Accordion", () => {
     expect(() => render(AccordionItem, { props: { value: "lonely" } })).toThrow(
       "AccordionItem must be used inside an Accordion."

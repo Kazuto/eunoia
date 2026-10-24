@@ -5,6 +5,7 @@
     :dense
     :aria-label="t('label')"
     @close="close"
+    @mousedown="keepInputFocus"
   >
     <CommandInput
       ref="inputRef"
@@ -208,6 +209,14 @@ function select(item: CommandPaletteItem) {
   if (item.disabled) return;
   emit("select", item.value);
   close();
+}
+
+// Keys are handled on the search field, so clicks on headings, padding or the
+// icon must not move focus away from it.
+function keepInputFocus(event: MouseEvent) {
+  if (event.target instanceof HTMLInputElement) return;
+  event.preventDefault();
+  inputRef.value?.focus();
 }
 
 function onKeydown(event: KeyboardEvent) {

@@ -6,6 +6,8 @@
     :aria-labelledby="ariaLabelledby"
     @close="onNativeClose"
     @cancel="onCancel"
+    @keydown.esc="onEscape"
+    @pointerdown="onPointerdown"
     @click="onBackdropClick"
   >
     <slot />
@@ -13,7 +15,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { tv } from "tailwind-variants";
 import { useForwardedAttrs } from "@/composables";
 
@@ -36,16 +38,15 @@ const emit = defineEmits<{
 
 const dialogRef = ref<HTMLDialogElement | null>(null);
 
-watch(
-  () => props.open,
-  (open) => {
-    if (open) {
-      dialogRef.value?.showModal();
-    } else {
-      dialogRef.value?.close();
-    }
-  }
-);
+function sync(open: boolean) {
+  const el = dialogRef.value;
+  if (!el) return;
+  if (open && !el.open) el.showModal();
+  else if (!open && el.open) el.close();
+}
+
+watch(() => props.open, sync);
+onMounted(() => sync(props.open));
 
 function onCancel(e: Event) {
   if (props.persistent) {
@@ -53,12 +54,31 @@ function onCancel(e: Event) {
   }
 }
 
+// Chrome stops letting `cancel` be prevented after repeated Escapes without user activation,
+// so a persistent dialog also blocks the key itself.
+function onEscape(e: KeyboardEvent) {
+  if (props.persistent) {
+    e.preventDefault();
+  }
+}
+
+// Only report closes the parent did not ask for (Escape), so closing via `open` doesn't echo back.
 function onNativeClose() {
-  emit("close");
+  if (props.open) emit("close");
+}
+
+// Only a press that also started on the backdrop counts, so a text selection
+// dragged out of the dialog doesn't close it.
+let pressedBackdrop = false;
+
+function onPointerdown(e: PointerEvent) {
+  pressedBackdrop = e.target === dialogRef.value;
 }
 
 function onBackdropClick(e: MouseEvent) {
-  if (e.target === dialogRef.value && !props.persistent) {
+  const fromBackdrop = pressedBackdrop;
+  pressedBackdrop = false;
+  if (fromBackdrop && e.target === dialogRef.value && !props.persistent) {
     emit("close");
   }
 }

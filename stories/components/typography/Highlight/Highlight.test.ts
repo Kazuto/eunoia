@@ -58,4 +58,23 @@ describe("Highlight", () => {
     expect(container.querySelector("img")).toBeNull();
     expect(container.textContent).toBe("<img src=x onerror=alert(1)>");
   });
+
+  it("marks terms that overlap each other as one run", () => {
+    expect(
+      marks({ text: "data table view", query: ["data table", "table view"] })
+        .marked
+    ).toEqual(["data table view"]);
+    expect(marks({ text: "abcd", query: ["ab", "bcd"] }).marked).toEqual([
+      "abcd",
+    ]);
+  });
+
+  it("matches composed and decomposed accents alike", () => {
+    expect(marks({ text: "Cafe\u0301 menu", query: "Café" }).marked).toEqual([
+      "Café",
+    ]);
+    expect(marks({ text: "Café menu", query: "Cafe\u0301" }).marked).toEqual([
+      "Café",
+    ]);
+  });
 });

@@ -14,7 +14,7 @@
         {{ term }}
       </slot>
     </dt>
-    <dd class="text-neutral-900 sm:col-span-2 dark:text-neutral-100">
+    <dd :class="descriptionStyles({ orientation: context?.orientation.value })">
       <slot />
     </dd>
   </div>
@@ -48,6 +48,19 @@ const itemStyles = tv({
   },
   defaultVariants: {
     dense: false,
+    orientation: "horizontal",
+  },
+});
+
+const descriptionStyles = tv({
+  base: "text-neutral-900 dark:text-neutral-100",
+  variants: {
+    orientation: {
+      horizontal: "sm:col-span-2",
+      vertical: "",
+    },
+  },
+  defaultVariants: {
     orientation: "horizontal",
   },
 });

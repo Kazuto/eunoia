@@ -27,6 +27,16 @@ describe("Timeline", () => {
     expect(time.textContent?.trim()).toBe("5 minutes ago");
   });
 
+  it("renders an invalid date without a datetime instead of throwing", () => {
+    const { container } = render(Timeline, {
+      props: { items: [{ title: "Imported", time: new Date("bad") }] },
+    });
+    expect(screen.getByText("Imported")).toBeTruthy();
+    expect(container.querySelector("time")!.hasAttribute("datetime")).toBe(
+      false
+    );
+  });
+
   it("renders custom content from the slot", () => {
     render(Timeline, {
       props: { items: [{ title: "Commented" }] },

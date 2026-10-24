@@ -82,9 +82,9 @@ const dotStyles = tv({
     variant: {
       primary: "bg-primary-500 dark:bg-primary-400",
       secondary: "bg-neutral-400 dark:bg-neutral-500",
-      success: "bg-green-500",
-      warning: "bg-yellow-500",
-      danger: "bg-red-500",
+      success: "bg-green-500 dark:bg-green-600",
+      warning: "bg-yellow-500 dark:bg-yellow-600",
+      danger: "bg-red-500 dark:bg-red-600",
     },
   },
 });

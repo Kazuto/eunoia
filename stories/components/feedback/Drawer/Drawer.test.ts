@@ -50,8 +50,19 @@ describe("Drawer", () => {
       props: { title: "Settings", open: true },
     });
     await fireEvent.click(screen.getByRole("button", { name: "Close" }));
+    await fireEvent.pointerDown(screen.getByRole("dialog"));
     await fireEvent.click(screen.getByRole("dialog"));
     expect(emitted().close).toHaveLength(2);
+  });
+
+  it("stays open when a drag from inside ends on the backdrop", async () => {
+    const { emitted } = render(Drawer, {
+      props: { title: "Settings", open: true },
+      slots: { default: "Drawer body" },
+    });
+    await fireEvent.pointerDown(screen.getByText("Drawer body"));
+    await fireEvent.click(screen.getByRole("dialog"));
+    expect(emitted().close).toBeUndefined();
   });
 
   it("emits close when dismissed natively, e.g. with Escape", async () => {
@@ -75,6 +86,37 @@ describe("Drawer", () => {
 
     expect(cancel.defaultPrevented).toBe(true);
     expect(emitted().close).toBeUndefined();
+  });
+
+  it("blocks Escape itself while persistent, since Chrome stops honoring a prevented cancel", async () => {
+    const { rerender } = render(Drawer, {
+      props: { title: "Settings", open: true, persistent: true },
+    });
+    const escape = () => {
+      const event = new KeyboardEvent("keydown", {
+        key: "Escape",
+        bubbles: true,
+        cancelable: true,
+      });
+      screen.getByRole("dialog").dispatchEvent(event);
+      return event.defaultPrevented;
+    };
+    expect(escape()).toBe(true);
+
+    await rerender({ title: "Settings", open: true, persistent: false });
+    expect(escape()).toBe(false);
+  });
+
+  it("keeps a max height on top and bottom drawers only", async () => {
+    const { rerender } = render(Drawer, {
+      props: { title: "Settings", open: true, side: "bottom" },
+    });
+    const classes = () => screen.getByRole("dialog").classList;
+    expect(classes().contains("max-h-[80dvh]")).toBe(true);
+    expect(classes().contains("max-h-none")).toBe(false);
+
+    await rerender({ title: "Settings", open: true, side: "left" });
+    expect(classes().contains("max-h-none")).toBe(true);
   });
 
   it("renders the footer slot only when provided", () => {

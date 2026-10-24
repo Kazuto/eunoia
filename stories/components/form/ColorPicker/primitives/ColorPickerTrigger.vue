@@ -13,7 +13,10 @@
       :color="value"
       :size="dense ? 'sm' : 'md'"
     />
-    <span class="min-w-0 flex-1 truncate text-left font-mono uppercase">
+    <span
+      :id="valueId"
+      class="min-w-0 flex-1 truncate text-left font-mono uppercase"
+    >
       {{ value }}
     </span>
     <Icon
@@ -38,6 +41,7 @@ const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 defineProps<{
   value?: string | null;
+  valueId?: string;
   isOpen: boolean;
   panelId: string;
   dense?: boolean;

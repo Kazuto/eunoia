@@ -41,7 +41,10 @@
     </div>
     <span
       v-else-if="!multiple && selectedLabels.length > 0"
-      class="flex-1 truncate dark:text-neutral-100"
+      :class="[
+        'flex-1 truncate',
+        invalid ? 'dark:text-red-300' : 'dark:text-neutral-100',
+      ]"
     >
       {{ selectedLabels[0] }}
     </span>
@@ -85,7 +88,10 @@ const triggerStyles = tv({
       true: "min-h-[32px] px-2.5 py-1.5 text-xs",
     },
     invalid: {
-      true: "border-red-500 bg-red-50 text-red-900 focus-visible:border-red-400 dark:focus-visible:border-red-500",
+      true: [
+        "border-red-500 bg-red-50 text-red-900 focus-visible:border-red-400",
+        "dark:border-red-700 dark:bg-red-950/25 dark:text-red-300 dark:hover:bg-red-950/50 dark:focus-visible:border-red-500",
+      ],
     },
     disabled: {
       true: "pointer-events-none cursor-not-allowed opacity-50",

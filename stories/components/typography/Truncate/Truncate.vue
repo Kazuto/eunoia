@@ -69,8 +69,10 @@ onBeforeUnmount(() => {
   }
 });
 
+// A clamped box keeps its size when the text changes, so the ResizeObserver
+// can't be relied on to notice; re-check on content changes too.
 watch(
-  () => [props.maxLength, props.lines],
+  () => [props.content, props.maxLength, props.lines],
   async () => {
     await nextTick();
 

@@ -6,6 +6,7 @@
   >
     <Label
       v-if="hasDefaultSlot"
+      :id="labelId"
       :dense
       :for="triggerId"
     >
@@ -16,12 +17,16 @@
       :id="triggerId"
       ref="triggerRef"
       :value="model"
+      :value-id="valueId"
       :is-open="isOpen"
       :panel-id="panelId"
       :dense
       :invalid
       :disabled
-      :aria-label="hasDefaultSlot ? undefined : t('label')"
+      :aria-labelledby="
+        hasDefaultSlot ? `${labelId} ${valueId}` : $attrs['aria-labelledby']
+      "
+      :aria-label="hasDefaultSlot ? undefined : triggerLabel"
       @click="toggle"
       @keydown="onTriggerKeydown"
     />
@@ -83,6 +88,7 @@
             v-model="hexDraft"
             :label="t('hex')"
             :dense
+            @input="hexEdited = true"
             @commit="commitHex"
           />
         </div>
@@ -191,7 +197,9 @@ const t = useLocale(
   toRef(() => props.locale)
 );
 
+const labelId = useSanitizedId("colorpicker-label");
 const triggerId = useSanitizedId("colorpicker-trigger");
+const valueId = useSanitizedId("colorpicker-value");
 const panelId = useSanitizedId("colorpicker-panel");
 
 const isOpen = ref(false);
@@ -216,6 +224,12 @@ const { floatingStyles } = useFloating(triggerElement, panelElement, {
 });
 
 const hasHelper = computed(() => props.helper && !props.errors?.length);
+
+// Without a visible label, the name still carries the colour, like the labelled
+// trigger's `aria-labelledby` of label and value.
+const triggerLabel = computed(() =>
+  model.value ? `${t("label")} ${model.value}` : t("label")
+);
 
 function fromHex(hex: string | null | undefined): Hsva | null {
   const parsed = hex ? parseHex(hex) : null;
@@ -279,11 +293,16 @@ watch(model, (value) => {
 });
 
 const hexDraft = ref(currentHex.value);
+// Only typing counts as an edit, so tabbing through the field writes nothing back,
+// while typing the placeholder black into an empty picker still selects it.
+const hexEdited = ref(false);
 watch(currentHex, (hex) => {
   hexDraft.value = hex;
 });
 
 function commitHex(value: string) {
+  if (!hexEdited.value) return;
+  hexEdited.value = false;
   const normalized = normalizeHex(value, props.alpha);
   if (normalized) {
     setFromHex(normalized);
@@ -318,6 +337,7 @@ function onTriggerKeydown(event: KeyboardEvent) {
     open();
   } else if (event.key === "Escape" && isOpen.value) {
     event.preventDefault();
+    event.stopPropagation();
     close();
   }
 }
@@ -325,7 +345,9 @@ function onTriggerKeydown(event: KeyboardEvent) {
 function onPanelKeydown(event: KeyboardEvent) {
   if (event.key !== "Escape") return;
   event.preventDefault();
+  event.stopPropagation();
   hexDraft.value = currentHex.value;
+  hexEdited.value = false;
   close({ restoreFocus: true });
 }
 
@@ -346,11 +368,19 @@ function onClickOutside(event: MouseEvent) {
   if (!isInside(event.target as Node)) close();
 }
 
-watch(isOpen, (value) => {
-  if (value) {
+function onDialogClose() {
+  close();
+}
+
+watch(isOpen, (open, _, onCleanup) => {
+  if (open) {
     document.addEventListener("mousedown", onClickOutside);
-  } else {
-    document.removeEventListener("mousedown", onClickOutside);
+    const dialog = triggerElement.value?.closest("dialog");
+    dialog?.addEventListener("close", onDialogClose);
+    onCleanup(() => {
+      document.removeEventListener("mousedown", onClickOutside);
+      dialog?.removeEventListener("close", onDialogClose);
+    });
   }
 });
 

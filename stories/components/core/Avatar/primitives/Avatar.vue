@@ -32,7 +32,7 @@ const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const avatarStyles = tv({
   base: [
-    "inline-flex shrink-0 items-center justify-center overflow-hidden rounded-[100%] bg-primary-200 superellipse",
+    "inline-flex shrink-0 items-center justify-center overflow-hidden superellipse rounded-[100%] bg-primary-200",
     "dark:bg-primary-800",
   ],
   variants: {

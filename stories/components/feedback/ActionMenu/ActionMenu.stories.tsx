@@ -5,14 +5,14 @@ import ActionMenu from "./ActionMenu.vue";
 
 const items = [
   { value: "edit", label: "Edit", icon: "pencil-simple" },
+  { value: "duplicate", label: "Duplicate", icon: "copy" },
   {
-    value: "translate",
-    label: "Translate empty languages",
-    icon: "sparkle",
-    hint: "Save the default text first",
+    value: "publish",
+    label: "Publish",
+    icon: "paper-plane-tilt",
+    hint: "Add a title before publishing",
     disabled: true,
   },
-  { value: "copy", label: "Copy to empty languages", icon: "copy" },
   {
     value: "delete",
     label: "Delete",
@@ -35,7 +35,7 @@ const meta = {
   },
   args: {
     items,
-    label: "Entry actions",
+    label: "Document actions",
     placement: "bottom-end",
     dense: false,
     disabled: false,

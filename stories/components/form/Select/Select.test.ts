@@ -15,6 +15,49 @@ const options = [
   { label: "Banana", value: "banana" },
 ];
 
+describe("Select keyboard", () => {
+  it("ignores arrow keys and Enter without options", async () => {
+    const errorHandler = vi.fn();
+    const { emitted } = render(Select, {
+      props: { options: [], ariaLabel: "Fruit" },
+      global: { config: { errorHandler } },
+    });
+    const trigger = screen.getByRole("combobox");
+
+    await fireEvent.keyDown(trigger, { key: "ArrowDown" });
+    await fireEvent.keyDown(trigger, { key: "ArrowUp" });
+    await fireEvent.keyDown(trigger, { key: "Home" });
+    expect(trigger.getAttribute("aria-activedescendant")).toBeNull();
+    await fireEvent.keyDown(trigger, { key: "Enter" });
+
+    expect(errorHandler).not.toHaveBeenCalled();
+    expect(emitted()["update:modelValue"]).toBeUndefined();
+  });
+
+  it("keeps the active option in range when the options shrink while open", async () => {
+    const { emitted, rerender } = render(Select, {
+      props: { options, ariaLabel: "Fruit" },
+    });
+    const trigger = screen.getByRole("combobox");
+    await fireEvent.keyDown(trigger, { key: "ArrowDown" });
+    await fireEvent.keyDown(trigger, { key: "End" });
+
+    await rerender({ options: [options[0]] });
+
+    const [only] = screen.getAllByRole("option");
+    expect(trigger.getAttribute("aria-activedescendant")).toBe(only.id);
+    await fireEvent.keyDown(trigger, { key: "Enter" });
+    expect(emitted()["update:modelValue"]).toEqual([["apple"]]);
+  });
+
+  it("keeps the red border of the invalid state in dark mode", () => {
+    render(Select, { props: { options, invalid: true, ariaLabel: "Fruit" } });
+    const classes = screen.getByRole("combobox").className.split(" ");
+    expect(classes).toContain("dark:border-red-700");
+    expect(classes).not.toContain("dark:border-neutral-700");
+  });
+});
+
 describe("Select portals", () => {
   it("keeps portaled option clicks inside the Select and dismisses outside clicks", async () => {
     const { container, emitted } = render(Select, {

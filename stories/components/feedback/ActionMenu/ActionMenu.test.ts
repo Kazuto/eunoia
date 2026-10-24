@@ -8,9 +8,9 @@ afterEach(cleanup);
 const items = [
   { value: "edit", label: "Edit", icon: "pencil-simple" },
   {
-    value: "translate",
-    label: "Translate",
-    hint: "Save the default text first",
+    value: "publish",
+    label: "Publish",
+    hint: "Add a title before publishing",
     disabled: true,
   },
   {
@@ -22,10 +22,10 @@ const items = [
 ];
 
 function renderMenu() {
-  return render(ActionMenu, { props: { items, label: "Entry actions" } });
+  return render(ActionMenu, { props: { items, label: "Document actions" } });
 }
 
-const trigger = () => screen.getByRole("button", { name: "Entry actions" });
+const trigger = () => screen.getByRole("button", { name: "Document actions" });
 
 describe("ActionMenu", () => {
   it("opens on click and focuses the first item", async () => {
@@ -36,7 +36,7 @@ describe("ActionMenu", () => {
     await fireEvent.click(trigger());
     await nextTick();
 
-    const menu = screen.getByRole("menu", { name: "Entry actions" });
+    const menu = screen.getByRole("menu", { name: "Document actions" });
     expect(trigger().getAttribute("aria-expanded")).toBe("true");
     expect(trigger().getAttribute("aria-controls")).toBe(menu.id);
     expect(document.activeElement).toBe(
@@ -55,7 +55,7 @@ describe("ActionMenu", () => {
     expect(document.activeElement?.textContent).toContain("Edit");
     // Disabled items are focusable, so their hint is read out.
     await fireEvent.keyDown(menu, { key: "ArrowDown" });
-    expect(document.activeElement?.textContent).toContain("Translate");
+    expect(document.activeElement?.textContent).toContain("Publish");
     await fireEvent.keyDown(menu, { key: "End" });
     expect(document.activeElement?.textContent).toContain("Delete");
   });
@@ -78,12 +78,12 @@ describe("ActionMenu", () => {
     await fireEvent.click(trigger());
     await nextTick();
 
-    const item = screen.getByRole("menuitem", { name: /Translate/ });
+    const item = screen.getByRole("menuitem", { name: /Publish/ });
     expect(item.getAttribute("aria-disabled")).toBe("true");
     const hint = document.getElementById(
       item.getAttribute("aria-describedby")!
     );
-    expect(hint?.textContent).toBe("Save the default text first");
+    expect(hint?.textContent).toBe("Add a title before publishing");
 
     await fireEvent.click(item);
     expect(emitted().select).toBeUndefined();

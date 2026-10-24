@@ -33,4 +33,13 @@ describe("Progress", () => {
     });
     expect(screen.getByRole("progressbar", { name: "Upload" })).toBeTruthy();
   });
+
+  it("treats a value that isn't a finite number as indeterminate", () => {
+    render(Progress, { props: { value: NaN } });
+    render(Progress, { props: { value: Infinity } });
+    for (const bar of screen.getAllByRole("progressbar")) {
+      expect(bar.hasAttribute("aria-valuenow")).toBe(false);
+      expect(bar.firstElementChild!.getAttribute("style")).toBeNull();
+    }
+  });
 });

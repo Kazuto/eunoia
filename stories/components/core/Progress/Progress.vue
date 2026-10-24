@@ -89,7 +89,10 @@ const t = useLocale(
   toRef(() => props.locale)
 );
 
-const indeterminate = computed(() => props.value == null);
+// NaN shows up as e.g. loaded / total * 100 before the total is known.
+const indeterminate = computed(
+  () => props.value == null || !Number.isFinite(props.value)
+);
 
 const clampedValue = computed(() =>
   Math.min(Math.max(props.value ?? 0, 0), props.max)

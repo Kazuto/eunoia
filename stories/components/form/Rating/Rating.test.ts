@@ -55,6 +55,16 @@ describe("Rating", () => {
     expect(emitted().change).toEqual([[3], [1], [5], [1]]);
   });
 
+  it("moves forward with ArrowDown and back with ArrowUp, like native radios", async () => {
+    const { emitted } = render(Rating, { props: { modelValue: 2 } });
+    const current = screen.getByRole("radio", { name: "2 of 5" });
+
+    await fireEvent.keyDown(current, { key: "ArrowDown" });
+    await fireEvent.keyDown(current, { key: "ArrowUp" });
+
+    expect(emitted()["update:modelValue"]).toEqual([[3], [1]]);
+  });
+
   it("offers half steps when allowHalf is set", async () => {
     const { emitted } = render(Rating, {
       props: { modelValue: null, allowHalf: true, max: 3 },

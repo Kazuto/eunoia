@@ -5,6 +5,7 @@
     :open="nativeOpen || undefined"
   >
     <summary
+      :id="summaryId"
       :class="summaryStyles({ dense })"
       :aria-expanded="open"
       :aria-controls="contentId"
@@ -25,6 +26,7 @@
     <div
       :id="contentId"
       role="region"
+      :aria-labelledby="summaryId"
       class="grid transition-[grid-template-rows] duration-200 ease-in-out"
       :style="{ gridTemplateRows: expanded ? '1fr' : '0fr' }"
       @transitionend.self="emit('transitionend')"
@@ -94,6 +96,7 @@ defineProps<{
   expanded?: boolean;
   dense?: boolean;
   contentId?: string;
+  summaryId?: string;
 }>();
 
 const emit = defineEmits<{

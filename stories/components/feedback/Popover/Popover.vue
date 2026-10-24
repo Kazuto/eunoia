@@ -128,10 +128,21 @@ function toggle(event?: Event) {
   open.value = !open.value;
 }
 
+/** The trigger in the anchor, for when the popover was opened through v-model rather than a click. */
+function findTrigger(): HTMLElement | null {
+  const candidates =
+    anchorRef.value?.querySelectorAll<HTMLElement>(
+      '[aria-haspopup="dialog"]'
+    ) ?? [];
+  return (
+    [...candidates].find((el) => !panelElement.value?.contains(el)) ?? null
+  );
+}
+
 function close(returnFocus: boolean) {
   if (!open.value) return;
   open.value = false;
-  if (returnFocus) triggerElement?.focus();
+  if (returnFocus) (triggerElement ?? findTrigger())?.focus();
 }
 
 function onKeydown(event: KeyboardEvent) {

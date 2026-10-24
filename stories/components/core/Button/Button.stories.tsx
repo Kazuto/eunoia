@@ -124,7 +124,7 @@ export const AsLink: Story = {
     primary: true,
     icon: "arrow-right",
     href: "#",
-    default: "Open entries",
+    default: "View details",
   },
 };
 

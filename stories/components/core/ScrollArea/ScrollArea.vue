@@ -2,6 +2,7 @@
   <!-- Focusable so keyboard users can scroll it; a scroll container without focusable children is otherwise unreachable. -->
   <div
     tabindex="0"
+    :role="labelled ? 'region' : undefined"
     v-bind="forwardedAttrs"
     :class="scrollStyles({ orientation, class: classAttr })"
     :style="sizeStyle"
@@ -37,6 +38,14 @@ const scrollStyles = tv({
     orientation: "vertical",
   },
 });
+
+// A label only reaches screen readers on an element with a role, so a labelled
+// scroll area becomes a named region.
+const labelled = computed(
+  () =>
+    forwardedAttrs.value["aria-label"] != null ||
+    forwardedAttrs.value["aria-labelledby"] != null
+);
 
 const props = withDefaults(
   defineProps<{

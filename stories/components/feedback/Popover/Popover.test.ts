@@ -1,7 +1,8 @@
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, fireEvent, render, screen } from "@testing-library/vue";
 import { h, nextTick } from "vue";
 import Popover from "./Popover.vue";
+import ContextMenu from "../ContextMenu/ContextMenu.vue";
 
 afterEach(cleanup);
 
@@ -54,6 +55,59 @@ describe("Popover", () => {
 
     expect(screen.queryByRole("dialog")).toBeNull();
     expect(document.activeElement).toBe(trigger());
+  });
+
+  it("returns focus to the trigger on Escape when opened through the model", async () => {
+    renderPopover({ open: true });
+    await nextTick();
+    await nextTick();
+    expect(document.activeElement).toBe(
+      screen.getByRole("button", { name: "Copy link" })
+    );
+
+    await fireEvent.keyDown(document.activeElement!, { key: "Escape" });
+    await nextTick();
+
+    expect(screen.queryByRole("dialog")).toBeNull();
+    expect(document.activeElement).toBe(trigger());
+  });
+
+  it("stays open while a context menu inside it is used", async () => {
+    Element.prototype.scrollIntoView ??= () => {};
+    const onSelect = vi.fn();
+    render(Popover, {
+      props: { label: "Share" },
+      slots: {
+        default: () =>
+          h(
+            ContextMenu,
+            {
+              label: "Link actions",
+              items: [{ value: "copy", label: "Copy" }],
+              onSelect,
+            },
+            () => "Link"
+          ),
+      },
+    });
+    await fireEvent.click(trigger());
+    await nextTick();
+
+    screen
+      .getByText("Link")
+      .dispatchEvent(
+        new MouseEvent("contextmenu", { bubbles: true, cancelable: true })
+      );
+    await nextTick();
+    await nextTick();
+
+    const item = screen.getByRole("menuitem", { name: "Copy" });
+    await fireEvent.mouseDown(item);
+    await nextTick();
+    expect(screen.getByRole("dialog", { name: "Share" })).toBeTruthy();
+
+    await fireEvent.click(item);
+    expect(onSelect).toHaveBeenCalledWith("copy");
   });
 
   it("closes on a click outside but not on a click inside", async () => {

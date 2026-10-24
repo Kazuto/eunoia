@@ -108,7 +108,7 @@ defineOptions({
 const props = withDefaults(
   defineProps<{
     items: ActionMenuItem[];
-    /** Names the button and the menu, e.g. "Entry actions". */
+    /** Names the button and the menu, e.g. "Document actions". */
     label: string;
     icon?: string;
     /** Which edge of the button the menu lines up with. */

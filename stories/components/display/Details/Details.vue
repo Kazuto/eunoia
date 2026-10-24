@@ -6,6 +6,7 @@
     :native-open="nativeOpen"
     :expanded
     :content-id="contentId"
+    :summary-id="summaryId"
     @toggle="toggle"
     @transitionend="onTransitionEnd"
   >
@@ -35,6 +36,7 @@ withDefaults(
 const model = defineModel<boolean>({ default: false });
 
 const contentId = useSanitizedId("details-content");
+const summaryId = useSanitizedId("details-summary");
 const nativeOpen = ref(model.value);
 const expanded = ref(model.value);
 

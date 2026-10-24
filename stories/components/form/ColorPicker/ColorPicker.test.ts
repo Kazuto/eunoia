@@ -1,5 +1,6 @@
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, fireEvent, render, screen } from "@testing-library/vue";
+import { defineComponent, h } from "vue";
 import ColorPicker from "./ColorPicker.vue";
 
 afterEach(cleanup);
@@ -9,14 +10,25 @@ async function openPicker(props: Record<string, unknown> = {}) {
     props: { modelValue: "#a88bc7", ...props },
     slots: { default: "Accent" },
   });
-  await fireEvent.click(screen.getByRole("button", { name: "Accent" }));
+  await fireEvent.click(screen.getByRole("button", { name: /^Accent/ }));
   return result;
+}
+
+function renderInside(tag: string, attrs: Record<string, unknown>) {
+  return render(
+    defineComponent({
+      setup: () => () =>
+        h(tag, attrs, [
+          h(ColorPicker, { modelValue: "#a88bc7" }, () => "Accent"),
+        ]),
+    })
+  );
 }
 
 describe("ColorPicker", () => {
   it("names the trigger by its label and opens a dialog panel", async () => {
     await openPicker();
-    const trigger = screen.getByRole("button", { name: "Accent" });
+    const trigger = screen.getByRole("button", { name: "Accent #a88bc7" });
     expect(trigger.getAttribute("aria-expanded")).toBe("true");
     expect(screen.getByRole("dialog", { name: "Color picker" })).toBeTruthy();
     expect(
@@ -114,8 +126,72 @@ describe("ColorPicker", () => {
     });
     expect(screen.queryByRole("dialog")).toBeNull();
     expect(document.activeElement).toBe(
-      screen.getByRole("button", { name: "Accent" })
+      screen.getByRole("button", { name: /^Accent/ })
     );
+  });
+
+  it("includes the colour in the name when there is no label", () => {
+    render(ColorPicker, { props: { modelValue: "#a88bc7" } });
+    expect(
+      screen.getByRole("button", { name: "Color picker #a88bc7" })
+    ).toBeTruthy();
+  });
+
+  it("does not change the value when tabbing through the hex field", async () => {
+    const { emitted } = await openPicker({ modelValue: null });
+    const hex = screen.getByRole("textbox", { name: "Hex" });
+    await fireEvent.focus(hex);
+    await fireEvent.blur(hex);
+    expect(emitted()["update:modelValue"]).toBeUndefined();
+  });
+
+  it("selects black when it is typed into an empty picker", async () => {
+    const { emitted } = await openPicker({ modelValue: null });
+    const hex = screen.getByRole("textbox", { name: "Hex" });
+    await fireEvent.update(hex, "#000000");
+    await fireEvent.blur(hex);
+    expect(emitted()["update:modelValue"]).toEqual([["#000000"]]);
+  });
+
+  it("does not normalize an untouched value on blur", async () => {
+    const { emitted } = await openPicker({ modelValue: "#ABC" });
+    await fireEvent.blur(screen.getByRole("textbox", { name: "Hex" }));
+    expect(emitted()["update:modelValue"]).toBeUndefined();
+  });
+
+  it("does not change the value on Escape from the hex field", async () => {
+    const { emitted } = await openPicker({ modelValue: null });
+    const hex = screen.getByRole("textbox", { name: "Hex" });
+    hex.focus();
+    await fireEvent.keyDown(hex, { key: "Escape" });
+    expect(screen.queryByRole("dialog")).toBeNull();
+    expect(emitted()["update:modelValue"]).toBeUndefined();
+  });
+
+  it("keeps Escape from closing a surrounding popup", async () => {
+    const onKeydown = vi.fn();
+    renderInside("div", { onKeydown });
+    const trigger = screen.getByRole("button", { name: /^Accent/ });
+    await fireEvent.click(trigger);
+    await fireEvent.keyDown(screen.getByRole("slider", { name: "Hue" }), {
+      key: "Escape",
+    });
+    await fireEvent.click(trigger);
+    await fireEvent.keyDown(trigger, { key: "Escape" });
+
+    expect(screen.queryByRole("dialog")).toBeNull();
+    expect(onKeydown).not.toHaveBeenCalled();
+  });
+
+  it("closes the panel when its dialog closes", async () => {
+    renderInside("dialog", { open: true });
+    await fireEvent.click(screen.getByRole("button", { name: /^Accent/ }));
+    expect(screen.getByRole("dialog", { name: "Color picker" })).toBeTruthy();
+
+    const dialog = document.querySelector("dialog")!;
+    await fireEvent(dialog, new Event("close"));
+
+    expect(screen.queryByRole("dialog", { name: "Color picker" })).toBeNull();
   });
 
   it("does not open while disabled", async () => {
@@ -123,7 +199,7 @@ describe("ColorPicker", () => {
       props: { modelValue: "#a88bc7", disabled: true },
       slots: { default: "Accent" },
     });
-    await fireEvent.click(screen.getByRole("button", { name: "Accent" }));
+    await fireEvent.click(screen.getByRole("button", { name: /^Accent/ }));
     expect(screen.queryByRole("dialog")).toBeNull();
   });
 });

@@ -168,10 +168,21 @@ const filteredOptions = computed(() => {
   );
 });
 
-const activeDescendantId = computed(() => {
-  if (!isOpen.value || activeIndex.value < 0) return undefined;
-  return `${listboxId}-option-${activeIndex.value}`;
-});
+const activeOption = computed(() =>
+  isOpen.value ? filteredOptions.value[activeIndex.value] : undefined
+);
+
+const activeDescendantId = computed(() =>
+  activeOption.value ? `${listboxId}-option-${activeIndex.value}` : undefined
+);
+
+// The options can shrink while the list is open; keep the active row on one that exists.
+watch(
+  () => filteredOptions.value.length,
+  (length) => {
+    if (activeIndex.value >= length) activeIndex.value = length - 1;
+  }
+);
 
 const { floatingStyles } = useFloating(inputElement, dropdownElement, {
   open: isOpen,
@@ -272,6 +283,9 @@ function clear() {
 }
 
 function handleKeydown(event: KeyboardEvent) {
+  // Enter also confirms an IME composition; that must not pick an option.
+  if (event.isComposing) return;
+
   const lastIndex = filteredOptions.value.length - 1;
 
   switch (event.key) {
@@ -290,7 +304,7 @@ function handleKeydown(event: KeyboardEvent) {
       if (!isOpen.value) {
         openListbox();
         activeIndex.value = lastIndex;
-      } else {
+      } else if (lastIndex >= 0) {
         activeIndex.value = Math.max(activeIndex.value - 1, 0);
       }
       break;
@@ -310,9 +324,9 @@ function handleKeydown(event: KeyboardEvent) {
       break;
 
     case "Enter":
-      if (isOpen.value && activeIndex.value >= 0) {
+      if (activeOption.value) {
         event.preventDefault();
-        selectOption(filteredOptions.value[activeIndex.value]);
+        selectOption(activeOption.value);
       }
       break;
 

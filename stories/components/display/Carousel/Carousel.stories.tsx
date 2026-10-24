@@ -42,7 +42,7 @@ const meta = {
     autoplay: {
       control: "number",
       description:
-        "Milliseconds between slides. Pauses on hover and focus, and stays off for users who prefer reduced motion.",
+        "Milliseconds between slides. Pauses on hover and while the tab is hidden, stops once focus moves inside, and stays off for users who prefer reduced motion.",
     },
     ariaLabel: { control: "text" },
     default: {
@@ -96,7 +96,7 @@ export const Autoplay: Story = {
     docs: {
       description: {
         story:
-          "Rotates every 3 seconds and always wraps. Hovering or focusing the carousel pauses it, and the first button stops it for good.",
+          "Rotates every 3 seconds and always wraps. Hovering pauses it; moving focus into the carousel or pressing the first button stops it until it is started again.",
       },
     },
   },

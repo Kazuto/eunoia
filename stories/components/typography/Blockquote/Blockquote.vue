@@ -51,7 +51,10 @@ const quoteStyles = tv({
       ],
       pull: [
         "text-2xl leading-snug font-semibold text-neutral-900",
-        "before:content-['“'] after:content-['”']",
+        // On the blockquote for a plain-text quote; inside the first and last
+        // paragraph otherwise, so the marks don't sit on lines of their own.
+        "not-has-[>p]:before:content-['“'] not-has-[>p]:after:content-['”']",
+        "[&>p:first-child]:before:content-['“'] [&>p:last-child]:after:content-['”']",
         "dark:text-neutral-100",
       ],
     },

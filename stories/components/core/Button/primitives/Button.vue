@@ -113,7 +113,7 @@ const buttonStyles = tv({
       true: "",
     },
     iconOnly: {
-      true: "aspect-square justify-center rounded-[100%] superellipse",
+      true: "aspect-square justify-center superellipse rounded-[100%]",
       false: "squircle",
     },
   },

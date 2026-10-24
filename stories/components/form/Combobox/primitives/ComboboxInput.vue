@@ -25,7 +25,7 @@
       :disabled
       :placeholder
       :value="query"
-      :class="inputStyles({ dense })"
+      :class="inputStyles({ dense, invalid })"
       @input="onInput"
       @click="emit('open')"
       @keydown="emit('keydown', $event)"
@@ -120,7 +120,10 @@ const wrapperStyles = tv({
       true: "min-h-[32px]",
     },
     invalid: {
-      true: "border-red-500 bg-red-50 text-red-900 focus-within:border-red-400 dark:focus-within:border-red-500",
+      true: [
+        "border-red-500 bg-red-50 text-red-900 focus-within:border-red-400",
+        "dark:border-red-700 dark:bg-red-950/25 dark:text-red-300 dark:focus-within:border-red-500 dark:hover:bg-red-950/50",
+      ],
     },
     disabled: {
       true: "pointer-events-none cursor-not-allowed opacity-50",
@@ -143,6 +146,9 @@ const inputStyles = tv({
     dense: {
       false: "py-1.5 pl-3 text-sm",
       true: "py-1.5 pl-2.5 text-xs",
+    },
+    invalid: {
+      true: "dark:text-red-300",
     },
   },
   defaultVariants: {

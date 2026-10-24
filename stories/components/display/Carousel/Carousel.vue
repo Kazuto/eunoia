@@ -8,15 +8,14 @@
     @keydown="onKeydown"
     @mouseenter="hovered = true"
     @mouseleave="hovered = false"
-    @focusin="focused = true"
-    @focusout="onFocusOut"
+    @focusin="onFocusIn"
   >
     <div
       :id="viewportId"
       ref="viewportRef"
       tabindex="0"
       :aria-live="running ? 'off' : 'polite'"
-      class="flex snap-x snap-mandatory overflow-x-auto overscroll-x-contain rounded-[16px] outline-none [scrollbar-width:none] squircle focus-visible:ring-2 focus-visible:ring-primary-500 [&::-webkit-scrollbar]:hidden"
+      class="relative flex snap-x snap-mandatory overflow-x-auto overscroll-x-contain rounded-[16px] outline-none [scrollbar-width:none] squircle focus-visible:ring-2 focus-visible:ring-primary-500 [&::-webkit-scrollbar]:hidden"
       @scroll="onScroll"
     >
       <CarouselSlide
@@ -37,11 +36,14 @@
       v-if="items.length > 1"
       class="flex items-center justify-center gap-2"
     >
+      <!-- The icon is replaced on every press; keeping it out of hit testing
+           stops Chrome from losing the hover and never sending mouseleave. -->
       <Button
         v-if="autoplayEnabled"
         ghost
         dense
-        class="aspect-square"
+        data-rotation
+        class="aspect-square [&_svg]:pointer-events-none"
         :icon="playing ? 'pause' : 'play'"
         :aria-label="playing ? t('pause') : t('play')"
         @click="playing = !playing"
@@ -185,6 +187,8 @@ function onScroll() {
   }, 100);
 }
 
+// The viewport is `relative`, so a slide's offsetLeft is measured from it and
+// not from whatever positioned ancestor the carousel sits in.
 function scrollToCurrent(behavior: "auto" | "smooth") {
   const viewport = viewportRef.value;
   const slide = viewport?.children[current.value] as HTMLElement | undefined;
@@ -192,31 +196,53 @@ function scrollToCurrent(behavior: "auto" | "smooth") {
   viewport.scrollTo({ left: slide.offsetLeft, behavior });
 }
 
-watch(current, (index) => {
-  if (scrolledTo === index) {
-    scrolledTo = undefined;
-    return;
+// The outgoing slide turns inert, which would drop focus held inside it to the
+// page, so hand focus to the viewport before that happens.
+watch(current, (_, previousIndex) => {
+  const viewport = viewportRef.value;
+  const outgoing = viewport?.children[previousIndex];
+  if (viewport && outgoing?.contains(document.activeElement)) {
+    viewport.focus({ preventScroll: true });
   }
-  scrolledTo = undefined;
-  scrollToCurrent(prefersReducedMotion() ? "auto" : "smooth");
 });
+
+// After the DOM update, so a slide added and selected together can be found.
+watch(
+  current,
+  (index) => {
+    if (scrolledTo === index) {
+      scrolledTo = undefined;
+      return;
+    }
+    scrolledTo = undefined;
+    scrollToCurrent(prefersReducedMotion() ? "auto" : "smooth");
+  },
+  { flush: "post" }
+);
 
 const autoplayEnabled = computed(
   () => !!props.autoplay && props.autoplay > 0 && props.items.length > 1
 );
 const playing = ref(false);
 const hovered = ref(false);
-const focused = ref(false);
+const pageHidden = ref(false);
 const running = computed(
   () =>
-    autoplayEnabled.value && playing.value && !hovered.value && !focused.value
+    autoplayEnabled.value &&
+    playing.value &&
+    !hovered.value &&
+    !pageHidden.value
 );
 
-function onFocusOut(event: FocusEvent) {
-  const root = event.currentTarget as HTMLElement;
-  if (!root.contains(event.relatedTarget as Node | null)) {
-    focused.value = false;
-  }
+// Focus on anything but the rotation control stops autoplay until the user
+// starts it again; hovering only pauses it.
+function onFocusIn(event: FocusEvent) {
+  const target = event.target as HTMLElement;
+  if (!target.closest("[data-rotation]")) playing.value = false;
+}
+
+function onVisibilityChange() {
+  pageHidden.value = document.visibilityState === "hidden";
 }
 
 let autoplayTimer: ReturnType<typeof setInterval> | undefined;
@@ -237,10 +263,13 @@ watch(autoplayEnabled, (enabled) => {
 onMounted(() => {
   scrollToCurrent("auto");
   playing.value = autoplayEnabled.value && !prefersReducedMotion();
+  onVisibilityChange();
+  document.addEventListener("visibilitychange", onVisibilityChange);
 });
 
 onBeforeUnmount(() => {
   clearTimeout(settleTimer);
   clearInterval(autoplayTimer);
+  document.removeEventListener("visibilitychange", onVisibilityChange);
 });
 </script>
