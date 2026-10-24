@@ -6,6 +6,9 @@ export type { MenuItem } from "./Menu/Menu.vue";
 
 export { default as Pagination } from "./Pagination/Pagination.vue";
 
+export { default as Stepper } from "./Stepper/Stepper.vue";
+export type { StepperStepItem } from "./Stepper/Stepper.vue";
+
 export { default as Tabs } from "./Tabs/Tabs.vue";
 export type { TabItem } from "./Tabs/Tabs.vue";
 
