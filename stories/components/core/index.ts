@@ -17,3 +17,4 @@ export { default as ScrollArea } from "./ScrollArea/ScrollArea.vue";
 export { default as Skeleton } from "./Skeleton/Skeleton.vue";
 export { default as Spinner } from "./Spinner/Spinner.vue";
 export { default as ThemeToggle } from "./ThemeToggle/ThemeToggle.vue";
+export { default as VisuallyHidden } from "./VisuallyHidden/VisuallyHidden.vue";
