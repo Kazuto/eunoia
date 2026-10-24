@@ -1,3 +1,6 @@
+export { default as Accordion } from "./Accordion/Accordion.vue";
+export { default as AccordionItem } from "./Accordion/primitives/AccordionItem.vue";
+
 export { default as Card } from "./Card/Card.vue";
 
 export { default as DataTable } from "./DataTable/DataTable.vue";
