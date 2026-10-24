@@ -10,6 +10,8 @@ export { default as ConfirmDialog } from "./ConfirmDialog/ConfirmDialog.vue";
 export { default as ContextMenu } from "./ContextMenu/ContextMenu.vue";
 export type { ContextMenuItem } from "./ContextMenu/ContextMenu.vue";
 export { default as Dialog } from "./Dialog/Dialog.vue";
+export { default as Drawer } from "./Drawer/Drawer.vue";
+export type { DrawerSide } from "./Drawer/Drawer.vue";
 export { default as Dropdown } from "./Dropdown/Dropdown.vue";
 export type { DropdownItem } from "./Dropdown/Dropdown.vue";
 export { default as Toast } from "./Toast/Toast.vue";
