@@ -11,6 +11,11 @@ const meta = {
       options: ["sm", "base", "lg"],
     },
     muted: { control: "boolean" },
+    weight: {
+      control: "select",
+      options: [undefined, "normal", "medium", "semibold", "bold"],
+    },
+    as: { control: "text" },
     default: {
       control: "text",
       description: "Default slot content",
@@ -52,4 +57,38 @@ export const Muted: Story = {
 
 export const MutedSmall: Story = {
   args: { size: "sm", muted: true },
+};
+
+export const Weights: Story = {
+  render: () => ({
+    setup() {
+      return () => (
+        <div>
+          <Text weight="normal">Normal weight</Text>
+          <Text weight="medium">Medium weight</Text>
+          <Text weight="semibold">Semibold weight</Text>
+          <Text weight="bold">Bold weight</Text>
+        </div>
+      );
+    },
+  }),
+};
+
+export const Inline: Story = {
+  render: () => ({
+    setup() {
+      return () => (
+        <Text>
+          Signed in as{" "}
+          <Text
+            as="span"
+            weight="semibold"
+          >
+            ada@example.com
+          </Text>
+          .
+        </Text>
+      );
+    },
+  }),
 };

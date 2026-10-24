@@ -3,6 +3,8 @@
     v-bind="$attrs"
     :size
     :muted
+    :weight
+    :as
   >
     <slot />
   </TextPrimitive>
@@ -19,9 +21,14 @@ withDefaults(
   defineProps<{
     size?: "sm" | "base" | "lg";
     muted?: boolean;
+    weight?: "normal" | "medium" | "semibold" | "bold";
+    /** Element to render, e.g. "span" for inline text. */
+    as?: string;
   }>(),
   {
     size: "base",
+    weight: undefined,
+    as: "p",
   }
 );
 </script>

@@ -1,10 +1,11 @@
 <template>
-  <p
+  <component
+    :is="as"
     v-bind="forwardedAttrs"
-    :class="textStyles({ size, muted, class: classAttr })"
+    :class="textStyles({ size, muted, weight, class: classAttr })"
   >
     <slot />
-  </p>
+  </component>
 </template>
 
 <script lang="ts" setup>
@@ -21,9 +22,13 @@ withDefaults(
   defineProps<{
     size?: "sm" | "base" | "lg";
     muted?: boolean;
+    weight?: "normal" | "medium" | "semibold" | "bold";
+    as?: string;
   }>(),
   {
     size: "base",
+    weight: undefined,
+    as: "p",
   }
 );
 
@@ -41,6 +46,12 @@ const textStyles = tv({
     },
     muted: {
       true: ["text-neutral-500", "dark:text-neutral-400"],
+    },
+    weight: {
+      normal: "font-normal",
+      medium: "font-medium",
+      semibold: "font-semibold",
+      bold: "font-bold",
     },
   },
   defaultVariants: {
