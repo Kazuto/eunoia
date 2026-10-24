@@ -1,4 +1,5 @@
 export { default as Checkbox } from "./Checkbox/Checkbox.vue";
+export { default as ColorPicker } from "./ColorPicker/ColorPicker.vue";
 export { default as DatePicker } from "./DatePicker/DatePicker.vue";
 export { default as Dropzone } from "./Dropzone/Dropzone.vue";
 export { default as FormGroup } from "./FormGroup/FormGroup.vue";
