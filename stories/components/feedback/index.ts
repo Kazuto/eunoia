@@ -4,6 +4,8 @@ export type {
   ActionMenuPlacement,
 } from "./ActionMenu/ActionMenu.vue";
 export { default as Alert } from "./Alert/Alert.vue";
+export { default as CommandPalette } from "./CommandPalette/CommandPalette.vue";
+export type { CommandPaletteItem } from "./CommandPalette/CommandPalette.vue";
 export { default as ConfirmDialog } from "./ConfirmDialog/ConfirmDialog.vue";
 export { default as Dialog } from "./Dialog/Dialog.vue";
 export { default as Dropdown } from "./Dropdown/Dropdown.vue";
