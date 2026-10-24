@@ -1,3 +1,4 @@
+export { default as AspectRatio } from "./AspectRatio/AspectRatio.vue";
 export { default as Avatar } from "./Avatar/Avatar.vue";
 export { default as Badge } from "./Badge/Badge.vue";
 export { default as Button } from "./Button/Button.vue";
