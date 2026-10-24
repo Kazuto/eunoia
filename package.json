@@ -68,7 +68,7 @@
     "prepublishOnly": "node scripts/check-dist-css.mjs",
     "prepare": "husky"
   },
-  "version": "0.0.1-beta.79",
+  "version": "0.0.1-beta.80",
   "dependencies": {
     "@floating-ui/vue": "^2.0.1",
     "@tanstack/vue-virtual": "^3.13.12"
