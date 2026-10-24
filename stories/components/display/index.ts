@@ -3,6 +3,8 @@ export { default as AccordionItem } from "./Accordion/primitives/AccordionItem.v
 
 export { default as Card } from "./Card/Card.vue";
 
+export { default as Carousel } from "./Carousel/Carousel.vue";
+
 export { default as DataTable } from "./DataTable/DataTable.vue";
 export type { DataTableColumn } from "./DataTable/DataTable.vue";
 
