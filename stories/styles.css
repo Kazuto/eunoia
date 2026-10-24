@@ -374,3 +374,248 @@
     width: 0%;
   }
 }
+
+@keyframes progress-indeterminate {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(300%);
+  }
+}
+
+/* Typography for HTML the app doesn't control (rendered Markdown, CMS content).
+   Sizes are in em so the Prose `size` scales everything. Plain CSS, not @apply,
+   for the same reason as the scrollbar block. Anything inside `.not-prose` (an
+   embedded component, say) keeps its own styles. */
+@utility eunoia-prose {
+  color: var(--color-neutral-800);
+  font-family: var(--font-sans);
+  line-height: 1.7;
+
+  @variant dark {
+    color: var(--color-neutral-200);
+  }
+
+  & > :first-child {
+    margin-top: 0;
+  }
+
+  & > :last-child {
+    margin-bottom: 0;
+  }
+
+  &
+    :where(p, ul, ol, blockquote, pre, table, figure):not(
+      :where(.not-prose, .not-prose *)
+    ) {
+    margin-block: 1.25em;
+  }
+
+  & :where(h1, h2, h3, h4, h5, h6):not(:where(.not-prose, .not-prose *)) {
+    color: var(--color-neutral-950);
+    line-height: 1.25;
+    margin-top: 1.75em;
+    margin-bottom: 0.6em;
+
+    @variant dark {
+      color: var(--color-neutral-50);
+    }
+  }
+
+  & :where(h1):not(:where(.not-prose, .not-prose *)) {
+    font-size: 2em;
+    font-weight: 700;
+  }
+
+  & :where(h2):not(:where(.not-prose, .not-prose *)) {
+    font-size: 1.5em;
+    font-weight: 700;
+  }
+
+  & :where(h3):not(:where(.not-prose, .not-prose *)) {
+    font-size: 1.25em;
+    font-weight: 600;
+  }
+
+  & :where(h4):not(:where(.not-prose, .not-prose *)) {
+    font-size: 1.125em;
+    font-weight: 600;
+  }
+
+  & :where(h5, h6):not(:where(.not-prose, .not-prose *)) {
+    font-size: 1em;
+    font-weight: 600;
+  }
+
+  & :where(strong, b):not(:where(.not-prose, .not-prose *)) {
+    color: var(--color-neutral-950);
+    font-weight: 600;
+
+    @variant dark {
+      color: var(--color-neutral-50);
+    }
+  }
+
+  & :where(a):not(:where(.not-prose, .not-prose *)) {
+    color: var(--color-primary-600);
+    font-weight: 500;
+    text-decoration-line: underline;
+    text-decoration-color: color-mix(
+      in oklch,
+      var(--color-primary) 40%,
+      transparent
+    );
+    text-underline-offset: 2px;
+
+    &:hover {
+      text-decoration-color: currentColor;
+    }
+
+    @variant dark {
+      color: var(--color-primary-300);
+    }
+  }
+
+  & :where(ul):not(:where(.not-prose, .not-prose *)) {
+    list-style-type: disc;
+    padding-left: 1.5em;
+  }
+
+  & :where(ol):not(:where(.not-prose, .not-prose *)) {
+    list-style-type: decimal;
+    padding-left: 1.5em;
+  }
+
+  & :where(li):not(:where(.not-prose, .not-prose *)) {
+    margin-block: 0.4em;
+    padding-left: 0.25em;
+
+    &::marker {
+      color: var(--color-neutral-400);
+    }
+  }
+
+  & :where(li > ul, li > ol):not(:where(.not-prose, .not-prose *)) {
+    margin-block: 0.4em;
+  }
+
+  & :where(blockquote):not(:where(.not-prose, .not-prose *)) {
+    border-left: 3px solid var(--color-primary-300);
+    padding-left: 1em;
+    color: var(--color-neutral-600);
+    font-style: italic;
+
+    @variant dark {
+      border-color: var(--color-primary-700);
+      color: var(--color-neutral-300);
+    }
+  }
+
+  & :where(code):not(:where(pre code, .not-prose, .not-prose *)) {
+    border-radius: 8px;
+    corner-shape: squircle;
+    background-color: var(--color-neutral-100);
+    padding: 0.15em 0.4em;
+    color: var(--color-neutral-800);
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+
+    @variant dark {
+      background-color: var(--color-neutral-800);
+      color: var(--color-neutral-100);
+    }
+  }
+
+  & :where(pre):not(:where(.not-prose, .not-prose *)) {
+    overflow-x: auto;
+    border-radius: 14px;
+    corner-shape: squircle;
+    background-color: var(--color-neutral-50);
+    padding: 1em;
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    line-height: 1.6;
+
+    @variant dark {
+      background-color: var(--color-neutral-950);
+    }
+  }
+
+  & :where(hr):not(:where(.not-prose, .not-prose *)) {
+    margin-block: 2.5em;
+    border: 0;
+    border-top: 1px solid var(--color-neutral-200);
+
+    @variant dark {
+      border-color: var(--color-neutral-700);
+    }
+  }
+
+  & :where(table):not(:where(.not-prose, .not-prose *)) {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875em;
+    text-align: left;
+  }
+
+  & :where(th, td):not(:where(.not-prose, .not-prose *)) {
+    padding: 0.5em 0.75em;
+    border-bottom: 1px solid var(--color-neutral-200);
+
+    @variant dark {
+      border-color: var(--color-neutral-700);
+    }
+  }
+
+  & :where(th):not(:where(.not-prose, .not-prose *)) {
+    border-bottom-color: var(--color-neutral-300);
+    color: var(--color-neutral-950);
+    font-weight: 600;
+
+    @variant dark {
+      border-color: var(--color-neutral-600);
+      color: var(--color-neutral-50);
+    }
+  }
+
+  & :where(tbody tr:last-child > td):not(:where(.not-prose, .not-prose *)) {
+    border-bottom: 0;
+  }
+
+  & :where(img, video):not(:where(.not-prose, .not-prose *)) {
+    max-width: 100%;
+    height: auto;
+    border-radius: 14px;
+    corner-shape: squircle;
+  }
+
+  & :where(figcaption):not(:where(.not-prose, .not-prose *)) {
+    margin-top: 0.75em;
+    color: var(--color-neutral-500);
+    font-size: 0.875em;
+
+    @variant dark {
+      color: var(--color-neutral-400);
+    }
+  }
+
+  & :where(mark):not(:where(.not-prose, .not-prose *)) {
+    border-radius: 4px;
+    background-color: color-mix(
+      in oklch,
+      var(--color-yellow-300) 60%,
+      transparent
+    );
+    padding-inline: 0.1em;
+    color: inherit;
+
+    @variant dark {
+      background-color: color-mix(
+        in oklch,
+        var(--color-yellow-500) 35%,
+        transparent
+      );
+    }
+  }
+}
