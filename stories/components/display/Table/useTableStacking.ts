@@ -44,6 +44,7 @@ export function useTableStacking(
 
   let observer: ResizeObserver | undefined;
   let lastWidth = -1;
+  let frame = 0;
 
   onMounted(() => {
     measure();
@@ -52,16 +53,20 @@ export function useTableStacking(
     if (!wrapper.value || typeof ResizeObserver === "undefined") return;
 
     // Only width matters; stacking changes the height, which mustn't re-trigger.
+    // That height change waits for the next frame, as resizing an observed
+    // element from within the callback ends in a "ResizeObserver loop" error.
     observer = new ResizeObserver(([entry]) => {
       if (!entry || entry.contentRect.width === lastWidth) return;
       lastWidth = entry.contentRect.width;
-      measure();
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(measure);
     });
     observer.observe(wrapper.value);
   });
 
   onBeforeUnmount(() => {
     observer?.disconnect();
+    cancelAnimationFrame(frame);
   });
 
   watch([stack, content], measure, { flush: "post" });

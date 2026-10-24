@@ -127,6 +127,10 @@ describe("HeaderActions", () => {
   });
 
   it("brings actions back when the row grows", async () => {
+    vi.stubGlobal("requestAnimationFrame", (callback: () => void) => {
+      callback();
+      return 0;
+    });
     await renderAt(40);
     rowWidth = 1000;
     resize?.();

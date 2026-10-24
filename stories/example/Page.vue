@@ -2,7 +2,10 @@
 import { onBeforeUnmount, onMounted, ref } from "vue";
 import {
   Button,
+  Checkbox,
+  FormGroup,
   Input,
+  RadioGroup,
   Select,
   Badge,
   Alert,
@@ -262,30 +265,26 @@ const items = [
               >
                 Role
               </Select>
-              <Input
-                v-model="department"
-                type="radio"
-                value="engineer"
-                :options="departmentOptions"
+              <FormGroup
+                helper="Engineers are responsible for designing and building software systems."
               >
-                Department
-                <template #description>
-                  Engineers are responsible for designing and building software
-                  systems.
-                </template>
-              </Input>
-              <Input
-                v-model="newsletter"
-                type="checkbox"
-              >
-                Newsletter
-                <template #description>
-                  Subscribe to our
-                  <Link href="https://example.com/newsletter">
-                    monthly newsletter
-                  </Link>
-                </template>
-              </Input>
+                <template #label>Department</template>
+                <RadioGroup
+                  v-model="department"
+                  :options="departmentOptions"
+                />
+              </FormGroup>
+              <FormGroup>
+                <template #label>Newsletter</template>
+                <Checkbox v-model="newsletter">
+                  <template #description>
+                    Subscribe to our
+                    <Link href="https://example.com/newsletter">
+                      monthly newsletter
+                    </Link>
+                  </template>
+                </Checkbox>
+              </FormGroup>
             </div>
 
             <template #footer>
@@ -349,33 +348,31 @@ const items = [
               >
                 Role
               </Select>
-              <Input
-                v-model="department"
-                type="radio"
-                value="engineer"
-                :options="departmentOptions"
+              <FormGroup
                 dense
+                helper="Engineers are responsible for designing and building software systems."
               >
-                Department
-
-                <template #description>
-                  Engineers are responsible for designing and building software
-                  systems.
-                </template>
-              </Input>
-              <Input
-                v-model="newsletter"
-                type="checkbox"
-                dense
-              >
-                Newsletter
-                <template #description>
-                  Subscribe to our
-                  <Link href="https://example.com/newsletter">
-                    monthly newsletter
-                  </Link>
-                </template>
-              </Input>
+                <template #label>Department</template>
+                <RadioGroup
+                  v-model="department"
+                  :options="departmentOptions"
+                  dense
+                />
+              </FormGroup>
+              <FormGroup dense>
+                <template #label>Newsletter</template>
+                <Checkbox
+                  v-model="newsletter"
+                  dense
+                >
+                  <template #description>
+                    Subscribe to our
+                    <Link href="https://example.com/newsletter">
+                      monthly newsletter
+                    </Link>
+                  </template>
+                </Checkbox>
+              </FormGroup>
             </div>
             <template #footer>
               <Button

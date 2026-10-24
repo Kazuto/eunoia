@@ -253,17 +253,19 @@ function selectFromMenu(value: string) {
 }
 
 let observer: ResizeObserver | undefined;
+let frame = 0;
 
 // The row's width sets the space, and the title's size changes with its text.
-// The title also resizes whenever the buttons change, so a change of its own
-// waits a frame instead of looping within this one.
+// Moving buttons resizes the title in turn, so the update waits for the next
+// frame; resizing an observed element from within the callback ends in a
+// "ResizeObserver loop" error.
 function observe() {
   observer?.disconnect();
   if (typeof ResizeObserver === "undefined") return;
 
-  observer = new ResizeObserver((entries) => {
-    if (entries.some((entry) => entry.target === props.row)) update();
-    else requestAnimationFrame(update);
+  observer = new ResizeObserver(() => {
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(update);
   });
   if (props.row) observer.observe(props.row);
   if (props.titleGroup) observer.observe(props.titleGroup);
@@ -277,6 +279,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   observer?.disconnect();
+  cancelAnimationFrame(frame);
 });
 
 watch(() => [props.row, props.titleGroup], observe);
