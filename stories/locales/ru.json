@@ -105,5 +105,9 @@
   "carousel.go-to": "Перейти к слайду {index}",
   "carousel.slide": "Слайд {index} из {total}",
   "carousel.pause": "Приостановить автопрокрутку",
-  "carousel.play": "Запустить автопрокрутку"
+  "carousel.play": "Запустить автопрокрутку",
+  "bottom-nav.label": "Основная навигация",
+  "bottom-nav.more": "Ещё",
+  "bottom-nav.new": "Новое",
+  "bottom-nav.new-count": "Новых: {count}"
 }

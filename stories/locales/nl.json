@@ -105,5 +105,9 @@
   "carousel.go-to": "Ga naar dia {index}",
   "carousel.slide": "Dia {index} van {total}",
   "carousel.pause": "Automatisch afspelen pauzeren",
-  "carousel.play": "Automatisch afspelen starten"
+  "carousel.play": "Automatisch afspelen starten",
+  "bottom-nav.label": "Hoofdnavigatie",
+  "bottom-nav.more": "Meer",
+  "bottom-nav.new": "Nieuw",
+  "bottom-nav.new-count": "{count} nieuw"
 }

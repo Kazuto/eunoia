@@ -1,3 +1,6 @@
+export { default as BottomNav } from "./BottomNav/BottomNav.vue";
+export type { BottomNavItem } from "./BottomNav/BottomNav.vue";
+
 export { default as Breadcrumb } from "./Breadcrumb/Breadcrumb.vue";
 export type { BreadcrumbItem } from "./Breadcrumb/Breadcrumb.vue";
 

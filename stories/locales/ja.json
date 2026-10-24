@@ -105,5 +105,9 @@
   "carousel.go-to": "スライド{index}へ移動",
   "carousel.slide": "スライド {index}/{total}",
   "carousel.pause": "自動再生を一時停止",
-  "carousel.play": "自動再生を開始"
+  "carousel.play": "自動再生を開始",
+  "bottom-nav.label": "メインナビゲーション",
+  "bottom-nav.more": "その他",
+  "bottom-nav.new": "新着",
+  "bottom-nav.new-count": "新着 {count} 件"
 }

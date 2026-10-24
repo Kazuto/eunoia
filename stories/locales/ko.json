@@ -105,5 +105,9 @@
   "carousel.go-to": "{index}번 슬라이드로 이동",
   "carousel.slide": "슬라이드 {index}/{total}",
   "carousel.pause": "자동 재생 일시 중지",
-  "carousel.play": "자동 재생 시작"
+  "carousel.play": "자동 재생 시작",
+  "bottom-nav.label": "기본 탐색",
+  "bottom-nav.more": "더보기",
+  "bottom-nav.new": "새 항목",
+  "bottom-nav.new-count": "새 항목 {count}개"
 }

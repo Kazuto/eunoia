@@ -105,5 +105,9 @@
   "carousel.go-to": "Przejdź do slajdu {index}",
   "carousel.slide": "Slajd {index} z {total}",
   "carousel.pause": "Wstrzymaj autoodtwarzanie",
-  "carousel.play": "Uruchom autoodtwarzanie"
+  "carousel.play": "Uruchom autoodtwarzanie",
+  "bottom-nav.label": "Nawigacja główna",
+  "bottom-nav.more": "Więcej",
+  "bottom-nav.new": "Nowe",
+  "bottom-nav.new-count": "Nowe: {count}"
 }

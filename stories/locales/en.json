@@ -105,5 +105,9 @@
   "carousel.go-to": "Go to slide {index}",
   "carousel.slide": "Slide {index} of {total}",
   "carousel.pause": "Pause autoplay",
-  "carousel.play": "Start autoplay"
+  "carousel.play": "Start autoplay",
+  "bottom-nav.label": "Main navigation",
+  "bottom-nav.more": "More",
+  "bottom-nav.new": "New",
+  "bottom-nav.new-count": "{count} new"
 }

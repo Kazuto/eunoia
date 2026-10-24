@@ -6,6 +6,7 @@ Components that help users navigate through content, filter data, switch views, 
 
 ## Belongs Here
 
+- Main navigation: menus and nav bars, including ones fixed to the page
 - Pagination controls
 - Search components (not form inputs, but search UI patterns)
 - Filter controls (single and multi-select filters)
@@ -16,6 +17,7 @@ Components that help users navigate through content, filter data, switch views, 
 
 ## Examples of What Fits
 
+- Menu, BottomNav, UserMenu
 - Pagination
 - Search (search bar UI pattern)
 - FilterSelect, FilterSingleSelect, BadgeFilter
@@ -26,7 +28,7 @@ Components that help users navigate through content, filter data, switch views, 
 ## Does NOT Belong Here
 
 - Form search inputs → `forms/TextInput` or `forms/SearchableSelect`
-- Main site navigation → `layout/Header`, `layout/MenuDropdown`
+- Frames that hold navigation, such as `layout/Sidebar` and `layout/Header`
 - Action buttons → `core/Button`
 - Links without navigation context → `core/Link`
 - Modal/drawer navigation → `feedback/`
@@ -34,5 +36,5 @@ Components that help users navigate through content, filter data, switch views, 
 ## Decision Rule
 
 **If it helps users navigate, filter, or discover content → navigation**  
-**If it's structural site navigation → layout**  
+**If it only frames the page and takes other components in a slot → layout**  
 **If it's a form control → forms**

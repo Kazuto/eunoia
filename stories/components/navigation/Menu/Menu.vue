@@ -30,6 +30,7 @@ import {
   type MenuItem,
 } from "./primitives/MenuItem.vue";
 import MenuSection from "./primitives/MenuSection.vue";
+import { containsCurrentPage, isCurrentPage } from "./currentPage";
 import { useLocale, type LocaleMessages } from "@/composables";
 
 export type { MenuItem } from "./primitives/MenuItem.vue";
@@ -46,14 +47,6 @@ const t = useLocale(
   toRef(() => props.locale)
 );
 
-function hasActiveDescendant(items: MenuItem[], path: string): boolean {
-  for (const item of items) {
-    if (item.href === path) return true;
-    if (item.items && hasActiveDescendant(item.items, path)) return true;
-  }
-  return false;
-}
-
 function annotateItems(items: MenuItem[], path?: string): MenuItem[] {
   if (!path) return items;
 
@@ -61,14 +54,14 @@ function annotateItems(items: MenuItem[], path?: string): MenuItem[] {
     if (item.items) {
       return {
         ...item,
-        parentActive: hasActiveDescendant(item.items, path),
+        parentActive: containsCurrentPage(item.items, path),
         items: annotateItems(item.items, path),
       };
     }
 
     return {
       ...item,
-      active: item.href === path,
+      active: isCurrentPage(item, path),
     };
   });
 }

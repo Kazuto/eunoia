@@ -105,5 +105,9 @@
   "carousel.go-to": "الانتقال إلى الشريحة {index}",
   "carousel.slide": "الشريحة {index} من {total}",
   "carousel.pause": "إيقاف التشغيل التلقائي مؤقتاً",
-  "carousel.play": "بدء التشغيل التلقائي"
+  "carousel.play": "بدء التشغيل التلقائي",
+  "bottom-nav.label": "التنقل الرئيسي",
+  "bottom-nav.more": "المزيد",
+  "bottom-nav.new": "جديد",
+  "bottom-nav.new-count": "{count} جديدة"
 }

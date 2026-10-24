@@ -105,5 +105,9 @@
   "carousel.go-to": "Zu Folie {index} gehen",
   "carousel.slide": "Folie {index} von {total}",
   "carousel.pause": "Automatische Wiedergabe pausieren",
-  "carousel.play": "Automatische Wiedergabe starten"
+  "carousel.play": "Automatische Wiedergabe starten",
+  "bottom-nav.label": "Hauptnavigation",
+  "bottom-nav.more": "Mehr",
+  "bottom-nav.new": "Neu",
+  "bottom-nav.new-count": "{count} neu"
 }

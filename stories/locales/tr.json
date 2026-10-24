@@ -105,5 +105,9 @@
   "carousel.go-to": "{index}. slayta git",
   "carousel.slide": "Slayt {index} / {total}",
   "carousel.pause": "Otomatik oynatmayı duraklat",
-  "carousel.play": "Otomatik oynatmayı başlat"
+  "carousel.play": "Otomatik oynatmayı başlat",
+  "bottom-nav.label": "Ana gezinme",
+  "bottom-nav.more": "Daha fazla",
+  "bottom-nav.new": "Yeni",
+  "bottom-nav.new-count": "{count} yeni"
 }

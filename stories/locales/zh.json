@@ -105,5 +105,9 @@
   "carousel.go-to": "转到第{index}张幻灯片",
   "carousel.slide": "第{index}张，共{total}张",
   "carousel.pause": "暂停自动播放",
-  "carousel.play": "开始自动播放"
+  "carousel.play": "开始自动播放",
+  "bottom-nav.label": "主导航",
+  "bottom-nav.more": "更多",
+  "bottom-nav.new": "新内容",
+  "bottom-nav.new-count": "{count} 条新内容"
 }

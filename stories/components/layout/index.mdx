@@ -9,7 +9,7 @@ Components that define page structure, application shell, and major structural d
 - Page wrapper components
 - Site-wide structure components
 - Header and footer components
-- Main navigation shells (nav bars, sidebars)
+- Shells that hold navigation, such as the sidebar (the menu inside it is `navigation/`)
 - Grid systems and major structural containers
 - Template components that define page layouts
 
@@ -18,7 +18,7 @@ Components that define page structure, application shell, and major structural d
 - Page, Site
 - Header, SiteHeader
 - IndexComponent (list/index page layouts)
-- MenuDropdown (main navigation menus)
+- Sidebar (a frame with a slot, for one or more menus)
 - Structural wrappers that define page regions
 - Components that establish the application frame
 
@@ -26,6 +26,7 @@ Components that define page structure, application shell, and major structural d
 
 - Content cards → `display/`
 - Form containers → `forms/FormContainer`
+- Menus, nav bars and other components that render links → `navigation/`
 - Modals and overlays → `feedback/`
 - Content-level containers → Use semantic HTML or display components
 - Buttons and controls → `core/` or contextual directory
@@ -33,4 +34,5 @@ Components that define page structure, application shell, and major structural d
 ## Decision Rule
 
 **If it defines page structure or application shell → layout**  
-**If it's content within the structure → NOT layout**
+**If it's content within the structure → NOT layout**  
+**If it renders the navigation links itself → `navigation/`, even when it's fixed to the page**

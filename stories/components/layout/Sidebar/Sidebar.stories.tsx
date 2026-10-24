@@ -4,7 +4,7 @@ import { ref } from "vue";
 import Sidebar from "./Sidebar.vue";
 import SidebarToggle from "./primitives/SidebarToggle.vue";
 import Menu from "@/components/navigation/Menu/Menu.vue";
-import type { MenuItem } from "@/components/navigation/Menu/types";
+import type { MenuItem } from "@/components/navigation/Menu/Menu.vue";
 
 const menuItems: MenuItem[] = [
   { label: "Dashboard", href: "/", icon: "house-simple" },

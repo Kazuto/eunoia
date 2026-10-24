@@ -105,5 +105,9 @@
   "carousel.go-to": "Vai alla diapositiva {index}",
   "carousel.slide": "Diapositiva {index} di {total}",
   "carousel.pause": "Metti in pausa la riproduzione automatica",
-  "carousel.play": "Avvia la riproduzione automatica"
+  "carousel.play": "Avvia la riproduzione automatica",
+  "bottom-nav.label": "Navigazione principale",
+  "bottom-nav.more": "Altro",
+  "bottom-nav.new": "Nuovo",
+  "bottom-nav.new-count": "{count} nuovi"
 }

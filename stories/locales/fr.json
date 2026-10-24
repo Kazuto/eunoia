@@ -105,5 +105,9 @@
   "carousel.go-to": "Aller à la diapositive {index}",
   "carousel.slide": "Diapositive {index} sur {total}",
   "carousel.pause": "Mettre en pause la lecture automatique",
-  "carousel.play": "Démarrer la lecture automatique"
+  "carousel.play": "Démarrer la lecture automatique",
+  "bottom-nav.label": "Navigation principale",
+  "bottom-nav.more": "Plus",
+  "bottom-nav.new": "Nouveau",
+  "bottom-nav.new-count": "{count} nouveaux"
 }
