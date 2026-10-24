@@ -7,7 +7,7 @@
       ><slot
     /></Label>
     <div
-      class="relative cursor-pointer rounded-[14px] border-2 border-dashed transition-colors squircle"
+      class="relative cursor-pointer rounded-[14px] border-2 border-dashed transition-colors squircle has-focus-visible:ring-2 has-focus-visible:ring-blue-400 has-focus-visible:ring-offset-2 has-focus-visible:ring-offset-white dark:has-focus-visible:ring-offset-neutral-900"
       :class="{
         'border-blue-400 bg-blue-50 dark:border-blue-500 dark:bg-blue-950/20':
           isDragging && !disabled,
@@ -50,7 +50,7 @@
         <template v-else>
           <Icon
             :name="model ? 'file-check' : 'upload-simple'"
-            size="2xl"
+            size="lg"
             class="mx-auto mb-3"
             :class="{
               'text-blue-500 dark:text-blue-400': isDragging && !disabled,
@@ -105,6 +105,7 @@
         </template>
       </div>
 
+      <!-- Hidden only visually, so it can still be focused and opened by keyboard. -->
       <input
         :id="dropzoneId"
         ref="fileInputRef"
@@ -112,7 +113,7 @@
         :accept="accept"
         :disabled="disabled"
         :required="required && !model"
-        class="hidden"
+        class="sr-only"
         @change="handleFileSelect"
       />
     </div>
@@ -170,6 +171,12 @@ const isImage = computed(() => {
 });
 
 watch(model, (newFile) => {
+  // A file cleared from outside has to leave the input as well; otherwise
+  // picking the same file again doesn't fire `change`.
+  if (!newFile && fileInputRef.value) {
+    fileInputRef.value.value = "";
+  }
+
   if (previewUrl.value) {
     URL.revokeObjectURL(previewUrl.value);
     previewUrl.value = undefined;
@@ -214,16 +221,14 @@ function handleFileSelect(event: Event) {
   }
 }
 
-function handleClick() {
-  if (!props.disabled) {
-    fileInputRef.value?.click();
-  }
+function handleClick(event: MouseEvent) {
+  // The input's own click, e.g. from the keyboard, opens the picker already.
+  if (props.disabled || event.target === fileInputRef.value) return;
+
+  fileInputRef.value?.click();
 }
 
 function clearFile() {
   model.value = undefined;
-  if (fileInputRef.value) {
-    fileInputRef.value.value = "";
-  }
 }
 </script>

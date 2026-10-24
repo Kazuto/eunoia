@@ -1,5 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { containsCurrentPage, isCurrentPage } from "./currentPage";
+import {
+  containsCurrentPage,
+  currentTarget,
+  isCurrentPage,
+} from "./currentPage";
 
 describe("isCurrentPage", () => {
   it("matches the exact path through `href` or `to`", () => {
@@ -25,5 +29,27 @@ describe("containsCurrentPage", () => {
     ];
     expect(containsCurrentPage(items, "/b/c")).toBe(true);
     expect(containsCurrentPage(items, "/b")).toBe(false);
+  });
+});
+
+describe("currentTarget", () => {
+  const items = [
+    { href: "/" },
+    { href: "/projects" },
+    { items: [{ href: "/projects/archive" }, { to: "/settings" }] },
+  ];
+
+  it("picks the most specific item containing the page", () => {
+    expect(currentTarget(items, "/projects/42")).toBe("/projects");
+    expect(currentTarget(items, "/projects/archive/7")).toBe(
+      "/projects/archive"
+    );
+    expect(currentTarget(items, "/settings")).toBe("/settings");
+  });
+
+  it("finds nothing outside the items, and the root only on itself", () => {
+    expect(currentTarget(items, "/inbox")).toBeUndefined();
+    expect(currentTarget(items, "/")).toBe("/");
+    expect(currentTarget(items, undefined)).toBeUndefined();
   });
 });

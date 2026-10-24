@@ -17,6 +17,7 @@
         v-else
         v-bind="item"
         :level="1"
+        :current-path="currentPath"
       />
     </template>
   </MenuPrimitive>
@@ -30,7 +31,11 @@ import {
   type MenuItem,
 } from "./primitives/MenuItem.vue";
 import MenuSection from "./primitives/MenuSection.vue";
-import { containsCurrentPage, isCurrentPage } from "./currentPage";
+import {
+  containsCurrentPage,
+  currentTarget,
+  isCurrentPage,
+} from "./currentPage";
 import { useLocale, type LocaleMessages } from "@/composables";
 
 export type { MenuItem } from "./primitives/MenuItem.vue";
@@ -47,26 +52,27 @@ const t = useLocale(
   toRef(() => props.locale)
 );
 
-function annotateItems(items: MenuItem[], path?: string): MenuItem[] {
-  if (!path) return items;
+// `target` is the one link to mark, which may be a page above the current one.
+function annotateItems(items: MenuItem[], target?: string): MenuItem[] {
+  if (!target) return items;
 
   return items.map((item) => {
     if (item.items) {
       return {
         ...item,
-        parentActive: containsCurrentPage(item.items, path),
-        items: annotateItems(item.items, path),
+        parentActive: containsCurrentPage(item.items, target),
+        items: annotateItems(item.items, target),
       };
     }
 
     return {
       ...item,
-      active: isCurrentPage(item, path),
+      active: isCurrentPage(item, target),
     };
   });
 }
 
 const annotatedItems = computed(() =>
-  annotateItems(props.items, props.currentPath)
+  annotateItems(props.items, currentTarget(props.items, props.currentPath))
 );
 </script>

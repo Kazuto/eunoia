@@ -268,11 +268,16 @@ function onQueryInput(value: string) {
   activeIndex.value = value.trim() && filteredOptions.value.length > 0 ? 0 : -1;
 }
 
-function selectOption(option: ComboboxOption) {
+async function selectOption(option: ComboboxOption) {
   model.value = option.value;
   closeListbox();
   // The model may update on the parent's next render; show the pick now.
   query.value = option.label;
+
+  // Then show what the parent kept. A parent that adds the pick to a list and
+  // clears the field in the same tick never changes the value seen here.
+  await nextTick();
+  query.value = selectedOption.value?.label ?? "";
 }
 
 function clear() {

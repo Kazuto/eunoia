@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, fireEvent, render, screen } from "@testing-library/vue";
+import { defineComponent, nextTick, ref, watch } from "vue";
 import Combobox from "./Combobox.vue";
 
 vi.mock("@/components", () => ({
@@ -79,6 +80,34 @@ describe("Combobox", () => {
     await fireEvent.update(screen.getByRole("combobox"), "pine");
     await fireEvent.click(screen.getByRole("option", { name: "Pineapple" }));
     expect(emitted()["update:modelValue"]).toEqual([["pineapple"]]);
+  });
+
+  it("empties the field when the parent clears the pick right away", async () => {
+    // E.g. adding the pick to a list, ready for the next one.
+    const Picker = defineComponent({
+      components: { Combobox },
+      setup() {
+        const value = ref<string | null>(null);
+        const picked = ref<string[]>([]);
+        watch(value, (pick) => {
+          if (pick == null) return;
+          picked.value.push(pick);
+          value.value = null;
+        });
+        return { value, picked, options };
+      },
+      template: `
+        <Combobox v-model="value" :options="options">Fruit</Combobox>
+        <p data-testid="picked">{{ picked.join(", ") }}</p>
+      `,
+    });
+    render(Picker);
+    const input = screen.getByRole<HTMLInputElement>("combobox");
+    await fireEvent.update(input, "ban");
+    await fireEvent.click(screen.getByRole("option", { name: "Banana" }));
+    await nextTick();
+    expect(screen.getByTestId("picked").textContent).toBe("banana");
+    expect(input.value).toBe("");
   });
 
   it("closes on Escape and restores the selected label", async () => {

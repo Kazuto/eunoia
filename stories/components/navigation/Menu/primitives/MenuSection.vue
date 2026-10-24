@@ -62,6 +62,7 @@
           v-else
           v-bind="item"
           :level="level + 1"
+          :current-path="currentPath"
         />
       </template>
     </ul>

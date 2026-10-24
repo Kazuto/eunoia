@@ -69,7 +69,7 @@ const groupStyles = tv({
   base: [
     "relative inline-flex w-full rounded-[14px] p-1 squircle",
     "bg-neutral-100",
-    "dark:bg-neutral-900",
+    "dark:bg-neutral-800",
   ],
   variants: {
     dense: {

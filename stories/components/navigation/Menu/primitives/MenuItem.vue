@@ -14,7 +14,7 @@
         :href
         :to="props.to"
         :class="itemStyles({ active, collapsed: !!unref(sidebarCollapsed) })"
-        :aria-current="active ? 'page' : undefined"
+        :aria-current="ariaCurrent"
         tabindex="0"
         :style="{ paddingLeft: unref(sidebarCollapsed) ? undefined : padding }"
       >
@@ -33,6 +33,7 @@ import Tooltip from "@/components/feedback/Tooltip/Tooltip.vue";
 import { tv } from "tailwind-variants";
 import { useForwardedAttrs } from "@/composables";
 import MenuLabel from "./MenuLabel.vue";
+import { isCurrentPage } from "../currentPage";
 import { sidebarCollapsedKey } from "@/components/layout/Sidebar/keys";
 
 defineOptions({
@@ -54,13 +55,32 @@ export type MenuItem = {
   to?: string;
 };
 
-const props = withDefaults(defineProps<MenuItem>(), {
-  ariaLabel: undefined,
-  href: undefined,
-  icon: undefined,
-  items: undefined,
-  level: 1,
-  to: undefined,
+const props = withDefaults(
+  defineProps<
+    MenuItem & {
+      /** Tells the page itself apart from a page below it. */
+      currentPath?: string;
+    }
+  >(),
+  {
+    ariaLabel: undefined,
+    currentPath: undefined,
+    href: undefined,
+    icon: undefined,
+    items: undefined,
+    level: 1,
+    to: undefined,
+  }
+);
+
+// "true" marks the item of a page below it, e.g. Projects on /projects/42.
+const ariaCurrent = computed(() => {
+  if (!props.active) return undefined;
+
+  return props.currentPath === undefined ||
+    isCurrentPage(props, props.currentPath)
+    ? "page"
+    : "true";
 });
 
 const padding = computed(() => {

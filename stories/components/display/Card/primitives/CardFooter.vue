@@ -18,7 +18,11 @@ defineOptions({
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const footerStyles = tv({
-  base: "flex items-center gap-2 border-t border-neutral-200",
+  base: [
+    "flex items-center gap-2 border-t",
+    "border-neutral-200",
+    "dark:border-neutral-800",
+  ],
   variants: {
     dense: {
       false: "mt-4 pt-4",

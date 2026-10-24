@@ -21,14 +21,21 @@
           })
         "
       >
-        <!-- The header still names the cell for screen readers. -->
-        <span
-          v-if="stacked && headerIndex > 0"
-          aria-hidden="true"
-          class="text-neutral-500 dark:text-neutral-400"
-        >
-          {{ header.title }}
-        </span>
+        <!-- The header still names the cell for screen readers. A dotted leader
+             ties the label to its value across the card; its dots are drawn
+             as a background, as a 1px dotted border looks too faint. -->
+        <template v-if="stacked && headerIndex > 0">
+          <span
+            aria-hidden="true"
+            class="max-w-1/2 shrink-0 text-neutral-500 dark:text-neutral-400"
+          >
+            {{ header.title }}
+          </span>
+          <span
+            aria-hidden="true"
+            class="h-0.5 min-w-6 flex-1 self-center bg-[radial-gradient(circle,currentColor_0.75px,transparent_1px)] bg-size-[4px_2px] bg-repeat-x text-neutral-300 dark:text-neutral-700"
+          />
+        </template>
         <Skeleton v-if="loading" />
         <template v-else>
           {{ item[header.key] }}
@@ -96,8 +103,7 @@ const cellStyles = tv({
     stacked: {
       false: "",
       title: "min-w-0 p-0 font-semibold wrap-anywhere",
-      field:
-        "flex min-w-0 items-center justify-between gap-4 p-0 text-right wrap-anywhere",
+      field: "flex min-w-0 items-center gap-2 p-0 text-right wrap-anywhere",
     },
   },
   defaultVariants: {

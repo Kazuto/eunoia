@@ -17,6 +17,37 @@ export function isCurrentPage(
   return includeSubpages && target !== "/" && path.startsWith(`${target}/`);
 }
 
+/**
+ * The link of the most specific item, nested ones included, that contains
+ * `path`: on `/projects/42`, "Projects" is current, but only one item is.
+ */
+export function currentTarget(
+  items: NavLink[],
+  path: string | undefined
+): string | undefined {
+  let best: string | undefined;
+  for (const item of items) {
+    const target = item.href ?? item.to;
+    if (
+      target !== undefined &&
+      isCurrentPage(item, path, true) &&
+      (best === undefined || target.length > best.length)
+    ) {
+      best = target;
+    }
+
+    const nested = item.items && currentTarget(item.items, path);
+    if (
+      nested !== undefined &&
+      (best === undefined || nested.length > best.length)
+    ) {
+      best = nested;
+    }
+  }
+
+  return best;
+}
+
 /** Whether any item, or any of their sub-items, links to `path`. */
 export function containsCurrentPage(
   items: NavLink[],
