@@ -15,6 +15,10 @@ export { default as DescriptionItem } from "./DescriptionList/primitives/Descrip
 export { default as Details } from "./Details/Details.vue";
 
 export { default as EmptyState } from "./EmptyState/EmptyState.vue";
+
+export { default as List } from "./List/List.vue";
+export { default as ListItem } from "./List/primitives/ListItem.vue";
+
 export { default as Table } from "./Table/Table.vue";
 export type { TableHeader, TableItem } from "./Table/Table.vue";
 
