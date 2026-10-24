@@ -1,0 +1,28 @@
+# Example Pages
+
+## Purpose
+
+Whole screens built from the library, to see the components working together and as a starting point for real pages. They're meant to be read: each page keeps its data and behavior in one file.
+
+## The Pages
+
+| Page            | What it shows                                                                                                      | Components                                                                    |
+| --------------- | ------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------- |
+| **Dashboard**   | A reference page with forms, a dense variant, and a table                                                          | Alert, Card, Input, Select, RadioGroup, Checkbox, DataTable                   |
+| **Employees**   | A list page: search and filters, sorting, row actions, removing with confirmation, pagination, an empty state      | DataTable, ActionMenu, ConfirmDialog, Pagination, EmptyState, Toast           |
+| **Employee**    | A record page: breadcrumb, profile summary, tabs for overview, activity and documents, uploading files             | Breadcrumb, Tabs, DescriptionList, Timeline, List, Dropzone, Chip             |
+| **Settings**    | Tabs of settings: a validated profile form, notification switches, appearance, and a danger zone                   | Tabs, Input, Textarea, Select, Switch, RadioGroup, ColorPicker, ConfirmDialog |
+| **New Project** | A multi-step form: validating each step, adding team members, a review with links back to each step                | Stepper, Progress, Combobox, DatePicker, DescriptionList                      |
+| **Sign In**     | A standalone form: validation, a loading state, a wrong-password error. Any email with the password `eunoia` works | Card, Input, Checkbox, Alert, Spinner, Divider                                |
+
+## The App Shell
+
+Every page except Sign In sits in `AppShell.vue`: a `Header` with the page's title and actions, a `Sidebar` with the `Menu` on wide screens, and `BottomNav` on phones. Header actions that don't fit move into the "More actions" menu, and tables stack into cards on narrow screens.
+
+Links inside the app don't lead anywhere in Storybook. The shell catches them and emits `navigate` instead, which shows up in the Actions panel; in an app, that's where a router takes over.
+
+## Trying Them Out
+
+- Resize the window or switch the viewport to a phone to see the layouts adapt.
+- Toggle dark mode in the toolbar.
+- Try them with the keyboard alone, too.
