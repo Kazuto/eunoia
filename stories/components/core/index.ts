@@ -13,5 +13,6 @@ export { default as Link } from "./Link/Link.vue";
 export { default as LocaleProvider } from "./LocaleProvider/LocaleProvider.vue";
 export { default as Divider } from "./Divider/Divider.vue";
 export { default as Progress } from "./Progress/Progress.vue";
+export { default as ScrollArea } from "./ScrollArea/ScrollArea.vue";
 export { default as Skeleton } from "./Skeleton/Skeleton.vue";
 export { default as ThemeToggle } from "./ThemeToggle/ThemeToggle.vue";
