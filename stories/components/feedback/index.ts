@@ -14,6 +14,8 @@ export { default as Drawer } from "./Drawer/Drawer.vue";
 export type { DrawerSide } from "./Drawer/Drawer.vue";
 export { default as Dropdown } from "./Dropdown/Dropdown.vue";
 export type { DropdownItem } from "./Dropdown/Dropdown.vue";
+export { default as Popover } from "./Popover/Popover.vue";
+export type { PopoverPlacement } from "./Popover/Popover.vue";
 export { default as Toast } from "./Toast/Toast.vue";
 export { default as ToastStack } from "./Toast/ToastStack.vue";
 export { default as Tooltip } from "./Tooltip/Tooltip.vue";
