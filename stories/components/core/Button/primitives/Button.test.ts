@@ -1,6 +1,7 @@
 import { describe, expect, it, vi, afterEach } from "vitest";
 import { render, screen, cleanup } from "@testing-library/vue";
 import { userEvent } from "@testing-library/user-event";
+import { markRaw } from "vue";
 import axe from "axe-core";
 import Button from "./Button.vue";
 
@@ -136,11 +137,11 @@ describe("Button primitive", () => {
     });
 
     it("renders the given component and passes it attributes such as `to`", () => {
-      const RouterLink = {
+      const RouterLink = markRaw({
         name: "RouterLink",
         props: ["to"],
         template: '<a :href="to" data-router-link><slot /></a>',
-      };
+      });
       render(Button, {
         props: { as: RouterLink },
         attrs: { to: "/docs?page=2" },
@@ -196,11 +197,11 @@ describe("Button primitive", () => {
       });
 
       it("does not render the router link, which would still navigate", () => {
-        const RouterLink = {
+        const RouterLink = markRaw({
           name: "RouterLink",
           props: ["to"],
           template: '<a :href="to" data-router-link><slot /></a>',
-        };
+        });
         render(Button, {
           props: { as: RouterLink },
           attrs: { to: "/docs", disabled: "" },

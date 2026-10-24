@@ -1,5 +1,6 @@
 import { describe, expect, it, vi, afterEach } from "vitest";
 import { render, screen, cleanup } from "@testing-library/vue";
+import { markRaw } from "vue";
 import Button from "./Button.vue";
 
 vi.mock("@/components", () => ({
@@ -76,11 +77,11 @@ describe("Button orchestrator", () => {
   });
 
   it("passes `as` and its attributes through the variants", () => {
-    const RouterLink = {
+    const RouterLink = markRaw({
       name: "RouterLink",
       props: ["to"],
       template: '<a :href="to"><slot /></a>',
-    };
+    });
     render(Button, {
       props: { primary: true, as: RouterLink },
       attrs: { to: "/docs" },

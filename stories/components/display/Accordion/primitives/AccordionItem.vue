@@ -25,7 +25,8 @@ defineProps<{
   value: string;
 }>();
 
-const injected = inject(ACCORDION_KEY);
+// The default keeps Vue from warning before the clearer error below.
+const injected = inject(ACCORDION_KEY, null);
 if (!injected) {
   throw new Error("AccordionItem must be used inside an Accordion.");
 }

@@ -90,7 +90,11 @@ describe("BottomNav", () => {
     await fireEvent.click(screen.getByRole("button", { name: "More" }));
     const drawer = screen.getByRole("dialog", { name: "More" });
 
+    // A router would take over the click; jsdom can't follow the link.
+    const preventNavigation = (event: Event) => event.preventDefault();
+    document.addEventListener("click", preventNavigation);
     await fireEvent.click(link("Settings"));
+    document.removeEventListener("click", preventNavigation);
     expect(drawer.hasAttribute("open")).toBe(false);
   });
 
