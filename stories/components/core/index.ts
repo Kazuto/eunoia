@@ -15,4 +15,5 @@ export { default as Divider } from "./Divider/Divider.vue";
 export { default as Progress } from "./Progress/Progress.vue";
 export { default as ScrollArea } from "./ScrollArea/ScrollArea.vue";
 export { default as Skeleton } from "./Skeleton/Skeleton.vue";
+export { default as Spinner } from "./Spinner/Spinner.vue";
 export { default as ThemeToggle } from "./ThemeToggle/ThemeToggle.vue";
