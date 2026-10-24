@@ -20,7 +20,7 @@ export { default as List } from "./List/List.vue";
 export { default as ListItem } from "./List/primitives/ListItem.vue";
 
 export { default as Table } from "./Table/Table.vue";
-export type { TableHeader, TableItem } from "./Table/Table.vue";
+export type { TableHeader, TableItem, TableStack } from "./Table/Table.vue";
 
 export { default as SplitView } from "./SplitView/SplitView.vue";
 export type { SplitViewItem } from "./SplitView/SplitView.vue";

@@ -1,12 +1,17 @@
 <template>
   <thead
     v-bind="forwardedAttrs"
-    :class="headStyles({ class: classAttr })"
+    :role="stacked ? 'rowgroup' : undefined"
+    :class="headStyles({ stacked, class: classAttr })"
   >
-    <tr :class="rowStyles()">
+    <tr
+      :role="stacked ? 'row' : undefined"
+      :class="rowStyles()"
+    >
       <th
         v-for="header in headers"
         :key="header.key"
+        :role="stacked ? 'columnheader' : undefined"
         :class="cellStyles({ dense })"
       >
         {{ header.title }}
@@ -25,7 +30,14 @@ defineOptions({
 
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
-const headStyles = tv({});
+// Stacked, every row labels its own values, so the header is only read out.
+const headStyles = tv({
+  variants: {
+    stacked: {
+      true: "sr-only",
+    },
+  },
+});
 
 const rowStyles = tv({
   base: ["border-b", "border-neutral-300", "dark:border-neutral-700"],
@@ -56,6 +68,7 @@ export type TableHeader = {
 type TableHead = {
   headers: TableHeader[];
   dense?: boolean;
+  stacked?: boolean;
 };
 
 defineProps<TableHead>();

@@ -2,7 +2,7 @@ import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "@storybook/vue3-vite";
 
 import DataTable from "./DataTable.vue";
-import { Button, Icon, Tooltip } from "@/components";
+import { Badge, Button, Icon, Tooltip } from "@/components";
 
 const items = [
   { name: "Alice Johnson", role: "Engineer", salary: 95000, hours: 160 },
@@ -25,6 +25,7 @@ const meta = {
     loadingRows: { control: "number" },
     actions: { table: { category: "slots" } },
     rowClass: { control: "function" },
+    stack: { control: "select", options: ["auto", "always", "never"] },
   },
   args: {
     columns: [
@@ -41,6 +42,7 @@ const meta = {
     items,
     dense: false,
     loading: false,
+    stack: "auto",
   },
 } satisfies Meta<typeof DataTable>;
 
@@ -180,5 +182,94 @@ export const EmptyWithCustomContent: Story = {
         </template>
       </DataTable>
     `,
+  }),
+};
+
+const projects = [
+  {
+    name: "Website relaunch",
+    status: "Active",
+    owner: "Alice Johnson",
+    updated: "Yesterday",
+  },
+  {
+    name: "Mobile app",
+    status: "Draft",
+    owner: "Bob Smith",
+    updated: "Last week",
+  },
+  {
+    name: "Annual report",
+    status: "Archived",
+    owner: "Carol White",
+    updated: "Last month",
+  },
+];
+
+const projectColumns = [
+  { title: "Name", key: "name", sortable: true },
+  { title: "Status", key: "status", sortable: true },
+  { title: "Owner", key: "owner", sortable: true },
+  { title: "Updated", key: "updated" },
+];
+
+const statusVariants: Record<string, "success" | "secondary" | "warning"> = {
+  Active: "success",
+  Draft: "warning",
+  Archived: "secondary",
+};
+
+const projectTemplate = `
+  <DataTable v-bind="args">
+    <template #status="{ item }">
+      <Badge :variant="statusVariants[item.status]" dense pill>{{ item.status }}</Badge>
+    </template>
+    <template #actions="{ item }">
+      <div class="inline-flex items-center gap-1">
+        <Tooltip content="Edit" placement="top">
+          <Button ghost dense aria-label="Edit" @click="onEdit(item)"><Icon name="pencil-simple" size="sm" /></Button>
+        </Tooltip>
+        <Tooltip content="Delete" placement="top">
+          <Button dense destructive aria-label="Delete" @click="onDelete(item)"><Icon name="trash" size="sm" /></Button>
+        </Tooltip>
+      </div>
+    </template>
+  </DataTable>
+`;
+
+/**
+ * When the columns don't fit side by side, each row turns into a card instead
+ * of the table scrolling sideways: the first column becomes its title, the
+ * actions sit beside it, and the other columns are listed with their labels.
+ * Sortable columns stay available as a row of sort toggles. Drag the corner
+ * of the frame to resize it.
+ */
+export const Responsive: Story = {
+  args: {
+    columns: projectColumns,
+    items: projects,
+  },
+  render: (args) => ({
+    components: { DataTable, Badge, Button, Icon, Tooltip },
+    setup: () => ({ args, statusVariants, onEdit, onDelete }),
+    template: `
+      <div class="max-w-full resize-x overflow-hidden rounded-[14px] border border-dashed border-neutral-300 squircle dark:border-neutral-700" style="width: 360px">
+        ${projectTemplate}
+      </div>
+    `,
+  }),
+};
+
+/** `stack: "always"` shows the cards at every width, e.g. in a narrow side panel. */
+export const Stacked: Story = {
+  args: {
+    columns: projectColumns,
+    items: projects,
+    stack: "always",
+  },
+  render: (args) => ({
+    components: { DataTable, Badge, Button, Icon, Tooltip },
+    setup: () => ({ args, statusVariants, onEdit, onDelete }),
+    template: projectTemplate,
   }),
 };

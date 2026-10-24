@@ -23,12 +23,14 @@ const meta = {
     dense: { control: "boolean" },
     loading: { control: "boolean" },
     loadingRows: { control: "number" },
+    stack: { control: "select", options: ["auto", "always", "never"] },
   },
   args: {
     headers,
     items,
     dense: false,
     loading: false,
+    stack: "auto",
   },
 } satisfies Meta<typeof Table>;
 
@@ -74,5 +76,27 @@ export const LoadingCustomRows: Story = {
   args: {
     loading: true,
     loadingRows: 5,
+  },
+};
+
+/**
+ * When the columns don't fit side by side, each row turns into a card with the
+ * first column as its title. Drag the corner of the frame to resize it.
+ */
+export const Responsive: Story = {
+  render: (args) => ({
+    components: { Table },
+    setup: () => ({ args }),
+    template: `
+      <div class="max-w-full resize-x overflow-hidden rounded-[14px] border border-dashed border-neutral-300 squircle dark:border-neutral-700" style="width: 300px">
+        <Table v-bind="args" />
+      </div>
+    `,
+  }),
+};
+
+export const Stacked: Story = {
+  args: {
+    stack: "always",
   },
 };

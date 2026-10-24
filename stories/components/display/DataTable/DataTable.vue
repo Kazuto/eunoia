@@ -1,60 +1,78 @@
 <template>
-  <TablePrimitive
-    v-bind="$attrs"
-    :dense
+  <div
+    ref="wrapper"
+    :class="classAttr"
   >
-    <DataTableHead
-      :headers="columns"
+    <TablePrimitive
+      ref="table"
+      v-bind="forwardedAttrs"
       :dense
-      :has-actions="hasActions"
-      :sort-key="sortKey"
-      :sort-direction="sortDirection"
-      @sort="handleSort"
-    />
-    <DataTableBody
-      :columns
-      :items="displayItems"
-      :has-actions
-      :loading
-      :dense
-      :row-class
+      :stacked
     >
-      <template
-        v-for="column in columns"
-        #[column.key]="{ item }"
+      <DataTableHead
+        :headers="columns"
+        :dense
+        :stacked
+        :has-actions="hasActions"
+        :sort-key="sortKey"
+        :sort-direction="sortDirection"
+        @sort="handleSort"
+      />
+      <DataTableBody
+        :columns
+        :items="displayItems"
+        :has-actions
+        :loading
+        :dense
+        :stacked
+        :row-class
       >
-        <slot
-          :name="column.key"
-          :item="item"
-        />
-      </template>
+        <template
+          v-for="column in columns"
+          #[column.key]="{ item }"
+        >
+          <slot
+            :name="column.key"
+            :item="item"
+          />
+        </template>
 
-      <template
-        v-if="hasActions"
-        #actions="{ item }"
-      >
-        <slot
-          name="actions"
-          :item="item"
-        />
-      </template>
+        <template
+          v-if="hasActions"
+          #actions="{ item }"
+        >
+          <slot
+            name="actions"
+            :item="item"
+          />
+        </template>
 
-      <template #empty>
-        <slot name="empty" />
-      </template>
-    </DataTableBody>
-  </TablePrimitive>
+        <template #empty>
+          <slot name="empty" />
+        </template>
+      </DataTableBody>
+    </TablePrimitive>
+  </div>
 </template>
 
 <script lang="ts">
 import { type DataTableColumn } from "./primitives/DataTableBody.vue";
+import { type TableStack } from "../Table/useTableStacking";
 
-export type { DataTableColumn };
+export type { DataTableColumn, TableStack };
 </script>
 
 <script lang="ts" setup generic="T extends Record<string, unknown>">
-import { computed, ref, useSlots } from "vue";
+import {
+  computed,
+  ref,
+  useSlots,
+  useTemplateRef,
+  type ComponentPublicInstance,
+} from "vue";
+import { useForwardedAttrs } from "@/composables";
 import TablePrimitive from "../Table/primitives/Table.vue";
+import { useTableStacking } from "../Table/useTableStacking";
 import DataTableHead from "./primitives/DataTableHead.vue";
 import DataTableBody from "./primitives/DataTableBody.vue";
 
@@ -76,12 +94,21 @@ const props = withDefaults(
     loadingRows?: number;
     dense?: boolean;
     rowClass?: (item: T) => string;
+    /**
+     * Show each row as a card when the columns don't fit side by side ("auto"),
+     * always, or never.
+     */
+    stack?: TableStack;
   }>(),
   {
     loadingRows: 3,
     rowClass: undefined,
+    stack: "auto",
   }
 );
+
+// `class` sizes and places the component; everything else goes to the table.
+const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const slots = useSlots();
 const hasActions = computed(() => !!slots.actions);
@@ -135,5 +162,12 @@ const placeholderItems = computed(() =>
 
 const displayItems = computed(() =>
   props.loading ? placeholderItems.value : sortedItems.value
+);
+
+const { stacked } = useTableStacking(
+  () => props.stack,
+  useTemplateRef<HTMLElement>("wrapper"),
+  useTemplateRef<ComponentPublicInstance>("table"),
+  () => [displayItems.value, props.columns, hasActions.value]
 );
 </script>
