@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref } from "vue";
+import { onBeforeUnmount, onMounted, ref } from "vue";
 import {
   Button,
   Input,
@@ -14,8 +14,9 @@ import {
   Sidebar,
   SidebarToggle,
 } from "@/components";
-import { Header, Menu, UserMenu } from "@/components";
-import type { MenuItem, UserMenuItem } from "@/components";
+import { BottomNav, Header, Menu, UserMenu } from "@/components";
+import type { BottomNavItem, MenuItem, UserMenuItem } from "@/components";
+import type { HeaderAction } from "@/types";
 
 const emit = defineEmits<{
   (e: "view", item: Record<string, unknown>): void;
@@ -25,6 +26,18 @@ const emit = defineEmits<{
 
 const loggedIn = ref(true);
 const sidebarCollapsed = ref(false);
+
+// Below md, the sidebar gives way to the bottom navigation.
+const wide = ref(true);
+let wideQuery: MediaQueryList | undefined;
+const updateWide = () => (wide.value = wideQuery?.matches ?? true);
+
+onMounted(() => {
+  wideQuery = window.matchMedia("(min-width: 48rem)");
+  updateWide();
+  wideQuery.addEventListener("change", updateWide);
+});
+onBeforeUnmount(() => wideQuery?.removeEventListener("change", updateWide));
 
 const name = ref("");
 const email = ref("invalid-email");
@@ -63,6 +76,16 @@ const menuItems: MenuItem[] = [
     ],
   },
 ];
+
+const bottomNavItems: BottomNavItem[] = menuItems.map(
+  ({ label, href, icon }) => ({ label, href, icon })
+);
+
+const headerActions: HeaderAction[] = [{ content: "Settings", icon: "gear" }];
+const newEmployee: HeaderAction = {
+  content: "New Employee",
+  icon: "user-plus",
+};
 
 const userMenuItems: UserMenuItem[] = [
   { label: "Profile", icon: "user" },
@@ -139,33 +162,26 @@ const items = [
 <template>
   <div class="flex h-screen flex-col bg-white font-sans dark:bg-neutral-950">
     <!-- Header -->
-    <Header>
-      <template #left>
+    <Header
+      title="Dashboard"
+      :actions="loggedIn ? headerActions : undefined"
+      :primary-action="loggedIn ? newEmployee : undefined"
+    >
+      <template
+        v-if="wide"
+        #left
+      >
         <SidebarToggle v-model:collapsed="sidebarCollapsed" />
-        <h1 class="text-xl font-bold text-neutral-900 dark:text-neutral-100">
-          Dashboard
-        </h1>
       </template>
       <template #right>
         <template v-if="loggedIn">
           <Badge
+            v-if="wide"
             variant="success"
             pill
           >
             5 online
           </Badge>
-          <Button
-            dense
-            ghost
-          >
-            Settings
-          </Button>
-          <Button
-            dense
-            primary
-          >
-            New Employee
-          </Button>
           <UserMenu
             name="Alice Johnson"
             :items="userMenuItems"
@@ -185,7 +201,10 @@ const items = [
 
     <!-- Body: Sidebar + Main -->
     <div class="flex flex-1 overflow-hidden">
-      <Sidebar v-model:collapsed="sidebarCollapsed">
+      <Sidebar
+        v-if="wide"
+        v-model:collapsed="sidebarCollapsed"
+      >
         <Menu
           class="p-3"
           :items="menuItems"
@@ -193,7 +212,7 @@ const items = [
         />
       </Sidebar>
 
-      <main class="flex-1 overflow-y-auto p-8">
+      <main class="flex-1 overflow-y-auto p-4 md:p-8">
         <div class="mx-auto flex max-w-6xl flex-col gap-8">
           <!-- Alert -->
           <Alert
@@ -384,7 +403,11 @@ const items = [
           <!-- Data Table -->
           <Card>
             <template #header>
-              <h3 class="text-lg font-semibold text-neutral-900">Employees</h3>
+              <h3
+                class="text-lg font-semibold text-neutral-900 dark:text-neutral-100"
+              >
+                Employees
+              </h3>
               <div class="flex items-center gap-2">
                 <Badge
                   variant="primary"
@@ -465,5 +488,11 @@ const items = [
         </div>
       </main>
     </div>
+
+    <BottomNav
+      v-if="!wide"
+      :items="bottomNavItems"
+      current-path="/"
+    />
   </div>
 </template>

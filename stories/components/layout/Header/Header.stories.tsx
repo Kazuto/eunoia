@@ -72,6 +72,43 @@ export const WithSecondaryActions: Story = {
   },
 };
 
+const actions = [
+  { content: "Share", icon: "share-network", onClick: fn() },
+  { content: "Import", icon: "upload", onClick: fn() },
+  { content: "Export", icon: "download", onClick: fn() },
+];
+
+/**
+ * `actions` show as buttons next to the primary action while they fit. When
+ * the header gets narrower, they move into the "More actions" menu, last
+ * first; then the primary action shrinks to its icon, and finally moves into
+ * the menu too. The title keeps up to 12rem before anything moves. Drag the
+ * corner of the frame to resize it.
+ */
+export const CollapsingActions: Story = {
+  args: {
+    actions,
+    secondaryActions: [{ content: "Archive", icon: "archive", onClick: fn() }],
+  },
+  render: (args) => ({
+    components: { Header, Button },
+    setup() {
+      return { args };
+    },
+    template: `
+      <div class="min-h-screen bg-neutral-100 p-4 dark:bg-neutral-950">
+        <div class="max-w-full resize-x overflow-hidden rounded-[14px] border border-dashed border-neutral-300 squircle dark:border-neutral-700" style="width: 720px">
+          <Header v-bind="args">
+            <template #left>
+              <Button ghost icon="sidebar" aria-label="Toggle sidebar" />
+            </template>
+          </Header>
+        </div>
+      </div>
+    `,
+  }),
+};
+
 export const WithoutPageContext: Story = {
   render: () => ({
     components: { Header, Button },

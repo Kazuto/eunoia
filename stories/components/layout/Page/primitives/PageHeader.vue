@@ -1,6 +1,7 @@
 <script lang="ts" setup>
+import { useTemplateRef } from "vue";
 import { Button, Tooltip, Headline, Truncate, Text } from "@/components";
-import PageSecondaryActions from "./PageSecondaryActions.vue";
+import HeaderActions from "@/components/layout/Header/primitives/HeaderActions.vue";
 import type { HeaderAction } from "@/types";
 
 export type PageHeaderOptions = {
@@ -8,7 +9,14 @@ export type PageHeaderOptions = {
   description?: string;
   backAction?: HeaderAction;
   copyAction?: HeaderAction;
+  /**
+   * Shown as buttons next to the primary action. When they don't fit, they
+   * move into the "More actions" menu, last first; after them the primary
+   * action shrinks to its icon, then moves into the menu as well.
+   */
+  actions?: HeaderAction[];
   primaryAction?: HeaderAction;
+  /** Always in the "More actions" menu, below any actions that moved there. */
   secondaryActions?: HeaderAction[];
   truncateTitleAfter?: number;
 };
@@ -18,16 +26,26 @@ withDefaults(defineProps<PageHeaderOptions & { compact?: boolean }>(), {
   description: undefined,
   backAction: undefined,
   copyAction: undefined,
+  actions: undefined,
   primaryAction: undefined,
   secondaryActions: undefined,
   truncateTitleAfter: undefined,
 });
+
+const row = useTemplateRef<HTMLElement>("row");
+const titleGroup = useTemplateRef<HTMLElement>("titleGroup");
 </script>
 
 <template>
   <component :is="compact ? 'div' : 'header'">
-    <div class="flex flex-wrap items-center justify-between gap-3">
-      <div class="flex min-w-0 items-center gap-3">
+    <div
+      ref="row"
+      class="flex items-center justify-between gap-3"
+    >
+      <div
+        ref="titleGroup"
+        class="flex min-w-0 items-center gap-3"
+      >
         <template v-if="backAction">
           <Tooltip :content="backAction.content">
             <Button
@@ -78,27 +96,14 @@ withDefaults(defineProps<PageHeaderOptions & { compact?: boolean }>(), {
         </template>
       </div>
 
-      <div
-        v-if="primaryAction || secondaryActions?.length"
-        class="flex shrink-0 items-center gap-2"
-      >
-        <Button
-          v-if="primaryAction"
-          primary
-          :dense="compact"
-          :icon="primaryAction.icon"
-          :disabled="primaryAction.disabled"
-          @click="primaryAction.onClick"
-        >
-          {{ primaryAction.content }}
-        </Button>
-
-        <PageSecondaryActions
-          v-if="secondaryActions?.length"
-          :actions="secondaryActions"
-          :dense="compact"
-        />
-      </div>
+      <HeaderActions
+        :actions
+        :primary-action
+        :secondary-actions
+        :dense="compact"
+        :row
+        :title-group
+      />
     </div>
 
     <Text

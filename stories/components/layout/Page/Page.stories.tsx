@@ -13,6 +13,10 @@ const meta = {
       control: "object",
       options: ["content", "onClick", "icon", "disabled"],
     },
+    actions: {
+      control: "object",
+      options: ["content", "onClick", "icon", "disabled"],
+    },
     secondaryActions: {
       control: "object",
       options: ["content", "onClick", "icon", "disabled"],
@@ -181,5 +185,26 @@ export const TruncatedTitle: Story = {
   args: {
     title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     truncateTitleAfter: 20,
+  },
+};
+
+/**
+ * `actions` show as buttons until they don't fit, then move into the "More
+ * actions" menu, the same way as in `Header`.
+ */
+export const WithActions: Story = {
+  args: {
+    actions: [
+      {
+        content: "Import",
+        icon: "upload",
+        onClick: () => console.log("Import"),
+      },
+      {
+        content: "Export",
+        icon: "download",
+        onClick: () => console.log("Export"),
+      },
+    ],
   },
 };

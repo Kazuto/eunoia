@@ -4,6 +4,7 @@ import { nextTick } from "vue";
 import Header from "./Header.vue";
 
 vi.mock("@/components", () => ({
+  ActionMenu: { template: "<button />" },
   Button: { template: "<button><slot /></button>" },
   Tooltip: { template: "<span><slot /></span>" },
   Headline: { template: "<h3><slot /></h3>" },

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { tv } from "tailwind-variants";
 import { Button, Tooltip, Headline, Truncate, Text } from "@/components";
-import HeaderSecondaryActions from "./primitives/HeaderSecondaryActions.vue";
+import HeaderActions from "./primitives/HeaderActions.vue";
 import type { HeaderAction } from "@/types";
 import {
   onBeforeUnmount,
@@ -17,7 +17,14 @@ export type HeaderOptions = {
   description?: string;
   backAction?: HeaderAction;
   copyAction?: HeaderAction;
+  /**
+   * Shown as buttons next to the primary action. When they don't fit, they
+   * move into the "More actions" menu, last first; after them the primary
+   * action shrinks to its icon, then moves into the menu as well.
+   */
+  actions?: HeaderAction[];
   primaryAction?: HeaderAction;
+  /** Always in the "More actions" menu, below any actions that moved there. */
   secondaryActions?: HeaderAction[];
   truncateTitleAfter?: number;
   /**
@@ -38,6 +45,8 @@ const PAGE_WIDTHS = { narrow: "64rem", wide: "80rem", "extra-wide": "1680px" };
 const PAGE_PADDING = 16;
 
 const middle = useTemplateRef<HTMLElement>("middle");
+const row = useTemplateRef<HTMLElement>("row");
+const titleGroup = useTemplateRef<HTMLElement>("titleGroup");
 const alignStyle = ref<CSSProperties>();
 
 function toPixels(length: string) {
@@ -126,10 +135,14 @@ const headerStyles = tv({
       class="min-w-0 flex-1"
     >
       <div
-        class="flex min-w-0 flex-wrap items-center justify-between gap-3"
+        ref="row"
+        class="flex min-w-0 items-center justify-between gap-3"
         :style="alignStyle"
       >
-        <div class="flex min-w-0 items-center gap-3">
+        <div
+          ref="titleGroup"
+          class="flex min-w-0 items-center gap-3"
+        >
           <Tooltip
             v-if="backAction"
             :content="backAction.content"
@@ -180,25 +193,13 @@ const headerStyles = tv({
           </Tooltip>
         </div>
 
-        <div
-          v-if="primaryAction || secondaryActions?.length"
-          class="flex shrink-0 items-center gap-2"
-        >
-          <Button
-            v-if="primaryAction"
-            primary
-            :icon="primaryAction.icon"
-            :disabled="primaryAction.disabled"
-            @click="primaryAction.onClick"
-          >
-            {{ primaryAction.content }}
-          </Button>
-
-          <HeaderSecondaryActions
-            v-if="secondaryActions?.length"
-            :actions="secondaryActions"
-          />
-        </div>
+        <HeaderActions
+          :actions
+          :primary-action
+          :secondary-actions
+          :row
+          :title-group
+        />
       </div>
     </div>
     <div
