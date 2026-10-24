@@ -24,3 +24,6 @@ export type { TableHeader, TableItem } from "./Table/Table.vue";
 
 export { default as SplitView } from "./SplitView/SplitView.vue";
 export type { SplitViewItem } from "./SplitView/SplitView.vue";
+
+export { default as Timeline } from "./Timeline/Timeline.vue";
+export type { TimelineItem } from "./Timeline/Timeline.vue";
