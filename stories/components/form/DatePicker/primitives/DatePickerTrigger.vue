@@ -89,6 +89,8 @@ const props = defineProps<{
   placeholder: string;
   isOpen: boolean;
   id?: string;
+  /** The open calendar's id, for aria-controls. */
+  calendarId?: string;
   ariaLabel?: string;
   ariaLabelledby?: string;
 }>();

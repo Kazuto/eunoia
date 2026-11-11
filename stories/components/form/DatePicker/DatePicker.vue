@@ -166,11 +166,12 @@ const { floatingStyles } = useFloating(triggerElement, calendarElement, {
           offset(4),
           flip(),
           shift({ padding: 8 }),
+          // The calendar keeps its own width, which is wider than most
+          // triggers; only its height is capped.
           size({
             padding: 8,
-            apply({ rects, availableHeight, elements }) {
+            apply({ availableHeight, elements }) {
               Object.assign(elements.floating.style, {
-                width: `${rects.reference.width}px`,
                 maxHeight: `${Math.max(0, Math.min(400, availableHeight))}px`,
               });
             },
@@ -255,7 +256,11 @@ function closeCalendar() {
 }
 
 function toggleCalendar() {
-  isOpen.value = !isOpen.value;
+  if (isOpen.value) {
+    closeCalendar();
+  } else {
+    openCalendar();
+  }
 }
 
 function handleDateSelect(payload: { date: Date; edge?: "start" | "end" }) {

@@ -394,7 +394,7 @@ const calendarStyles = tv({
       false: "p-3",
     },
     floating: {
-      true: "overflow-auto",
+      true: "fixed m-0 overflow-auto",
       false: "",
     },
   },
