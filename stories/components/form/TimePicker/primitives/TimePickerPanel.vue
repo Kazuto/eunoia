@@ -34,10 +34,9 @@ const panelStyles = tv({
     "dark:border-neutral-700 dark:bg-neutral-900",
   ],
   variants: {
-    // At least as wide as the field; floating panels get that from the trigger.
     floating: {
       true: "fixed m-0",
-      false: "absolute left-0 min-w-full",
+      false: "absolute left-0",
     },
     dense: {
       false: "p-1.5",

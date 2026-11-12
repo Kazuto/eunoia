@@ -82,7 +82,7 @@ describe("TimePicker", () => {
   });
 
   it("opens with ArrowDown and closes on Escape", async () => {
-    renderPicker();
+    const { emitted } = renderPicker();
     await fireEvent.keyDown(trigger(), { key: "ArrowDown" });
     await nextTick();
     const hours = screen.getByRole("listbox", { name: "Hours" });
@@ -90,6 +90,33 @@ describe("TimePicker", () => {
     await fireEvent.keyDown(hours, { key: "Escape" });
     expect(screen.queryByRole("dialog")).toBeNull();
     expect(document.activeElement).toBe(trigger());
+    expect(emitted()["update:modelValue"]).toBeUndefined();
+  });
+
+  it("rests on midday without a value, and starts unset parts there", async () => {
+    const { emitted } = renderPicker();
+    await open();
+
+    const hours = screen.getByRole("listbox", { name: "Hours" });
+    expect(hours.getAttribute("aria-activedescendant")).toBe(
+      within(hours).getByRole("option", { name: "12", selected: false }).id
+    );
+    expect(emitted()["update:modelValue"]).toBeUndefined();
+
+    const minutes = screen.getByRole("listbox", { name: "Minutes" });
+    await fireEvent.click(within(minutes).getByRole("option", { name: "30" }));
+    expect(emitted()["update:modelValue"]).toEqual([["12:30"]]);
+  });
+
+  it("takes the time on the band with Enter, though nothing was picked", async () => {
+    const { emitted } = renderPicker();
+    await open();
+
+    await fireEvent.keyDown(screen.getByRole("listbox", { name: "Hours" }), {
+      key: "Enter",
+    });
+    expect(emitted()["update:modelValue"]).toEqual([["12:00"]]);
+    expect(screen.queryByRole("dialog")).toBeNull();
   });
 
   it("offers minutes in the configured step", async () => {
@@ -166,18 +193,17 @@ describe("TimePicker", () => {
     expect(screen.getByRole("listbox", { name: "Seconds" })).toBeTruthy();
   });
 
-  it("picks the option that settles on the band after scrolling", async () => {
-    vi.useFakeTimers();
-
-    try {
-      const { emitted } = renderPicker({ modelValue: "09:00" });
+  describe("moving a column by hand", () => {
+    /** The minutes column, laid out as in a browser: 32px options below
+     * 96px of padding, 224px tall, scrolled to the top. */
+    async function openMinutes() {
+      const rendered = renderPicker({ modelValue: "09:00" });
       await open();
 
-      // jsdom has no layout: 32px options below 96px of padding, 224px tall.
       const minutes = screen.getByRole("listbox", { name: "Minutes" });
       Object.defineProperties(minutes, {
         clientHeight: { value: 224 },
-        scrollTop: { value: 30 * 32, writable: true },
+        scrollTop: { value: 0, writable: true },
       });
       within(minutes)
         .getAllByRole("option")
@@ -188,24 +214,71 @@ describe("TimePicker", () => {
           })
         );
 
-      await fireEvent.scroll(minutes);
-      expect(emitted()["update:modelValue"]).toBeUndefined();
-
-      vi.advanceTimersByTime(120);
-      expect(emitted()["update:modelValue"]).toEqual([["09:30"]]);
-    } finally {
-      vi.useRealTimers();
+      return { ...rendered, minutes };
     }
-  });
 
-  it("opens a floating panel at least as wide as the field", async () => {
-    renderPicker({ teleportTo: "body" });
-    vi.spyOn(trigger().parentElement!, "getBoundingClientRect").mockReturnValue(
-      new DOMRect(0, 0, 200, 40)
-    );
-    await open();
+    it("picks the option that settles on the band after scrolling", async () => {
+      vi.useFakeTimers();
 
-    const panel = screen.getByRole("dialog", { name: "Time picker" });
-    await vi.waitFor(() => expect(panel.style.minWidth).toBe("200px"));
+      try {
+        const { emitted, minutes } = await openMinutes();
+
+        await fireEvent.wheel(minutes);
+        minutes.scrollTop = 30 * 32;
+        await fireEvent.scroll(minutes);
+        expect(emitted()["update:modelValue"]).toBeUndefined();
+
+        vi.advanceTimersByTime(120);
+        expect(emitted()["update:modelValue"]).toEqual([["09:30"]]);
+      } finally {
+        vi.useRealTimers();
+      }
+    });
+
+    it("picks nothing when the column scrolls itself", async () => {
+      vi.useFakeTimers();
+
+      try {
+        const { emitted, minutes } = await openMinutes();
+
+        minutes.scrollTop = 30 * 32;
+        await fireEvent.scroll(minutes);
+        vi.advanceTimersByTime(120);
+
+        expect(emitted()["update:modelValue"]).toBeUndefined();
+      } finally {
+        vi.useRealTimers();
+      }
+    });
+
+    it("drags with the mouse, picking what lands on the band", async () => {
+      const { emitted, minutes } = await openMinutes();
+      const start = within(minutes).getByRole("option", { name: "05" });
+      const pointer = { pointerId: 1, pointerType: "mouse", button: 0 };
+
+      await fireEvent.pointerDown(start, { ...pointer, clientY: 400 });
+      await fireEvent.pointerMove(minutes, { ...pointer, clientY: 300 });
+      await fireEvent.pointerMove(minutes, { ...pointer, clientY: 400 - 960 });
+      await fireEvent.pointerUp(minutes, { ...pointer, clientY: 400 - 960 });
+      // The click that ends the drag doesn't pick the option under it.
+      await fireEvent.click(start);
+
+      expect(minutes.scrollTop).toBe(960);
+      expect(emitted()["update:modelValue"]).toEqual([["09:30"]]);
+    });
+
+    it("still clicks when the mouse barely moves", async () => {
+      const { emitted, minutes } = await openMinutes();
+      const option = within(minutes).getByRole("option", { name: "05" });
+      const pointer = { pointerId: 1, pointerType: "mouse", button: 0 };
+
+      await fireEvent.pointerDown(option, { ...pointer, clientY: 400 });
+      await fireEvent.pointerMove(option, { ...pointer, clientY: 402 });
+      await fireEvent.pointerUp(option, { ...pointer, clientY: 402 });
+      expect(minutes.scrollTop).toBe(0);
+
+      await fireEvent.click(option);
+      expect(emitted()["update:modelValue"]).toEqual([["09:05"]]);
+    });
   });
 });

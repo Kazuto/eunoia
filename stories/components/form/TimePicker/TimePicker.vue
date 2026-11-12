@@ -57,9 +57,10 @@
           :heading="column.heading"
           :items="column.items"
           :selected="column.selected"
+          :fallback="column.fallback"
           :dense
           @select="(value) => handleSelect(column.key, value)"
-          @commit="commit"
+          @commit="accept"
         />
       </TimePickerPanel>
     </Teleport>
@@ -68,14 +69,7 @@
 
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, ref, toRef, watch } from "vue";
-import {
-  autoUpdate,
-  flip,
-  offset,
-  shift,
-  size,
-  useFloating,
-} from "@floating-ui/vue";
+import { autoUpdate, flip, offset, shift, useFloating } from "@floating-ui/vue";
 import {
   type LocaleMessages,
   useLocale,
@@ -97,6 +91,9 @@ import {
 } from "./primitives/time";
 
 type ColumnKey = "hours" | "minutes" | "seconds" | "period";
+
+// Without a value the columns rest on midday, and unset parts start there.
+const MIDDAY = { hours: 12, minutes: 0, seconds: 0 };
 
 defineOptions({
   inheritAttrs: false,
@@ -163,19 +160,7 @@ const { floatingStyles } = useFloating(triggerElement, panelElement, {
   placement: "bottom-start",
   strategy: "fixed",
   middleware: computed(() =>
-    props.teleportTo
-      ? [
-          offset(4),
-          flip(),
-          shift({ padding: 8 }),
-          // At least as wide as the field.
-          size({
-            apply({ rects, elements }) {
-              elements.floating.style.minWidth = `${rects.reference.width}px`;
-            },
-          }),
-        ]
-      : []
+    props.teleportTo ? [offset(4), flip(), shift({ padding: 8 })] : []
   ),
   whileElementsMounted(reference, floating, update) {
     if (props.teleportTo) return autoUpdate(reference, floating, update);
@@ -210,6 +195,7 @@ const columns = computed(() => {
     heading: string;
     items: TimePickerColumnItem[];
     selected: number | undefined;
+    fallback: number;
   }> = [
     {
       key: "hours",
@@ -226,6 +212,7 @@ const columns = computed(() => {
           ? current.hours % 12 || 12
           : current.hours
         : undefined,
+      fallback: MIDDAY.hours,
     },
     {
       key: "minutes",
@@ -233,6 +220,7 @@ const columns = computed(() => {
       heading: t("minutes-short"),
       items: range(60, minuteStep.value),
       selected: current?.minutes,
+      fallback: MIDDAY.minutes,
     },
   ];
 
@@ -243,6 +231,7 @@ const columns = computed(() => {
       heading: t("seconds-short"),
       items: range(60),
       selected: current?.seconds,
+      fallback: MIDDAY.seconds,
     });
   }
 
@@ -257,6 +246,7 @@ const columns = computed(() => {
         { value: 1, label: pm },
       ],
       selected: current ? (current.hours >= 12 ? 1 : 0) : undefined,
+      fallback: 1,
     });
   }
 
@@ -264,7 +254,7 @@ const columns = computed(() => {
 });
 
 function handleSelect(key: ColumnKey, value: number) {
-  const current = parts.value ?? { hours: 0, minutes: 0, seconds: 0 };
+  const current = parts.value ?? MIDDAY;
   const next = { ...current };
   const isPm = current.hours >= 12;
 
@@ -325,6 +315,12 @@ function togglePanel() {
 function commit() {
   closePanel();
   triggerRef.value?.focus();
+}
+
+/** Enter takes the time on the band, also when nothing was picked yet. */
+function accept() {
+  if (!parts.value) model.value = serializeTime(MIDDAY, props.seconds);
+  commit();
 }
 
 function clear() {

@@ -22,11 +22,18 @@
         tabindex="0"
         :aria-label="label"
         :aria-activedescendant="
-          selectedIndex >= 0 ? optionId(selectedIndex) : undefined
+          bandIndex >= 0 ? optionId(bandIndex) : undefined
         "
-        :class="listStyles({ dense })"
+        :class="listStyles({ dense, dragging })"
         @keydown="onKeydown"
         @scroll="onScroll"
+        @wheel.passive="markByHand"
+        @touchstart.passive="markByHand"
+        @pointerdown="onPointerDown"
+        @pointermove="onPointerMove"
+        @pointerup="onPointerUp"
+        @pointercancel="onPointerUp"
+        @click.capture="onClickCapture"
       >
         <li
           v-for="(item, index) in items"
@@ -65,6 +72,8 @@ const props = defineProps<{
   heading?: string;
   items: TimePickerColumnItem[];
   selected?: number;
+  /** Rests on the band while nothing is selected. */
+  fallback?: number;
   dense?: boolean;
 }>();
 
@@ -79,6 +88,13 @@ const selectedIndex = computed(() =>
   props.items.findIndex((item) => item.value === props.selected)
 );
 
+// The option on the band: the selected one, else the fallback.
+const bandIndex = computed(() =>
+  selectedIndex.value >= 0
+    ? selectedIndex.value
+    : props.items.findIndex((item) => item.value === props.fallback)
+);
+
 function optionId(index: number) {
   return `${props.id}-option-${index}`;
 }
@@ -90,7 +106,7 @@ function selectIndex(index: number) {
 }
 
 function onKeydown(event: KeyboardEvent) {
-  const current = selectedIndex.value;
+  const current = bandIndex.value;
   switch (event.key) {
     case "ArrowDown":
       event.preventDefault();
@@ -133,9 +149,9 @@ function centeredIndex(list: HTMLElement) {
 }
 
 // Scroll only this column so the panel and page stay put.
-function scrollToSelected(smooth: boolean) {
+function scrollToIndex(index: number, smooth: boolean) {
   const list = listRef.value;
-  const option = list?.children[selectedIndex.value] as HTMLElement | undefined;
+  const option = list?.children[index] as HTMLElement | undefined;
   if (!list || !option) return;
 
   const top =
@@ -148,22 +164,93 @@ function scrollToSelected(smooth: boolean) {
   }
 }
 
-// Scrolling the column picks whatever settles on the band.
+/** Picks the option that came to rest nearest the band, and centres it. */
+function pickCentered() {
+  const list = listRef.value;
+  if (!list) return;
+
+  const index = centeredIndex(list);
+  if (index < 0) return;
+  if (index !== selectedIndex.value) selectIndex(index);
+  scrollToIndex(index, true);
+}
+
+// Scrolling by hand picks whatever settles on the band. The column's own
+// scrolling, e.g. to the fallback on open, picks nothing.
+let byHand = false;
 let settleTimer: ReturnType<typeof setTimeout> | undefined;
 
+function markByHand() {
+  byHand = true;
+}
+
 function onScroll() {
+  if (!byHand || dragging.value) return;
   clearTimeout(settleTimer);
   settleTimer = setTimeout(() => {
-    const list = listRef.value;
-    if (!list) return;
-    const index = centeredIndex(list);
-    if (index >= 0 && index !== selectedIndex.value) selectIndex(index);
+    byHand = false;
+    pickCentered();
   }, 120);
 }
 
-onMounted(() => scrollToSelected(false));
+// The mouse drags the column like a wheel; touch already scrolls it natively.
+const dragging = ref(false);
+let drag:
+  | { pointerId: number; startY: number; startTop: number; moved: boolean }
+  | undefined;
+let suppressClick = false;
+
+function onPointerDown(event: PointerEvent) {
+  if (event.pointerType === "touch" || event.button !== 0 || !listRef.value)
+    return;
+  drag = {
+    pointerId: event.pointerId,
+    startY: event.clientY,
+    startTop: listRef.value.scrollTop,
+    moved: false,
+  };
+}
+
+function onPointerMove(event: PointerEvent) {
+  const list = listRef.value;
+  if (!drag || !list || event.pointerId !== drag.pointerId) return;
+
+  const delta = event.clientY - drag.startY;
+
+  // A few pixels of wobble still count as a click.
+  if (!drag.moved) {
+    if (Math.abs(delta) < 4) return;
+    drag.moved = true;
+    dragging.value = true;
+    list.setPointerCapture?.(event.pointerId);
+  }
+
+  list.scrollTop = drag.startTop - delta;
+}
+
+function onPointerUp(event: PointerEvent) {
+  if (!drag || event.pointerId !== drag.pointerId) return;
+
+  const { moved } = drag;
+  drag = undefined;
+  if (!moved) return;
+
+  dragging.value = false;
+  suppressClick = true;
+  setTimeout(() => (suppressClick = false));
+  pickCentered();
+}
+
+// The click that ends a drag doesn't pick the option under the pointer.
+function onClickCapture(event: MouseEvent) {
+  if (!suppressClick) return;
+  suppressClick = false;
+  event.stopPropagation();
+}
+
+onMounted(() => scrollToIndex(bandIndex.value, false));
 onBeforeUnmount(() => clearTimeout(settleTimer));
-watch(selectedIndex, () => scrollToSelected(true), { flush: "post" });
+watch(bandIndex, (index) => scrollToIndex(index, true), { flush: "post" });
 
 defineExpose({
   focus: () => listRef.value?.focus({ preventScroll: true }),
@@ -222,7 +309,7 @@ const bandStyles = tv({
 // scrollbar, the fade shows there is more.
 const listStyles = tv({
   base: [
-    "relative snap-y snap-mandatory overflow-y-auto overscroll-contain outline-none",
+    "relative snap-y snap-mandatory overflow-y-auto overscroll-contain outline-none select-none",
     "[scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
     "[mask-image:linear-gradient(to_bottom,transparent,#000_30%,#000_70%,transparent)]",
   ],
@@ -230,6 +317,10 @@ const listStyles = tv({
     dense: {
       false: "h-56 py-24",
       true: "h-44 py-19",
+    },
+    // Snapping would fight the drag; the release centres an option instead.
+    dragging: {
+      true: "cursor-grabbing snap-none",
     },
   },
   defaultVariants: {
