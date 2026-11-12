@@ -50,6 +50,7 @@
         :dense
         @select="handleDateSelect"
         @navigate="handleNavigate"
+        @focusout="onFocusOut"
       />
     </Teleport>
     <InputHintRow
@@ -391,11 +392,15 @@ function handleTriggerKeydown(event: KeyboardEvent) {
 }
 
 function onFocusOut(event: FocusEvent) {
-  // Don't close if focus is moving to nothing (clicking on non-focusable element)
-  if (!event.relatedTarget) return;
+  const next = event.relatedTarget as Node | null;
 
-  // Don't close if focus is staying within the container
-  if (containerRef.value?.contains(event.relatedTarget as Node)) return;
+  // Don't close if focus is moving to nothing (clicking on non-focusable element)
+  if (!next) return;
+
+  // Don't close if focus stays within the container, or within the calendar,
+  // which sits outside the container once teleported
+  if (containerRef.value?.contains(next)) return;
+  if (calendarElement.value?.contains(next)) return;
 
   closeCalendar();
 }
