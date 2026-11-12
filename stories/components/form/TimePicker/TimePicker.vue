@@ -54,6 +54,7 @@
           :id="`${panelId}-${column.key}`"
           :key="column.key"
           :label="column.label"
+          :heading="column.heading"
           :items="column.items"
           :selected="column.selected"
           :dense
@@ -67,7 +68,14 @@
 
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, ref, toRef, watch } from "vue";
-import { autoUpdate, flip, offset, shift, useFloating } from "@floating-ui/vue";
+import {
+  autoUpdate,
+  flip,
+  offset,
+  shift,
+  size,
+  useFloating,
+} from "@floating-ui/vue";
 import {
   type LocaleMessages,
   useLocale,
@@ -155,7 +163,19 @@ const { floatingStyles } = useFloating(triggerElement, panelElement, {
   placement: "bottom-start",
   strategy: "fixed",
   middleware: computed(() =>
-    props.teleportTo ? [offset(4), flip(), shift({ padding: 8 })] : []
+    props.teleportTo
+      ? [
+          offset(4),
+          flip(),
+          shift({ padding: 8 }),
+          // At least as wide as the field.
+          size({
+            apply({ rects, elements }) {
+              elements.floating.style.minWidth = `${rects.reference.width}px`;
+            },
+          }),
+        ]
+      : []
   ),
   whileElementsMounted(reference, floating, update) {
     if (props.teleportTo) return autoUpdate(reference, floating, update);
@@ -187,12 +207,14 @@ const columns = computed(() => {
   const result: Array<{
     key: ColumnKey;
     label: string;
+    heading: string;
     items: TimePickerColumnItem[];
     selected: number | undefined;
   }> = [
     {
       key: "hours",
       label: t("hours"),
+      heading: t("hours-short"),
       items: props.hour12
         ? [12, ...Array.from({ length: 11 }, (_, i) => i + 1)].map((h) => ({
             value: h,
@@ -208,6 +230,7 @@ const columns = computed(() => {
     {
       key: "minutes",
       label: t("minutes"),
+      heading: t("minutes-short"),
       items: range(60, minuteStep.value),
       selected: current?.minutes,
     },
@@ -217,6 +240,7 @@ const columns = computed(() => {
     result.push({
       key: "seconds",
       label: t("seconds"),
+      heading: t("seconds-short"),
       items: range(60),
       selected: current?.seconds,
     });
@@ -227,6 +251,7 @@ const columns = computed(() => {
     result.push({
       key: "period",
       label: `${am}/${pm}`,
+      heading: `${am}/${pm}`,
       items: [
         { value: 0, label: am },
         { value: 1, label: pm },

@@ -29,18 +29,19 @@ defineProps<{
 
 const panelStyles = tv({
   base: [
-    "z-50 flex w-max divide-x rounded-[16px] border shadow-lg squircle",
-    "divide-neutral-200 border-neutral-300 bg-white",
-    "dark:divide-neutral-700 dark:border-neutral-700 dark:bg-neutral-900",
+    "z-50 flex w-max rounded-[16px] border shadow-lg squircle",
+    "border-neutral-300 bg-white",
+    "dark:border-neutral-700 dark:bg-neutral-900",
   ],
   variants: {
+    // At least as wide as the field; floating panels get that from the trigger.
     floating: {
       true: "fixed m-0",
-      false: "absolute left-0",
+      false: "absolute left-0 min-w-full",
     },
     dense: {
-      false: "p-1",
-      true: "p-0.5",
+      false: "p-1.5",
+      true: "p-1",
     },
     placement: {
       top: "bottom-full mb-1",

@@ -151,4 +151,61 @@ describe("TimePicker", () => {
     await fireEvent.mouseDown(document.body);
     expect(screen.queryByRole("dialog")).toBeNull();
   });
+
+  it("heads the columns with short names, keeping the full ones for the listboxes", async () => {
+    renderPicker({ seconds: true });
+    await open();
+
+    const panel = screen.getByRole("dialog", { name: "Time picker" });
+    const headings = Array.from(
+      panel.querySelectorAll("[aria-hidden='true']"),
+      (element) => element.textContent?.trim()
+    ).filter(Boolean);
+
+    expect(headings).toEqual(["Hour", "Min", "Sec"]);
+    expect(screen.getByRole("listbox", { name: "Seconds" })).toBeTruthy();
+  });
+
+  it("picks the option that settles on the band after scrolling", async () => {
+    vi.useFakeTimers();
+
+    try {
+      const { emitted } = renderPicker({ modelValue: "09:00" });
+      await open();
+
+      // jsdom has no layout: 32px options below 96px of padding, 224px tall.
+      const minutes = screen.getByRole("listbox", { name: "Minutes" });
+      Object.defineProperties(minutes, {
+        clientHeight: { value: 224 },
+        scrollTop: { value: 30 * 32, writable: true },
+      });
+      within(minutes)
+        .getAllByRole("option")
+        .forEach((option, index) =>
+          Object.defineProperties(option, {
+            offsetTop: { value: 96 + index * 32 },
+            offsetHeight: { value: 32 },
+          })
+        );
+
+      await fireEvent.scroll(minutes);
+      expect(emitted()["update:modelValue"]).toBeUndefined();
+
+      vi.advanceTimersByTime(120);
+      expect(emitted()["update:modelValue"]).toEqual([["09:30"]]);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it("opens a floating panel at least as wide as the field", async () => {
+    renderPicker({ teleportTo: "body" });
+    vi.spyOn(trigger().parentElement!, "getBoundingClientRect").mockReturnValue(
+      new DOMRect(0, 0, 200, 40)
+    );
+    await open();
+
+    const panel = screen.getByRole("dialog", { name: "Time picker" });
+    await vi.waitFor(() => expect(panel.style.minWidth).toBe("200px"));
+  });
 });
