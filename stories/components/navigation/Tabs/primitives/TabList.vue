@@ -3,7 +3,7 @@
     role="tablist"
     :aria-label="ariaLabel"
     aria-orientation="horizontal"
-    :class="variants({ dense })"
+    :class="variants()"
   >
     <slot />
   </div>
@@ -14,21 +14,15 @@ import { tv } from "@/utils/tv";
 
 defineProps<{
   ariaLabel?: string;
-  dense?: boolean;
 }>();
 
-// A segmented control: the tabs share one track and split its width evenly.
+// The tabs split the width evenly over one bottom border, which the active tab
+// underlines. Flat on purpose, so they don't read as a RadioGroup.
 const variants = tv({
   base: [
-    "grid auto-cols-fr grid-flow-col items-center rounded-field squircle",
-    "bg-neutral-100",
-    "dark:bg-neutral-950",
+    "grid auto-cols-fr grid-flow-col border-b",
+    "border-neutral-200",
+    "dark:border-neutral-700",
   ],
-  variants: {
-    dense: {
-      true: "gap-0.5 p-0.5",
-      false: "gap-1 p-1",
-    },
-  },
 });
 </script>

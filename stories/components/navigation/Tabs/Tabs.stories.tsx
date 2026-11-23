@@ -17,6 +17,10 @@ const meta = {
       control: "boolean",
       description: "Compact sizing",
     },
+    divided: {
+      control: "boolean",
+      description: "Line between neighbouring tabs",
+    },
     items: {
       control: "object",
       description: "Tabs as `{ value, label, disabled? }`",
@@ -50,6 +54,10 @@ export const Default: Story = {};
 
 export const Dense: Story = {
   args: { dense: true },
+};
+
+export const Divided: Story = {
+  args: { divided: true },
 };
 
 export const WithDisabledTab: Story = {

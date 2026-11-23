@@ -70,6 +70,18 @@ describe("Tabs", () => {
     expect(screen.getByTestId("value").textContent).toBe("overview");
   });
 
+  it("draws lines between the tabs only when divided", async () => {
+    const { rerender } = render(Tabs, { props: { items } });
+    const lined = () =>
+      screen
+        .getAllByRole("tab")
+        .map((tab) => tab.className.includes("not-first:border-l"));
+    expect(lined()).toEqual([false, false, false]);
+
+    await rerender({ items, divided: true });
+    expect(lined()).toEqual([true, true, true]);
+  });
+
   it("falls back to the first enabled tab for an unknown value", () => {
     renderTabs("missing");
     expect(

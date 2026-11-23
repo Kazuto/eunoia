@@ -2,7 +2,6 @@
   <div v-bind="$attrs">
     <TabList
       :aria-label="ariaLabel"
-      :dense
       :class="listClass"
       @keydown="onKeydown"
     >
@@ -13,6 +12,7 @@
         :controls="panelId(item.value)"
         :active="item.value === activeValue"
         :dense
+        :divided
         :disabled="item.disabled"
         @select="select(item.value)"
       >
@@ -58,6 +58,8 @@ const props = withDefaults(
     items: TabItem[];
     ariaLabel?: string;
     dense?: boolean;
+    /** Draws a line between neighbouring tabs. */
+    divided?: boolean;
     /** Classes for the tab row, e.g. padding or a border. */
     listClass?: string;
     /** Classes for the panel, e.g. `flex-1 overflow-y-auto`. */
