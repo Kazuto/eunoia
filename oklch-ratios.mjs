@@ -1,5 +1,7 @@
 /**
- * Calculate oklch lightness multipliers needed to match a reference color scale.
+ * Calculate the oklch lightness formulas needed to match a reference color scale.
+ * Stops lighter than the base get the share of the way to white, darker stops
+ * the multiplier toward black (see the scales in stories/styles.css).
  *
  * Usage:
  *   node oklch-ratios.mjs <base-hex> <stop:hex> [<stop:hex> ...]
@@ -47,14 +49,17 @@ const baseHex = args[0];
 const baseL = hexToOklchL(baseHex);
 
 console.log(`Base: ${baseHex}  (L = ${baseL.toFixed(4)})\n`);
-console.log("Stop  | Target  | L       | Ratio");
-console.log("------|---------|---------|------");
+console.log("Stop  | Target  | L       | Lightness");
+console.log("------|---------|---------|----------");
 
 for (const arg of args.slice(1)) {
   const [stop, hex] = arg.split(":");
   const targetL = hexToOklchL(hex);
-  const ratio = targetL / baseL;
+  const lightness =
+    targetL > baseL
+      ? `calc(l + (1 - l) * ${((targetL - baseL) / (1 - baseL)).toFixed(2)})`
+      : `calc(l * ${(targetL / baseL).toFixed(2)})`;
   console.log(
-    `${stop.padEnd(5)} | ${hex}  | ${targetL.toFixed(4)}  | ${ratio.toFixed(2)}`
+    `${stop.padEnd(5)} | ${hex}  | ${targetL.toFixed(4)}  | ${lightness}`
   );
 }
