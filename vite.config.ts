@@ -13,6 +13,7 @@ export default defineConfig({
       "@/components": resolve(__dirname, "stories/components"),
       "@/composables": resolve(__dirname, "stories/composables"),
       "@/types": resolve(__dirname, "stories/types"),
+      "@/utils": resolve(__dirname, "stories/utils"),
     },
   },
   build: {

@@ -33,7 +33,7 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { Icon, VisuallyHidden } from "@/components";
 import { useForwardedAttrs, useLinkComponent } from "@/composables";
 
@@ -80,7 +80,7 @@ const badgeText = computed(() => {
 
 const itemStyles = tv({
   base: [
-    "group flex min-w-0 flex-1 cursor-pointer flex-col items-center justify-center gap-1 rounded-[14px] font-sans text-xs font-medium no-underline transition-colors outline-none squircle focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-inset",
+    "group flex min-w-0 flex-1 cursor-pointer flex-col items-center justify-center gap-1 rounded-field font-sans text-xs font-medium no-underline transition-colors outline-none squircle focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-inset",
     "text-neutral-600 hover:text-neutral-900",
     "dark:text-neutral-400 dark:hover:text-neutral-100",
   ],

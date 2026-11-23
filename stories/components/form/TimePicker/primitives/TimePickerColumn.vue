@@ -53,7 +53,7 @@
 
 <script lang="ts" setup>
 import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { useForwardedAttrs } from "@/composables";
 
 export type TimePickerColumnItem = { value: number; label: string };
@@ -290,7 +290,7 @@ const headingStyles = tv({
 const bandStyles = tv({
   base: [
     "pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 transition-colors",
-    "group-first/column:rounded-l-[10px] group-last/column:rounded-r-[10px]",
+    "group-first/column:rounded-l-field-sm group-last/column:rounded-r-field-sm",
     "bg-neutral-100 group-focus-within/column:bg-primary-100",
     "dark:bg-neutral-800 dark:group-focus-within/column:bg-primary-900/60",
   ],
@@ -330,7 +330,7 @@ const listStyles = tv({
 
 const optionStyles = tv({
   base: [
-    "mx-1 flex cursor-pointer snap-center items-center justify-center rounded-[8px] tabular-nums transition-colors squircle",
+    "mx-1 flex cursor-pointer snap-center items-center justify-center rounded-field-xs tabular-nums transition-colors squircle",
     "text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900",
     "dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-neutral-100",
   ],

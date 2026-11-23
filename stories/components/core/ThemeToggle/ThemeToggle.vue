@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 import { computed, toRef } from "vue";
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { useTheme } from "@/composables";
 import { useForwardedAttrs, useLocale } from "@/composables";
 import * as icons from "vue-icons-plus/pi";

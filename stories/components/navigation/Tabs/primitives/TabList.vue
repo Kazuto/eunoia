@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 
 defineProps<{
   ariaLabel?: string;
@@ -20,7 +20,7 @@ defineProps<{
 // A segmented control: the tabs share one track and split its width evenly.
 const variants = tv({
   base: [
-    "grid auto-cols-fr grid-flow-col items-center rounded-[14px] squircle",
+    "grid auto-cols-fr grid-flow-col items-center rounded-field squircle",
     "bg-neutral-100",
     "dark:bg-neutral-950",
   ],

@@ -253,7 +253,7 @@ export const Responsive: Story = {
     components: { DataTable, Badge, Button, Icon, Tooltip },
     setup: () => ({ args, statusVariants, onEdit, onDelete }),
     template: `
-      <div class="max-w-full resize-x overflow-hidden rounded-[14px] border border-dashed border-neutral-300 squircle dark:border-neutral-700" style="width: 360px">
+      <div class="max-w-full resize-x overflow-hidden rounded-field border border-dashed border-neutral-300 squircle dark:border-neutral-700" style="width: 360px">
         ${projectTemplate}
       </div>
     `,

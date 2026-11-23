@@ -58,7 +58,7 @@ export const SkipLink: Story = {
           <VisuallyHidden focusable>
             <a
               href="#main"
-              class="mb-3 inline-block rounded-[10px] bg-primary-600 px-3 py-2 text-white squircle"
+              class="mb-3 inline-block rounded-field-sm bg-primary-600 px-3 py-2 text-white squircle"
             >
               Skip to content
             </a>

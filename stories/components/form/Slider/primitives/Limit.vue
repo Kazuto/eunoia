@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 
 defineOptions({
   inheritAttrs: false,

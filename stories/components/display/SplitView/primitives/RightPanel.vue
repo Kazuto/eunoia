@@ -14,7 +14,7 @@ defineSlots<{
 
 <template>
   <div
-    class="flex min-h-0 min-w-0 flex-col overflow-hidden rounded-[6px] squircle"
+    class="flex min-h-0 min-w-0 flex-col overflow-hidden rounded-field-2xs squircle"
   >
     <div
       v-if="$slots.header"

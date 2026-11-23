@@ -19,7 +19,7 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { useForwardedAttrs } from "@/composables";
 import { Icon } from "@/components";
 

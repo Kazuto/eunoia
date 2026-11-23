@@ -75,7 +75,7 @@
 </template>
 
 <script setup lang="ts">
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { useForwardedAttrs } from "@/composables";
 import { useLocale } from "@/composables/useLocale";
 import { Icon } from "@/components";
@@ -119,7 +119,7 @@ function clearSelection(event: Event) {
 const triggerStyles = tv({
   base: [
     "flex w-full items-center justify-between",
-    "rounded-[10px] border transition-colors squircle",
+    "rounded-field border transition-colors squircle",
     "focus-within:border-primary-500 focus-within:ring-2 focus-within:ring-primary-500",
     "cursor-pointer",
     "transition-all duration-200 ease-in-out",

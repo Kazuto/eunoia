@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts" setup>
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { useForwardedAttrs, useSanitizedId } from "@/composables";
 
 defineOptions({

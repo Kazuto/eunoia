@@ -16,7 +16,7 @@
 
 <script lang="ts" setup>
 import { onMounted, ref, watch } from "vue";
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { useForwardedAttrs } from "@/composables";
 
 defineOptions({
@@ -85,7 +85,7 @@ function onBackdropClick(e: MouseEvent) {
 
 const panelStyles = tv({
   base: [
-    "m-auto max-h-[calc(100dvh-2rem)] w-full flex-col overflow-hidden rounded-[24px] border shadow-lg squircle",
+    "m-auto max-h-[calc(100dvh-2rem)] w-full flex-col overflow-hidden rounded-box border shadow-lg squircle",
     "border-neutral-200 bg-white",
     "dark:border-neutral-700 dark:bg-neutral-900",
     "backdrop:bg-black/50",

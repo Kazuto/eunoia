@@ -17,7 +17,7 @@ const meta = {
         <div class="max-w-md">
           <AspectRatio
             {...args}
-            class="rounded-[16px] squircle"
+            class="rounded-box-sm squircle"
           >
             <div class="flex items-center justify-center bg-primary-100 text-sm text-primary-900 dark:bg-primary-900 dark:text-primary-100">
               {String(args.ratio)}

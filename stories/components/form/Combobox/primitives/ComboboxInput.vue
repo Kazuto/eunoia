@@ -64,7 +64,7 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { Icon } from "@/components";
 import { useForwardedAttrs } from "@/composables";
 
@@ -110,7 +110,7 @@ defineExpose({
 
 const wrapperStyles = tv({
   base: [
-    "inline-flex w-full items-center rounded-[14px] border font-sans transition-colors squircle hover:bg-neutral-50/25",
+    "inline-flex w-full items-center rounded-field border font-sans transition-colors squircle hover:bg-neutral-50/25",
     "border-neutral-300 focus-within:border-primary-500",
     "dark:border-neutral-700 dark:focus-within:border-primary-500 dark:hover:bg-black/15",
   ],

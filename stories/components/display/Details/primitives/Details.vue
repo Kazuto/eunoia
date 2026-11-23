@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts" setup>
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { Icon } from "@/components";
 import { useForwardedAttrs } from "@/composables";
 
@@ -52,7 +52,7 @@ defineOptions({
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const detailsStyles = tv({
-  base: "rounded-[14px] border border-neutral-300 font-sans squircle dark:border-neutral-600",
+  base: "rounded-field border border-neutral-300 font-sans squircle dark:border-neutral-600",
   variants: {
     dense: {
       false: "text-sm",

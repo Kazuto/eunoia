@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts" setup>
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { useForwardedAttrs } from "@/composables";
 
 defineOptions({
@@ -33,7 +33,7 @@ const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const itemStyles = tv({
   base: [
-    "flex cursor-pointer items-center gap-2 rounded-[10px] squircle",
+    "flex cursor-pointer items-center gap-2 rounded-field-sm squircle",
     "text-neutral-900",
     "dark:text-neutral-100",
   ],

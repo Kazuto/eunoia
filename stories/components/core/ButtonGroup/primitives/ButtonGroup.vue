@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts" setup>
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { useForwardedAttrs } from "@/composables";
 
 defineOptions({
@@ -27,8 +27,8 @@ const buttonGroupStyles = tv({
   base: [
     "inline-flex",
     "[&>*]:rounded-none",
-    "[&>:first-child]:rounded-s-lg",
-    "[&>:last-child]:rounded-e-lg",
+    "[&>:first-child]:rounded-s-field",
+    "[&>:last-child]:rounded-e-field",
   ],
 });
 </script>

@@ -24,7 +24,7 @@
 <script setup lang="ts">
 import { inject } from "vue";
 import { Icon } from "@/components";
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { useForwardedAttrs } from "@/composables";
 import { sidebarCollapsedKey } from "@/components/layout/Sidebar/keys";
 

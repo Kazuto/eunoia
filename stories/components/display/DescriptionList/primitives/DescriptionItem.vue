@@ -22,7 +22,7 @@
 
 <script lang="ts" setup>
 import { inject } from "vue";
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { useForwardedAttrs } from "@/composables";
 import { DESCRIPTION_LIST_KEY } from "./context";
 

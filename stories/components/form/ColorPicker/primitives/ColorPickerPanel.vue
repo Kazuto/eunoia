@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts" setup>
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { useForwardedAttrs } from "@/composables";
 
 defineOptions({
@@ -30,7 +30,7 @@ defineProps<{
 
 const panelStyles = tv({
   base: [
-    "z-50 flex flex-col rounded-[14px] border shadow-lg squircle",
+    "z-50 flex flex-col rounded-box-sm border shadow-lg squircle",
     "border-neutral-300 bg-white text-neutral-900",
     "dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100",
   ],

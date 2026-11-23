@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts" setup>
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { useForwardedAttrs } from "@/composables";
 
 defineOptions({
@@ -25,7 +25,7 @@ const imageStyles = tv({
   base: "inline-block",
   variants: {
     rounded: {
-      true: "rounded-[14px] squircle",
+      true: "rounded-field squircle",
       full: "rounded-full",
     },
     fit: {

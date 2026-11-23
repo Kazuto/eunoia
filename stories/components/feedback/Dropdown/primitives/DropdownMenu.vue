@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts" setup>
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { useForwardedAttrs } from "@/composables";
 
 defineOptions({
@@ -22,7 +22,7 @@ const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const menuStyles = tv({
   base: [
-    "absolute top-full right-0 left-0 z-50 mt-1 max-h-60 overflow-auto rounded-[16px] border p-1 shadow-lg squircle",
+    "absolute top-full right-0 left-0 z-50 mt-1 max-h-60 overflow-auto rounded-box-sm border p-1 shadow-lg squircle",
     "border-neutral-300 bg-white",
     "dark:border-neutral-600 dark:bg-neutral-800",
   ],

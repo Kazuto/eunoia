@@ -20,7 +20,7 @@ const meta = {
       return () => (
         <Grid {...args}>
           {Array.from({ length: 6 }, (_, i) => (
-            <div class="rounded-[16px] bg-primary-100 p-4 text-sm text-primary-900 squircle dark:bg-primary-900 dark:text-primary-100">
+            <div class="rounded-box-sm bg-primary-100 p-4 text-sm text-primary-900 squircle dark:bg-primary-900 dark:text-primary-100">
               Item {i + 1}
             </div>
           ))}

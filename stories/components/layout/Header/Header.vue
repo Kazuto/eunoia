@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { Button, Tooltip, Headline, Truncate, Text } from "@/components";
 import HeaderActions from "./primitives/HeaderActions.vue";
 import type { HeaderAction } from "@/types";

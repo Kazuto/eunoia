@@ -13,7 +13,7 @@
 
 <script lang="ts" setup>
 import { computed } from "vue";
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { useForwardedAttrs } from "@/composables";
 
 defineOptions({
@@ -24,7 +24,7 @@ const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const scrollStyles = tv({
   base: [
-    "scrollbar-subtle overscroll-contain rounded-[12px] squircle",
+    "scrollbar-subtle overscroll-contain rounded-field squircle",
     "focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:outline-none",
   ],
   variants: {

@@ -47,7 +47,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { Icon } from "@/components";
 import { useForwardedAttrs } from "@/composables";
 
@@ -85,7 +85,7 @@ defineExpose({
 const triggerStyles = tv({
   base: [
     "flex w-full items-center gap-1",
-    "rounded-[10px] border transition-all duration-200 ease-in-out squircle",
+    "rounded-field border transition-all duration-200 ease-in-out squircle",
     "focus-within:border-primary-500 focus-within:ring-2 focus-within:ring-primary-500",
   ],
   variants: {

@@ -60,7 +60,7 @@ import {
   shallowRef,
   watch,
 } from "vue";
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import {
   autoUpdate,
   flip,

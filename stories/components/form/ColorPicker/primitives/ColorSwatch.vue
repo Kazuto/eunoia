@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts" setup>
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { useForwardedAttrs } from "@/composables";
 
 defineOptions({
@@ -34,7 +34,7 @@ withDefaults(
 
 const swatchStyles = tv({
   base: [
-    "relative inline-block shrink-0 overflow-hidden rounded-[6px] border squircle",
+    "relative inline-block shrink-0 overflow-hidden rounded-field-2xs border squircle",
     "border-black/10 dark:border-white/15",
     "bg-[repeating-conic-gradient(#d4d4d4_0_25%,#ffffff_0_50%)] bg-size-[8px_8px]",
   ],

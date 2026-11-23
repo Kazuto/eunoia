@@ -37,7 +37,7 @@ const meta = {
       return () => (
         <Stack {...args}>
           {["First", "Second", "Third"].map((label) => (
-            <div class="rounded-[16px] bg-primary-100 px-4 py-3 text-sm text-primary-900 squircle dark:bg-primary-900 dark:text-primary-100">
+            <div class="rounded-box-sm bg-primary-100 px-4 py-3 text-sm text-primary-900 squircle dark:bg-primary-900 dark:text-primary-100">
               {label}
             </div>
           ))}

@@ -66,7 +66,7 @@
 </template>
 
 <script lang="ts" setup>
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { Icon, Chip } from "@/components";
 import { useForwardedAttrs } from "@/composables";
 
@@ -78,7 +78,7 @@ const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const triggerStyles = tv({
   base: [
-    "inline-flex w-full cursor-pointer items-center rounded-[14px] border font-sans transition-colors outline-none squircle hover:bg-neutral-50/25",
+    "inline-flex w-full cursor-pointer items-center rounded-field border font-sans transition-colors outline-none squircle hover:bg-neutral-50/25",
     "border-neutral-300 focus-visible:border-primary-500",
     "dark:border-neutral-700 dark:hover:bg-black/15 dark:focus-visible:border-primary-500",
   ],

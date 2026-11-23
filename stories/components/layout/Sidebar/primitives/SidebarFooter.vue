@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts" setup>
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { useForwardedAttrs } from "@/composables";
 import Divider from "@/components/core/Divider/Divider.vue";
 

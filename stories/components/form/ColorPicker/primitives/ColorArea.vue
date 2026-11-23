@@ -33,7 +33,7 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { useForwardedAttrs } from "@/composables";
 
 defineOptions({
@@ -125,7 +125,7 @@ function onKeydown(event: KeyboardEvent) {
 
 const areaStyles = tv({
   base: [
-    "relative w-full touch-none overflow-hidden rounded-[10px] outline-none squircle",
+    "relative w-full touch-none overflow-hidden rounded-field-sm outline-none squircle",
     "ring-1 ring-black/10 ring-inset dark:ring-white/15",
     "focus-visible:ring-2 focus-visible:ring-primary-500",
   ],

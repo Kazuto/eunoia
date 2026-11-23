@@ -25,7 +25,7 @@
 
 <script lang="ts" setup>
 import { computed } from "vue";
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { Icon } from "@/components";
 import { useSlotContent, useForwardedAttrs } from "@/composables";
 import type { ButtonLinkOptions } from "./linkOptions";
@@ -100,7 +100,7 @@ const elementAttrs = computed(() => {
 
 const buttonStyles = tv({
   base: [
-    "inline-flex cursor-pointer items-center gap-1.5 rounded-[14px] border-0 font-sans leading-none font-medium no-underline transition-colors outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50",
+    "inline-flex cursor-pointer items-center gap-1.5 rounded-field border-0 font-sans leading-none font-medium no-underline transition-colors outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50",
     "focus-visible:ring-offset-white",
     "dark:focus-visible:ring-offset-neutral-900",
   ],

@@ -80,7 +80,7 @@ const meta = {
             {placeholders.map((index) => (
               <div
                 key={index}
-                class="h-20 shrink-0 rounded-[14px] bg-neutral-100 squircle dark:bg-neutral-800"
+                class="h-20 shrink-0 rounded-field bg-neutral-100 squircle dark:bg-neutral-800"
               />
             ))}
           </main>
@@ -162,7 +162,7 @@ export const WithSidebar: Story = {
               {placeholders.map((index) => (
                 <div
                   key={index}
-                  class="h-20 shrink-0 rounded-[14px] bg-neutral-100 squircle dark:bg-neutral-800"
+                  class="h-20 shrink-0 rounded-field bg-neutral-100 squircle dark:bg-neutral-800"
                 />
               ))}
             </main>

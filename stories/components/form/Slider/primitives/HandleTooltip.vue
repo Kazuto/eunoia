@@ -23,7 +23,7 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 
 const props = defineProps<{
   dense?: boolean;
@@ -49,7 +49,7 @@ const tooltipStyle = computed(() => {
 
 const bubbleStyles = tv({
   base: [
-    "rounded-[8px] px-1.5 font-medium tabular-nums squircle",
+    "rounded-field-xs px-1.5 font-medium tabular-nums squircle",
     "bg-neutral-800 text-white",
     "dark:bg-neutral-100 dark:text-neutral-900",
   ],

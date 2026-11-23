@@ -3,7 +3,7 @@ import Checkbox from "@/components/form/Checkbox/Checkbox.vue";
 import Input from "@/components/form/Input/Input.vue";
 import { type LocaleMessages, useLocale } from "@/composables";
 import { useVirtualizer } from "@tanstack/vue-virtual";
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import {
   computed,
   nextTick,
@@ -80,7 +80,7 @@ const emit = defineEmits<{
 
 const variants = tv({
   base: [
-    "flex cursor-pointer items-center justify-between rounded-[12px] px-2.5 py-1.5 text-sm font-medium squircle",
+    "flex cursor-pointer items-center justify-between rounded-field px-2.5 py-1.5 text-sm font-medium squircle",
     "text-neutral-700 hover:bg-neutral-100",
     "dark:text-neutral-200 dark:hover:bg-white/5",
   ],

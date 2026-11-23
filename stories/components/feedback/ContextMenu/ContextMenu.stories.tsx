@@ -41,7 +41,7 @@ const meta = {
     setup() {
       return () => (
         <ContextMenu {...args}>
-          <div class="flex h-48 items-center justify-center rounded-[16px] border border-dashed border-neutral-300 text-sm text-neutral-600 squircle dark:border-neutral-600 dark:text-neutral-300">
+          <div class="flex h-48 items-center justify-center rounded-box-sm border border-dashed border-neutral-300 text-sm text-neutral-600 squircle dark:border-neutral-600 dark:text-neutral-300">
             Right-click here, or focus and press Shift+F10
           </div>
         </ContextMenu>

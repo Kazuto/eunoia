@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts" setup>
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import Button from "../primitives/Button.vue";
 import type { ButtonLinkOptions } from "../primitives/linkOptions";
 

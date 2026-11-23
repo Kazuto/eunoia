@@ -74,7 +74,7 @@ import {
   useTemplateRef,
   watch,
 } from "vue";
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { Drawer, Menu } from "@/components";
 import { isCurrentPage } from "../Menu/currentPage";
 import {

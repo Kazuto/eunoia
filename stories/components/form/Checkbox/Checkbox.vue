@@ -53,7 +53,7 @@
 
 <script setup lang="ts">
 import { ref, toRef, watchEffect, computed } from "vue";
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { Icon } from "@/components";
 import InputHintRow from "../Input/primitives/InputHintRow.vue";
 import InputHelper from "../Input/primitives/InputHelper.vue";

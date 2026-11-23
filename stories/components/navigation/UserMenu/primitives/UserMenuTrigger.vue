@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts" setup>
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { Avatar } from "@/components";
 import { useForwardedAttrs } from "@/composables";
 
@@ -37,7 +37,7 @@ const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const triggerStyles = tv({
   base: [
-    "inline-flex cursor-pointer items-center gap-2 rounded-[16px] border p-1 font-sans outline-none squircle focus-visible:ring-2 focus-visible:ring-offset-2",
+    "inline-flex cursor-pointer items-center gap-2 rounded-field border p-1 font-sans outline-none squircle focus-visible:ring-2 focus-visible:ring-offset-2",
     "border-neutral-200 bg-white focus-visible:ring-neutral-300 focus-visible:ring-offset-white",
     "dark:border-neutral-700 dark:bg-neutral-800 dark:focus-visible:ring-neutral-700 dark:focus-visible:ring-offset-neutral-900",
   ],

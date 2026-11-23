@@ -7,6 +7,17 @@
 @theme {
   --font-sans: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
+  /* Corner radii. Fields (buttons, inputs, menu items) and boxes (cards,
+     dialogs) are the two to theme; the smaller ones follow them so nested
+     corners keep their spacing, and stop at square. tailwind-merge has to know
+     these names too, see stories/utils/tv.ts. */
+  --radius-box: 24px;
+  --radius-box-sm: calc(var(--radius-box) - 8px); /* Popups, toasts, alerts */
+  --radius-field: 14px;
+  --radius-field-sm: calc(var(--radius-field) - 4px); /* Tabs, menu items */
+  --radius-field-xs: calc(var(--radius-field) - 6px); /* Kbd, inline code */
+  --radius-field-2xs: calc(var(--radius-field) - 8px); /* Swatches */
+
   --color-gray: #8f877b; /* Light, warm gray/neutrals */
   --color-neutral: #6e6e6e; /* Medium-dark gray */
   --color-primary: #a88bc7; /* Soft lavender-purple, gentle and contemplative */
@@ -554,7 +565,7 @@
   }
 
   & :where(code):not(:where(pre code, .not-prose, .not-prose *)) {
-    border-radius: 8px;
+    border-radius: var(--radius-field-xs);
     corner-shape: squircle;
     background-color: var(--color-neutral-100);
     padding: 0.15em 0.4em;
@@ -570,7 +581,7 @@
 
   & :where(pre):not(:where(.not-prose, .not-prose *)) {
     overflow-x: auto;
-    border-radius: 14px;
+    border-radius: var(--radius-field);
     corner-shape: squircle;
     background-color: var(--color-neutral-50);
     padding: 1em;
@@ -627,7 +638,7 @@
   & :where(img, video):not(:where(.not-prose, .not-prose *)) {
     max-width: 100%;
     height: auto;
-    border-radius: 14px;
+    border-radius: var(--radius-field);
     corner-shape: squircle;
   }
 

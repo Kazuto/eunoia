@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts" setup>
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { useForwardedAttrs } from "@/composables";
 
 defineOptions({
@@ -42,7 +42,7 @@ const badgeStyles = tv({
       true: "px-2 py-0.5 text-[10px]",
     },
     pill: {
-      false: "rounded-[10px] squircle",
+      false: "rounded-field-sm squircle",
       true: "rounded-full",
     },
   },

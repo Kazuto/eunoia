@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts" setup>
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { useForwardedAttrs } from "@/composables";
 
 defineOptions({
@@ -22,7 +22,7 @@ const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const panelStyles = tv({
   base: [
-    "z-50 w-max max-w-[min(22rem,calc(100vw-1rem))] rounded-[16px] border font-sans shadow-lg outline-none squircle",
+    "z-50 w-max max-w-[min(22rem,calc(100vw-1rem))] rounded-box-sm border font-sans shadow-lg outline-none squircle",
     "border-neutral-300 bg-white text-neutral-900",
     "dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-100",
   ],

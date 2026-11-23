@@ -63,7 +63,7 @@
 
 <script lang="ts" setup>
 import { computed } from "vue";
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { type DataTableColumn, Icon } from "@/components";
 import { useForwardedAttrs, useLocale } from "@/composables";
 
@@ -143,7 +143,7 @@ const cellStyles = tv({
 });
 
 const sortButtonStyles = tv({
-  base: "inline-flex cursor-pointer items-center gap-1 rounded-[6px] outline-none select-none squircle focus-visible:ring-2 focus-visible:ring-primary-500",
+  base: "inline-flex cursor-pointer items-center gap-1 rounded-field-2xs outline-none select-none squircle focus-visible:ring-2 focus-visible:ring-primary-500",
 });
 
 const caretStyles = tv({

@@ -81,7 +81,7 @@
 
 <script lang="ts" setup>
 import { computed, nextTick, onBeforeUnmount, ref, watch } from "vue";
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { useSanitizedId } from "@/composables";
 import Button from "@/components/core/Button/Button.vue";
 import Icon from "@/components/core/Icon/Icon.vue";
@@ -148,7 +148,7 @@ const positionStyle = computed(
 
 const menuStyles = tv({
   base: [
-    "z-50 my-1.5 max-w-80 min-w-56 overflow-auto rounded-[16px] border p-1 shadow-lg squircle",
+    "z-50 my-1.5 max-w-80 min-w-56 overflow-auto rounded-box-sm border p-1 shadow-lg squircle",
     "border-neutral-300 bg-white",
     "dark:border-neutral-600 dark:bg-neutral-800",
   ],
@@ -156,7 +156,7 @@ const menuStyles = tv({
 
 const itemStyles = tv({
   base: [
-    "flex w-full cursor-pointer items-start gap-2 rounded-[10px] font-medium outline-none squircle",
+    "flex w-full cursor-pointer items-start gap-2 rounded-field-sm font-medium outline-none squircle",
     "text-neutral-900 focus:bg-neutral-200",
     "dark:text-neutral-100 dark:focus:bg-neutral-700",
   ],

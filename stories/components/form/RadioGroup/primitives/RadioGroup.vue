@@ -33,7 +33,7 @@
 
 <script lang="ts" setup>
 import { computed, ref } from "vue";
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { useForwardedAttrs } from "@/composables";
 
 defineOptions({
@@ -67,7 +67,7 @@ const indicatorStyle = computed(() => {
 
 const groupStyles = tv({
   base: [
-    "relative inline-flex w-full rounded-[14px] p-1 squircle",
+    "relative inline-flex w-full rounded-field p-1 squircle",
     "bg-neutral-100",
     "dark:bg-neutral-800",
   ],
@@ -84,7 +84,7 @@ const groupStyles = tv({
 
 const indicatorStyles = tv({
   base: [
-    "absolute top-1 bottom-1 rounded-[10px] border border-transparent shadow transition-[left] duration-200 ease-out squircle",
+    "absolute top-1 bottom-1 rounded-field-sm border border-transparent shadow transition-[left] duration-200 ease-out squircle",
     "bg-white",
     "dark:bg-neutral-700",
   ],

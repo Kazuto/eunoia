@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import {
   default as LeftPanel,
   type SplitViewItem,
@@ -63,7 +63,7 @@ const emit = defineEmits<{
 
 const variants = tv({
   base: [
-    "grid h-full min-h-0 grid-cols-12 grid-rows-[minmax(0,1fr)] overflow-hidden rounded-[28px] border squircle",
+    "grid h-full min-h-0 grid-cols-12 grid-rows-[minmax(0,1fr)] overflow-hidden rounded-box border squircle",
     "border-neutral-200 bg-white text-neutral-900",
     "dark:border-white/5 dark:bg-neutral-900 dark:text-neutral-100",
   ],

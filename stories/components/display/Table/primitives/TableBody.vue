@@ -46,7 +46,7 @@
 </template>
 
 <script lang="ts" setup>
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { useForwardedAttrs } from "@/composables";
 import { Skeleton } from "@/components";
 import type { TableHeader } from "./TableHead.vue";

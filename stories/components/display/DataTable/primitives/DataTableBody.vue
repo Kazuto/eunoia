@@ -96,7 +96,7 @@ export type DataTableColumn<T = Record<string, unknown>> = {
 </script>
 
 <script lang="ts" setup generic="T extends Record<string, unknown>">
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { useForwardedAttrs, useLocale } from "@/composables";
 import { Skeleton } from "@/components";
 

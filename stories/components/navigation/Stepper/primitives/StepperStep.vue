@@ -47,7 +47,7 @@
 </template>
 
 <script setup lang="ts">
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import StepperMarker from "./StepperMarker.vue";
 
 export type StepState = "completed" | "current" | "upcoming";
@@ -87,7 +87,7 @@ const itemStyles = tv({
 });
 
 const bodyStyles = tv({
-  base: "flex gap-3 rounded-[12px] text-left squircle",
+  base: "flex gap-3 rounded-field text-left squircle",
   variants: {
     orientation: {
       horizontal: "items-center",

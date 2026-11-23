@@ -64,7 +64,7 @@
 
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { useForwardedAttrs } from "@/composables";
 import HandleTooltip from "../primitives/HandleTooltip.vue";
 import SliderInput from "../primitives/SliderInput.vue";

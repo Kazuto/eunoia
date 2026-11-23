@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts" setup>
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { useForwardedAttrs } from "@/composables";
 
 defineOptions({
@@ -20,7 +20,7 @@ defineOptions({
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const alertStyles = tv({
-  base: "relative flex items-start gap-3 overflow-hidden rounded-[16px] border font-sans squircle",
+  base: "relative flex items-start gap-3 overflow-hidden rounded-box-sm border font-sans squircle",
   variants: {
     variant: {
       info: [

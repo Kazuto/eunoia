@@ -15,7 +15,7 @@
       ref="viewportRef"
       tabindex="0"
       :aria-live="running ? 'off' : 'polite'"
-      class="relative flex snap-x snap-mandatory overflow-x-auto overscroll-x-contain rounded-[16px] outline-none [scrollbar-width:none] squircle focus-visible:ring-2 focus-visible:ring-primary-500 [&::-webkit-scrollbar]:hidden"
+      class="relative flex snap-x snap-mandatory overflow-x-auto overscroll-x-contain rounded-box-sm outline-none [scrollbar-width:none] squircle focus-visible:ring-2 focus-visible:ring-primary-500 [&::-webkit-scrollbar]:hidden"
       @scroll="onScroll"
     >
       <CarouselSlide

@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts" setup>
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { useForwardedAttrs } from "@/composables";
 import { Icon } from "@/components";
 import ColorSwatch from "./ColorSwatch.vue";
@@ -52,7 +52,7 @@ defineProps<{
 const triggerStyles = tv({
   base: [
     "flex w-full items-center gap-2",
-    "rounded-[10px] border squircle",
+    "rounded-field border squircle",
     "transition-all duration-200 ease-in-out",
     "focus-visible:border-primary-500 focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:outline-none",
   ],

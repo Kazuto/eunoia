@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts" setup>
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { useForwardedAttrs } from "@/composables";
 
 defineOptions({
@@ -18,7 +18,7 @@ const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const codeStyles = tv({
   base: [
-    "rounded-[8px] bg-neutral-100 px-1.5 py-0.5 font-mono text-[0.875em] text-neutral-800 select-all squircle",
+    "rounded-field-xs bg-neutral-100 px-1.5 py-0.5 font-mono text-[0.875em] text-neutral-800 select-all squircle",
     "dark:bg-neutral-800 dark:text-neutral-100",
   ],
 });

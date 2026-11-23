@@ -13,7 +13,7 @@
 
 <script lang="ts" setup>
 import { computed } from "vue";
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { useForwardedAttrs } from "@/composables";
 
 defineOptions({
@@ -24,7 +24,7 @@ const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const contentStyles = tv({
   base: [
-    "z-50 mt-1.5 min-w-48 overflow-auto rounded-[16px] border p-1 shadow-lg squircle",
+    "z-50 mt-1.5 min-w-48 overflow-auto rounded-box-sm border p-1 shadow-lg squircle",
     "border-neutral-300 bg-white",
     "dark:border-neutral-600 dark:bg-neutral-800",
   ],

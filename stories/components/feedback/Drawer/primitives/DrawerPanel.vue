@@ -16,7 +16,7 @@
 
 <script lang="ts" setup>
 import { onMounted, ref, watch } from "vue";
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { useForwardedAttrs } from "@/composables";
 
 defineOptions({
@@ -105,19 +105,19 @@ const panelStyles = tv({
   variants: {
     side: {
       right: [
-        "inset-y-0 right-0 left-auto h-dvh max-h-none w-[min(24rem,100vw)] rounded-l-[24px] border-r-0",
+        "inset-y-0 right-0 left-auto h-dvh max-h-none w-[min(24rem,100vw)] rounded-l-box border-r-0",
         "translate-x-full open:translate-none starting:open:translate-x-full",
       ],
       left: [
-        "inset-y-0 right-auto left-0 h-dvh max-h-none w-[min(24rem,100vw)] rounded-r-[24px] border-l-0",
+        "inset-y-0 right-auto left-0 h-dvh max-h-none w-[min(24rem,100vw)] rounded-r-box border-l-0",
         "-translate-x-full open:translate-none starting:open:-translate-x-full",
       ],
       top: [
-        "inset-x-0 top-0 bottom-auto max-h-[80dvh] w-full rounded-b-[24px] border-t-0",
+        "inset-x-0 top-0 bottom-auto max-h-[80dvh] w-full rounded-b-box border-t-0",
         "-translate-y-full open:translate-none starting:open:-translate-y-full",
       ],
       bottom: [
-        "inset-x-0 top-auto bottom-0 max-h-[80dvh] w-full rounded-t-[24px] border-b-0",
+        "inset-x-0 top-auto bottom-0 max-h-[80dvh] w-full rounded-t-box border-b-0",
         "translate-y-full open:translate-none starting:open:translate-y-full",
       ],
     },

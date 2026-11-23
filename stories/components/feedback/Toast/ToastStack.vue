@@ -50,7 +50,7 @@ import {
   nextTick,
   watch,
 } from "vue";
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { type LocaleMessages, useLocale } from "@/composables";
 import Toast from "./primitives/Toast.vue";
 import ToastDismiss from "./primitives/ToastDismiss.vue";

@@ -31,7 +31,7 @@
 
 <script lang="ts" setup>
 import { onBeforeUnmount, ref } from "vue";
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { useSanitizedId, useForwardedAttrs } from "@/composables";
 import TooltipContent from "./primitives/TooltipContent.vue";
 import type { TooltipPlacement } from "./primitives/placement";

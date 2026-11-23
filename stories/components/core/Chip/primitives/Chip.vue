@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts" setup>
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { useForwardedAttrs } from "@/composables";
 
 defineOptions({
@@ -56,11 +56,11 @@ const chipStyles = tv({
     },
     // Squircle by default, like Badge; `pill` keeps the fully round shape.
     pill: {
-      false: "rounded-[10px] squircle",
+      false: "rounded-field-sm squircle",
       true: "rounded-full",
     },
   },
-  compoundVariants: [{ dense: true, pill: false, class: "rounded-[8px]" }],
+  compoundVariants: [{ dense: true, pill: false, class: "rounded-field-xs" }],
   defaultVariants: {
     variant: "primary",
     dense: false,

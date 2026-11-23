@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { useForwardedAttrs } from "@/composables";
 
 defineOptions({
@@ -28,7 +28,7 @@ withDefaults(
 
 const variants = tv({
   base: [
-    "inline-flex overflow-hidden rounded-[14px] border transition-colors squircle",
+    "inline-flex overflow-hidden rounded-field border transition-colors squircle",
     "border-neutral-200 bg-white text-neutral-600 hover:bg-neutral-200/50 active:bg-neutral-50/25 has-[input:focus]:border-primary-500 has-[textarea:focus]:border-primary-500",
     "dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-900 dark:active:bg-neutral-900/25 dark:has-[input:focus]:border-primary-500 dark:has-[textarea:focus]:border-primary-500",
   ],

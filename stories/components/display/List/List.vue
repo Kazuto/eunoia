@@ -10,7 +10,7 @@
 
 <script lang="ts" setup>
 import { computed, provide } from "vue";
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { useForwardedAttrs } from "@/composables";
 import { LIST_KEY } from "./primitives/context";
 
@@ -27,7 +27,7 @@ const listStyles = tv({
       plain: "",
       divided: "divide-y divide-neutral-200 dark:divide-neutral-700",
       bordered: [
-        "divide-y divide-neutral-200 rounded-[14px] border border-neutral-300 squircle",
+        "divide-y divide-neutral-200 rounded-field border border-neutral-300 squircle",
         "dark:divide-neutral-700 dark:border-neutral-600",
       ],
     },

@@ -98,7 +98,7 @@ function followLink(event: MouseEvent) {
     <div class="flex w-full max-w-sm flex-col gap-6">
       <div class="flex flex-col items-center gap-3 text-center">
         <span
-          class="flex size-11 items-center justify-center rounded-[14px] bg-primary-500 text-white squircle"
+          class="flex size-11 items-center justify-center rounded-field bg-primary-500 text-white squircle"
         >
           <Icon
             name="cube"

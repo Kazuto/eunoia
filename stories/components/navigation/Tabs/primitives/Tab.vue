@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 
 defineProps<{
   id: string;
@@ -31,7 +31,7 @@ const emit = defineEmits<{
 
 const variants = tv({
   base: [
-    "cursor-pointer rounded-[10px] text-center font-semibold transition-colors outline-none squircle focus-visible:ring-2 focus-visible:ring-primary-500",
+    "cursor-pointer rounded-field-sm text-center font-semibold transition-colors outline-none squircle focus-visible:ring-2 focus-visible:ring-primary-500",
     "text-neutral-500 hover:text-neutral-900",
     "dark:text-neutral-400 dark:hover:text-neutral-100",
   ],

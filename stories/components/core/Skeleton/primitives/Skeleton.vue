@@ -9,7 +9,7 @@
 
 <script lang="ts" setup>
 import { computed } from "vue";
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { useForwardedAttrs } from "@/composables";
 
 defineOptions({
@@ -22,12 +22,12 @@ const skeletonStyles = tv({
   base: "animate-pulse bg-neutral-200",
   variants: {
     variant: {
-      text: "rounded-[8px] squircle",
+      text: "rounded-field-xs squircle",
       circular: "rounded-full",
       rectangular: "rounded-none",
     },
     rounded: {
-      true: "rounded-[14px] squircle",
+      true: "rounded-field squircle",
     },
   },
   defaultVariants: {

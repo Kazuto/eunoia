@@ -137,7 +137,7 @@
 
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { useForwardedAttrs } from "@/composables";
 import { useLocale } from "@/composables/useLocale";
 import { Icon, Select } from "@/components";
@@ -363,7 +363,7 @@ const selectDay = (day: number) => {
 // Styles
 const navButtonStyles = tv({
   base: [
-    "inline-flex aspect-square shrink-0 cursor-pointer items-center justify-center rounded-[10px] transition-colors squircle",
+    "inline-flex aspect-square shrink-0 cursor-pointer items-center justify-center rounded-field-sm transition-colors squircle",
     "text-neutral-600 hover:bg-neutral-200 focus:ring-2 focus:ring-primary-500 focus:outline-none",
     "dark:text-neutral-400 dark:hover:bg-neutral-700",
   ],
@@ -380,7 +380,7 @@ const navButtonStyles = tv({
 
 const calendarStyles = tv({
   base: [
-    "z-50 min-w-[280px] rounded-[14px] border shadow-lg squircle",
+    "z-50 min-w-[280px] rounded-box-sm border shadow-lg squircle",
     "border-neutral-300 bg-white",
     "dark:border-neutral-700 dark:bg-neutral-800",
   ],
@@ -421,7 +421,7 @@ const weekdayStyles = tv({
 
 const dayStyles = tv({
   base: [
-    "rounded-[14px] text-center transition-colors squircle",
+    "rounded-field text-center transition-colors squircle",
     "focus:ring-2 focus:ring-primary-500 focus:outline-none",
   ],
   variants: {

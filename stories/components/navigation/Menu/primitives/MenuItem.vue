@@ -30,7 +30,7 @@
 import { computed, inject, unref } from "vue";
 import { Link } from "@/components";
 import Tooltip from "@/components/feedback/Tooltip/Tooltip.vue";
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { useForwardedAttrs } from "@/composables";
 import MenuLabel from "./MenuLabel.vue";
 import { isCurrentPage } from "../currentPage";
@@ -91,7 +91,7 @@ const padding = computed(() => {
 
 const itemStyles = tv({
   base: [
-    "flex w-full cursor-pointer items-center rounded-[14px] p-2 text-sm no-underline transition-all duration-200 outline-none squircle focus-visible:ring-2 focus-visible:ring-offset-2",
+    "flex w-full cursor-pointer items-center rounded-field p-2 text-sm no-underline transition-all duration-200 outline-none squircle focus-visible:ring-2 focus-visible:ring-offset-2",
     "text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900 focus-visible:bg-neutral-100 focus-visible:text-neutral-900 focus-visible:ring-neutral-100 focus-visible:ring-offset-white hover:focus-visible:bg-neutral-200 hover:focus-visible:ring-neutral-200",
     "dark:text-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-neutral-200 dark:focus-visible:bg-neutral-700 dark:focus-visible:text-neutral-200 dark:focus-visible:ring-neutral-700 dark:focus-visible:ring-offset-neutral-800 dark:hover:focus-visible:bg-neutral-600 dark:hover:focus-visible:ring-neutral-600",
   ],

@@ -22,7 +22,7 @@ const meta = {
     setup() {
       return () => (
         <Container {...args}>
-          <div class="rounded-[16px] bg-primary-100 p-6 text-sm text-primary-900 squircle dark:bg-primary-900 dark:text-primary-100">
+          <div class="rounded-box-sm bg-primary-100 p-6 text-sm text-primary-900 squircle dark:bg-primary-900 dark:text-primary-100">
             Content constrained to max-w-screen-{args.size}
           </div>
         </Container>

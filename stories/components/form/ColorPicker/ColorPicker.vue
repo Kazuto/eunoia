@@ -100,7 +100,7 @@
             v-for="swatch in normalizedSwatches"
             :key="swatch"
             type="button"
-            class="cursor-pointer rounded-[8px] outline-none squircle focus-visible:ring-2 focus-visible:ring-primary-500"
+            class="cursor-pointer rounded-field-xs outline-none squircle focus-visible:ring-2 focus-visible:ring-primary-500"
             :aria-label="t('swatch', { color: swatch })"
             :aria-pressed="model != null && swatch === currentHex"
             @click="setFromHex(swatch)"

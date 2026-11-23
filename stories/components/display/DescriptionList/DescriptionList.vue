@@ -17,7 +17,7 @@
 
 <script lang="ts" setup>
 import { computed, provide } from "vue";
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { useForwardedAttrs } from "@/composables";
 import DescriptionItem from "./primitives/DescriptionItem.vue";
 import { DESCRIPTION_LIST_KEY } from "./primitives/context";

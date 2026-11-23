@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts" setup>
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { useForwardedAttrs } from "@/composables";
 
 defineOptions({
@@ -35,7 +35,7 @@ withDefaults(
 
 const radioStyles = tv({
   base: [
-    "absolute inset-y-0 rounded-[6px] outline-none squircle",
+    "absolute inset-y-0 rounded-field-2xs outline-none squircle",
     "focus-visible:ring-2 focus-visible:ring-primary-500",
   ],
   variants: {

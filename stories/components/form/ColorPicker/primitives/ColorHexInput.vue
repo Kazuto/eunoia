@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts" setup>
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 import { useForwardedAttrs } from "@/composables";
 
 defineOptions({
@@ -36,7 +36,7 @@ const emit = defineEmits<{
 
 const inputStyles = tv({
   base: [
-    "w-full min-w-0 rounded-[10px] border font-mono uppercase squircle",
+    "w-full min-w-0 rounded-field-sm border font-mono uppercase squircle",
     "border-neutral-300 bg-white text-neutral-900",
     "dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-100",
     "focus:border-primary-500 focus:ring-2 focus:ring-primary-500 focus:outline-none",
