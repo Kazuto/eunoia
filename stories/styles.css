@@ -245,20 +245,40 @@
   );
 }
 
-/* Dark mode palette inspired by Catppuccin Mocha with purple hues */
+/* Dark mode palette inspired by Catppuccin Mocha */
 @variant dark {
-  /* Base backgrounds with purple tint - replacing pure black/neutral */
-  --color-neutral-50: #e5e1ec; /* Very light purple-gray for light text - WCAG AAA */
-  --color-neutral-100: #d5cfe0; /* Light purple-gray - improved contrast */
-  --color-neutral-200: #b8adc9; /* Medium-light purple-gray - brighter */
-  --color-neutral-300: #a393bf; /* Medium purple-gray for secondary text - WCAG AA */
-  --color-neutral-400: #8a7ca8; /* Medium-dark purple-gray for muted text - WCAG AA */
-  --color-neutral-500: #6b5d7f; /* Medium purple for subtle elements */
-  --color-neutral-600: #4a3f5a; /* Dark purple for borders */
-  --color-neutral-700: #342d3d; /* Darker purple for elevated surfaces */
-  --color-neutral-800: #251f2e; /* Very dark purple for cards/panels */
-  --color-neutral-900: #1a1625; /* Deep purple for main background */
-  --color-neutral-950: #110e17; /* Deepest purple for darkest elements */
+  /* The neutral scale, brighter at the dark end and softer at the light end.
+     Hue and chroma come from the neutral like in light mode; the lightness is
+     fixed so text and surfaces keep their contrast with any neutral. */
+  --color-neutral-50: oklch(
+    from var(--color-neutral) 0.916 calc(c * 0.06) h
+  ); /* Light text - WCAG AAA */
+  --color-neutral-100: oklch(from var(--color-neutral) 0.864 calc(c * 0.15) h);
+  --color-neutral-200: oklch(from var(--color-neutral) 0.766 calc(c * 0.29) h);
+  --color-neutral-300: oklch(
+    from var(--color-neutral) 0.693 calc(c * 0.53) h
+  ); /* Secondary text - WCAG AA */
+  --color-neutral-400: oklch(
+    from var(--color-neutral) 0.615 calc(c * 0.82) h
+  ); /* Muted text - WCAG AA */
+  --color-neutral-500: oklch(
+    from var(--color-neutral) 0.505 c h
+  ); /* Subtle elements */
+  --color-neutral-600: oklch(
+    from var(--color-neutral) 0.39 calc(c * 1.04) h
+  ); /* Borders */
+  --color-neutral-700: oklch(
+    from var(--color-neutral) 0.311 calc(c * 0.93) h
+  ); /* Elevated surfaces */
+  --color-neutral-800: oklch(
+    from var(--color-neutral) 0.253 calc(c * 0.76) h
+  ); /* Cards and panels */
+  --color-neutral-900: oklch(
+    from var(--color-neutral) 0.212 calc(c * 0.6) h
+  ); /* Main background */
+  --color-neutral-950: oklch(
+    from var(--color-neutral) 0.172 calc(c * 0.42) h
+  ); /* Darkest elements */
 
   /* Adjust primary colors for better dark mode visibility */
   --color-primary-300: oklch(
