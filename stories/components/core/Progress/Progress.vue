@@ -31,7 +31,7 @@ defineOptions({
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const trackStyles = tv({
-  base: "relative w-full overflow-hidden rounded-full bg-neutral-200 dark:bg-neutral-700",
+  base: "relative w-full overflow-hidden rounded-field bg-neutral-200 dark:bg-neutral-700",
   variants: {
     dense: {
       false: "h-2",
@@ -44,7 +44,7 @@ const trackStyles = tv({
 });
 
 const barStyles = tv({
-  base: "h-full rounded-full",
+  base: "h-full rounded-field",
   variants: {
     variant: {
       primary: "bg-primary-500",

@@ -7,16 +7,17 @@
 @theme {
   --font-sans: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
-  /* Corner radii. Fields (buttons, inputs, menu items) and boxes (cards,
-     dialogs) are the two to theme; the smaller ones follow them so nested
-     corners keep their spacing, and stop at square. tailwind-merge has to know
-     these names too, see stories/utils/tv.ts. */
+  /* Corner radii. Fields (buttons, inputs, the dropdowns they open, bars) and
+     boxes (cards, dialogs) are the two to theme; the smaller ones follow them
+     so nested corners keep their spacing, and stop at square. tailwind-merge
+     has to know these names too, see stories/utils/tv.ts. */
   --radius-box: 24px;
-  --radius-box-sm: calc(var(--radius-box) - 8px); /* Popups, toasts, alerts */
+  --radius-box-sm: calc(var(--radius-box) - 8px); /* Popovers, toasts, alerts */
   --radius-field: 14px;
   --radius-field-sm: calc(var(--radius-field) - 4px); /* Tabs, menu items */
-  --radius-field-xs: calc(var(--radius-field) - 6px); /* Kbd, inline code */
-  --radius-field-2xs: calc(var(--radius-field) - 8px); /* Swatches */
+  --radius-field-xs: calc(var(--radius-field) - 6px); /* Checkbox, Kbd */
+  --radius-field-2xs: calc(var(--radius-field) - 8px); /* Close buttons */
+  --corner-shape: squircle; /* What the squircle utility draws; round turns it off */
 
   --color-gray: #8f877b; /* Light, warm gray/neutrals */
   --color-neutral: #6e6e6e; /* Medium-dark gray */
@@ -308,17 +309,21 @@
 
 /* Smooth corners on top of a border-radius. Browsers without corner-shape keep
    the plain rounded corners. `squircle` is for the usual radii; `superellipse` is
-   squarer and meant for square elements with a 100% radius (avatars, icon buttons). */
+   squarer and meant for square elements with a 100% radius (avatars, decorative
+   icons). A theme can switch `squircle` off through --corner-shape; `superellipse`
+   stays, since without it those elements would turn into circles. Controls such
+   as checkboxes and icon buttons use the field radii instead, so they follow the
+   theme. */
 @utility squircle {
-  corner-shape: squircle;
+  corner-shape: var(--corner-shape);
 }
 
 @utility superellipse {
   corner-shape: superellipse(3);
 
-  /* Without corner-shape the 100% radius would draw a circle, and a checkbox
-     would look like a radio button. A smaller radius keeps it a rounded square;
-     the doubled selector outranks the rounded-[100%] that comes after it. */
+  /* Without corner-shape the 100% radius would draw a circle, and an avatar
+     would lose its shape. A smaller radius keeps it a rounded square; the
+     doubled selector outranks the rounded-[100%] that comes after it. */
   @supports not (corner-shape: superellipse(3)) {
     && {
       border-radius: 30%;

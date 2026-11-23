@@ -380,7 +380,7 @@ const navButtonStyles = tv({
 
 const calendarStyles = tv({
   base: [
-    "z-50 min-w-[280px] rounded-box-sm border shadow-lg squircle",
+    "z-50 min-w-[280px] rounded-field border shadow-lg squircle",
     "border-neutral-300 bg-white",
     "dark:border-neutral-700 dark:bg-neutral-800",
   ],

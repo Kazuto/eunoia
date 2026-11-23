@@ -49,14 +49,14 @@ const icon = computed(() => {
 
 const cycleStyles = tv({
   base: [
-    "inline-flex aspect-square items-center justify-center transition-colors outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
+    "inline-flex aspect-square items-center justify-center rounded-field transition-colors outline-none squircle focus-visible:ring-2 focus-visible:ring-offset-2",
     "text-neutral-800 hover:bg-black/10 focus-visible:ring-neutral-300 focus-visible:ring-offset-white active:bg-neutral-200",
     "dark:focus-visible:ring-offset-dark dark:text-neutral-200 dark:hover:bg-white/10 dark:active:bg-neutral-700",
   ],
   variants: {
     dense: {
-      false: "superellipse rounded-[100%] p-2.5 text-sm",
-      true: "superellipse rounded-[100%] p-1.5 text-xs",
+      false: "p-2.5 text-sm",
+      true: "p-1.5 text-xs",
     },
   },
 });

@@ -55,7 +55,7 @@ const removeStyles = tv({
     },
     // Matches the chip: a squircle chip gets a squircle button, a pill a round one.
     pill: {
-      false: "superellipse rounded-[100%]",
+      false: "rounded-field-2xs squircle",
       true: "rounded-full",
     },
   },

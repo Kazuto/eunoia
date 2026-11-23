@@ -49,7 +49,7 @@ const collapsed = defineModel<boolean>("collapsed", { default: false });
 
 const toggleStyles = tv({
   base: [
-    "flex aspect-square w-10 items-center justify-center superellipse rounded-[100%] p-1",
+    "flex aspect-square w-10 items-center justify-center rounded-field p-1 squircle",
     "text-neutral-400 hover:bg-black/10 hover:text-neutral-700",
     "dark:hover:bg-white/10 dark:hover:text-neutral-200",
   ],

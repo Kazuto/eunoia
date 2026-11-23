@@ -122,7 +122,7 @@ function onKeydown(event: KeyboardEvent) {
 
 const trackStyles = tv({
   base: [
-    "relative w-full touch-none rounded-full outline-none",
+    "relative w-full touch-none rounded-field outline-none",
     "ring-1 ring-black/10 ring-inset dark:ring-white/15",
     "focus-visible:ring-2 focus-visible:ring-primary-500",
   ],

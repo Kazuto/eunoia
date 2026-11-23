@@ -38,7 +38,7 @@ defineOptions({
 const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const optionStyles = tv({
-  base: "flex cursor-pointer items-center gap-2 transition-colors",
+  base: "flex cursor-pointer items-center gap-2 rounded-field-sm transition-colors squircle",
   variants: {
     dense: {
       false: "px-3 py-2.5 text-sm",

@@ -22,7 +22,7 @@ const { classAttr, forwardedAttrs } = useForwardedAttrs();
 
 const dropdownStyles = tv({
   base: [
-    "z-50 max-h-60 overflow-auto overscroll-contain rounded-box-sm border shadow-lg squircle",
+    "z-50 max-h-60 overflow-auto overscroll-contain rounded-field border shadow-lg squircle",
     "border-neutral-300 bg-white",
     "dark:border-neutral-700 dark:bg-neutral-900",
   ],
@@ -32,8 +32,8 @@ const dropdownStyles = tv({
       false: "absolute right-0 left-0",
     },
     dense: {
-      false: "py-1",
-      true: "py-0.5",
+      false: "p-1",
+      true: "p-0.5",
     },
     placement: {
       top: "bottom-full mb-1",

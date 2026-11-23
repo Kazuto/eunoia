@@ -148,7 +148,7 @@ const positionStyle = computed(
 
 const menuStyles = tv({
   base: [
-    "z-50 my-1.5 max-w-80 min-w-56 overflow-auto rounded-box-sm border p-1 shadow-lg squircle",
+    "z-50 my-1.5 max-w-80 min-w-56 overflow-auto rounded-field border p-1 shadow-lg squircle",
     "border-neutral-300 bg-white",
     "dark:border-neutral-600 dark:bg-neutral-800",
   ],

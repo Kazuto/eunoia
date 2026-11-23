@@ -169,7 +169,7 @@ const containerStyles = tv({
 
 const trackBgStyles = tv({
   base: [
-    "pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 rounded-full",
+    "pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 rounded-field",
     "bg-neutral-200",
     "dark:bg-neutral-700",
   ],
@@ -181,7 +181,7 @@ const trackBgStyles = tv({
 
 const fillStyles = tv({
   base: [
-    "pointer-events-none absolute top-1/2 -translate-y-1/2 rounded-full",
+    "pointer-events-none absolute top-1/2 -translate-y-1/2 rounded-field",
     "bg-primary-500",
   ],
   variants: {
